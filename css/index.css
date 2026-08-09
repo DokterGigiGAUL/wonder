@@ -535,7 +535,7 @@ body {
     justify-content: space-between;
     text-align: center;
     gap: 0px;
-    padding: 6px 12px 12px;
+    padding: 3px 12px 9px;
     background: var(--card);
     border: none;
     border-radius: 16px; /* Sudut lebih melengkung seperti contoh */
@@ -572,7 +572,7 @@ body {
 .category-card:nth-child(4) svg { fill: #ff8b2b; }
 
 .category-card span {
-    font-size: 13px; /* Ukuran teks diperkecil agar pas 4 kolom */
+    font-size: 12px; /* Ukuran teks diperkecil agar pas 4 kolom */
     font-weight: 400;
     color: #222;
     text-align: center;
