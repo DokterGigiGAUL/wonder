@@ -522,20 +522,20 @@ body {
 
 .category-grid {
     display: grid;
-    /* Mengubah layout menjadi 4 kolom sejajar */
+    /* Mengubah layout menjadi 3 kolom sejajar */
     grid-template-columns: repeat(4, 1fr); 
-    gap: 10px; /* Jarak disesuaikan agar muat di layar HP */
+    gap: 16px; /* Jarak disesuaikan agar muat di layar HP */
 }
 
 .category-card {
     display: flex;
     /* Susun elemen secara vertikal (Teks di atas, Ikon di bawah) */
-    flex-direction: column-reverse; 
+    flex-direction: column; 
     align-items: center;
     justify-content: space-between;
     text-align: center;
-    gap: 8px;
-    padding: 12px 6px;
+    gap: 0px;
+    padding: 6px 18px 12px;
     background: var(--card);
     border: none;
     border-radius: 16px; /* Sudut lebih melengkung seperti contoh */
