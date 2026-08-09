@@ -13,8 +13,8 @@ const comics = [{
   type: "comic",
   images: [
     "assets/images/komik/komik1/Komik1panel1.webp",
-    "assets/images/komik/komik1/Komik1panel1.webp",
-    "assets/images/komik/komik1/Komik1panel1.webp",
+    "assets/images/komik/komik1/Komik1panel2.webp",
+    "assets/images/komik/komik1/Komik1panel3.webp",
     "assets/images/komik/komik1/panel.jpeg"
   ]
   },
