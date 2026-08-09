@@ -514,6 +514,72 @@ body {
     color: #666;
 }
 
+/* Mobile Breakpoint (max-width: 480px) */
+@media (max-width: 480px) {
+   .category-section {
+    margin: 8px 16px 16px;
+}
+
+.category-grid {
+    display: grid;
+    /* Mengubah layout menjadi 4 kolom sejajar */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px; /* Jarak disesuaikan agar muat di layar HP */
+}
+
+.category-card {
+    display: flex;
+    /* Susun elemen secara vertikal (Teks di atas, Ikon di bawah) */
+    flex-direction: column-reverse; 
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    gap: 8px;
+    padding: 12px 6px;
+    background: var(--card);
+    border: none;
+    border-radius: 16px; /* Sudut lebih melengkung seperti contoh */
+    box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    cursor: pointer;
+    transition: .2s;
+    min-height: 100px; /* Menjaga tinggi kartu tetap konsisten */
+}
+
+.category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,.12);
+}
+
+.category-icon {
+    width: 40px; /* Ukuran ikon diperbesar sedikit */
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.category-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: #666;
+}
+
+.category-card:nth-child(1) svg { fill: #27c3b6; }
+.category-card:nth-child(2) svg { fill: #ff5d9e; }
+.category-card:nth-child(3) svg { fill: #7a5cff; }
+.category-card:nth-child(4) svg { fill: #ff8b2b; }
+
+.category-card span {
+    font-size: 12px; /* Ukuran teks diperkecil agar pas 4 kolom */
+    font-weight: 600;
+    color: #222;
+    text-align: center;
+    line-height: 1.2;
+}
+}
+
 /* ==========================================
    7. BUTTONS
    ========================================== */
