@@ -84,12 +84,12 @@ body {
 .app-brand {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
 }
 
 .app-brand img {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
 }
 
@@ -535,7 +535,7 @@ body {
     justify-content: space-between;
     text-align: center;
     gap: 0px;
-    padding: 6px 18px 12px;
+    padding: 6px 12px 12px;
     background: var(--card);
     border: none;
     border-radius: 16px; /* Sudut lebih melengkung seperti contoh */
