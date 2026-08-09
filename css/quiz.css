@@ -5,8 +5,7 @@
 .quiz-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-    
+    gap: 18px;  
 }
 
 .quiz-card, .case-card{
@@ -39,6 +38,7 @@
     line-height:1.15;
     margin-bottom:6px;
 }
+
 .case-title{
     position: absolute;
     bottom: 0;
@@ -64,7 +64,7 @@
     position: relative;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 480px) {
 
     .quiz-grid {
         gap: 14px;
@@ -78,9 +78,9 @@
         display: flex;
         justify-content: space-between;
     }
-
 }
-    .quiz-header{
+
+.quiz-header{
     background:var(--primary);
     color:white;
     padding:16px;
@@ -126,7 +126,6 @@
     margin:auto;
     padding:20px;
 }
-
 
 .question-card{
     background:#fff;
@@ -189,7 +188,7 @@
     color:white;
 }
 
-@media(max-width:640px){
+@media(max-width:480px){
 
     .quiz-header{
         padding:16px;
