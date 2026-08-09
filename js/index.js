@@ -532,7 +532,7 @@ function renderFeaturedHero() {
         switch (heroItem.type) {
             case "quiz":
                 location.href =
-                    `quiz.html?id=${heroItem.file}`;
+                    `quiz.html?id=${heroItem.id}`; //heroItem.file
                 break;
 
             case "comic":
@@ -547,7 +547,7 @@ function renderFeaturedHero() {
                 
             case "case":
                 location.href =
-                    `case.html?case=${heroItem.file}`;
+                    `case.html?case=${heroItem.id}`; //heroItem.file
                 break;
         }
     };
