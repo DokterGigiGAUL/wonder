@@ -12,6 +12,9 @@ const comics = [{
   releaseDate: "2026-06-20",
   type: "comic",
   images: [
+    "assets/images/komik/komik1/Komik1panel1.webp",
+    "assets/images/komik/komik1/Komik1panel1.webp",
+    "assets/images/komik/komik1/Komik1panel1.webp",
     "assets/images/komik/komik1/panel.jpeg"
   ]
   },
