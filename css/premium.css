@@ -215,6 +215,18 @@ body {
   .premium-option-header {
     gap: 14px;
   }
+
+  .premium-option-header-mobile .premium-option-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    padding: 2px;
+}
   
   .premium-option h2 {
     font-size: 1.3rem;
