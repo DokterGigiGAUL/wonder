@@ -91,7 +91,14 @@ body {
   transform: translateY(-3px);
 }
 
-.premium-option-header {
+.premium-option-header-mobile{
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.premium-option-header{
   display: flex;
   align-items: flex-start;
   gap: 18px;
@@ -201,10 +208,14 @@ body {
     gap: 20px;
   }
 
-  .premium-option-header {
+  .premium-option-header-mobile {
     gap: 14px;
   }
 
+  .premium-option-header {
+    gap: 14px;
+  }
+  
   .premium-option h2 {
     font-size: 1.3rem;
   }
