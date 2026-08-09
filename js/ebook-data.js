@@ -89,7 +89,7 @@ const ebooks = [
 {
         id: 6,
         file: "ebook6",
-        title: "Panduan Pemilihan Obat Topikal Lesi Oral",
+        title: "Pemilihan Obat Topikal Lesi Oral",
         description: "Contekan pemilihan obat topikal lesi oral ringkas dari handphone .",
         /*thumbnail: "assets/images/ebook/ebook2.jpg",*/
         thumbnail: "https://media-myr.b-cdn.net/images/resized/600/40439849-a51a-4bbd-85d3-7b11a69bbb4a.jpeg",
