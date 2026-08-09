@@ -22,7 +22,7 @@ function loadPremiumCatalog() {
         (a, b) =>
             new Date(b.releaseDate) -
             new Date(a.releaseDate)
-    );
+    )
     .slice(0, 12);
 
     premiumItems.forEach(item => {
