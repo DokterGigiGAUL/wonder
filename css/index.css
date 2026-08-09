@@ -680,6 +680,7 @@ body {
 .tts-btn, 
 .case-btn {
     width: 100%;
+   padding:12px;
 }
 
 .content-btn {
