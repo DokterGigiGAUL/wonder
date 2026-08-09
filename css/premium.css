@@ -118,7 +118,7 @@ body {
 
 /* Color Variants */
 .premium-item .premium-option-icon {
-  background: var(--blue-light);
+    background: #f0f0f0;
 }
 
 .premium-subscription .premium-option-icon {
@@ -149,23 +149,25 @@ body {
   cursor: pointer;
   transition: background-color 0.25s ease;
   margin-bottom: 0px;
-  background: linear-gradient(145deg, #6c6c6c 0%, #e6e6e6 20%, #c0c0c0 40%, #a6a6a6 60%, #c0c0c0 80%, #808080 100%);
 }
 
 .premium-item .premium-btn {
-  background: var(--blue);
+  /*background: var(--blue);*/
+  background: linear-gradient(145deg, #6c6c6c 0%, #e6e6e6 20%, #c0c0c0 40%, #a6a6a6 60%, #c0c0c0 80%, #808080 100%);
+
 }
 
 .premium-item .premium-btn:hover {
-  background: var(--blue-hover);
+  /*background: var(--blue-hover);*/
 }
 
 .premium-subscription .premium-btn {
-  background: var(--gold);
+  /*background: var(--gold);*/
+  background: linear-gradient(145deg, #d4af37 0%, #f3cc69 25%, #d4af37 50%, #aa8210 75%, #ffeeb3 100%);
 }
 
 .premium-subscription .premium-btn:hover {
-  background: var(--gold-hover);
+  /*background: var(--gold-hover);*/
 }
 
 /* Feature List */
@@ -228,7 +230,6 @@ body {
     flex-shrink: 0;
     font-size: 14px;
     padding: 2px;
-    background: #f0f0f0;
 }
   
   .premium-option h2 {
