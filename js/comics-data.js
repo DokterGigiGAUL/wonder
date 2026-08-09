@@ -39,7 +39,7 @@ const comics = [{
   premium: false,
   price: null,
   title: "Episode #3",
-  description: "Kenapa Gigi Bungsu Perlu Dioperasi (Odontektomi)?",
+  description: "Kenapa Gigi Bungsu Perlu Dioperasi?",
   thumbnail: "assets/images/komik/komik3/thumbnail3.png",
   releaseDate: "2026-06-20",
         type: "comic",
