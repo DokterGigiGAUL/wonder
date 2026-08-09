@@ -542,7 +542,7 @@ body {
     box-shadow: 0 4px 14px rgba(0,0,0,.08);
     cursor: pointer;
     transition: .2s;
-    min-height: 100px; /* Menjaga tinggi kartu tetap konsisten */
+    min-height: 60px; /* Menjaga tinggi kartu tetap konsisten */
 }
 
 .category-card:hover {
@@ -572,11 +572,11 @@ body {
 .category-card:nth-child(4) svg { fill: #ff8b2b; }
 
 .category-card span {
-    font-size: 12px; /* Ukuran teks diperkecil agar pas 4 kolom */
-    font-weight: 600;
+    font-size: 13px; /* Ukuran teks diperkecil agar pas 4 kolom */
+    font-weight: 400;
     color: #222;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1;
 }
 }
 
