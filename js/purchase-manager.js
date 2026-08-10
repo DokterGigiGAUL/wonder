@@ -1,15 +1,17 @@
 /*
-|--------------------------------------------------------------------------
-| purchase-manager.js
-|--------------------------------------------------------------------------
-*/
+ * --------------------------------------------------------------------------
+ * purchase-manager.js
+ * --------------------------------------------------------------------------
+ */
 
 const PurchaseManager = (() => {
 
     const STORAGE_KEY = "wonderapp_purchases";
 
     function getPurchasedProducts() {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        return JSON.parse(
+            localStorage.getItem(STORAGE_KEY) || "[]"
+        );
     }
 
     function savePurchasedProducts(products) {
@@ -30,7 +32,6 @@ const PurchaseManager = (() => {
         } else {
             Premium.disable();
         }
-
     }
 
     function hasAccess(item) {
@@ -49,7 +50,6 @@ const PurchaseManager = (() => {
             item.productId &&
             products.includes(item.productId)
         );
-
     }
 
     function hasTTSPremium() {
@@ -61,7 +61,6 @@ const PurchaseManager = (() => {
         return getPurchasedProducts().some(id =>
             id.startsWith("tts")
         );
-
     }
 
     function purchase() {
@@ -77,7 +76,6 @@ const PurchaseManager = (() => {
         localStorage.removeItem(STORAGE_KEY);
 
         Premium.disable();
-
     }
 
     async function refreshPurchases() {
@@ -85,10 +83,8 @@ const PurchaseManager = (() => {
         const user = auth.currentUser;
 
         if (!user) {
-
             clear();
             return;
-
         }
 
         const response = await WonderAPI.getProfile({
@@ -96,7 +92,6 @@ const PurchaseManager = (() => {
         });
 
         sync(response.data);
-
     }
 
     return {
@@ -114,7 +109,15 @@ const PurchaseManager = (() => {
 
 })();
 
+
+/*
+ * --------------------------------------------------------------------------
+ * UNIVERSAL PRODUCT CHECKOUT
+ * --------------------------------------------------------------------------
+ */
+
 async function purchaseProduct(productId) {
+
     console.log("=================================");
     console.log("[Purchase] START");
     console.log("[Purchase] productId:", productId);
@@ -126,10 +129,9 @@ async function purchaseProduct(productId) {
         }
 
         /*
-         * Ambil user dari PurchaseManager / auth
-         * yang sudah digunakan WonderApp.
+         * WonderApp menggunakan Firebase Auth melalui object `auth`.
          */
-        const user = firebase?.auth?.().currentUser;
+        const user = auth.currentUser;
 
         console.log("[Purchase] user:", user);
 
@@ -137,6 +139,9 @@ async function purchaseProduct(productId) {
             throw new Error("User belum login");
         }
 
+        /*
+         * Ambil Firebase ID Token.
+         */
         const idToken = await user.getIdToken();
 
         console.log("[Purchase] UID:", user.uid);
@@ -144,11 +149,16 @@ async function purchaseProduct(productId) {
         console.log("[Purchase] Token berhasil diperoleh");
 
         /*
-         * BACKEND_URL harus merupakan URL GAS
-         * yang sudah digunakan WonderApp.
+         * Backend URL WonderApp.
          */
-        console.log("[Purchase] BACKEND_URL:", BACKEND_URL);
+        console.log(
+            "[Purchase] BACKEND_URL:",
+            BACKEND_URL
+        );
 
+        /*
+         * Buat checkout melalui GAS.
+         */
         const response = await fetch(
             `${BACKEND_URL}?action=createCheckout`,
             {
@@ -172,6 +182,10 @@ async function purchaseProduct(productId) {
             response.status
         );
 
+        /*
+         * Baca response mentah terlebih dahulu
+         * supaya error backend mudah dilacak.
+         */
         const text = await response.text();
 
         console.log(
@@ -182,8 +196,11 @@ async function purchaseProduct(productId) {
         let result;
 
         try {
+
             result = JSON.parse(text);
-        } catch (e) {
+
+        } catch (parseError) {
+
             throw new Error(
                 "Response backend bukan JSON: " + text
             );
@@ -194,7 +211,18 @@ async function purchaseProduct(productId) {
             result
         );
 
+        /*
+         * Backend mengembalikan:
+         *
+         * {
+         *   success: true,
+         *   data: {
+         *      checkoutUrl: "..."
+         *   }
+         * }
+         */
         if (!result.success) {
+
             throw new Error(
                 result.message ||
                 result.code ||
@@ -212,11 +240,16 @@ async function purchaseProduct(productId) {
         );
 
         if (!checkoutUrl) {
+
             throw new Error(
                 "checkoutUrl tidak ditemukan dalam response backend"
             );
         }
 
+        /*
+         * Checkout berhasil dibuat.
+         * Redirect ke Mayar.
+         */
         console.log(
             "[Purchase] REDIRECT MAYAR"
         );
@@ -242,8 +275,4 @@ async function purchaseProduct(productId) {
 
         throw error;
     }
-}
-      "Terjadi kesalahan saat membuat pembayaran."
-    );
-  }
 }
