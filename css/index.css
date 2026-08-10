@@ -862,6 +862,13 @@ body {
         min-height: calc(1.25em * 2);
         -webkit-line-clamp: 2;
     }
+
+   .category-card {
+    padding: 24px;
+}
+
+   .category-card span {
+    font-size: 16px;
 }
 
 /* Desktop Breakpoint (min-width: 1024px) */
