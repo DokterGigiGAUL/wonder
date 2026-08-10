@@ -128,10 +128,7 @@ async function purchaseProduct(productId) {
             throw new Error("productId kosong");
         }
 
-        /*
-         * Ambil Firebase Auth langsung dari Firebase SDK.
-         * Tidak bergantung pada variabel `auth`.
-         */
+        // Ambil user Firebase yang sedang login
         const user = firebase.auth().currentUser;
 
         console.log("[Purchase] user:", user);
@@ -140,24 +137,44 @@ async function purchaseProduct(productId) {
             throw new Error("User belum login.");
         }
 
-        /*
-         * Ambil Firebase ID Token
-         */
+        // Ambil ID Token Firebase
         const token = await user.getIdToken();
 
         console.log("[Purchase] UID:", user.uid);
         console.log("[Purchase] Email:", user.email);
+        console.log("[Purchase] Display Name:", user.displayName);
         console.log("[Purchase] Token berhasil diperoleh");
 
         /*
-         * Gunakan API resmi WonderApp.
+         * Mobile dan redirectUrl saat ini belum berasal
+         * dari input user. Kita gunakan nilai yang tersedia
+         * dan URL halaman aplikasi sebagai return URL.
+         */
+
+        const mobile =
+            user.phoneNumber || "";
+
+        const redirectUrl =
+            window.parent.location.href;
+
+        /*
+         * Create Checkout melalui WonderAPI.
          */
         const response = await WonderAPI.createCheckout({
 
-            token: token,
             uid: user.uid,
-            email: user.email,
-            productId: productId
+
+            productId: productId,
+
+            displayName:
+                user.displayName || user.email || "Wonder App User",
+
+            email:
+                user.email || "",
+
+            mobile: mobile,
+
+            redirectUrl: redirectUrl
 
         });
 
@@ -166,11 +183,15 @@ async function purchaseProduct(productId) {
             response
         );
 
+        /*
+         * Backend mengembalikan checkoutUrl
+         */
         const checkoutUrl =
             response.data?.checkoutUrl ||
             response.data?.checkout_url;
 
         if (!checkoutUrl) {
+
             throw new Error(
                 "checkoutUrl tidak ditemukan dalam response."
             );
@@ -185,7 +206,11 @@ async function purchaseProduct(productId) {
             checkoutUrl
         );
 
-        window.top.location.href = checkoutUrl;
+        /*
+         * Redirect ke halaman checkout Mayar
+         */
+        window.top.location.href =
+            checkoutUrl;
 
     } catch (error) {
 
