@@ -7,12 +7,15 @@ const comics = [{
   premium: false,
   price: null,
   title: "Episode #1",
-  description: "Sariawan Karena Infeksi Jamur?",
+  description: "Kenapa Gigi Hilang Perlu Diganti?",
   thumbnail: "assets/images/komik/komik1/thumbnail1.webp",
   releaseDate: "2026-06-20",
   type: "comic",
   images: [
-    "assets/images/komik/komik1/panel.jpeg"
+    "assets/images/komik/komik1/Komik1panel1.webp",
+    "assets/images/komik/komik1/Komik1panel2.webp",
+    "assets/images/komik/komik1/Komik1panel3.webp"
+    //"assets/images/komik/komik2/panel.png"
   ]
   },
   {
@@ -23,14 +26,16 @@ const comics = [{
   premium: false,
   price: null,
   title: "Episode #2",
-  description: "Kenapa Gigi Hilang Perlu Diganti?",
+  description: "Sariawan Karena Infeksi Jamur?",
   thumbnail: "assets/images/komik/komik2/thumbnail2.jpeg",
   releaseDate: "2026-06-20",
         type: "comic",
   images: [
-    "assets/images/komik/komik1/Komik1panel1.webp",
-    "assets/images/komik/komik1/Komik1panel2.webp",
-    "assets/images/komik/komik1/Komik1panel3.webp"
+    "assets/images/komik/komik2/Komik2panel1.webp",
+    "assets/images/komik/komik2/Komik2panel2.webp",
+    "assets/images/komik/komik2/Komik2panel3.webp",
+    "assets/images/komik/komik2/Komik2panel4.webp",
+    "assets/images/komik/komik2/Komik2panel5.webp"
     //"assets/images/komik/komik2/panel.png"
   ]
   },
@@ -42,7 +47,7 @@ const comics = [{
   premium: false,
   price: null,
   title: "Episode #3",
-  description: "Kenapa Gigi Bungsu Perlu Dioperasi?",
+  description: "Bagaimana Alkohol Bisa Menyebabkan Kanker Mulut?",
   thumbnail: "assets/images/komik/komik3/thumbnail3.png",
   releaseDate: "2026-06-20",
         type: "comic",
