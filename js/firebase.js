@@ -8,13 +8,22 @@ const firebaseConfig = {
     appId: "1:274978911943:web:b5c763f8a8b29dc86ff0e2"
 };
 
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Firebase Auth Only
+
+// Firebase Auth
 const auth = firebase.auth();
 
+
+// Expose Auth globally
+window.auth = auth;
+
+
 console.log("Firebase initialized.");
+console.log("Firebase Auth available:", !!window.auth);
+
 
 /**
  * Sync user ke Backend GAS
@@ -29,6 +38,7 @@ async function syncUser(user) {
     });
 
 }
+
 
 /**
  * Ambil profile dari Backend GAS
