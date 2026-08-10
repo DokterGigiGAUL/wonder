@@ -129,10 +129,10 @@ async function purchaseProduct(productId) {
         }
 
         /*
-         * premium.html berjalan sendiri dan memiliki
-         * Firebase Auth sendiri melalui firebase.js
+         * Ambil Firebase Auth langsung dari Firebase SDK.
+         * Tidak bergantung pada variabel `auth`.
          */
-        const user = auth.currentUser;
+        const user = firebase.auth().currentUser;
 
         console.log("[Purchase] user:", user);
 
@@ -151,16 +151,12 @@ async function purchaseProduct(productId) {
 
         /*
          * Gunakan API resmi WonderApp.
-         * Tidak membuat fetch / BACKEND_URL baru.
          */
         const response = await WonderAPI.createCheckout({
 
             token: token,
-
             uid: user.uid,
-
             email: user.email,
-
             productId: productId
 
         });
@@ -170,22 +166,18 @@ async function purchaseProduct(productId) {
             response
         );
 
-        /*
-         * Ambil checkout URL dari response backend.
-         */
         const checkoutUrl =
             response.data?.checkoutUrl ||
             response.data?.checkout_url;
 
         if (!checkoutUrl) {
-
             throw new Error(
                 "checkoutUrl tidak ditemukan dalam response."
             );
         }
 
         console.log(
-            "[Purchase] Checkout berhasil dibuat."
+            "[Purchase] CHECKOUT BERHASIL"
         );
 
         console.log(
@@ -193,9 +185,6 @@ async function purchaseProduct(productId) {
             checkoutUrl
         );
 
-        /*
-         * Redirect ke halaman pembayaran Mayar.
-         */
         window.top.location.href = checkoutUrl;
 
     } catch (error) {
@@ -211,7 +200,7 @@ async function purchaseProduct(productId) {
         );
 
         alert(
-            "Checkout gagal:\n\n" +
+            "Checkout gagal\n\n" +
             error.message
         );
 
