@@ -8,13 +8,13 @@ const PurchaseManager = (() => {
 
     const STORAGE_KEY = "wonderapp_purchases";
 
-    function getPurchasedProducts() {
+function getPurchasedProducts() {
         return JSON.parse(
             localStorage.getItem(STORAGE_KEY) || "[]"
         );
     }
 
-    function savePurchasedProducts(products) {
+function savePurchasedProducts(products) {
         localStorage.setItem(
             STORAGE_KEY,
             JSON.stringify(products)
@@ -129,38 +129,85 @@ async function purchaseProduct(productId) {
         }
 
         /*
-         * WonderApp menggunakan Firebase Auth melalui object `auth`.
+         * premium.html berjalan di iframe.
+         * Ambil Firebase Auth dari halaman utama.
          */
-        const user = auth.currentUser;
+        const parentAuth =
+            window.parent &&
+            window.parent.auth
+                ? window.parent.auth
+                : null;
 
-        console.log("[Purchase] user:", user);
+        console.log(
+            "[Purchase] parentAuth:",
+            parentAuth
+        );
+
+        if (!parentAuth) {
+            throw new Error(
+                "Firebase Auth halaman utama tidak tersedia."
+            );
+        }
+
+        const user = parentAuth.currentUser;
+
+        console.log(
+            "[Purchase] user:",
+            user
+        );
 
         if (!user) {
-            throw new Error("User belum login");
+            throw new Error(
+                "User belum login."
+            );
         }
 
         /*
-         * Ambil Firebase ID Token.
+         * Firebase ID Token
          */
-        const idToken = await user.getIdToken();
+        const idToken =
+            await user.getIdToken();
 
-        console.log("[Purchase] UID:", user.uid);
-        console.log("[Purchase] Email:", user.email);
-        console.log("[Purchase] Token berhasil diperoleh");
-
-        /*
-         * Backend URL WonderApp.
-         */
         console.log(
-            "[Purchase] BACKEND_URL:",
-            BACKEND_URL
+            "[Purchase] UID:",
+            user.uid
+        );
+
+        console.log(
+            "[Purchase] Email:",
+            user.email
+        );
+
+        console.log(
+            "[Purchase] Token berhasil diperoleh"
         );
 
         /*
-         * Buat checkout melalui GAS.
+         * Backend URL.
+         * Ambil dari halaman utama jika tidak tersedia
+         * langsung di iframe.
+         */
+        const backendUrl =
+            typeof BACKEND_URL !== "undefined"
+                ? BACKEND_URL
+                : window.parent.BACKEND_URL;
+
+        console.log(
+            "[Purchase] BACKEND_URL:",
+            backendUrl
+        );
+
+        if (!backendUrl) {
+            throw new Error(
+                "BACKEND_URL tidak tersedia."
+            );
+        }
+
+        /*
+         * Create Checkout
          */
         const response = await fetch(
-            `${BACKEND_URL}?action=createCheckout`,
+            `${backendUrl}?action=createCheckout`,
             {
                 method: "POST",
 
@@ -182,11 +229,8 @@ async function purchaseProduct(productId) {
             response.status
         );
 
-        /*
-         * Baca response mentah terlebih dahulu
-         * supaya error backend mudah dilacak.
-         */
-        const text = await response.text();
+        const text =
+            await response.text();
 
         console.log(
             "[Purchase] RAW RESPONSE:",
@@ -199,10 +243,11 @@ async function purchaseProduct(productId) {
 
             result = JSON.parse(text);
 
-        } catch (parseError) {
+        } catch (error) {
 
             throw new Error(
-                "Response backend bukan JSON: " + text
+                "Response backend bukan JSON: " +
+                text
             );
         }
 
@@ -211,16 +256,6 @@ async function purchaseProduct(productId) {
             result
         );
 
-        /*
-         * Backend mengembalikan:
-         *
-         * {
-         *   success: true,
-         *   data: {
-         *      checkoutUrl: "..."
-         *   }
-         * }
-         */
         if (!result.success) {
 
             throw new Error(
@@ -242,19 +277,16 @@ async function purchaseProduct(productId) {
         if (!checkoutUrl) {
 
             throw new Error(
-                "checkoutUrl tidak ditemukan dalam response backend"
+                "checkoutUrl tidak ditemukan."
             );
         }
 
-        /*
-         * Checkout berhasil dibuat.
-         * Redirect ke Mayar.
-         */
         console.log(
             "[Purchase] REDIRECT MAYAR"
         );
 
-        window.location.href = checkoutUrl;
+        window.top.location.href =
+            checkoutUrl;
 
     } catch (error) {
 
