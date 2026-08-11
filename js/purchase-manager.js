@@ -128,72 +128,68 @@ async function purchaseProduct(productId) {
             throw new Error("productId kosong");
         }
 
-        // Ambil user Firebase yang sedang login
         const user = firebase.auth().currentUser;
-
-        console.log("[Purchase] user:", user);
 
         if (!user) {
             throw new Error("User belum login.");
         }
 
-        // Ambil ID Token Firebase
-        const token = await user.getIdToken();
+        const displayName =
+            user.displayName ||
+            user.email ||
+            "Wonder App User";
 
-        console.log("[Purchase] UID:", user.uid);
-        console.log("[Purchase] Email:", user.email);
-        console.log("[Purchase] Display Name:", user.displayName);
-        console.log("[Purchase] Token berhasil diperoleh");
+        const email =
+            user.email || "";
 
         /*
-         * Mobile dan redirectUrl saat ini belum berasal
-         * dari input user. Kita gunakan nilai yang tersedia
-         * dan URL halaman aplikasi sebagai return URL.
+         * Mayar membutuhkan mobile.
+         * Untuk simulasi sandbox gunakan nomor dummy.
          */
-
         const mobile =
-            user.phoneNumber || "";
+            user.phoneNumber ||
+            "081234567890";
 
+        /*
+         * Kembali ke halaman aplikasi setelah checkout.
+         */
         const redirectUrl =
             window.parent.location.href;
 
-        /*
-         * Create Checkout melalui WonderAPI.
-         */
-        const response = await WonderAPI.createCheckout({
+        console.log("[Purchase] UID:", user.uid);
+        console.log("[Purchase] Name:", displayName);
+        console.log("[Purchase] Email:", email);
+        console.log("[Purchase] Mobile:", mobile);
+        console.log("[Purchase] Redirect:", redirectUrl);
 
-            uid: user.uid,
+        const response =
+            await WonderAPI.createCheckout({
 
-            productId: productId,
+                uid: user.uid,
 
-            displayName:
-                user.displayName || user.email || "Wonder App User",
+                productId: productId,
 
-            email:
-                user.email || "",
+                displayName: displayName,
 
-            mobile: mobile,
+                email: email,
 
-            redirectUrl: redirectUrl
+                mobile: mobile,
 
-        });
+                redirectUrl: redirectUrl
+
+            });
 
         console.log(
-            "[Purchase] createCheckout response:",
+            "[Purchase] createCheckout:",
             response
         );
 
-        /*
-         * Backend mengembalikan checkoutUrl
-         */
         const checkoutUrl =
-            response.data?.checkoutUrl ||
-            response.data?.checkout_url;
+            response.data?.checkoutUrl;
 
         if (!checkoutUrl) {
-
             throw new Error(
-                "checkoutUrl tidak ditemukan dalam response."
+                "checkoutUrl tidak ditemukan."
             );
         }
 
@@ -201,14 +197,6 @@ async function purchaseProduct(productId) {
             "[Purchase] CHECKOUT BERHASIL"
         );
 
-        console.log(
-            "[Purchase] Redirect ke Mayar:",
-            checkoutUrl
-        );
-
-        /*
-         * Redirect ke halaman checkout Mayar
-         */
         window.top.location.href =
             checkoutUrl;
 
@@ -217,11 +205,6 @@ async function purchaseProduct(productId) {
         console.error(
             "[Purchase] ERROR:",
             error
-        );
-
-        console.error(
-            "[Purchase] ERROR MESSAGE:",
-            error.message
         );
 
         alert(
