@@ -1,124 +1,192 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kuis Penyakit Mulut</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wonder App Kedokteran Gigi</title>
+  
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="css/index.css" />
 
-    <link rel="stylesheet" href="css/index.css" />
-    <!--<link rel="stylesheet" href="css/style.css" />-->
+</head>
 
-  </head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <h1 class="app-brand">
+      <img src="assets/images/favicon-32x32.png" alt="Wonder App Logo">
+      <span>Wonder App</span>
+    </h1>
+    <div class="header-actions"> 
+      <button type="button" id="loginBtn" class="btn btn-secondary" onclick="openLogin()">Login</button> 
+      <button type="button" id="logoutBtn" class="btn btn-secondary" onclick="logout()" style="display: none;">Logout</button> 
+    </div> 
+  </header>
 
-  <body>
-    <header class="header">
-      <h1>Penyakit Mulut Wonder App</h1>
-    </header>
-
-    <main class="container">
-
-      <section id="featured-hero" class="featured-hero">
-        <div class="featured-overlay">
-          <span class="featured-badge""></span>
-          <!--<span class="featured-item">✭ Baru</span>-->
-          <h2 class="featured-title"></h2>
-          <p class="featured-description"></p>
-          <button class="btn btn-primary featured-btn"></button>
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Featured Hero Section -->
+    <section id="featured-hero" class="featured-hero">
+      <div class="featured-overlay">
+        <span class="featured-badge"></span>
+        <h2 class="featured-title"></h2>
+        <p class="featured-description"></p>
+        <div class="featured-actions">
+          <button type="button" class="btn btn-primary featured-btn">
+            🔓 Buka
+          </button>
+          <button type="button" class="btn featured-catalog-btn">
+            Konten premium terbaru →
+          </button>
         </div>
-          <div id="featured-latest" class="featured-latest"></div>
-      </section>
-      
-      <!-- Template Card -->
-<section class="home-section">
-    <div class="section-header">
-        <h2>Kuis</h2>
-        <a href="explore.html?tab=quiz">Lihat semua →</a>
-    </div>
+      </div>
+    </section>
 
-    <div id="quiz-list" class="horizontal-scroll"></div>
-</section>
+    <!-- Category Grid -->
+    <section class="category-section">
+      <div class="category-grid">
+        <button type="button" class="category-card" data-category="tts">
+          <div class="category-icon">
+            <img src="https://img.icons8.com/?size=24&id=oSaVJS0JhbLs&format=png" alt="Ikon Teka Teki Silang">
+          </div>
+          <span>Teka Teki Silang</span>
+        </button>
 
-<section class="home-section">
-    <div class="section-header">
-        <h2>Kartu Kasus</h2>
-        <a href="explore.html?tab=case">Lihat semua →</a>
-    </div>
+        <button type="button" class="category-card" data-category="case">
+          <div class="category-icon">
+            <img src="https://img.icons8.com/?size=24&id=azRXyH7B2uOy&format=png" alt="Ikon Kartu Kasus">
+          </div>
+          <span>Kartu Kasus</span>
+        </button>
 
-    <div id="case-container" class="horizontal-scroll"></div>
-</section>
-      
-<section class="home-section">
-    <div class="section-header">
-        <h2>TTS</h2>
+        <button type="button" class="category-card" data-category="comic">
+          <div class="category-icon">
+            <img src="https://img.icons8.com/?size=24&id=3As91fPvDjeH&format=png" alt="Ikon Komik Edukasi">
+          </div>
+          <span>Komik Edukasi</span>
+        </button>
+
+        <button type="button" class="category-card" data-category="quiz">
+          <div class="category-icon">
+            <img src="https://img.icons8.com/?size=24&id=C39yrLwypzvJ&format=png" alt="Ikon Kuis Interaktif">
+          </div>
+          <span>Kuis Interaktif</span>
+        </button> 
+      </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz-section" class="home-section">
+      <div class="section-header">
+        <h2>Kuis Trivia</h2>
+        <a href="explore.html?tab=quiz">Lihat semua Kuis →</a>
+      </div>
+      <div id="quiz-list" class="horizontal-scroll"></div>
+    </section>
+
+    <!-- TTS Section -->
+    <section id="tts-section" class="home-section">
+      <div class="section-header">
+        <h2>Teka Teki Silang</h2>
         <a href="explore.html?tab=tts">Lihat semua →</a>
-    </div>
+      </div>
+      <div id="tts-container" class="horizontal-scroll"></div>
+    </section>
 
-    <div id="tts-container" class="horizontal-scroll"></div>
-</section>
-        
-<section class="home-section">
-    <div class="section-header">
-        <h2>Komik</h2>
+    <!-- Case Section -->
+    <section id="case-section" class="home-section">
+      <div class="section-header">
+        <h2>Kartu Kasus</h2>
+        <a href="explore.html?tab=case">Lihat semua Kasus →</a>
+      </div>
+      <div id="case-container" class="horizontal-scroll"></div>
+    </section>
+
+    <!-- Comic Section -->
+    <section id="comic-section" class="home-section">
+      <div class="section-header">
+        <h2>Komik Edukasi</h2>
         <a href="explore.html?tab=comic">Lihat semua →</a>
-    </div>
+      </div>
+      <div id="comics-container" class="horizontal-scroll"></div>
+    </section>
 
-    <div id="comics-container" class="horizontal-scroll"></div>
-</section>
-        
-    </main>
+    <!-- Ebook Section -->
+    <section id="ebook-section" class="home-section">
+      <div class="section-header">
+        <h2>Ebook</h2>
+        <a href="https://gigital.myr.id" target="_blank" rel="noopener noreferrer">Lihat semua →</a>
+      </div>
+      <div id="ebook-container" class="horizontal-scroll"></div>
+    </section>
+  </main>
 
-    <!-- Template -->
-      
-<template id="content-card-template">
+  <!-- Component Templates -->
+  <template id="content-card-template">
     <article class="content-card">
-<div class="featured-card-overlay">
-<span class="featured-badge"></span>
-</div>
-        <img
-            class="content-thumb"
-            loading="lazy"
-            alt="">
-
-        <div class="content-info">
-            <h3 class="content-title"></h3>
-            <p class="content-description"></p>
-            <button class="btn btn-primary content-btn">
-                Buka
-            </button>
-        </div>
+      <div class="featured-card-overlay">
+        <span class="featured-badge"></span>
+      </div>
+      <img class="content-thumb">
+      <div class="content-info">
+        <h3 class="content-title"></h3>
+        <p class="content-description"></p>
+        <button type="button" class="btn btn-primary content-btn">
+          Buka →
+        </button>
+      </div>
     </article>
-</template>
+  </template>
 
-    <template id="featured-card-template">
-    <article class="featured-card">
-<div class="featured-card-overlay">
-<span class="featured-badge"></span>
-</div>
-        <img
-            class="featured-card-thumb"
-            loading="lazy"
-            alt="">
+  <!-- Modals -->
+  <!-- Premium Modal -->
+  <div id="premiumModal" class="premium-modal">
+    <div class="premium-modal-content">
+      <button type="button" id="closePremiumModal" class="premium-modal-close" aria-label="Tutup">
+        ✕
+      </button>
+      <iframe id="premiumFrame" src="" title="Konten Premium" frameborder="0"></iframe>
+    </div>
+  </div>
 
-        <div class="featured-card-info">
-          <span class="featured-card-type" style="display:none;"></span>
-            <h3 class="featured-card-title"></h3>
-            <p class="featured-card-description"></p>
-            <button class="btn btn-primary featured-card-btn">
-                Buka
-            </button>
-        </div>
+  <!-- Login Modal -->
+  <div id="loginModal" class="login-modal">
+    <div class="login-box">
+      <button type="button" class="login-close" onclick="closeLogin()" aria-label="Tutup">&times;</button>
+      <h2>Login</h2>
+      <input id="loginEmail" type="email" placeholder="Email" required>
+      <input id="loginPassword" type="password" placeholder="Password" required>
+      <button type="button" class="btn btn-primary login-email" onclick="loginEmail()">Login</button>
+      <button type="button" class="btn btn-outline register-email" onclick="registerEmail()">Daftar</button>
+      <div class="divider">ATAU</div>
+      <button type="button" class="btn btn-primary login-google" onclick="loginGoogle()">Login / Daftar dengan Google</button>
+    </div>
+  </div>
 
-    </article>
-</template>
-  <script src="js/purchase-manager.js"></script>    
+  <!-- Scripts -->
+  
+  <!-- Firebase SDK 
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script> -->
+  
+<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-compat.js"></script>
+<script src="js/firebase.js"></script>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/premium.js"></script>
+  <script src="js/purchase-manager.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/quiz-data.js"></script>
   <script src="js/comics-data.js"></script>
   <script src="js/tts-data.js"></script>
   <script src="js/case-data.js"></script>
-  <script src="js/premium.js"></script>
+  <script src="js/ebook-data.js"></script>
   <script src="js/index.js"></script>
-    
-  </body>
-
+  <script src="https://mayarembed.r2.mayar.id/mayar-new-min.js"></script>
+</body>
 </html>
