@@ -43,13 +43,14 @@ function getBackendProduct(productId) {
 }
 
 async function initializeHome() {
-/*
+
     loadQuiz();
     loadComics();
     loadTTS();
     loadCases();
     loadEbooks();
-    renderFeaturedHero();*/    
+    renderFeaturedHero();
+    
     await syncBackendProducts();
 
     loadQuiz();
@@ -256,7 +257,7 @@ function createContentCard({
 function loadQuiz() {
 
     if (!quizList) return;
-
+    quizList.innerHTML = "";
     quizzes
         .slice(0, 6)
         .forEach(quiz => {
@@ -315,7 +316,7 @@ function loadQuiz() {
 function loadComics() {
 
     if (!comicsContainer) return;
-
+    comicsContainer.innerHTML = "";
     comics
         .slice(0, 6)
         .forEach(comic => {
@@ -366,7 +367,7 @@ function loadComics() {
 function loadTTS() {
 
     if (!ttsContainer) return;
-
+    ttsContainer.innerHTML = "";
     ttsList
         .slice(0, 6)
         .forEach(tts => {
@@ -415,6 +416,7 @@ function loadTTS() {
 
 function loadCases() {
     if (!caseContainer) return;
+    caseContainer.innerHTML = "";
     cases
         .slice(0, 6)
         .forEach(caseData => {
