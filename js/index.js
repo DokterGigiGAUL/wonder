@@ -43,14 +43,13 @@ function getBackendProduct(productId) {
 }
 
 async function initializeHome() {
-
+/*
     loadQuiz();
     loadComics();
     loadTTS();
     loadCases();
     loadEbooks();
-    renderFeaturedHero();
-    
+    renderFeaturedHero();*/    
     await syncBackendProducts();
 
     loadQuiz();
