@@ -44,6 +44,13 @@ function getBackendProduct(productId) {
 
 async function initializeHome() {
 
+    loadQuiz();
+    loadComics();
+    loadTTS();
+    loadCases();
+    loadEbooks();
+    renderFeaturedHero();
+    
     await syncBackendProducts();
 
     loadQuiz();
@@ -150,6 +157,8 @@ function createContentCard({
 
     clone.querySelector(".content-thumb").alt =
         title;
+
+    clone.querySelector(".content-thumb").loading = "lazy";
 
     clone.querySelector(".content-title").textContent =
         title;
