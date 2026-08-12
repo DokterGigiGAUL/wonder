@@ -283,7 +283,8 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    box-shadow: var(--shadow);
+
+   box-shadow: 6px 6px 0 var(--shadow);
 }
 
 .featured-hero::before {
