@@ -153,19 +153,44 @@ if (buyItemBtn) {
 /* =========================================
    LANGGANAN PREMIUM
    ========================================= */
+
 if (subscribeBtn) {
+    subscribeBtn.addEventListener("click", async () => {
+
+        subscribeBtn.disabled = true;
+        subscribeBtn.textContent = "Memproses...";
+
+        try {
+
+            await subscribePremium();
+
+        } catch (error) {
+
+            console.error(
+                "[Premium] Gagal membuat checkout:",
+                error
+            );
+
+            alert(
+                "Gagal membuat checkout. Silakan coba lagi."
+            );
+
+            subscribeBtn.disabled = false;
+            subscribeBtn.textContent =
+                "Beli Akses Premium";
+        }
+
+    });
+}
+/*if (subscribeBtn) {
     subscribeBtn.addEventListener("click", () => {
-        /*
-        window.location.href =
-            "https://wonderapp.mayar.shop/m/akses-premium-wonder-app/";
-    */
         window.open(
   "https://wonderapp.mayar.shop/m/akses-premium-wonder-app/",
   "_blank"
 );
     });
 }
-    /*
+    
 if (subscribeBtn) {
 
     subscribeBtn.addEventListener("click", async () => {
