@@ -10,8 +10,13 @@ googleProvider.setCustomParameters({
     prompt: "select_account"
 });
 */
-const auth = firebase.auth();
-const db = firebase.firestore();
+// Gunakan variabel auth & db yang sudah ada, atau inisialisasi jika belum
+window.auth = window.auth || firebase.auth();
+window.db = window.db || firebase.firestore();
+
+// Buat alias lokal tanpa menggunakan 'const' jika nama variabel bentrok
+var auth = window.auth;
+var db = window.db;
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
