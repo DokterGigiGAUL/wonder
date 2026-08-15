@@ -2,14 +2,22 @@
 |--------------------------------------------------------------------------
 | auth.js
 |--------------------------------------------------------------------------
-*/
+
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
     prompt: "select_account"
 });
+*/
+const auth = firebase.auth();
+const db = firebase.firestore();
 
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+googleProvider.setCustomParameters({
+    prompt: "select_account"
+});
 /* -------------------------------------------------------------------------- */
 /* LOGIN EMAIL */
 /* -------------------------------------------------------------------------- */
