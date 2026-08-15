@@ -10,19 +10,19 @@ googleProvider.setCustomParameters({
     prompt: "select_account"
 });
 */
-// Memastikan objek auth dan db mengambil dari instance yang sudah diinisialisasi sebelumnya
-if (typeof auth === "undefined") {
-    var auth = firebase.auth();
+// Gunakan instance firebase.auth() & firestore() secara aman
+function getAuthInstance() {
+    return window.auth || firebase.auth();
 }
-if (typeof db === "undefined") {
-    var db = firebase.firestore();
+
+function getDbInstance() {
+    return window.db || firebase.firestore();
 }
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
-googleProvider.setCustomParameters({
-    prompt: "select_account"
-});/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
 /* LOGIN EMAIL */
 /* -------------------------------------------------------------------------- */
 
