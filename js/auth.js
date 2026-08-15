@@ -186,7 +186,7 @@ PurchaseManager.sync(response.data);
 });*/
 /* -------------------------------------------------------------------------- */
 /* APP START (UPDATED FOR REALTIME PREMIUM SYNC)                              */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- 
 
 let unsubscribeUserDoc = null; // Menyimpan listener agar tidak menumpuk
 
@@ -232,6 +232,52 @@ auth.onAuthStateChanged(async (user) => {
         console.error("Gagal inisialisasi user:", err);
     }
 
+});*/
+
+/* -------------------------------------------------------------------------- */
+/* REALTIME FIRESTORE LISTENER (APP START)                                    */
+/* -------------------------------------------------------------------------- */
+
+let unsubscribeUserDoc = null;
+
+getAuthInstance().onAuthStateChanged((user) => {
+    updateAuthUI(user);
+
+    if (!user) {
+        if (unsubscribeUserDoc) {
+            unsubscribeUserDoc();
+            unsubscribeUserDoc = null;
+        }
+        if (typeof PurchaseManager !== "undefined") {
+            PurchaseManager.clear();
+        }
+        return;
+    }
+
+    // Pasang listener Firestore secara aman menggunakan getDbInstance()
+    try {
+        if (unsubscribeUserDoc) unsubscribeUserDoc();
+
+        const firestoreDb = getDbInstance(); // <--- Ambil instance Firestore di sini
+
+        unsubscribeUserDoc = firestoreDb
+            .collection("users")
+            .doc(user.uid)
+            .onSnapshot((docSnap) => {
+                if (docSnap.exists) {
+                    const userData = docSnap.data();
+                    console.log("🔥 Firestore Data Received:", userData);
+
+                    if (typeof PurchaseManager !== "undefined") {
+                        PurchaseManager.sync(userData);
+                    }
+                }
+            }, (err) => {
+                console.error("Firestore Listener Error:", err);
+            });
+    } catch (err) {
+        console.error("Auth Init Error:", err);
+    }
 });
 
 /* -------------------------------------------------------------------------- */
