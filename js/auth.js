@@ -143,7 +143,7 @@ function onUserChanged(callback) {
 
 /* -------------------------------------------------------------------------- */
 /* APP START */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- 
 
 auth.onAuthStateChanged(async (user) => {
 
@@ -169,6 +169,55 @@ PurchaseManager.sync(response.data);
 
         console.error(err);
 
+    }
+
+});*/
+/* -------------------------------------------------------------------------- */
+/* APP START (UPDATED FOR REALTIME PREMIUM SYNC)                              */
+/* -------------------------------------------------------------------------- */
+
+let unsubscribeUserDoc = null; // Menyimpan listener agar tidak menumpuk
+
+auth.onAuthStateChanged(async (user) => {
+
+    updateAuthUI(user);
+
+    // Jika user logout, hentikan listener dan bersihkan PurchaseManager
+    if (!user) {
+        if (unsubscribeUserDoc) {
+            unsubscribeUserDoc();
+            unsubscribeUserDoc = null;
+        }
+        PurchaseManager.clear();
+        return;
+    }
+
+    try {
+        // 1. Pastikan profil dasar user tersinkron di Firestore
+        await syncUser(user);
+
+        // 2. Pasang Realtime Listener ke Firestore agar status premium ter-update OTOMATIS
+        const userDocRef = db.collection("users").doc(user.uid);
+
+        // Hentikan listener lama jika ada
+        if (unsubscribeUserDoc) unsubscribeUserDoc();
+
+        unsubscribeUserDoc = userDocRef.onSnapshot((docSnap) => {
+            if (docSnap.exists) {
+                const userData = docSnap.data();
+                console.log("Data Firestore Terbaru Received:", userData);
+
+                // Sinkronkan data Firestore (termasuk premiumUntil & ownedProducts) ke PurchaseManager
+                PurchaseManager.sync(userData);
+            } else {
+                console.warn("Dokumen user tidak ditemukan di Firestore!");
+            }
+        }, (err) => {
+            console.error("Realtime listener error:", err);
+        });
+
+    } catch (err) {
+        console.error("Gagal inisialisasi user:", err);
     }
 
 });
