@@ -112,11 +112,22 @@ function createContentCard({
      * =====================================================
      * STATUS PRODUK
      * =====================================================
-     */
+    
 
     const backendActive =
         backendProduct?.status === "active";
+    */
 
+    /*
+     * =====================================================
+     * STATUS PRODUK
+     * =====================================================
+     */
+
+    // Ganti logika pengecekan dari backendProduct saja menjadi gabungan PurchaseManager
+    const backendActive =
+        (item && typeof PurchaseManager !== "undefined" && PurchaseManager.hasAccess(item)) ||
+        backendProduct?.status === "active";
 
     /*
      * =====================================================
@@ -610,3 +621,13 @@ document.querySelectorAll(".category-card").forEach(card => {
     });
 
 });
+
+// Tambahkan fungsi listener agar bisa dipanggil saat PurchaseManager selesai sync
+window.renderAllContent = function() {
+    loadQuiz();
+    loadComics();
+    loadTTS();
+    loadCases();
+    loadEbooks();
+    renderFeaturedHero();
+};
