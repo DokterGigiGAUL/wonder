@@ -167,8 +167,14 @@ getAuthInstance().onAuthStateChanged(async (user) => {
                     }
 
                     if (typeof PurchaseManager !== "undefined") {
-                        PurchaseManager.sync(userData);
-                    }
+    PurchaseManager.sync(userData);
+    
+    // Panggil re-render UI jika fungsi tersebut tersedia di halaman aktif
+    if (typeof window.renderAllContent === "function") {
+        window.renderAllContent();
+    }
+}
+                    
                 } else {
                     console.warn("Dokumen user tidak ditemukan di Firestore untuk UID:", user.uid);
                 }
