@@ -132,7 +132,7 @@ function createContentCard({
         if (backendActive) {
 
             badge.textContent =
-                "🟢 Dimiliki";
+                "🟢 Terbuka";
 
         } else {
 
@@ -214,7 +214,7 @@ function createContentCard({
      * =====================================================
      *
      * Premium + backend active
-     *     → 🟢 Dimiliki
+     *     → 🟢 Terbuka
      *
      * Premium + backend inactive
      *     → 👑 Premium
@@ -516,7 +516,7 @@ function renderFeaturedHero() {
 
     badge.textContent =
         PurchaseManager.hasAccess(heroItem)
-            ? "🟢 Akses permanen"
+            ? "🟢 Terbuka"
             : "👑 Premium";
 
     title.textContent =
