@@ -173,3 +173,19 @@ function checkUserAccess(uid) {
       console.error("Gagal mengambil data akses premium:", error);
     });
 }
+
+// Otomatis redirect ke Mayar jika user baru saja login dari tombol Premium
+if (typeof firebase !== 'undefined' && firebase.auth) {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user && localStorage.getItem("autoRedirectMayar") === "true") {
+      // Hapus penanda agar tidak terpicu berulang kali
+      localStorage.removeItem("autoRedirectMayar");
+
+      // Buka link Mayar
+      const MAYAR_PAYMENT_URL = "https://wonderapp.mayar.shop/m/akses-premium-wonder-app";
+      const userEmail = encodeURIComponent(user.email);
+      window.open(`${MAYAR_PAYMENT_URL}?email=${userEmail}`, '_blank');
+    }
+  });
+}
+
