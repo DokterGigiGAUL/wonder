@@ -4,6 +4,28 @@
 |--------------------------------------------------------------------------
 */
 
+// =========================================================================
+// FUNGSI GLOBAL PEMICU POP-UP PREMIUM
+// =========================================================================
+window.showPremiumDialog = function(productId) {
+    const premiumModal = document.getElementById('premiumModal');
+    const premiumFrame = document.getElementById('premiumFrame');
+    
+    if (premiumModal) {
+        if (premiumFrame) {
+            // Muat file premium.html ke dalam iframe modal dengan membawa productId
+            premiumFrame.src = `premium.html?product=${encodeURIComponent(productId || '')}`;
+        }
+        premiumModal.classList.add('show');
+    } else {
+        // Fallback jika modal berbentuk halaman terpisah
+        window.location.href = `premium.html?product=${encodeURIComponent(productId || '')}`;
+    }
+};
+
+// =========================================================================
+// ELEMEN & VARIABEL UTAMA
+// =========================================================================
 const quizList = document.getElementById("quiz-list");
 const comicsContainer = document.getElementById("comics-container");
 const ttsContainer = document.getElementById("tts-container");
@@ -402,7 +424,7 @@ function renderFeaturedHero() {
 
     if (catalogButton) {
         catalogButton.onclick = () => {
-            location.href = "premium-catalog.html";
+            location.href = "https://doktergigigaul.github.io/wonder/premium-catalog.html";
         };
     }
 }
