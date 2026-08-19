@@ -1,233 +1,135 @@
-/*
-|--------------------------------------------------------------------------
-| auth.js
-|--------------------------------------------------------------------------
-*/
+// js/auth.js
 
-// Gunakan instance firebase.auth() & firestore() secara aman
-function getAuthInstance() {
-    return window.auth || firebase.auth();
-}
+// Global State User & Status Akses
+window.currentUser = null;
+window.userAccess = {
+  isPremium: false,
+  subscriptionExpiry: null,
+  purchasedItems: []
+};
 
-function getDbInstance() {
-    return window.db || firebase.firestore();
-}
-
-const googleProvider = new firebase.auth.GoogleAuthProvider();
-googleProvider.setCustomParameters({ prompt: "select_account" });
-
-/* -------------------------------------------------------------------------- */
-/* LOGIN EMAIL */
-/* -------------------------------------------------------------------------- */
-
-async function login(email, password) {
-    try {
-        const authInst = getAuthInstance(); // <--- Disesuaikan agar aman
-        const result = await authInst.signInWithEmailAndPassword(email, password);
-
-        return {
-            success: true,
-            user: result.user
-        };
-    } catch (err) {
-        return {
-            success: false,
-            message: err.message
-        };
-    }
-}
-
-/* -------------------------------------------------------------------------- */
-/* REGISTER */
-/* -------------------------------------------------------------------------- */
-
-async function register(email, password) {
-    try {
-        const authInst = getAuthInstance(); // <--- Disesuaikan agar aman
-        const result = await authInst.createUserWithEmailAndPassword(email, password);
-
-        return {
-            success: true,
-            user: result.user
-        };
-    } catch (err) {
-        return {
-            success: false,
-            message: err.message
-        };
-    }
-}
-
-/* -------------------------------------------------------------------------- */
-/* GOOGLE LOGIN */
-/* -------------------------------------------------------------------------- */
-
-async function loginWithGoogle() {
-    try {
-        const authInst = getAuthInstance(); // <--- Disesuaikan agar aman
-        const result = await authInst.signInWithPopup(googleProvider);
-
-        return {
-            success: true,
-            user: result.user
-        };
-    } catch (err) {
-        return {
-            success: false,
-            message: err.message
-        };
-    }
-}
-
-/* -------------------------------------------------------------------------- */
-/* LOGOUT */
-/* -------------------------------------------------------------------------- */
-
-async function logout() {
-    if (typeof PurchaseManager !== "undefined") {
-        PurchaseManager.clear();
-    }
-    const authInst = getAuthInstance(); // <--- Disesuaikan agar aman
-    await authInst.signOut();
-}
-
-/* -------------------------------------------------------------------------- */
-/* UI */
-/* -------------------------------------------------------------------------- */
-
-function updateAuthUI(user) {
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-
-    if (!loginBtn || !logoutBtn) return;
-
-    if (user) {
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "";
-    } else {
-        loginBtn.style.display = "";
-        logoutBtn.style.display = "none";
-    }
-}
-
-/* -------------------------------------------------------------------------- */
-/* HELPERS */
-/* -------------------------------------------------------------------------- */
-
-function currentUser() {
-    return getAuthInstance().currentUser;
-}
-
-function onUserChanged(callback) {
-    getAuthInstance().onAuthStateChanged(callback);
-}
-
-/* -------------------------------------------------------------------------- */
-/* REALTIME FIRESTORE LISTENER (APP START)                                    */
-/* -------------------------------------------------------------------------- */
-
-let unsubscribeUserDoc = null;
-
-getAuthInstance().onAuthStateChanged(async (user) => {
-    updateAuthUI(user);
-
-    if (!user) {
-        if (unsubscribeUserDoc) {
-            unsubscribeUserDoc();
-            unsubscribeUserDoc = null;
-        }
-        if (typeof PurchaseManager !== "undefined") {
-            PurchaseManager.clear();
-        }
-        return;
-    }
-
-    try {
-        if (unsubscribeUserDoc) unsubscribeUserDoc();
-
-        const firestoreDb = getDbInstance();
-
-        // 1. Jalankan syncUser jika fungsi tersebut ada di project Anda
-        if (typeof syncUser === "function") {
-            await syncUser(user);
-        }
-
-        // 2. Pasang Listener Firestore
-        unsubscribeUserDoc = firestoreDb
-            .collection("users")
-            .doc(user.uid)
-            .onSnapshot((docSnap) => {
-                if (docSnap.exists) {
-                    const userData = docSnap.data();
-                    console.log("🔥 Firestore Data Received:", userData);
-
-                    // Normalisasi Firestore Timestamp jika ada
-                    if (userData.premiumUntil && typeof userData.premiumUntil.toDate === "function") {
-                        userData.premiumUntil = userData.premiumUntil.toDate();
-                    }
-
-                    if (typeof PurchaseManager !== "undefined") {
-    PurchaseManager.sync(userData);
-    
-    // Panggil re-render UI jika fungsi tersebut tersedia di halaman aktif
-    if (typeof window.renderAllContent === "function") {
-        window.renderAllContent();
-    }
-}
-                    
-                } else {
-                    console.warn("Dokumen user tidak ditemukan di Firestore untuk UID:", user.uid);
-                }
-            }, (err) => {
-                console.error("Firestore Listener Error:", err);
-            });
-    } catch (err) {
-        console.error("Auth Init Error:", err);
-    }
-});
-
-/* -------------------------------------------------------------------------- */
-/* LOGIN MODAL & BUTTON HANDLERS                                              */
-/* -------------------------------------------------------------------------- */
-
-function getLoginModal() {
-    return document.getElementById("loginModal");
-}
-
+// --- PENGELOLA MODAL LOGIN ---
 function openLogin() {
-    getLoginModal().classList.add("show");
+  const modal = document.getElementById('loginModal');
+  if (modal) modal.style.display = 'block';
 }
 
 function closeLogin() {
-    getLoginModal().classList.remove("show");
+  const modal = document.getElementById('loginModal');
+  if (modal) modal.style.display = 'none';
 }
 
-async function loginEmail() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
+// --- FUNGSI AUTHENTICATION ---
 
-    const result = await login(email, password);
-
-    if (result.success) {
-        closeLogin();
-    }
+// 1. Login/Daftar dengan Google
+function loginGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then((result) => {
+      console.log("Berhasil login via Google:", result.user.email);
+      closeLogin();
+    })
+    .catch((error) => {
+      alert("Gagal login dengan Google: " + error.message);
+    });
 }
 
-async function registerEmail() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
+// 2. Login dengan Email & Password
+function loginEmail() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
 
-    const result = await register(email, password);
+  if (!email || !password) {
+    alert("Harap isi email dan password.");
+    return;
+  }
 
-    if (result.success) {
-        closeLogin();
-    }
+  auth.signInWithEmailAndPassword(email, password)
+    .then((result) => {
+      console.log("Berhasil login via Email:", result.user.email);
+      closeLogin();
+    })
+    .catch((error) => {
+      alert("Gagal login: " + error.message);
+    });
 }
 
-async function loginGoogle() {
-    const result = await loginWithGoogle();
+// 3. Registrasi Akun Baru via Email
+function registerEmail() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
 
-    if (result.success) {
-        closeLogin();
-    }
+  if (!email || !password) {
+    alert("Harap isi email dan password untuk mendaftar.");
+    return;
+  }
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((result) => {
+      alert("Pendaftaran berhasil!");
+      closeLogin();
+    })
+    .catch((error) => {
+      alert("Gagal mendaftar: " + error.message);
+    });
+}
+
+// 4. Logout
+function logout() {
+  auth.signOut().then(() => {
+    console.log("User logged out");
+  }).catch((error) => {
+    console.error("Error logout:", error);
+  });
+}
+
+// --- DETEKSI STATE USER & QUERY ACCESS DARI FIRESTORE ---
+auth.onAuthStateChanged((user) => {
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+
+  if (user) {
+    window.currentUser = user;
+
+    // Update Tampilan Tombol Header
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (logoutBtn) logoutBtn.style.display = 'inline-block';
+
+    // Ambil Data Status Akses dari Firestore
+    checkUserAccess(user.uid);
+  } else {
+    window.currentUser = null;
+    window.userAccess = {
+      isPremium: false,
+      subscriptionExpiry: null,
+      purchasedItems: []
+    };
+
+    // Update Tampilan Tombol Header
+    if (loginBtn) loginBtn.style.display = 'inline-block';
+    if (logoutBtn) logoutBtn.style.display = 'none';
+
+    console.log("Status: Guest User");
+  }
+});
+
+// Fungsi Pengecekan Akses Firestore
+function checkUserAccess(uid) {
+  db.collection('users').doc(uid).get()
+    .then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        window.userAccess = {
+          isPremium: data.isPremium || false,
+          subscriptionExpiry: data.subscriptionExpiry || null,
+          purchasedItems: data.purchasedItems || []
+        };
+        console.log("Akses User Dimuat:", window.userAccess);
+      } else {
+        console.log("Dokumen user belum ada di Firestore (User Baru/Belum pernah transaksi).");
+      }
+    })
+    .catch((error) => {
+      console.error("Gagal mengambil data akses user:", error);
+    });
 }
