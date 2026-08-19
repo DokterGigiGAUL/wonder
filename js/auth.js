@@ -11,12 +11,16 @@ window.userAccess = {
 // --- PENGELOLA MODAL LOGIN ---
 function openLogin() {
   const modal = document.getElementById('loginModal');
-  if (modal) modal.style.display = 'block';
+  if (modal) {
+    modal.classList.add('show'); // Menggunakan class .show agar display: flex aktif
+  }
 }
 
 function closeLogin() {
   const modal = document.getElementById('loginModal');
-  if (modal) modal.style.display = 'none';
+  if (modal) {
+    modal.classList.remove('show'); // Menghapus class .show untuk menyembunyikan modal
+  }
 }
 
 // --- FUNGSI AUTHENTICATION ---
