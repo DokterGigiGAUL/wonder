@@ -23,8 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
                           ? firebase.auth().currentUser
                           : window.currentUser;
 
+      // Jika BELUM login:
       if (!activeUser) {
-        alert("Silakan Login atau Daftar akun terlebih dahulu untuk melanjutkan pembelian.");
+        // Tandai bahwa user ingin langsung ke Mayar setelah login
+        localStorage.setItem("autoRedirectMayar", "true");
+        
+        alert("Silakan Login atau Daftar akun terlebih dahulu untuk melanjutkan pembayaran.");
         
         if (window.parent && typeof window.parent.openLogin === "function") {
           window.parent.openLogin();
@@ -34,10 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      // Jika SUDAH login:
       const userEmail = encodeURIComponent(activeUser.email);
       window.open(`${MAYAR_PAYMENT_URL}?email=${userEmail}`, '_blank');
     });
   }
+
 });
 
 // Fungsi Buka & Tutup Modal Premium (Iframe)
