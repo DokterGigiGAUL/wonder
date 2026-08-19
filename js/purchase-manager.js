@@ -66,21 +66,33 @@ const PurchaseManager = (() => {
     }
 
     function hasAccess(item) {
+        if (!item) return false;
 
+        // 1. Jika konten bukan premium/gratis
         if (!item.premium) {
             return true;
         }
 
-        if (Premium.isPremium()) {
+        // 2. Jika user memiliki status langganan Premium (global)
+        if (typeof Premium !== "undefined" && Premium.isPremium()) {
             return true;
         }
 
+        // 3. Cek apakah produk dibeli secara individu (di-save ke localStorage)
         const products = getPurchasedProducts();
+        if (item.productId && products.includes(item.productId)) {
+            return true;
+        }
 
-        return (
-            item.productId &&
-            products.includes(item.productId)
-        );
+        // 4. Cek status aktif dari backend API (jika ada)
+        if (item.productId && typeof getBackendProduct === "function") {
+            const backendProd = getBackendProduct(item.productId);
+            if (backendProd?.status === "active") {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     function hasTTSPremium() {
