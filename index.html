@@ -32,14 +32,24 @@
         <span class="featured-badge"></span>
         <h2 class="featured-title"></h2>
         <p class="featured-description"></p>
-        <div class="featured-actions">
+       <!-- <div class="featured-actions">
           <button type="button" class="btn btn-primary featured-btn">
             🔓 Buka
           </button>
           <button type="button" class="btn featured-catalog-btn">
             Konten premium terbaru →
           </button>
-        </div>
+        </div> -->
+        <div class="featured-actions">
+  <!-- Pasang event click untuk memeriksa akses -->
+  <button type="button" class="btn btn-primary featured-btn" onclick="window.open('https://wonderapp.mayar.shop/m/akses-premium-wonder-app', '_blank')" >
+    🔓 Buka 
+  </button>
+  <button type="button" class="btn featured-catalog-btn" onclick="handleContentAccess('featured-01', 'https://example.com/demo-konten-premium')">
+    Beli Akses Premium →
+  </button>
+</div>
+
       </div>
     </section>
 
