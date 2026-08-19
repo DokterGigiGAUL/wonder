@@ -43,6 +43,29 @@ function getBackendProduct(productId) {
 }
 
 /* -------------------------------------------------------------------------- */
+/* HELPER CHECK ACCESS                                                        */
+/* -------------------------------------------------------------------------- */
+
+function checkAccess(item) {
+    if (!item) return false;
+    
+    // Cek lewat PurchaseManager
+    if (typeof PurchaseManager !== "undefined" && PurchaseManager.hasAccess(item)) {
+        return true;
+    }
+
+    // Cek fallback via Backend API
+    if (item.productId) {
+        const backendProd = backendProducts.get(item.productId);
+        if (backendProd?.status === "active") {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/* -------------------------------------------------------------------------- */
 /* INIT & GLOBAL RE-RENDER                                                    */
 /* -------------------------------------------------------------------------- */
 
@@ -86,7 +109,7 @@ function createContentCard({
     item,
     onClick
 }) {
-    if (!cardTemplate) return;
+    if (!cardTemplate || !container) return;
 
     const clone = cardTemplate.content.cloneNode(true);
     const card = clone.querySelector(".content-card");
@@ -102,11 +125,8 @@ function createContentCard({
 
     /*
      * STATUS PRODUK & AKSES
-     * Menggabungkan pengecekan dari PurchaseManager (Firestore) & Backend Product
      */
-    const hasAccess = 
-        (item && typeof PurchaseManager !== "undefined" && PurchaseManager.hasAccess(item)) ||
-        backendProduct?.status === "active";
+    const hasAccess = checkAccess(item);
 
     /*
      * BADGE
@@ -197,7 +217,7 @@ function loadQuiz() {
             buttonText: finished ? "Sudah Selesai" : "Mulai →",
             disabled: finished,
             onClick() {
-                const hasAccess = PurchaseManager.hasAccess(quiz);
+                const hasAccess = checkAccess(quiz);
 
                 if (quiz.premium && !hasAccess) {
                     showPremiumDialog(quiz.productId);
@@ -224,7 +244,7 @@ function loadComics() {
             premium: comic.premium,
             buttonText: "Baca →",
             onClick() {
-                const hasAccess = PurchaseManager.hasAccess(comic);
+                const hasAccess = checkAccess(comic);
 
                 if (comic.premium && !hasAccess) {
                     showPremiumDialog(comic.productId);
@@ -251,7 +271,7 @@ function loadTTS() {
             premium: tts.premium,
             buttonText: "Main →",
             onClick() {
-                const hasAccess = PurchaseManager.hasAccess(tts);
+                const hasAccess = checkAccess(tts);
 
                 if (tts.premium && !hasAccess) {
                     showPremiumDialog(tts.productId);
@@ -278,7 +298,7 @@ function loadCases() {
             premium: caseData.premium,
             buttonText: "Lihat →",
             onClick() {
-                const hasAccess = PurchaseManager.hasAccess(caseData);
+                const hasAccess = checkAccess(caseData);
 
                 if (caseData.premium && !hasAccess) {
                     showPremiumDialog(caseData.productId);
@@ -330,7 +350,7 @@ function renderFeaturedHero() {
         ...ttsList,
         ...cases
     ]
-    .filter(item => item.premium)
+    .filter(item => item?.premium)
     .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
 
     const heroItem = latestPremiumItems[0];
@@ -345,7 +365,7 @@ function renderFeaturedHero() {
     const button = featuredHero.querySelector(".featured-btn");
     const catalogButton = featuredHero.querySelector(".featured-catalog-btn");
 
-    const isOwned = typeof PurchaseManager !== "undefined" && PurchaseManager.hasAccess(heroItem);
+    const isOwned = checkAccess(heroItem);
 
     if (badge) {
         badge.textContent = isOwned ? "🟢 Terbuka" : "👑 Premium";
@@ -365,7 +385,7 @@ function renderFeaturedHero() {
 
             switch (heroItem.type) {
                 case "quiz":
-                    location.href = `quiz.html?id=${heroItem.id}`;
+                    location.href = `quiz.html?id=${heroItem.file}`;
                     break;
                 case "comic":
                     location.href = `komik.html?id=${heroItem.id}`;
@@ -374,7 +394,7 @@ function renderFeaturedHero() {
                     location.href = `tts.html?puzzle=tts${heroItem.id}`;
                     break;
                 case "case":
-                    location.href = `case.html?case=${heroItem.id}`;
+                    location.href = `case.html?case=${heroItem.file}`;
                     break;
             }
         };
