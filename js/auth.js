@@ -136,23 +136,40 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-// Fungsi Pengecekan Akses Firestore
+// Fungsi Pengecekan Akses Firestore berdasarkan Email User
 function checkUserAccess(uid) {
-  db.collection('users').doc(uid).get()
+  if (!window.currentUser || !window.currentUser.email) return;
+
+  const userEmail = window.currentUser.email.toLowerCase();
+  const sanitizedEmail = userEmail.replace(/[^a-zA-Z0-9]/g, "_");
+
+  // Query dokumen di koleksi premium_memberships
+  db.collection('premium_memberships').doc(sanitizedEmail).get()
     .then((doc) => {
       if (doc.exists) {
         const data = doc.data();
+        
+        // Cek apakah tanggal kedaluwarsa masih berlaku
+        const now = new Date();
+        const expiry = data.subscriptionExpiry ? new Date(data.subscriptionExpiry) : null;
+        const isValid = expiry ? expiry > now : false;
+
         window.userAccess = {
-          isPremium: data.isPremium || false,
+          isPremium: data.isPremium && isValid,
           subscriptionExpiry: data.subscriptionExpiry || null,
-          purchasedItems: data.purchasedItems || []
+          product: data.product || ""
         };
-        console.log("Akses User Dimuat:", window.userAccess);
+        console.log("Status Akses Premium Terverifikasi:", window.userAccess);
       } else {
-        console.log("Dokumen user belum ada di Firestore (User Baru/Belum pernah transaksi).");
+        window.userAccess = {
+          isPremium: false,
+          subscriptionExpiry: null,
+          product: ""
+        };
+        console.log("User belum memiliki akses premium.");
       }
     })
     .catch((error) => {
-      console.error("Gagal mengambil data akses user:", error);
+      console.error("Gagal mengambil data akses premium:", error);
     });
 }
