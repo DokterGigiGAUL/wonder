@@ -40,8 +40,11 @@ function loginGoogle() {
 
 // 2. Login dengan Email & Password
 function loginEmail() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value.trim();
+  const emailInput = document.getElementById('loginEmail');
+  const passwordInput = document.getElementById('loginPassword');
+  
+  const email = emailInput ? emailInput.value.trim() : '';
+  const password = passwordInput ? passwordInput.value.trim() : '';
 
   if (!email || !password) {
     alert("Harap isi email dan password.");
@@ -54,27 +57,43 @@ function loginEmail() {
       closeLogin();
     })
     .catch((error) => {
-      alert("Gagal login: " + error.message);
+      if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        alert("Email atau password salah. Jika belum punya akun, klik tombol 'Daftar'.");
+      } else {
+        alert("Gagal login: " + error.message);
+      }
     });
 }
 
 // 3. Registrasi Akun Baru via Email
 function registerEmail() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value.trim();
+  const emailInput = document.getElementById('loginEmail');
+  const passwordInput = document.getElementById('loginPassword');
+
+  const email = emailInput ? emailInput.value.trim() : '';
+  const password = passwordInput ? passwordInput.value.trim() : '';
 
   if (!email || !password) {
     alert("Harap isi email dan password untuk mendaftar.");
     return;
   }
 
+  if (password.length < 6) {
+    alert("Password minimal 6 karakter.");
+    return;
+  }
+
   auth.createUserWithEmailAndPassword(email, password)
     .then((result) => {
-      alert("Pendaftaran berhasil!");
+      alert("Pendaftaran berhasil! Anda otomatis terlogin.");
       closeLogin();
     })
     .catch((error) => {
-      alert("Gagal mendaftar: " + error.message);
+      if (error.code === 'auth/email-already-in-use') {
+        alert("Email ini sudah terdaftar. Silakan klik tombol 'Login'.");
+      } else {
+        alert("Gagal mendaftar: " + error.message);
+      }
     });
 }
 
