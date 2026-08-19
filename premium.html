@@ -80,11 +80,6 @@
 </section>
 </main>
 
-  <!-- Firebase SDK 
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script> -->
-  
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-compat.js"></script>
@@ -100,126 +95,6 @@
 <script src="js/premium.js"></script>
 
 <script>
-/* =========================================
-   PREMIUM CHECKOUT
-   ========================================= */
-
-const params = new URLSearchParams(window.location.search);
-const productId = params.get("product");
-
-const buyItemBtn = document.getElementById("buyItemBtn");
-const subscribeBtn = document.getElementById("subscribeBtn");
-
-
-/* =========================================
-   PEMBELIAN KONTEN
-   ========================================= */
-
-if (buyItemBtn) {
-
-    buyItemBtn.addEventListener("click", async () => {
-
-        if (!productId) {
-            alert("Produk tidak ditemukan.");
-            return;
-        }
-
-        buyItemBtn.disabled = true;
-        buyItemBtn.textContent = "Memproses...";
-
-        try {
-
-            await purchaseProduct(productId);
-
-        } catch (error) {
-
-            console.error(
-                "[Premium] Gagal membeli konten:",
-                error
-            );
-
-            alert(
-                "Gagal membuat checkout. Silakan coba lagi."
-            );
-
-            buyItemBtn.disabled = false;
-            buyItemBtn.textContent = "Beli Konten Ini";
-        }
-
-    });
-
-}
-
-/* =========================================
-   LANGGANAN PREMIUM
-   ========================================= */
-
-if (subscribeBtn) {
-    subscribeBtn.addEventListener("click", async () => {
-
-        subscribeBtn.disabled = true;
-        subscribeBtn.textContent = "Memproses...";
-
-        try {
-
-            await subscribePremium();
-
-        } catch (error) {
-
-            console.error(
-                "[Premium] Gagal membuat checkout:",
-                error
-            );
-
-            alert(
-                "Gagal membuat checkout. Silakan coba lagi."
-            );
-
-            subscribeBtn.disabled = false;
-            subscribeBtn.textContent =
-                "Beli Akses Premium";
-        }
-
-    });
-}
-/*if (subscribeBtn) {
-    subscribeBtn.addEventListener("click", () => {
-        window.open(
-  "https://wonderapp.mayar.shop/m/akses-premium-wonder-app/",
-  "_blank"
-);
-    });
-}
-    
-if (subscribeBtn) {
-
-    subscribeBtn.addEventListener("click", async () => {
-
-        subscribeBtn.disabled = true;
-        subscribeBtn.textContent = "Memproses...";
-
-        try {
-
-            await purchaseProduct("premium-monthly");
-
-        } catch (error) {
-
-            console.error(
-                "[Premium] Gagal membeli Premium:",
-                error
-            );
-
-            alert(
-                "Gagal membuat checkout. Silakan coba lagi."
-            );
-
-            subscribeBtn.disabled = false;
-            subscribeBtn.textContent = "Beli Akses Premium";
-        }
-
-    });
-
-}*/
 </script>
 
 </body>
