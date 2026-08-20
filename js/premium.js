@@ -19,15 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // 2. Tombol Beli Akses Premium Bulanan
   if (subscribeBtn) {
     subscribeBtn.addEventListener("click", () => {
-      // PERBAIKAN: Ambil akun dari Firebase Iframe, Window Utama (Parent), atau Window Current
+      // Ambil user aktif dari Firebase atau window parent (jika di dalam iframe)
       const activeUser = (typeof firebase !== 'undefined' && firebase.auth && firebase.auth().currentUser)
                           || (window.parent && window.parent.currentUser)
                           || window.currentUser;
 
-      // Jika BELUM login:
+      // Jika BELUM login -> buka Pop-up Login
       if (!activeUser) {
-        localStorage.setItem("autoRedirectMayar", "true");
-        
         alert("Silakan Login atau Daftar akun terlebih dahulu untuk melanjutkan pembayaran.");
         
         if (window.parent && typeof window.parent.openLogin === "function") {
@@ -38,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Jika SUDAH login: Langsung buka Mayar dengan email user
+      // Jika SUDAH login -> Buka halaman pembayaran Mayar membawa email
       const userEmail = encodeURIComponent(activeUser.email);
       window.open(`${MAYAR_PAYMENT_URL}?email=${userEmail}`, '_blank');
     });
