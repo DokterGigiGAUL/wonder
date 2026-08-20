@@ -174,18 +174,19 @@ function checkUserAccess(uid) {
     });
 }
 
-// Otomatis redirect ke Mayar jika user baru saja login dari tombol Premium
+// Cek dan redirect otomatis ke Mayar setelah login berhasil
 if (typeof firebase !== 'undefined' && firebase.auth) {
   firebase.auth().onAuthStateChanged((user) => {
     if (user && localStorage.getItem("autoRedirectMayar") === "true") {
-      // Hapus penanda agar tidak terpicu berulang kali
       localStorage.removeItem("autoRedirectMayar");
+      
+      // Tutup modal premium jika terbuka
+      const modal = document.getElementById('premiumModal');
+      if (modal) modal.classList.remove('show');
 
-      // Buka link Mayar
-      const MAYAR_PAYMENT_URL = "https://wonderapp.mayar.shop/m/akses-premium-wonder-app";
-      const userEmail = encodeURIComponent(user.email);
-      window.open(`${MAYAR_PAYMENT_URL}?email=${userEmail}`, '_blank');
+      // Langsung buka link Mayar di tab baru
+      const MAYAR_URL = "https://wonderapp.mayar.shop/m/akses-premium-wonder-app";
+      window.open(`${MAYAR_URL}?email=${encodeURIComponent(user.email)}`, '_blank');
     }
   });
 }
-
