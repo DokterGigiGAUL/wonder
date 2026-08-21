@@ -136,41 +136,25 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-// Fungsi Pengecekan Akses Firestore berdasarkan Email User
+// Fungsi Pengecekan Akses via Google Apps Script (GAS)
 function checkUserAccess(uid) {
   if (!window.currentUser || !window.currentUser.email) return;
 
-  const userEmail = window.currentUser.email.toLowerCase();
-  const sanitizedEmail = userEmail.replace(/[^a-zA-Z0-9]/g, "_");
+  const userEmail = encodeURIComponent(window.currentUser.email.toLowerCase());
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbxizPnrzJKftQuEpt0OOKrp_KSpFyw7JDsiHOxY1k1nvKLXPH9ZSlrkYqufc7iQGifr/exec";
 
-  // Query dokumen di koleksi premium_memberships
-  db.collection('premium_memberships').doc(sanitizedEmail).get()
-    .then((doc) => {
-      if (doc.exists) {
-        const data = doc.data();
-        
-        // Cek apakah tanggal kedaluwarsa masih berlaku
-        const now = new Date();
-        const expiry = data.subscriptionExpiry ? new Date(data.subscriptionExpiry) : null;
-        const isValid = expiry ? expiry > now : false;
-
-        window.userAccess = {
-          isPremium: data.isPremium && isValid,
-          subscriptionExpiry: data.subscriptionExpiry || null,
-          product: data.product || ""
-        };
-        console.log("Status Akses Premium Terverifikasi:", window.userAccess);
-      } else {
-        window.userAccess = {
-          isPremium: false,
-          subscriptionExpiry: null,
-          product: ""
-        };
-        console.log("User belum memiliki akses premium.");
-      }
+  fetch(`${GAS_URL}?email=${userEmail}`)
+    .then((res) => res.json())
+    .then((data) => {
+      window.userAccess = {
+        isPremium: data.hasAccess || false,
+        subscriptionExpiry: null,
+        product: ""
+      };
+      console.log("Status Akses Premium Terverifikasi via GAS:", window.userAccess);
     })
     .catch((error) => {
-      console.error("Gagal mengambil data akses premium:", error);
+      console.error("Gagal mengambil data akses dari GAS:", error);
     });
 }
 
