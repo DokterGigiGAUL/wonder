@@ -1,4 +1,155 @@
-<!-- Modals -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wonder App Kedokteran Gigi</title>
+  
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="css/index.css" />
+
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <h1 class="app-brand">
+      <img src="assets/images/favicon-32x32.png" alt="Wonder App Logo">
+      <span>Wonder App</span>
+    </h1>
+    <div class="header-actions"> 
+      <button type="button" id="loginBtn" class="btn btn-secondary" onclick="openLogin()">Login</button> 
+      <button type="button" id="logoutBtn" class="btn btn-secondary" onclick="logout()" style="display: none;">Logout</button> 
+    </div> 
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Featured Hero Section -->
+    <section id="featured-hero" class="featured-hero">
+      <div class="featured-overlay">
+        <span class="featured-badge"></span>
+        <h2 class="featured-title"></h2>
+        <p class="featured-description"></p>
+       <!-- <div class="featured-actions">
+          <button type="button" class="btn btn-primary featured-btn">
+            🔓 Buka
+          </button>
+          <button type="button" class="btn featured-catalog-btn">
+            Konten premium terbaru →
+          </button>
+        </div> -->
+        <div class="featured-actions">
+  <!-- Pasang event click untuk memeriksa akses -->
+  <button type="button" class="btn btn-primary featured-btn" onclick="window.open('https://wonderapp.mayar.shop/m/akses-premium-wonder-app', '_blank')">
+    🔓 Buka 
+  </button>
+  <button type="button" class="btn featured-catalog-btn" onclick="handleContentAccess('featured-01', 'https://example.com/demo-konten-premium')">
+    Konten premium terbaru →
+  </button>
+</div>
+
+      </div>
+    </section>
+
+    <!-- Category Grid -->
+    <section class="category-section">
+      <div class="category-grid">
+        <button type="button" class="category-card" data-category="tts">
+          <div class="category-icon">
+            <img src="https://img.icons8.com/?size=24&id=oSaVJS0JhbLs&format=png" alt="Ikon Teka Teki Silang">
+          </div>
+          <span>Teka Teki Silang</span>
+        </button>
+
+        <button type="button" class="category-card" data-category="case">
+          <div class="category-icon">
+            <img src="https://img.icons8.com/?size=24&id=azRXyH7B2uOy&format=png" alt="Ikon Kartu Kasus">
+          </div>
+          <span>Kartu Kasus</span>
+        </button>
+
+        <button type="button" class="category-card" data-category="comic">
+          <div class="category-icon">
+            <img src="https://img.icons8.com/?size=24&id=3As91fPvDjeH&format=png" alt="Ikon Komik Edukasi">
+          </div>
+          <span>Komik Edukasi</span>
+        </button>
+
+        <button type="button" class="category-card" data-category="quiz">
+          <div class="category-icon">
+            <img src="https://img.icons8.com/?size=24&id=C39yrLwypzvJ&format=png" alt="Ikon Kuis Interaktif">
+          </div>
+          <span>Kuis Interaktif</span>
+        </button> 
+      </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz-section" class="home-section">
+      <div class="section-header">
+        <h2>Kuis Trivia</h2>
+        <a href="explore.html?tab=quiz">Lihat semua Kuis →</a>
+      </div>
+      <div id="quiz-list" class="horizontal-scroll"></div>
+    </section>
+
+    <!-- TTS Section -->
+    <section id="tts-section" class="home-section">
+      <div class="section-header">
+        <h2>Teka Teki Silang</h2>
+        <a href="explore.html?tab=tts">Lihat semua →</a>
+      </div>
+      <div id="tts-container" class="horizontal-scroll"></div>
+    </section>
+
+    <!-- Case Section -->
+    <section id="case-section" class="home-section">
+      <div class="section-header">
+        <h2>Kartu Kasus</h2>
+        <a href="explore.html?tab=case">Lihat semua Kasus →</a>
+      </div>
+      <div id="case-container" class="horizontal-scroll"></div>
+    </section>
+
+    <!-- Comic Section -->
+    <section id="comic-section" class="home-section">
+      <div class="section-header">
+        <h2>Komik Edukasi</h2>
+        <a href="explore.html?tab=comic">Lihat semua →</a>
+      </div>
+      <div id="comics-container" class="horizontal-scroll"></div>
+    </section>
+
+    <!-- Ebook Section -->
+    <section id="ebook-section" class="home-section">
+      <div class="section-header">
+        <h2>Ebook</h2>
+        <a href="https://gigital.myr.id" target="_blank" rel="noopener noreferrer">Lihat semua →</a>
+      </div>
+      <div id="ebook-container" class="horizontal-scroll"></div>
+    </section>
+  </main>
+
+  <!-- Component Templates -->
+  <template id="content-card-template">
+    <article class="content-card">
+      <div class="featured-card-overlay">
+        <span class="featured-badge"></span>
+      </div>
+      <img class="content-thumb">
+      <div class="content-info">
+        <h3 class="content-title"></h3>
+        <p class="content-description"></p>
+        <button type="button" class="btn btn-primary content-btn">
+          Buka →
+        </button>
+      </div>
+    </article>
+  </template>
+
+ <!-- Modals -->
   <!-- Premium Modal -->
   <div id="premiumModal" class="premium-modal">
     <div class="premium-modal-content">
