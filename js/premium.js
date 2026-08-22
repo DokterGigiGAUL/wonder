@@ -1,66 +1,71 @@
 // js/premium.js
 
-const MAYAR_PAYMENT_URL = "https://wonderapp.mayar.shop/m/akses-premium-wonder-app";
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // 1. Tangkap productId dari URL
   const params = new URLSearchParams(window.location.search);
   const productId = params.get("product");
+
+  let currentProduct = null;
+
+  // 2. Ambil detail produk dari API jika productId ada
+  if (productId && typeof WonderAPI !== "undefined") {
+    try {
+      const response = await WonderAPI.getProducts();
+      const products = response.data || [];
+      currentProduct = products.find(p => p.productId === productId);
+    } catch (error) {
+      console.error("Gagal memuat detail produk dari backend:", error);
+    }
+  }
+
+  // Display info produk jika ada UI-nya
+  if (currentProduct) {
+    const titleEl = document.getElementById("selectedProductTitle");
+    const priceEl = document.getElementById("selectedProductPrice");
+    if (titleEl) titleEl.textContent = currentProduct.name || currentProduct.title;
+    if (priceEl && currentProduct.price) {
+      priceEl.textContent = `Rp ${Number(currentProduct.price).toLocaleString("id-ID")}`;
+    }
+  }
 
   const buyItemBtn = document.getElementById("buyItemBtn");
   const subscribeBtn = document.getElementById("subscribeBtn");
 
-  // 1. Tombol Beli Per Konten
+  // 3. Tombol Beli Per Konten
   if (buyItemBtn) {
     buyItemBtn.addEventListener("click", () => {
       alert("Fitur pembelian per konten sedang disiapkan.");
     });
   }
 
-  // 2. Tombol Beli Akses Premium Bulanan
+  // 4. Tombol Langganan / Pembayaran
   if (subscribeBtn) {
     subscribeBtn.addEventListener("click", () => {
-      // Ambil user aktif dari Firebase atau window parent (jika di dalam iframe)
+      // Cek User Auth
       const activeUser = (typeof firebase !== 'undefined' && firebase.auth && firebase.auth().currentUser)
-                          || (window.parent && window.parent.currentUser)
-                          || window.currentUser;
+                        || window.currentUser;
 
-      // Jika BELUM login -> buka Pop-up Login
       if (!activeUser) {
         alert("Silakan Login atau Daftar akun terlebih dahulu untuk melanjutkan pembayaran.");
-        
-        if (window.parent && typeof window.parent.openLogin === "function") {
-          window.parent.openLogin();
-        } else if (typeof openLogin === "function") {
+        if (typeof openLogin === "function") {
           openLogin();
+        } else {
+          window.location.href = `login.html?redirect=${encodeURIComponent(window.location.href)}`;
         }
         return;
       }
 
-      // Jika SUDAH login -> Buka halaman pembayaran Mayar membawa email
+      // Tentukan URL Pembayaran Mayar:
+      // Utamakan paymentUrl khusus milik produk dari backend, fallback ke default jika tidak ada
+      const paymentUrl = currentProduct?.paymentUrl || "https://wonderapp.mayar.shop/m/akses-premium-wonder-app";
       const userEmail = encodeURIComponent(activeUser.email);
-      window.open(`${MAYAR_PAYMENT_URL}?email=${userEmail}`, '_blank');
+
+      // Gabungkan parameter email
+      const finalCheckoutUrl = paymentUrl.includes("?") 
+        ? `${paymentUrl}&email=${userEmail}`
+        : `${paymentUrl}?email=${userEmail}`;
+
+      window.open(finalCheckoutUrl, '_blank');
     });
   }
-
 });
-
-// Fungsi Buka & Tutup Modal Premium (Iframe)
-function openPremiumModal(url) {
-  const modal = document.getElementById('premiumModal');
-  const iframe = document.getElementById('premiumFrame');
-  
-  if (modal && iframe) {
-    iframe.src = url;
-    modal.classList.add('show');
-  }
-}
-
-const closeBtn = document.getElementById('closePremiumModal');
-if (closeBtn) {
-  closeBtn.addEventListener('click', () => {
-    const modal = document.getElementById('premiumModal');
-    const iframe = document.getElementById('premiumFrame');
-    if (modal) modal.classList.remove('show');
-    if (iframe) iframe.src = '';
-  });
-}
