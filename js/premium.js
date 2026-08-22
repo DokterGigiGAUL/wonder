@@ -1,4 +1,4 @@
-// js/premium.js
+// js/premium.js 
 
 document.addEventListener("DOMContentLoaded", async () => {
   // 1. Tangkap productId dari URL
