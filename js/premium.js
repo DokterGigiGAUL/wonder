@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Display info produk jika ada UI-nya
+  // Display info produk jika elemen UI tersedia
   if (currentProduct) {
     const titleEl = document.getElementById("selectedProductTitle");
     const priceEl = document.getElementById("selectedProductPrice");
@@ -31,41 +31,43 @@ document.addEventListener("DOMContentLoaded", async () => {
   const buyItemBtn = document.getElementById("buyItemBtn");
   const subscribeBtn = document.getElementById("subscribeBtn");
 
-  // 3. Tombol Beli Per Konten
+  // Helper eksekusi checkout
+  function handleCheckout() {
+    // Ambil user aktif dari Firebase atau global window
+    const activeUser = (typeof firebase !== 'undefined' && firebase.auth && firebase.auth().currentUser)
+                      || window.currentUser;
+
+    // A. JIKA BELUM LOGIN: Langsung panggil modal login terpasang
+    if (!activeUser) {
+      if (typeof openLogin === "function") {
+        openLogin();
+      } else if (typeof Auth !== "undefined" && typeof Auth.openModal === "function") {
+        Auth.openModal();
+      } else {
+        console.error("Fungsi modal login tidak ditemukan di halaman ini.");
+      }
+      return;
+    }
+
+    // B. JIKA SUDAH LOGIN: Lanjut ke link pembayaran
+    const paymentUrl = currentProduct?.paymentUrl || "https://wonderapp.mayar.shop/m/akses-premium-wonder-app";
+    const userEmail = encodeURIComponent(activeUser.email);
+
+    const finalCheckoutUrl = paymentUrl.includes("?") 
+      ? `${paymentUrl}&email=${userEmail}`
+      : `${paymentUrl}?email=${userEmail}`;
+
+    window.open(finalCheckoutUrl, '_blank');
+  }
+
+  // 3. Listener Tombol
   if (buyItemBtn) {
     buyItemBtn.addEventListener("click", () => {
       alert("Fitur pembelian per konten sedang disiapkan.");
     });
   }
 
-  // 4. Tombol Langganan / Pembayaran
   if (subscribeBtn) {
-    subscribeBtn.addEventListener("click", () => {
-      // Cek User Auth
-      const activeUser = (typeof firebase !== 'undefined' && firebase.auth && firebase.auth().currentUser)
-                        || window.currentUser;
-
-      if (!activeUser) {
-        alert("Silakan Login atau Daftar akun terlebih dahulu untuk melanjutkan pembayaran.");
-        if (typeof openLogin === "function") {
-          openLogin();
-        } else {
-          window.location.href = `login.html?redirect=${encodeURIComponent(window.location.href)}`;
-        }
-        return;
-      }
-
-      // Tentukan URL Pembayaran Mayar:
-      // Utamakan paymentUrl khusus milik produk dari backend, fallback ke default jika tidak ada
-      const paymentUrl = currentProduct?.paymentUrl || "https://wonderapp.mayar.shop/m/akses-premium-wonder-app";
-      const userEmail = encodeURIComponent(activeUser.email);
-
-      // Gabungkan parameter email
-      const finalCheckoutUrl = paymentUrl.includes("?") 
-        ? `${paymentUrl}&email=${userEmail}`
-        : `${paymentUrl}?email=${userEmail}`;
-
-      window.open(finalCheckoutUrl, '_blank');
-    });
+    subscribeBtn.addEventListener("click", handleCheckout);
   }
 });
