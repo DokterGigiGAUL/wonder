@@ -1,26 +1,14 @@
 /*
 |--------------------------------------------------------------------------
-| index.js
+| index.js (Fixed Logic: Universal Locked Label & Dynamic Unlocked Label)
 |--------------------------------------------------------------------------
 */
 
 // =========================================================================
-// FUNGSI GLOBAL PEMICU POP-UP PREMIUM
+// NAVIGASI PEMBELIAN PREMIUM (Redirection)
 // =========================================================================
 window.showPremiumDialog = function(productId) {
-    const premiumModal = document.getElementById('premiumModal');
-    const premiumFrame = document.getElementById('premiumFrame');
-    
-    if (premiumModal) {
-        if (premiumFrame) {
-            // Muat file premium.html ke dalam iframe modal dengan membawa productId
-            premiumFrame.src = `premium.html?product=${encodeURIComponent(productId || '')}`;
-        }
-        premiumModal.classList.add('show');
-    } else {
-        // Fallback jika modal berbentuk halaman terpisah
-        window.location.href = `premium.html?product=${encodeURIComponent(productId || '')}`;
-    }
+    window.location.href = `premium.html?product=${encodeURIComponent(productId || '')}`;
 };
 
 // =========================================================================
@@ -38,9 +26,28 @@ const cardTemplate = document.getElementById("content-card-template");
 let backendProducts = new Map();
 
 /* -------------------------------------------------------------------------- */
-/* BACKEND PRODUCTS SYNC                                                     */
+/* HELPER UNTUK LABEL TOMBOL AKSI BERDASARKAN TIPE KONTEN                     */
 /* -------------------------------------------------------------------------- */
+function getActionText(type) {
+    switch (type) {
+        case "quiz":
+            return "Mulai →";
+        case "comic":
+            return "Baca →";
+        case "tts":
+            return "Main →";
+        case "case":
+            return "Lihat →";
+        case "ebook":
+            return "Detail →";
+        default:
+            return "Buka →";
+    }
+}
 
+/* -------------------------------------------------------------------------- */
+/* BACKEND PRODUCTS SYNC                                                      */
+/* -------------------------------------------------------------------------- */
 async function syncBackendProducts() {
     try {
         const response = await WonderAPI.getProducts();
@@ -53,7 +60,6 @@ async function syncBackendProducts() {
         );
 
         console.log("Backend products synced:", backendProducts);
-
     } catch (error) {
         console.error("Gagal mengambil products dari backend:", error);
         backendProducts.clear();
@@ -67,7 +73,6 @@ function getBackendProduct(productId) {
 /* -------------------------------------------------------------------------- */
 /* HELPER CHECK ACCESS                                                        */
 /* -------------------------------------------------------------------------- */
-
 function checkAccess(item) {
     if (!item) return false;
     
@@ -90,19 +95,12 @@ function checkAccess(item) {
 /* -------------------------------------------------------------------------- */
 /* INIT & GLOBAL RE-RENDER                                                    */
 /* -------------------------------------------------------------------------- */
-
 async function initializeHome() {
-    // Render awal
     renderAllContent();
-
-    // Sync produk backend
     await syncBackendProducts();
-
-    // Render ulang setelah produk backend siap
     renderAllContent();
 }
 
-// Fungsi global agar bisa dipanggil ulang oleh auth.js setelah Firestore sync
 window.renderAllContent = function() {
     loadQuiz();
     loadComics();
@@ -117,7 +115,6 @@ initializeHome();
 /* -------------------------------------------------------------------------- */
 /* CARD CREATOR                                                               */
 /* -------------------------------------------------------------------------- */
-
 function createContentCard({
     container,
     thumbnail,
@@ -145,9 +142,6 @@ function createContentCard({
         backendProduct = backendProducts.get(item.productId);
     }
 
-    /*
-     * STATUS PRODUK & AKSES
-     */
     const hasAccess = checkAccess(item);
 
     /*
@@ -203,7 +197,9 @@ function createContentCard({
     const button = clone.querySelector(".content-btn");
     if (button) {
         if (premium) {
-            button.textContent = hasAccess ? buttonText : "🔒 Buka";
+            // Jika belum punya akses -> "🔒 Buka →"
+            // Jika sudah punya akses -> Pakai buttonText dinamis (Mulai →, Baca →, dst.)
+            button.textContent = hasAccess ? buttonText : "🔒 Buka →";
         } else {
             button.textContent = buttonText;
         }
@@ -236,7 +232,7 @@ function loadQuiz() {
             title: quiz.title,
             description: quiz.description,
             premium: quiz.premium,
-            buttonText: finished ? "Sudah Selesai" : "Mulai →",
+            buttonText: finished ? "Sudah Selesai" : getActionText("quiz"),
             disabled: finished,
             onClick() {
                 const hasAccess = checkAccess(quiz);
@@ -264,7 +260,7 @@ function loadComics() {
             title: comic.title,
             description: comic.description,
             premium: comic.premium,
-            buttonText: "Baca →",
+            buttonText: getActionText("comic"),
             onClick() {
                 const hasAccess = checkAccess(comic);
 
@@ -291,7 +287,7 @@ function loadTTS() {
             title: tts.title,
             description: tts.description,
             premium: tts.premium,
-            buttonText: "Main →",
+            buttonText: getActionText("tts"),
             onClick() {
                 const hasAccess = checkAccess(tts);
 
@@ -318,7 +314,7 @@ function loadCases() {
             title: caseData.title,
             description: caseData.description,
             premium: caseData.premium,
-            buttonText: "Lihat →",
+            buttonText: getActionText("case"),
             onClick() {
                 const hasAccess = checkAccess(caseData);
 
@@ -350,7 +346,7 @@ function loadEbooks() {
                 description: ebook.description,
                 price: ebook.price,
                 premium: ebook.premium,
-                buttonText: "Detail →",
+                buttonText: getActionText("ebook"),
                 extraClass: "ebook-card",
                 onClick() {
                     location.href = `ebook.html?ebook=${ebook.file}`;
@@ -397,7 +393,8 @@ function renderFeaturedHero() {
     if (description) description.textContent = heroItem.description;
 
     if (button) {
-        button.textContent = isOwned ? "Buka →" : "🔒 Buka";
+        // Pada hero banner: Jika belum punya -> "🔒 Buka →", Jika sudah punya -> Sesuai tipe (Mulai →, Baca →, dst.)
+        button.textContent = isOwned ? getActionText(heroItem.type) : "🔒 Buka →";
 
         button.onclick = () => {
             if (!isOwned) {
