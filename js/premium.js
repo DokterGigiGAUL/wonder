@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // B. JIKA SUDAH LOGIN: Lanjut ke link pembayaran
-    const paymentUrl = currentProduct?.paymentUrl || "https://wonderapp.myr.wtf/m/akses-premium-wonder-app";
+    const paymentUrl = currentProduct?.paymentUrl || "https://gigital.myr.id/m/akses-premium-28331";
     const userEmail = encodeURIComponent(activeUser.email);
 
     const finalCheckoutUrl = paymentUrl.includes("?") 
