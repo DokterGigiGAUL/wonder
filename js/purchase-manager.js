@@ -9,15 +9,20 @@ const PurchaseManager = (() => {
     const STORAGE_KEY = "wonderapp_purchases";
 
     function getPurchasedProducts() {
-        return JSON.parse(
-            localStorage.getItem(STORAGE_KEY) || "[]"
-        );
+        try {
+            return JSON.parse(
+                localStorage.getItem(STORAGE_KEY) || "[]"
+            );
+        } catch (e) {
+            console.error("[PurchaseManager] Failed to parse localStorage:", e);
+            return [];
+        }
     }
 
     function savePurchasedProducts(products) {
         localStorage.setItem(
             STORAGE_KEY,
-            JSON.stringify(products)
+            JSON.stringify(products || [])
         );
     }
 
@@ -56,12 +61,14 @@ const PurchaseManager = (() => {
         }
 
         // 3. Eksekusi pengaktifan/penonaktifan modul Premium
-        if (isPremiumActive) {
-            console.log("✅ [PurchaseManager] Premium Aktif");
-            Premium.enable(profile.premiumUntil);
-        } else {
-            console.log("🔒 [PurchaseManager] Mode Free / Non-Premium");
-            Premium.disable();
+        if (typeof Premium !== "undefined") {
+            if (isPremiumActive) {
+                console.log("✅ [PurchaseManager] Premium Aktif");
+                Premium.enable(profile.premiumUntil);
+            } else {
+                console.log("🔒 [PurchaseManager] Mode Free / Non-Premium");
+                Premium.disable();
+            }
         }
     }
 
@@ -84,7 +91,7 @@ const PurchaseManager = (() => {
             return true;
         }
 
-        // 4. Cek status aktif dari backend API (jika ada)
+        // 4. Cek status aktif dari backend API (jika fungsi ketersediaan didefinisikan)
         if (item.productId && typeof getBackendProduct === "function") {
             const backendProd = getBackendProduct(item.productId);
             if (backendProd?.status === "active") {
@@ -97,12 +104,12 @@ const PurchaseManager = (() => {
 
     function hasTTSPremium() {
 
-        if (Premium.isPremium()) {
+        if (typeof Premium !== "undefined" && Premium.isPremium()) {
             return true;
         }
 
         return getPurchasedProducts().some(id =>
-            id.startsWith("tts")
+            typeof id === "string" && id.startsWith("tts")
         );
     }
 
@@ -115,32 +122,37 @@ const PurchaseManager = (() => {
     }
 
     function clear() {
-
         localStorage.removeItem(STORAGE_KEY);
-        Premium.disable();
+        if (typeof Premium !== "undefined") {
+            Premium.disable();
+        }
     }
 
     async function refreshPurchases() {
 
-        const user = auth.currentUser;
+        // FIX: Perbaikan pengambil user Firebase yang aman
+        const user = typeof firebase !== "undefined" && firebase.auth ? firebase.auth().currentUser : null;
 
         if (!user) {
             clear();
             return;
         }
 
-        // Catatan: Jika menggunakan realtime listener di auth.js,
-        // fungsi refreshPurchases ini opsional / fallback manual saja.
         if (typeof WonderAPI !== "undefined" && WonderAPI.getProfile) {
-            const response = await WonderAPI.getProfile({
-                uid: user.uid
-            });
-            sync(response.data);
+            try {
+                const response = await WonderAPI.getProfile({
+                    uid: user.uid
+                });
+                if (response?.data) {
+                    sync(response.data);
+                }
+            } catch (err) {
+                console.error("[PurchaseManager] Gagal refresh profile:", err);
+            }
         }
     }
 
     return {
-
         sync,
         refreshPurchases,
         hasAccess,
@@ -149,7 +161,6 @@ const PurchaseManager = (() => {
         getPurchasedProducts,
         purchase,
         revoke
-
     };
 
 })();
@@ -173,6 +184,10 @@ async function purchaseProduct(productId) {
             throw new Error("productId kosong");
         }
 
+        if (typeof firebase === "undefined" || !firebase.auth) {
+            throw new Error("SDK Firebase Auth belum dimuat.");
+        }
+
         const user = firebase.auth().currentUser;
 
         if (!user) {
@@ -184,22 +199,19 @@ async function purchaseProduct(productId) {
             user.email ||
             "Wonder App User";
 
-        const email =
-            user.email || "";
+        const email = user.email || "";
 
-        /*
-         * Mayar membutuhkan mobile.
-         * Untuk simulasi sandbox gunakan nomor dummy.
-         */
         const mobile =
             user.phoneNumber ||
             "081234567890";
 
-        /*
-         * Kembali ke halaman aplikasi setelah checkout.
-         */
-        const redirectUrl =
-            window.parent.location.href;
+        // FIX: Keamanan CORS untuk iframe window redirect
+        let redirectUrl = window.location.href;
+        try {
+            redirectUrl = window.parent.location.href;
+        } catch (e) {
+            console.warn("[Purchase] Unable to access parent frame URL, fallback to self:", e);
+        }
 
         console.log("[Purchase] UID:", user.uid);
         console.log("[Purchase] Name:", displayName);
@@ -209,19 +221,12 @@ async function purchaseProduct(productId) {
 
         const response =
             await WonderAPI.createCheckout({
-
                 uid: user.uid,
-
                 productId: productId,
-
                 displayName: displayName,
-
                 email: email,
-
                 mobile: mobile,
-
                 redirectUrl: redirectUrl
-
             });
 
         console.log(
@@ -242,8 +247,7 @@ async function purchaseProduct(productId) {
             "[Purchase] CHECKOUT BERHASIL"
         );
 
-        window.top.location.href =
-            checkoutUrl;
+        window.top.location.href = checkoutUrl;
 
     } catch (error) {
 
