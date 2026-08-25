@@ -49,15 +49,19 @@ function getActionText(type) {
 /* BACKEND PRODUCTS SYNC                                                      */
 /* -------------------------------------------------------------------------- */
 async function syncBackendProducts() {
+    if (typeof WonderAPI === "undefined" || !WonderAPI.getProducts) return;
+    
     try {
         const response = await WonderAPI.getProducts();
 
-        backendProducts = new Map(
-            response.data.map(product => [
-                product.productId,
-                product
-            ])
-        );
+        if (Array.isArray(response?.data)) {
+            backendProducts = new Map(
+                response.data.map(product => [
+                    product.productId,
+                    product
+                ])
+            );
+        }
 
         console.log("Backend products synced:", backendProducts);
     } catch (error) {
@@ -110,7 +114,12 @@ window.renderAllContent = function() {
     renderFeaturedHero();
 };
 
-initializeHome();
+// Inisialisasi setelah DOM Siap
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeHome);
+} else {
+    initializeHome();
+}
 
 /* -------------------------------------------------------------------------- */
 /* CARD CREATOR                                                               */
@@ -161,8 +170,8 @@ function createContentCard({
      */
     const thumbEl = clone.querySelector(".content-thumb");
     if (thumbEl) {
-        thumbEl.src = thumbnail;
-        thumbEl.alt = title;
+        thumbEl.src = thumbnail || "";
+        thumbEl.alt = title || "";
         thumbEl.loading = "lazy";
     }
 
@@ -175,7 +184,7 @@ function createContentCard({
     /*
      * PRICE
      */
-    const displayPrice = premium ? backendProduct?.price : price;
+    const displayPrice = premium ? (backendProduct?.price ?? price) : price;
 
     if (displayPrice != null && !hasAccess) {
         const info = clone.querySelector(".content-info");
@@ -197,8 +206,6 @@ function createContentCard({
     const button = clone.querySelector(".content-btn");
     if (button) {
         if (premium) {
-            // Jika belum punya akses -> "🔒 Buka →"
-            // Jika sudah punya akses -> Pakai buttonText dinamis (Mulai →, Baca →, dst.)
             button.textContent = hasAccess ? buttonText : "🔒 Buka →";
         } else {
             button.textContent = buttonText;
@@ -219,11 +226,11 @@ function createContentCard({
 /* -------------------------------------------------------------------------- */
 
 function loadQuiz() {
-    if (!quizList) return;
+    if (!quizList || typeof quizzes === "undefined") return;
     quizList.innerHTML = "";
 
     quizzes.slice(0, 6).forEach(quiz => {
-        const finished = typeof Storage !== "undefined" && Storage.isFinished(quiz.productId);
+        const finished = typeof Storage !== "undefined" && Storage.isFinished && Storage.isFinished(quiz.productId);
 
         createContentCard({
             container: quizList,
@@ -249,7 +256,7 @@ function loadQuiz() {
 }
 
 function loadComics() {
-    if (!comicsContainer) return;
+    if (!comicsContainer || typeof comics === "undefined") return;
     comicsContainer.innerHTML = "";
 
     comics.slice(0, 6).forEach(comic => {
@@ -276,7 +283,7 @@ function loadComics() {
 }
 
 function loadTTS() {
-    if (!ttsContainer) return;
+    if (!ttsContainer || typeof ttsList === "undefined") return;
     ttsContainer.innerHTML = "";
 
     ttsList.slice(0, 6).forEach(tts => {
@@ -303,7 +310,7 @@ function loadTTS() {
 }
 
 function loadCases() {
-    if (!caseContainer) return;
+    if (!caseContainer || typeof cases === "undefined") return;
     caseContainer.innerHTML = "";
 
     cases.slice(0, 6).forEach(caseData => {
@@ -330,7 +337,7 @@ function loadCases() {
 }
 
 function loadEbooks() {
-    if (!ebookContainer) return;
+    if (!ebookContainer || typeof ebooks === "undefined") return;
     ebookContainer.innerHTML = "";
 
     ebooks
@@ -349,6 +356,14 @@ function loadEbooks() {
                 buttonText: getActionText("ebook"),
                 extraClass: "ebook-card",
                 onClick() {
+                    const hasAccess = checkAccess(ebook);
+
+                    // FIX: Proteksi akses Ebook Premium
+                    if (ebook.premium && !hasAccess) {
+                        showPremiumDialog(ebook.productId);
+                        return;
+                    }
+
                     location.href = `ebook.html?ebook=${ebook.file}`;
                 }
             });
@@ -362,11 +377,16 @@ function loadEbooks() {
 function renderFeaturedHero() {
     if (!featuredHero) return;
 
+    const quizzesArr = typeof quizzes !== "undefined" ? quizzes : [];
+    const comicsArr = typeof comics !== "undefined" ? comics : [];
+    const ttsArr = typeof ttsList !== "undefined" ? ttsList : [];
+    const casesArr = typeof cases !== "undefined" ? cases : [];
+
     const latestPremiumItems = [
-        ...quizzes,
-        ...comics,
-        ...ttsList,
-        ...cases
+        ...quizzesArr,
+        ...comicsArr,
+        ...ttsArr,
+        ...casesArr
     ]
     .filter(item => item?.premium)
     .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
@@ -393,7 +413,6 @@ function renderFeaturedHero() {
     if (description) description.textContent = heroItem.description;
 
     if (button) {
-        // Pada hero banner: Jika belum punya -> "🔒 Buka →", Jika sudah punya -> Sesuai tipe (Mulai →, Baca →, dst.)
         button.textContent = isOwned ? getActionText(heroItem.type) : "🔒 Buka →";
 
         button.onclick = () => {
