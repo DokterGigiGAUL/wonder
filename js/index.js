@@ -146,8 +146,9 @@ function createContentCard({
         card.classList.add(extraClass);
     }
 
+    const isEbook = item?.type === "ebook" || extraClass.includes("ebook-card");
     let backendProduct = null;
-    if (premium && item?.productId) {
+    if (item?.productId) {
         backendProduct = backendProducts.get(item.productId);
     }
 
@@ -155,10 +156,13 @@ function createContentCard({
 
     /*
      * BADGE
+     * Ebook tidak menggunakan sistem badge "Terbuka/Premium" global
      */
     const badge = clone.querySelector(".featured-badge");
     if (badge) {
-        if (premium) {
+        if (isEbook) {
+            badge.textContent = "📘 E-Book"; // Atau disembunyikan jika tidak diperlukan
+        } else if (premium) {
             badge.textContent = hasAccess ? "🟢 Terbuka" : "👑 Premium";
         } else {
             badge.remove();
@@ -183,10 +187,11 @@ function createContentCard({
 
     /*
      * PRICE
+     * Ebook selalu menampilkan harga produk
      */
-    const displayPrice = premium ? (backendProduct?.price ?? price) : price;
+    const displayPrice = backendProduct?.price ?? price;
 
-    if (displayPrice != null && !hasAccess) {
+    if (displayPrice != null && (isEbook || !hasAccess)) {
         const info = clone.querySelector(".content-info");
         const priceEl = document.createElement("p");
         priceEl.className = "content-price";
@@ -205,7 +210,9 @@ function createContentCard({
      */
     const button = clone.querySelector(".content-btn");
     if (button) {
-        if (premium) {
+        if (isEbook) {
+            button.textContent = buttonText; // Selalu menampilkan teks khusus seperti "Beli Ebook →" atau "Detail →"
+        } else if (premium) {
             button.textContent = hasAccess ? buttonText : "🔒 Buka →";
         } else {
             button.textContent = buttonText;
@@ -347,24 +354,24 @@ function loadEbooks() {
         .forEach(ebook => {
             createContentCard({
                 container: ebookContainer,
-                item: ebook,
+                item: { ...ebook, type: "ebook" },
                 thumbnail: ebook.thumbnail,
                 title: ebook.title,
                 description: ebook.description,
                 price: ebook.price,
-                premium: ebook.premium,
-                buttonText: getActionText("ebook"),
+                premium: false, // Diset false agar tidak memicu proteksi logika modul edukasi
+                buttonText: "Beli Ebook 🛒",
                 extraClass: "ebook-card",
                 onClick() {
-                    const hasAccess = checkAccess(ebook);
-
-                    // FIX: Proteksi akses Ebook Premium
-                    if (ebook.premium && !hasAccess) {
-                        showPremiumDialog(ebook.productId);
-                        return;
+                    // Direct Link ke marketplace / halaman checkout khusus Ebook
+                    if (ebook.link) {
+                        window.open(ebook.link, "_blank");
+                    } else if (ebook.productId) {
+                        // Jika menggunakan sistem checkout universal internal
+                        purchaseProduct(ebook.productId);
+                    } else {
+                        location.href = `ebook.html?id=${ebook.id || ebook.file}`;
                     }
-
-                    location.href = `ebook.html?ebook=${ebook.file}`;
                 }
             });
         });
