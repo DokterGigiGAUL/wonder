@@ -8,19 +8,37 @@ window.userAccess = {
   purchasedItems: []
 };
 
+// --- FUNGSI SINKRONISASI KE FIRESTORE DATABASE ---
+function syncUserToFirestore(user) {
+  if (!user || typeof firebase === 'undefined') return;
+
+  // Inisialisasi Firestore secara mandiri di dalam JS
+  const db = firebase.firestore();
+
+  // Simpan/Perbarui dokumen users/{uid} di Firestore
+  db.collection("users").doc(user.uid).set({
+    uid: user.uid,
+    email: user.email,
+    displayName: user.displayName || user.email.split('@')[0],
+    lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+  }, { merge: true }) // merge: true agar transaksi Mayar tidak hilang/tertimpa
+  .then(() => {
+    console.log("Firestore Sync Success: Dokumen users/" + user.uid + " siap!");
+  })
+  .catch((error) => {
+    console.error("Firestore Sync Error:", error);
+  });
+}
+
 // --- PENGELOLA MODAL LOGIN ---
 function openLogin() {
   const modal = document.getElementById('loginModal');
-  if (modal) {
-    modal.classList.add('show'); // Menggunakan class .show agar display: flex aktif
-  }
+  if (modal) modal.classList.add('show');
 }
 
 function closeLogin() {
   const modal = document.getElementById('loginModal');
-  if (modal) {
-    modal.classList.remove('show'); // Menghapus class .show untuk menyembunyikan modal
-  }
+  if (modal) modal.classList.remove('show');
 }
 
 // --- FUNGSI AUTHENTICATION ---
@@ -28,9 +46,10 @@ function closeLogin() {
 // 1. Login/Daftar dengan Google
 function loginGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider)
+  firebase.auth().signInWithPopup(provider)
     .then((result) => {
       console.log("Berhasil login via Google:", result.user.email);
+      syncUserToFirestore(result.user);
       closeLogin();
     })
     .catch((error) => {
@@ -51,9 +70,10 @@ function loginEmail() {
     return;
   }
 
-  auth.signInWithEmailAndPassword(email, password)
+  firebase.auth().signInWithEmailAndPassword(email, password)
     .then((result) => {
       console.log("Berhasil login via Email:", result.user.email);
+      syncUserToFirestore(result.user);
       closeLogin();
     })
     .catch((error) => {
@@ -83,9 +103,20 @@ function registerEmail() {
     return;
   }
 
-  auth.createUserWithEmailAndPassword(email, password)
+  firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((result) => {
       alert("Pendaftaran berhasil! Anda otomatis terlogin.");
+      
+      const db = firebase.firestore();
+      db.collection("users").doc(result.user.uid).set({
+        uid: result.user.uid,
+        email: result.user.email,
+        isPremium: false,
+        ownedProducts: [],
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+
       closeLogin();
     })
     .catch((error) => {
@@ -99,26 +130,27 @@ function registerEmail() {
 
 // 4. Logout
 function logout() {
-  auth.signOut().then(() => {
+  firebase.auth().signOut().then(() => {
     console.log("User logged out");
   }).catch((error) => {
     console.error("Error logout:", error);
   });
 }
 
-// --- DETEKSI STATE USER & QUERY ACCESS DARI FIRESTORE ---
-auth.onAuthStateChanged((user) => {
+// --- DETEKSI STATE USER & SINKRONISASI AUTOMATIS ---
+firebase.auth().onAuthStateChanged((user) => {
   const loginBtn = document.getElementById('loginBtn');
   const logoutBtn = document.getElementById('logoutBtn');
 
   if (user) {
     window.currentUser = user;
 
-    // Update Tampilan Tombol Header
+    // OTOMATIS MEMBUAT/UPDATE DOKUMEN DI FIRESTORE
+    syncUserToFirestore(user);
+
     if (loginBtn) loginBtn.style.display = 'none';
     if (logoutBtn) logoutBtn.style.display = 'inline-block';
 
-    // Ambil Data Status Akses dari Firestore
     checkUserAccess(user.uid);
   } else {
     window.currentUser = null;
@@ -128,7 +160,6 @@ auth.onAuthStateChanged((user) => {
       purchasedItems: []
     };
 
-    // Update Tampilan Tombol Header
     if (loginBtn) loginBtn.style.display = 'inline-block';
     if (logoutBtn) logoutBtn.style.display = 'none';
 
@@ -158,19 +189,15 @@ function checkUserAccess(uid) {
     });
 }
 
-// Cek dan redirect otomatis ke Mayar setelah login berhasil
-if (typeof firebase !== 'undefined' && firebase.auth) {
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user && localStorage.getItem("autoRedirectMayar") === "true") {
-      localStorage.removeItem("autoRedirectMayar");
-      
-      // Tutup modal premium jika terbuka
-      const modal = document.getElementById('premiumModal');
-      if (modal) modal.classList.remove('show');
+// Redirect otomatis ke Mayar jika diperlukan
+firebase.auth().onAuthStateChanged((user) => {
+  if (user && localStorage.getItem("autoRedirectMayar") === "true") {
+    localStorage.removeItem("autoRedirectMayar");
+    
+    const modal = document.getElementById('premiumModal');
+    if (modal) modal.classList.remove('show');
 
-      // Langsung buka link Mayar di tab baru
-      const MAYAR_URL = "https://wonderapp.mayar.shop/m/akses-premium-wonder-app";
-      window.open(`${MAYAR_URL}?email=${encodeURIComponent(user.email)}`, '_blank');
-    }
-  });
-}
+    const MAYAR_URL = "https://wonderapp.mayar.shop/m/akses-premium-wonder-app";
+    window.open(`${MAYAR_URL}?email=${encodeURIComponent(user.email)}&uid=${user.uid}`, '_blank');
+  }
+});
