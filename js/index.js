@@ -75,17 +75,48 @@ function getBackendProduct(productId) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* HELPER CHECK ACCESS                                                        */
+/* HELPER CHECK ACCESS (Disesuaikan dengan Firestore & PurchaseManager)        */
 /* -------------------------------------------------------------------------- */
 function checkAccess(item) {
     if (!item) return false;
     
-    // Cek lewat PurchaseManager
+    // 1. Cek langsung status Premium Firestore dari window.userAccess
+    if (window.userAccess && window.userAccess.isPremium) {
+        // Cek jika ada batas waktu kadaluarsa (premiumUntil)
+        if (window.userAccess.premiumUntil) {
+            let expiryDate;
+            const rawDate = window.userAccess.premiumUntil;
+            
+            if (rawDate && typeof rawDate.toDate === "function") {
+                expiryDate = rawDate.toDate();
+            } else if (rawDate && rawDate.seconds) {
+                expiryDate = new Date(rawDate.seconds * 1000);
+            } else {
+                expiryDate = new Date(rawDate);
+            }
+
+            if (!isNaN(expiryDate.getTime()) && expiryDate > new Date()) {
+                return true;
+            }
+        } else {
+            // isPremium: true tanpa tanggal expired -> Akses Penuh
+            return true;
+        }
+    }
+
+    // 2. Cek produk eceran terdeteksi di Firestore (ownedProducts)
+    if (item.productId && window.userAccess && Array.isArray(window.userAccess.ownedProducts)) {
+        if (window.userAccess.ownedProducts.includes(item.productId)) {
+            return true;
+        }
+    }
+
+    // 3. Cek lewat PurchaseManager (Logika lokal existing Anda)
     if (typeof PurchaseManager !== "undefined" && PurchaseManager.hasAccess(item)) {
         return true;
     }
 
-    // Cek fallback via Backend API
+    // 4. Fallback via Backend API Map
     if (item.productId) {
         const backendProd = backendProducts.get(item.productId);
         if (backendProd?.status === "active") {
@@ -486,3 +517,25 @@ document.querySelectorAll(".category-card").forEach(card => {
         }
     });
 });
+
+// Listener saat Firebase / Firestore selesai memuat data hak akses user
+window.addEventListener("userAccessReady", () => {
+    console.log("Status Firestore diterima di index.js, merender ulang konten...");
+    if (typeof renderAllContent === "function") {
+        renderAllContent();
+    }
+});
+
+// Listener alternatif jika menggunakan Firebase Auth State Change langsung
+if (typeof firebase !== "undefined" && firebase.auth) {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // Memberikan sedikit jeda agar data Firestore tersimpan ke window.userAccess
+            setTimeout(() => {
+                if (typeof renderAllContent === "function") {
+                    renderAllContent();
+                }
+            }, 500);
+        }
+    });
+}
