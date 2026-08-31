@@ -26,6 +26,9 @@ function syncUserToFirestore(user) {
       window.userAccess.ownedProducts = data.ownedProducts || [];
 
       console.log("Akses User Berhasil Dimuat dari Firestore:", window.userAccess);
+
+      // PANGCIL EVENT UNTUK MEMBERI TAHU INDEX.JS BAHWA DATA AKSES SUDAH SIAP
+      window.dispatchEvent(new CustomEvent('userAccessReady', { detail: window.userAccess }));
     }
 
     // Update login terakhir tanpa menimpa data transaksi
@@ -51,16 +54,31 @@ window.canAccessContent = function(contentId) {
   // 1. Jika User adalah Member Premium aktif -> Bebas Akses Semua Konten
   if (window.userAccess.isPremium) {
     if (window.userAccess.premiumUntil) {
-      const expiryDate = new Date(window.userAccess.premiumUntil.seconds * 1000 || window.userAccess.premiumUntil);
-      if (expiryDate > new Date()) return true;
+      let expiryDate;
+      const rawDate = window.userAccess.premiumUntil;
+
+      // Handling aman untuk format Timestamp Firestore, ISO String, atau JS Date
+      if (rawDate && typeof rawDate.toDate === 'function') {
+        expiryDate = rawDate.toDate();
+      } else if (rawDate && rawDate.seconds) {
+        expiryDate = new Date(rawDate.seconds * 1000);
+      } else {
+        expiryDate = new Date(rawDate);
+      }
+
+      if (!isNaN(expiryDate.getTime()) && expiryDate > new Date()) {
+        return true;
+      }
     } else {
       return true; // Premium permanen/tanpa tanggal expired
     }
   }
 
-  // 2. Jika User membeli konten eceran ini secara spesifik
-  if (window.userAccess.ownedProducts && window.userAccess.ownedProducts.includes(contentId)) {
-    return true;
+  // 2. Jika User membeli konten eceran ini secara spesifik (Cek via contentId atau productId)
+  if (contentId && window.userAccess.ownedProducts && Array.isArray(window.userAccess.ownedProducts)) {
+    if (window.userAccess.ownedProducts.includes(contentId)) {
+      return true;
+    }
   }
 
   // 3. Konten Terkunci
@@ -151,5 +169,8 @@ firebase.auth().onAuthStateChanged((user) => {
 
     if (loginBtn) loginBtn.style.display = 'inline-block';
     if (logoutBtn) logoutBtn.style.display = 'none';
+
+    // Panggil re-render jika logout
+    window.dispatchEvent(new CustomEvent('userAccessReady', { detail: window.userAccess }));
   }
 });
