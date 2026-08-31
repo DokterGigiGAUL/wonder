@@ -75,48 +75,23 @@ function getBackendProduct(productId) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* HELPER CHECK ACCESS (Disesuaikan dengan Firestore & PurchaseManager)        */
+/* HELPER CHECK ACCESS                                                        */
 /* -------------------------------------------------------------------------- */
 function checkAccess(item) {
     if (!item) return false;
     
-    // 1. Cek langsung status Premium Firestore dari window.userAccess
-    if (window.userAccess && window.userAccess.isPremium) {
-        // Cek jika ada batas waktu kadaluarsa (premiumUntil)
-        if (window.userAccess.premiumUntil) {
-            let expiryDate;
-            const rawDate = window.userAccess.premiumUntil;
-            
-            if (rawDate && typeof rawDate.toDate === "function") {
-                expiryDate = rawDate.toDate();
-            } else if (rawDate && rawDate.seconds) {
-                expiryDate = new Date(rawDate.seconds * 1000);
-            } else {
-                expiryDate = new Date(rawDate);
-            }
-
-            if (!isNaN(expiryDate.getTime()) && expiryDate > new Date()) {
-                return true;
-            }
-        } else {
-            // isPremium: true tanpa tanggal expired -> Akses Penuh
-            return true;
-        }
+    // 1. Cek via Firestore canAccessContent (Kunci Utama)
+    const targetId = item.productId || item.id || item.file;
+    if (typeof window.canAccessContent === "function" && window.canAccessContent(targetId)) {
+        return true;
     }
 
-    // 2. Cek produk eceran terdeteksi di Firestore (ownedProducts)
-    if (item.productId && window.userAccess && Array.isArray(window.userAccess.ownedProducts)) {
-        if (window.userAccess.ownedProducts.includes(item.productId)) {
-            return true;
-        }
-    }
-
-    // 3. Cek lewat PurchaseManager (Logika lokal existing Anda)
+    // 2. Cek lewat PurchaseManager
     if (typeof PurchaseManager !== "undefined" && PurchaseManager.hasAccess(item)) {
         return true;
     }
 
-    // 4. Fallback via Backend API Map
+    // 3. Cek fallback via Backend API
     if (item.productId) {
         const backendProd = backendProducts.get(item.productId);
         if (backendProd?.status === "active") {
@@ -518,24 +493,12 @@ document.querySelectorAll(".category-card").forEach(card => {
     });
 });
 
-// Listener saat Firebase / Firestore selesai memuat data hak akses user
+/* -------------------------------------------------------------------------- */
+/* EVENT LISTENER: OTOMATIS RENDER ULANG SAAT DATA FIRESTORE SIAP             */
+/* -------------------------------------------------------------------------- */
 window.addEventListener("userAccessReady", () => {
-    console.log("Status Firestore diterima di index.js, merender ulang konten...");
+    console.log("Sinyal userAccessReady diterima. Merender ulang UI...");
     if (typeof renderAllContent === "function") {
         renderAllContent();
     }
 });
-
-// Listener alternatif jika menggunakan Firebase Auth State Change langsung
-if (typeof firebase !== "undefined" && firebase.auth) {
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            // Memberikan sedikit jeda agar data Firestore tersimpan ke window.userAccess
-            setTimeout(() => {
-                if (typeof renderAllContent === "function") {
-                    renderAllContent();
-                }
-            }, 500);
-        }
-    });
-}
