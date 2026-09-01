@@ -20,19 +20,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       window.showPremiumDialog(productId);
     } else if (typeof showPremiumDialog === "function") {
       showPremiumDialog(productId);
-    } else {
-      alert("Akses Premium diperlukan untuk melihat komik ini.");
     }
   };
 
-  // Verifikasi Akses
+  // Verifikasi Akses Async
   let hasAccess = !currentComic.premium;
   if (currentComic.premium) {
-    if (typeof window.canAccessContent === "function") {
-      hasAccess = await window.canAccessContent(currentComic.productId);
-    } else if (typeof PurchaseManager !== "undefined" && PurchaseManager.hasAccess) {
-      hasAccess = PurchaseManager.hasAccess(currentComic);
-    }
+    hasAccess = await window.canAccessContent(currentComic.productId);
   }
 
   if (!hasAccess) {
@@ -87,11 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         let canNext = !nextComic.premium;
         if (nextComic.premium) {
-          if (typeof window.canAccessContent === "function") {
-            canNext = await window.canAccessContent(nextComic.productId);
-          } else if (typeof PurchaseManager !== "undefined") {
-            canNext = PurchaseManager.getPurchasedProducts().includes(nextComic.productId);
-          }
+          canNext = await window.canAccessContent(nextComic.productId);
         }
 
         if (!canNext) {
