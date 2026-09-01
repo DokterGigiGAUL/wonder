@@ -36,17 +36,16 @@ class CrosswordEngine {
         throw new Error("Puzzle tidak ditemukan");
       }
 
-      // Verifikasi Akses Async
       let hasAccess = !metadata.premium;
       if (metadata.premium) {
         hasAccess = await window.canAccessContent(metadata.productId);
       }
 
+      // PENTING: Tampilkan modal tanpa auto-redirect
       if (!hasAccess) {
+        const loader = document.getElementById("loader");
+        if (loader) loader.style.display = "none";
         this.openPremiumModal(metadata.productId);
-        setTimeout(() => {
-          location.href = "index.html";
-        }, 1500);
         return;
       }
 
@@ -456,7 +455,7 @@ class CrosswordEngine {
         }
       } else if (wrapper) {
         wrapper.innerHTML = `
-          <h3>🎉 Semua TTS gratis sudah diselesaikan!</h3>
+          <h3>🎉 Semua TTS diselesaikan!</h3>
         `;
       }
       return;
