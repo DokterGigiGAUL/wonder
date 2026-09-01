@@ -23,17 +23,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
 
-  // Verifikasi Akses Async
   let hasAccess = !currentComic.premium;
   if (currentComic.premium) {
     hasAccess = await window.canAccessContent(currentComic.productId);
   }
 
+  // PENTING: Jika tidak ada akses, tampilkan modal dan JANGAN me-redirect ke Beranda
   if (!hasAccess) {
     openPremiumModal(currentComic.productId);
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 1500);
     return;
   }
 
