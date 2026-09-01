@@ -18,8 +18,6 @@ class CrosswordEngine {
       window.showPremiumDialog(productId);
     } else if (typeof showPremiumDialog === "function") {
       showPremiumDialog(productId);
-    } else {
-      alert("Akses Premium diperlukan untuk fitur ini.");
     }
   }
 
@@ -38,13 +36,10 @@ class CrosswordEngine {
         throw new Error("Puzzle tidak ditemukan");
       }
 
+      // Verifikasi Akses Async
       let hasAccess = !metadata.premium;
       if (metadata.premium) {
-        if (typeof window.canAccessContent === "function") {
-          hasAccess = await window.canAccessContent(metadata.productId);
-        } else if (typeof PurchaseManager !== "undefined" && PurchaseManager.hasAccess) {
-          hasAccess = PurchaseManager.hasAccess(metadata);
-        }
+        hasAccess = await window.canAccessContent(metadata.productId);
       }
 
       if (!hasAccess) {
@@ -280,13 +275,7 @@ class CrosswordEngine {
     const hintBtn = document.getElementById("hint-btn");
     if (hintBtn) {
       hintBtn.onclick = async () => {
-        let hasAccess = false;
-        if (typeof window.canAccessContent === "function") {
-          hasAccess = await window.canAccessContent("tts_access");
-        } else if (typeof PurchaseManager !== "undefined") {
-          hasAccess = PurchaseManager.hasTTSPremium();
-        }
-
+        const hasAccess = await window.canAccessContent("tts_access");
         if (!hasAccess) {
           this.openPremiumModal("tts_access");
           return;
@@ -298,13 +287,7 @@ class CrosswordEngine {
     const revealBtn = document.getElementById("reveal-btn");
     if (revealBtn) {
       revealBtn.onclick = async () => {
-        let hasAccess = false;
-        if (typeof window.canAccessContent === "function") {
-          hasAccess = await window.canAccessContent("tts_access");
-        } else if (typeof PurchaseManager !== "undefined") {
-          hasAccess = PurchaseManager.hasTTSPremium();
-        }
-
+        const hasAccess = await window.canAccessContent("tts_access");
         if (!hasAccess) {
           this.openPremiumModal("tts_access");
           return;
@@ -461,13 +444,7 @@ class CrosswordEngine {
             if (typeof ttsList !== "undefined") {
               const nextTTS = ttsList.find((t) => `tts${t.id}` === this.puzzle.next);
               if (nextTTS && nextTTS.premium) {
-                let hasAccess = false;
-                if (typeof window.canAccessContent === "function") {
-                  hasAccess = await window.canAccessContent(nextTTS.productId);
-                } else if (typeof PurchaseManager !== "undefined") {
-                  hasAccess = PurchaseManager.hasAccess(nextTTS);
-                }
-
+                const hasAccess = await window.canAccessContent(nextTTS.productId);
                 if (!hasAccess) {
                   this.openPremiumModal(nextTTS.productId);
                   return;
