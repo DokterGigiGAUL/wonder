@@ -5,14 +5,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const imageFlip = document.getElementById("imageFlip");
   const infoFlip = document.getElementById("infoFlip");
 
-  // Helper aman untuk dialog premium
   const openPremiumModal = (productId) => {
     if (typeof window.showPremiumDialog === "function") {
       window.showPremiumDialog(productId);
     } else if (typeof showPremiumDialog === "function") {
       showPremiumDialog(productId);
-    } else {
-      alert("Akses Premium diperlukan untuk melihat konten ini.");
     }
   };
 
@@ -56,14 +53,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const caseMeta = typeof cases !== "undefined" ? cases.find((c) => c.file === file) : null;
     const productId = caseMeta?.productId || data.productId;
 
-    // Cek akses via Firestore atau PurchaseManager
+    // Verifikasi Akses Async
     let hasAccess = !data.premium;
     if (data.premium) {
-      if (typeof window.canAccessContent === "function") {
-        hasAccess = await window.canAccessContent(productId);
-      } else if (typeof PurchaseManager !== "undefined" && PurchaseManager.getPurchasedProducts) {
-        hasAccess = PurchaseManager.getPurchasedProducts().includes(productId);
-      }
+      hasAccess = await window.canAccessContent(productId);
     }
 
     if (hasAccess) {
