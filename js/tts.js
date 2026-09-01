@@ -41,10 +41,22 @@ class CrosswordEngine {
         hasAccess = await window.canAccessContent(metadata.productId);
       }
 
-      // PENTING: Tampilkan modal tanpa auto-redirect
+      const loader = document.getElementById("loader");
+
+      // JIKA TIDAK ADA AKSES: Tampilkan ui pengunci gantinya papan kosong
       if (!hasAccess) {
-        const loader = document.getElementById("loader");
-        if (loader) loader.style.display = "none";
+        if (loader) {
+          loader.style.display = "block";
+          loader.innerHTML = `
+            <div class="loader-error" style="text-align:center; padding: 40px 20px;">
+                <h2>🔒 TTS Terkunci</h2>
+                <p>Fitur Teka Teki Silang ini khusus pengguna Premium atau yang sudah membeli lisensi.</p>
+                <button onclick="window.openLogin ? window.openLogin() : null()" class="btn btn-primary" style="margin-top:15px; padding: 10px 20px;">
+                    Login / Akses Premium
+                </button>
+            </div>
+          `;
+        }
         this.openPremiumModal(metadata.productId);
         return;
       }
@@ -69,7 +81,6 @@ class CrosswordEngine {
         this.selectWord(this.puzzle.words[0]);
       }
 
-      const loader = document.getElementById("loader");
       const app = document.getElementById("crossword-app");
       if (loader) loader.style.display = "none";
       if (app) app.style.display = "block";
