@@ -42,17 +42,14 @@ async function init() {
     return;
   }
 
-  // Verifikasi Akses Async
   let hasAccess = !metadata.premium;
   if (metadata.premium) {
     hasAccess = await window.canAccessContent(metadata.productId);
   }
 
+  // PENTING: Buka modal tanpa me-redirect ke Beranda
   if (!hasAccess) {
     openPremiumModal(metadata.productId);
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 1500);
     return;
   }
 
