@@ -20,8 +20,6 @@ const openPremiumModal = (productId) => {
     window.showPremiumDialog(productId);
   } else if (typeof showPremiumDialog === "function") {
     showPremiumDialog(productId);
-  } else {
-    alert("Akses Premium diperlukan untuk kuis ini.");
   }
 };
 
@@ -44,13 +42,10 @@ async function init() {
     return;
   }
 
+  // Verifikasi Akses Async
   let hasAccess = !metadata.premium;
   if (metadata.premium) {
-    if (typeof window.canAccessContent === "function") {
-      hasAccess = await window.canAccessContent(metadata.productId);
-    } else if (typeof PurchaseManager !== "undefined" && PurchaseManager.hasAccess) {
-      hasAccess = PurchaseManager.hasAccess(metadata);
-    }
+    hasAccess = await window.canAccessContent(metadata.productId);
   }
 
   if (!hasAccess) {
