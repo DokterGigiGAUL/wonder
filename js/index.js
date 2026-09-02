@@ -40,12 +40,13 @@ function getActionText(type) {
 /* INIT                                                                       */
 /* -------------------------------------------------------------------------- */
 function initializeHome() {
+    renderFeaturedHero();
     loadQuiz();
     loadComics();
     loadTTS();
     loadCases();
     loadEbooks();
-    renderFeaturedHero();
+    
 }
 
 if (document.readyState === "loading") {
@@ -155,7 +156,7 @@ function loadComics() {
             description: comic.description,
             buttonText: getActionText("comic"),
             onClick() {
-                location.href = `komik.html?id=${comic.id}`;
+                location.href = `comic.html?id=${comic.id}`;
             }
         });
     });
