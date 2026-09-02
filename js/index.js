@@ -122,7 +122,7 @@ function loadQuiz() {
     if (!quizList || typeof quizzes === "undefined") return;
     quizList.innerHTML = "";
 
-    quizzes.slice(0, 6).forEach(quiz => {
+    quizzes.slice(0, 4).forEach(quiz => {
         const finished = typeof Storage !== "undefined" && Storage.isFinished && Storage.isFinished(quiz.productId);
 
         createContentCard({
@@ -144,7 +144,7 @@ function loadComics() {
     if (!comicsContainer || typeof comics === "undefined") return;
     comicsContainer.innerHTML = "";
 
-    comics.slice(0, 6).forEach(comic => {
+    comics.slice(0, 4).forEach(comic => {
         createContentCard({
             container: comicsContainer,
             item: comic,
@@ -163,7 +163,7 @@ function loadTTS() {
     if (!ttsContainer || typeof ttsList === "undefined") return;
     ttsContainer.innerHTML = "";
 
-    ttsList.slice(0, 6).forEach(tts => {
+    ttsList.slice(0, 4).forEach(tts => {
         createContentCard({
             container: ttsContainer,
             item: tts,
@@ -182,7 +182,7 @@ function loadCases() {
     if (!caseContainer || typeof cases === "undefined") return;
     caseContainer.innerHTML = "";
 
-    cases.slice(0, 6).forEach(caseData => {
+    cases.slice(0, 4).forEach(caseData => {
         createContentCard({
             container: caseContainer,
             item: caseData,
