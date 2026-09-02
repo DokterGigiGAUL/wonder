@@ -230,7 +230,7 @@ function loadEbooks() {
         });
 
     // Panggil helper dengan parameter isExternal = true
-    appendSeeAllCard(ebookContainer, "Katalog lengkap →", "https://gigital.myr.id", true);
+    appendSeeAllCard(ebookContainer, "Katalog lengkap", "https://gigital.myr.id", true);
 }
 
 /* -------------------------------------------------------------------------- */
