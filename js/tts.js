@@ -13,14 +13,6 @@ class CrosswordEngine {
     this.originalProgressHTML = "";
   }
 
-  openPremiumModal(productId) {
-    if (typeof window.showPremiumDialog === "function") {
-      window.showPremiumDialog(productId);
-    } else if (typeof showPremiumDialog === "function") {
-      showPremiumDialog(productId);
-    }
-  }
-
   async load() {
     try {
       const params = new URLSearchParams(location.search);
@@ -36,30 +28,7 @@ class CrosswordEngine {
         throw new Error("Puzzle tidak ditemukan");
       }
 
-      let hasAccess = !metadata.premium;
-      if (metadata.premium) {
-        hasAccess = await window.canAccessContent(metadata.productId);
-      }
-
       const loader = document.getElementById("loader");
-
-      // JIKA TIDAK ADA AKSES: Tampilkan ui pengunci gantinya papan kosong
-      if (!hasAccess) {
-        if (loader) {
-          loader.style.display = "block";
-          loader.innerHTML = `
-            <div class="loader-error" style="text-align:center; padding: 40px 20px;">
-                <h2>🔒 TTS Terkunci</h2>
-                <p>Fitur Teka Teki Silang ini khusus pengguna Premium atau yang sudah membeli lisensi.</p>
-                <button onclick="window.openLogin ? window.openLogin() : null()" class="btn btn-primary" style="margin-top:15px; padding: 10px 20px;">
-                    Login / Akses Premium
-                </button>
-            </div>
-          `;
-        }
-        this.openPremiumModal(metadata.productId);
-        return;
-      }
 
       const res = await fetch(`assets/metadata/tts/${file}.json`);
       if (!res.ok) {
@@ -284,24 +253,14 @@ class CrosswordEngine {
 
     const hintBtn = document.getElementById("hint-btn");
     if (hintBtn) {
-      hintBtn.onclick = async () => {
-        const hasAccess = await window.canAccessContent("tts_access");
-        if (!hasAccess) {
-          this.openPremiumModal("tts_access");
-          return;
-        }
+      hintBtn.onclick = () => {
         this.useHint();
       };
     }
 
     const revealBtn = document.getElementById("reveal-btn");
     if (revealBtn) {
-      revealBtn.onclick = async () => {
-        const hasAccess = await window.canAccessContent("tts_access");
-        if (!hasAccess) {
-          this.openPremiumModal("tts_access");
-          return;
-        }
+      revealBtn.onclick = () => {
         this.revealAnswer();
       };
     }
@@ -450,17 +409,7 @@ class CrosswordEngine {
         `;
         const nextBtn = document.getElementById("next-btn");
         if (nextBtn) {
-          nextBtn.onclick = async () => {
-            if (typeof ttsList !== "undefined") {
-              const nextTTS = ttsList.find((t) => `tts${t.id}` === this.puzzle.next);
-              if (nextTTS && nextTTS.premium) {
-                const hasAccess = await window.canAccessContent(nextTTS.productId);
-                if (!hasAccess) {
-                  this.openPremiumModal(nextTTS.productId);
-                  return;
-                }
-              }
-            }
+          nextBtn.onclick = () => {
             location.href = `tts.html?puzzle=${this.puzzle.next}`;
           };
         }
