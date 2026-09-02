@@ -1,4 +1,33 @@
 /* ==========================================
+   SEE ALL CARD (GLOBAL)
+   ========================================== */
+.see-all-card {
+    min-width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.see-all-card:hover {
+    background: #e0ecff;
+    transform: translateY(-2px);
+}
+
+.see-all-link {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 400;
+    font-size: 15px;
+    padding: 16px;
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+/* ==========================================
    1. RESET & CSS VARIABLES
    ========================================== */
 * {
@@ -690,7 +719,7 @@ body {
 
 /* ==========================================
    8. MODALS & DIVIDERS
-   ========================================== */
+   ========================================== 
 .premium-modal,
 .login-modal {
     display: none;
@@ -809,7 +838,7 @@ body {
 .login-email {
     margin-top: 16px;
 }
-
+*/
 /* ==========================================
    9. RESPONSIVE MEDIA QUERIES
    ========================================== */
@@ -870,7 +899,7 @@ body {
    .category-card span {
     font-size: 18px;
 }
-
+}
 /* Desktop Breakpoint (min-width: 1024px) */
 @media (min-width: 1024px) {
     .header h1 {
@@ -917,33 +946,4 @@ body {
     .category-card span {
         font-size: 18px;
     }
-}
-
-/* ==========================================
-   SEE ALL CARD (GLOBAL)
-   ========================================== */
-.see-all-card {
-    min-width: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.see-all-card:hover {
-    background: #e0ecff;
-    transform: translateY(-2px);
-}
-
-.see-all-link {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 400;
-    font-size: 15px;
-    padding: 16px;
-    text-align: center;
-    width: 100%;
-    display: block;
 }
