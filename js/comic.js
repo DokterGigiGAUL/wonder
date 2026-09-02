@@ -15,25 +15,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  const openPremiumModal = (productId) => {
-    if (typeof window.showPremiumDialog === "function") {
-      window.showPremiumDialog(productId);
-    } else if (typeof showPremiumDialog === "function") {
-      showPremiumDialog(productId);
-    }
-  };
-
-  let hasAccess = !currentComic.premium;
-  if (currentComic.premium) {
-    hasAccess = await window.canAccessContent(currentComic.productId);
-  }
-
-  // PENTING: Jika tidak ada akses, tampilkan modal dan JANGAN me-redirect ke Beranda
-  if (!hasAccess) {
-    openPremiumModal(currentComic.productId);
-    return;
-  }
-
   const title = document.getElementById("comic-title");
   const imageContainer = document.getElementById("comic-image");
   const backBtn = document.getElementById("backBtn");
@@ -72,20 +53,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (nextButton) {
     nextButton.disabled = currentIndex === comics.length - 1;
-    nextButton.addEventListener("click", async () => {
+    nextButton.addEventListener("click", () => {
       if (currentIndex < comics.length - 1) {
         const nextComic = comics[currentIndex + 1];
-
-        let canNext = !nextComic.premium;
-        if (nextComic.premium) {
-          canNext = await window.canAccessContent(nextComic.productId);
-        }
-
-        if (!canNext) {
-          openPremiumModal(nextComic.productId);
-          return;
-        }
-
         window.location.href = `comic.html?id=${nextComic.id}`;
       }
     });
