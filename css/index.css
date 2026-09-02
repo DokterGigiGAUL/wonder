@@ -923,14 +923,13 @@ body {
    SEE ALL CARD (GLOBAL)
    ========================================== */
 .see-all-card {
+    min-width: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 160px;
-    background: #eef4ff;
-    border: 2px dashed var(--primary);
+    background: none;
+    border: none;
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
 }
 
 .see-all-card:hover {
@@ -941,9 +940,10 @@ body {
 .see-all-link {
     text-decoration: none;
     color: var(--primary);
-    font-weight: 700;
+    font-weight: 400;
     font-size: 15px;
     padding: 16px;
     text-align: center;
     width: 100%;
+    display: block;
 }
