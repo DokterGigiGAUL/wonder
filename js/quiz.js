@@ -15,14 +15,6 @@ const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const backBtn = document.getElementById("backBtn");
 
-const openPremiumModal = (productId) => {
-  if (typeof window.showPremiumDialog === "function") {
-    window.showPremiumDialog(productId);
-  } else if (typeof showPremiumDialog === "function") {
-    showPremiumDialog(productId);
-  }
-};
-
 document.addEventListener("DOMContentLoaded", () => {
   init();
 });
@@ -39,17 +31,6 @@ async function init() {
   if (!metadata) {
     alert("Kuis tidak ditemukan.");
     window.location.href = "index.html";
-    return;
-  }
-
-  let hasAccess = !metadata.premium;
-  if (metadata.premium) {
-    hasAccess = await window.canAccessContent(metadata.productId);
-  }
-
-  // PENTING: Buka modal tanpa me-redirect ke Beranda
-  if (!hasAccess) {
-    openPremiumModal(metadata.productId);
     return;
   }
 
