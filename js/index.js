@@ -227,6 +227,9 @@ function loadEbooks() {
                 }
             });
         });
+
+    // Panggil helper dengan parameter isExternal = true
+    appendSeeAllCard(ebookContainer, "Katalog lengkap →", "https://gigital.myr.id", true);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -329,18 +332,24 @@ document.querySelectorAll(".category-card").forEach(card => {
 /* -------------------------------------------------------------------------- */
 /* HELPER UNTUK KARTU "LIHAT SEMUA" GLOBAL                                   */
 /* -------------------------------------------------------------------------- */
-function appendSeeAllCard(container, label, url) {
+function appendSeeAllCard(container, label, url, isExternal = false) {
     if (!container) return;
 
     const seeAllCard = document.createElement("article");
     seeAllCard.className = "content-card see-all-card";
     
+    const targetAttr = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
+    
     seeAllCard.innerHTML = `
-        <a href="${url}" class="see-all-link">${label} →</a>
+        <a href="${url}" class="see-all-link" ${targetAttr}>${label} →</a>
     `;
     
     seeAllCard.addEventListener("click", () => {
-        location.href = url;
+        if (isExternal) {
+            window.open(url, "_blank", "noopener,noreferrer");
+        } else {
+            location.href = url;
+        }
     });
 
     container.appendChild(seeAllCard);
