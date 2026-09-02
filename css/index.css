@@ -148,7 +148,7 @@ body {
 
 .horizontal-scroll {
     display: flex;
-    gap: var(--home-card-gap);
+    /*gap: var(--home-card-gap);*/
     overflow-x: auto;
     overflow-y: hidden;
     padding: 18px 0;
@@ -194,6 +194,7 @@ body {
     text-decoration: none;
     color: inherit;
     box-shadow: var(--shadow-card);
+    margin-right:16px;
 }
 
 .content-thumb {
