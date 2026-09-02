@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     prevButton.disabled = currentIndex === 0;
     prevButton.addEventListener("click", () => {
       if (currentIndex > 0) {
-        window.location.href = `komik.html?id=${comics[currentIndex - 1].id}`;
+        window.location.href = `comic.html?id=${comics[currentIndex - 1].id}`;
       }
     });
   }
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           return;
         }
 
-        window.location.href = `komik.html?id=${nextComic.id}`;
+        window.location.href = `comic.html?id=${nextComic.id}`;
       }
     });
   }
