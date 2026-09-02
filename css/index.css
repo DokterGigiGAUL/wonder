@@ -304,7 +304,7 @@ body {
 .featured-hero {
     position: relative;
     width: auto;
-    aspect-ratio: 2 / 1;
+    aspect-ratio: 3 / 2;
     margin: 8px 16px 24px 16px;
     border-radius: 16px;
     display: block;
