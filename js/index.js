@@ -268,7 +268,12 @@ function renderFeaturedHero() {
     const button = featuredHero.querySelector(".featured-btn");
     const catalogButton = featuredHero.querySelector(".featured-catalog-btn");
 
-    if (badge) badge.remove();
+    //if (badge) badge.remove();
+    // LOGIKA BADGE: Jika badge ada di HTML, tampilkan teks berdasarkan status premium/terbaru
+    if (badge) {
+        badge.textContent = "⭐ Terbaru";
+        badge.style.display = "inline-block";
+    }
 
     if (title) title.textContent = heroItem.title;
     if (description) description.textContent = heroItem.description;
