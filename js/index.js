@@ -140,7 +140,7 @@ function loadQuiz() {
         });
     });
 
-    appendSeeAllCard(quizList, "Lihat semua", "explore.html?tab=quiz");
+    //appendSeeAllCard(quizList, "Lihat semua", "explore.html?tab=quiz");
 }
 
 function loadComics() {
@@ -161,7 +161,7 @@ function loadComics() {
         });
     });
 
-    appendSeeAllCard(comicsContainer, "Lihat semua", "explore.html?tab=comic");
+    //appendSeeAllCard(comicsContainer, "Lihat semua", "explore.html?tab=comic");
 }
 
 function loadTTS() {
@@ -182,7 +182,7 @@ function loadTTS() {
         });
     });
 
-    appendSeeAllCard(ttsContainer, "Lihat semua", "explore.html?tab=tts");
+    //appendSeeAllCard(ttsContainer, "Lihat semua", "explore.html?tab=tts");
 }
 
 function loadCases() {
@@ -203,7 +203,7 @@ function loadCases() {
         });
     });
 
-    appendSeeAllCard(caseContainer, "Lihat semua", "explore.html?tab=case");
+    //appendSeeAllCard(caseContainer, "Lihat semua", "explore.html?tab=case");
 }
 
 function loadEbooks() {
@@ -230,7 +230,7 @@ function loadEbooks() {
         });
 
     // Panggil helper dengan parameter isExternal = true
-    appendSeeAllCard(ebookContainer, "Katalog lengkap", "https://gigital.myr.id", true);
+    //appendSeeAllCard(ebookContainer, "Katalog lengkap", "https://gigital.myr.id", true);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -332,7 +332,7 @@ document.querySelectorAll(".category-card").forEach(card => {
 
 /* -------------------------------------------------------------------------- */
 /* HELPER UNTUK KARTU "LIHAT SEMUA" GLOBAL                                   */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- 
 function appendSeeAllCard(container, label, url, isExternal = false) {
     if (!container) return;
 
@@ -354,4 +354,4 @@ function appendSeeAllCard(container, label, url, isExternal = false) {
     });
 
     container.appendChild(seeAllCard);
-}
+}*/
