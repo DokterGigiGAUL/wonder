@@ -3,11 +3,10 @@
    ========================================== */
 .see-all-card {
     min-width: 160px;
-    display: flex;
     align-items: center;
     justify-content: center;
-    background: none;
-    border: none;
+    background: none !important;
+    box-shadow: none !important;
     cursor: pointer;
 }
 
