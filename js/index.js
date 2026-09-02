@@ -255,9 +255,13 @@ function renderFeaturedHero() {
     const heroItem = latestItems[0];
     if (!heroItem) return;
 
-    const urlBg = "https://doktergigigaul.github.io/wonder/assets/images/premium-bg.jpeg";
-    featuredHero.style.backgroundImage = `url(${urlBg})`;
-
+//    const urlBg = "https://doktergigigaul.github.io/wonder/assets/images/premium-bg.jpeg";
+//    featuredHero.style.backgroundImage = `url(${urlBg})`;
+    
+// Menggunakan thumbnail dari konten terbaru yang ditemukan
+    const urlBg = heroItem.thumbnail || "assets/images/premium-bg.jpeg";
+    featuredHero.style.backgroundImage = `url('${urlBg}')`;
+    
     const badge = featuredHero.querySelector(".featured-badge");
     const title = featuredHero.querySelector(".featured-title");
     const description = featuredHero.querySelector(".featured-description");
