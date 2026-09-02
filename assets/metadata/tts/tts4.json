@@ -71,14 +71,14 @@
     },
     {
       "answer": "LABIAL",
-      "clue": "Berkaitan dengan bibir atau mengarah ke permukaan gigi yang menghadap bibir.",
+      "clue": "Berkaitan dengan bibir atau mengarah ke permukaan gigi yang menghadap bibir bagian dalam.",
       "row": 6,
       "col": 6,
       "direction": "down"
     },
     {
       "answer": "BUKAL",
-      "clue": "Berkaitan dengan bibir atau mengarah ke permukaan gigi yang menghadap bibir.",
+      "clue": "Berkaitan dengan pipi atau mengarah ke permukaan gigi yang menghadap pipi bagian dalam.",
       "row": 3,
       "col": 10,
       "direction": "down"
