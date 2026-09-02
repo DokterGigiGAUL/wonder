@@ -138,6 +138,8 @@ function loadQuiz() {
             }
         });
     });
+
+    appendSeeAllCard(quizList, "Lihat semua Kuis", "explore.html?tab=quiz");
 }
 
 function loadComics() {
@@ -157,6 +159,8 @@ function loadComics() {
             }
         });
     });
+
+    appendSeeAllCard(comicsContainer, "Lihat semua Komik", "explore.html?tab=comic");
 }
 
 function loadTTS() {
@@ -176,6 +180,8 @@ function loadTTS() {
             }
         });
     });
+
+    appendSeeAllCard(ttsContainer, "Lihat semua TTS", "explore.html?tab=tts");
 }
 
 function loadCases() {
@@ -195,6 +201,8 @@ function loadCases() {
             }
         });
     });
+
+    appendSeeAllCard(caseContainer, "Lihat semua Kasus", "explore.html?tab=case");
 }
 
 function loadEbooks() {
@@ -317,3 +325,23 @@ document.querySelectorAll(".category-card").forEach(card => {
         }
     });
 });
+
+/* -------------------------------------------------------------------------- */
+/* HELPER UNTUK KARTU "LIHAT SEMUA" GLOBAL                                   */
+/* -------------------------------------------------------------------------- */
+function appendSeeAllCard(container, label, url) {
+    if (!container) return;
+
+    const seeAllCard = document.createElement("article");
+    seeAllCard.className = "content-card see-all-card";
+    
+    seeAllCard.innerHTML = `
+        <a href="${url}" class="see-all-link">${label} →</a>
+    `;
+    
+    seeAllCard.addEventListener("click", () => {
+        location.href = url;
+    });
+
+    container.appendChild(seeAllCard);
+}
