@@ -140,7 +140,7 @@ function loadQuiz() {
         });
     });
 
-    appendSeeAllCard(quizList, "Lihat semua Kuis", "explore.html?tab=quiz");
+    appendSeeAllCard(quizList, "Lihat semua", "explore.html?tab=quiz");
 }
 
 function loadComics() {
@@ -161,7 +161,7 @@ function loadComics() {
         });
     });
 
-    appendSeeAllCard(comicsContainer, "Lihat semua Komik", "explore.html?tab=comic");
+    appendSeeAllCard(comicsContainer, "Lihat semua", "explore.html?tab=comic");
 }
 
 function loadTTS() {
@@ -182,7 +182,7 @@ function loadTTS() {
         });
     });
 
-    appendSeeAllCard(ttsContainer, "Lihat semua TTS", "explore.html?tab=tts");
+    appendSeeAllCard(ttsContainer, "Lihat semua", "explore.html?tab=tts");
 }
 
 function loadCases() {
@@ -203,7 +203,7 @@ function loadCases() {
         });
     });
 
-    appendSeeAllCard(caseContainer, "Lihat semua Kasus", "explore.html?tab=case");
+    appendSeeAllCard(caseContainer, "Lihat semua", "explore.html?tab=case");
 }
 
 function loadEbooks() {
