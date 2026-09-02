@@ -918,3 +918,32 @@ body {
         font-size: 18px;
     }
 }
+
+/* ==========================================
+   SEE ALL CARD (GLOBAL)
+   ========================================== */
+.see-all-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+    background: #eef4ff;
+    border: 2px dashed var(--primary);
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.see-all-card:hover {
+    background: #e0ecff;
+    transform: translateY(-2px);
+}
+
+.see-all-link {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 16px;
+    text-align: center;
+    width: 100%;
+}
