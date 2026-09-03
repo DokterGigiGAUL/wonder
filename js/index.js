@@ -80,15 +80,27 @@ function createContentCard({
 
     const isEbook = item?.type === "ebook" || extraClass.includes("ebook-card");
 
-    const badge = clone.querySelector(".featured-badge");
+    /*const badge = clone.querySelector(".featured-badge");
     if (badge) {
         if (isEbook) {
             badge.textContent = "👑 Premium";
         } else {
             badge.remove();
         }
+    }*/
+    
+    const badge = clone.querySelector(".featured-badge");
+    if (badge) {
+        if (isEbook) {
+            badge.textContent = "👑 Premium";
+            badge.style.display = "inline-block";
+        } else if (item?.premium) {
+            badge.textContent = "👑 Premium";
+            badge.style.display = "inline-block";
+        } else {
+            badge.remove(); // Hapus badge jika bukan ebook dan bukan konten premium
+        }
     }
-
     const thumbEl = clone.querySelector(".content-thumb");
     if (thumbEl) {
         thumbEl.src = thumbnail || "";
