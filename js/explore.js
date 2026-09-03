@@ -95,7 +95,7 @@ function showQuiz() {
     caseTab.classList.remove("active");
 
     quizSection.innerHTML = "";
-    quizzes.slice(0, 4).forEach(quiz => {
+    quizzes.forEach(quiz => {
     createListCard({
         container: quizSection,
         thumbnail: quiz.thumbnail,
