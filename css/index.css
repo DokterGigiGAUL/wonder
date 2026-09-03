@@ -563,7 +563,7 @@ body {
       justify-content: flex-start;
       text-align: center;
       gap: 8px;
-      padding: 6px 24px;
+      padding: 6px 18px;
       background: var(--card);
       border: none;
       border-radius: 12px;
