@@ -5,7 +5,7 @@ const quizzes = [
         productId: "kuis1",
         title: "Kuis #1",
         description: "Level: ★★☆☆☆",
-        thumbnail: "assets/images/kuis/thumbnail-kuis1.jpeg",
+        thumbnail: "assets/images/kuis/thumbnail-kuis1.webp",
         premium: false,
         price: null,
         releaseDate: "2026-06-20",
@@ -17,7 +17,7 @@ const quizzes = [
         productId: "kuis2",
         title: "Kuis #2",
         description: "Level: ★★★☆☆",
-        thumbnail: "assets/images/kuis/thumbnail-kuis2.jpeg",
+        thumbnail: "assets/images/kuis/thumbnail-kuis2.webp",
         premium: false,
         price: null,
         releaseDate: "2026-06-20",
@@ -29,7 +29,7 @@ const quizzes = [
         productId: "kuis3",
         title: "Kuis #3",
         description: "Level: ★★☆☆☆",
-        thumbnail: "assets/images/kuis/thumbnail-kuis3.jpeg",
+        thumbnail: "assets/images/kuis/thumbnail-kuis3.webp",
         premium: false,
         price: null,
         releaseDate: "2026-06-20",
@@ -41,10 +41,10 @@ const quizzes = [
         productId: "kuis4",
         title: "Kuis #4",
         description: "Level: ★★★★☆",
-        thumbnail: "assets/images/kuis/thumbnail-kuis4.jpeg",
+        thumbnail: "assets/images/kuis/thumbnail-kuis4.webp",
         premium: true,
         price: 5000,
-        mayarUrl: "https://gigital.myr.id/pl/GANTI-DENGAN-LINK-KUIS4", // TODO: ganti dengan payment link Mayar untuk Kuis #4
+        mayarUrl: "https://gigital.myr.id/pl/kuis4", // TODO: ganti dengan payment link Mayar untuk Kuis #4
         releaseDate: "2026-06-20",
         type: "quiz"
     },
@@ -54,10 +54,10 @@ const quizzes = [
         productId: "kuis5",
         title: "Kuis #5",
         description: "Level: ★★★☆☆",
-        thumbnail: "assets/images/kuis/thumbnail-kuis5.jpeg",
+        thumbnail: "assets/images/kuis/thumbnail-kuis5.webp",
         premium: true,
         price: 5000,
-        mayarUrl: "https://gigital.myr.id/pl/GANTI-DENGAN-LINK-KUIS5", // TODO: ganti dengan payment link Mayar untuk Kuis #5
+        mayarUrl: "https://gigital.myr.id/pl/kuis5", // TODO: ganti dengan payment link Mayar untuk Kuis #5
         releaseDate: "2026-06-20",
         type: "quiz"
     },
@@ -67,10 +67,10 @@ const quizzes = [
         productId: "kuis6",
         title: "Kuis #6",
         description: "Level: ★★★★☆",
-        thumbnail: "assets/images/kuis/thumbnail-kuis6.jpeg",
+        thumbnail: "assets/images/kuis/thumbnail-kuis6.webp",
         premium: true,
         price: 5000,
-        mayarUrl: "https://gigital.myr.id/pl/GANTI-DENGAN-LINK-KUIS6", // TODO: ganti dengan payment link Mayar untuk Kuis #6
+        mayarUrl: "https://gigital.myr.id/pl/kuis6", // TODO: ganti dengan payment link Mayar untuk Kuis #6
         releaseDate: "2026-06-20",
         type: "quiz"
     },
@@ -80,10 +80,10 @@ const quizzes = [
         productId: "kuis7",
         title: "Kuis #7",
         description: "Level: ★★★★★",
-        thumbnail: "assets/images/kuis/thumbnail-kuis7.jpeg",
+        thumbnail: "assets/images/kuis/thumbnail-kuis7.webp",
         premium: true,
         price: 5000,
-        mayarUrl: "https://gigital.myr.id/pl/GANTI-DENGAN-LINK-KUIS7", // TODO: ganti dengan payment link Mayar untuk Kuis #7
+        mayarUrl: "https://gigital.myr.id/pl/kuis7", // TODO: ganti dengan payment link Mayar untuk Kuis #7
         releaseDate: "2026-07-20",
         type: "quiz"
     }
