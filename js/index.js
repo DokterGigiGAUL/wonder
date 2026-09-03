@@ -105,7 +105,7 @@ function createContentCard({
     if (thumbEl) {
         thumbEl.src = thumbnail || "";
         thumbEl.alt = title || "";
-        thumbEl.loading = "lazy";
+        thumbEl.loading = "";
     }
 
     const titleEl = clone.querySelector(".content-title");
