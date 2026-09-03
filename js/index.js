@@ -123,7 +123,7 @@ function loadQuiz() {
     if (!quizList || typeof quizzes === "undefined") return;
     quizList.innerHTML = "";
 
-    quizzes.slice(0, 3).forEach(quiz => {
+    quizzes.slice(0, 6).forEach(quiz => {
         const finished = typeof Storage !== "undefined" && Storage.isFinished && Storage.isFinished(quiz.productId);
 
         createContentCard({
