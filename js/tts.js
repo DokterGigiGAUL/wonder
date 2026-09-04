@@ -112,9 +112,7 @@ class CrosswordEngine {
 
   if (backBtn) {
   backBtn.onclick = () => {
-    if (confirm("Keluar dari kuis?")) {
       window.location.href = "index.html";
-    }
   };
 }
   
