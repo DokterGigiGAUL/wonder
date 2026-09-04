@@ -180,7 +180,7 @@ function loadTTS() {
     if (!ttsContainer || typeof ttsList === "undefined") return;
     ttsContainer.innerHTML = "";
 
-    ttsList.slice(0, 3).forEach(tts => {
+    ttsList.slice(0, 6).forEach(tts => {
         createContentCard({
             container: ttsContainer,
             item: tts,
