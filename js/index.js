@@ -94,6 +94,9 @@ function createContentCard({
         if (isEbook) {
             badge.textContent = "👑 Premium";
         } else {
+        if (item && item.premium) {
+            badge.textContent = "👑 Premium";
+        } else {
             badge.remove();
         }
     }
