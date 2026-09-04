@@ -165,7 +165,7 @@ function showTTS() {
     caseTab.classList.remove("active");
 
     ttsSection.innerHTML = "";
-    ttsList.slice(0, 4).forEach(tts => {
+    ttsList.forEach(tts => {
     createListCard({
         container: ttsSection,
         thumbnail: tts.thumbnail,
