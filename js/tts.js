@@ -110,6 +110,14 @@ class CrosswordEngine {
     }
   }
 
+  if (backBtn) {
+  backBtn.onclick = () => {
+    if (confirm("Keluar dari kuis?")) {
+      window.location.href = "index.html";
+    }
+  };
+}
+  
   updateHintButtonState(btn) {
     if (!btn) return;
     if (this.hintUnlocked) {
