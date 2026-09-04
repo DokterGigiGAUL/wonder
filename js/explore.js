@@ -32,6 +32,12 @@ if (!listTemplate) {
     );
 }
 
+function isPremiumLocked(item) {
+    if (!item || !item.premium) return false;
+    const unlocked = typeof Storage !== "undefined" && typeof Storage.isUnlocked === "function" && Storage.isUnlocked(item.productId);
+    return !unlocked;
+}
+
 if (tab === "comic") {
     showComic();
 } else if (tab === "tts") {
@@ -112,7 +118,7 @@ function showQuiz() {
         buttonText:
             Storage.isFinished(quiz.productId)
                 ? "Sudah Selesai"
-                : "Mulai",
+                : (isPremiumLocked(quiz) ? "Beli" : "Mulai"),
 
         disabled: Storage.isFinished(quiz.productId),
 
@@ -148,7 +154,7 @@ function showComic() {
         title: comic.title,
         description: comic.description,
         item: comic,
-        buttonText: "Baca",
+        buttonText: isPremiumLocked(comic) ? "Beli" : "Baca",
         onClick() {
             location.href =
                 `komik.html?id=${comic.id}`;
@@ -178,7 +184,7 @@ function showTTS() {
         title: tts.title,
         description: tts.description,
         item: tts,
-        buttonText: "Main",
+        buttonText: isPremiumLocked(tts) ? "Beli" : "Main",
         onClick() {
             location.href =
                 `tts.html?puzzle=tts${tts.id}`;
@@ -211,7 +217,7 @@ function showCase() {
         title: caseData.title,
         description: caseData.description,
         item: caseData,
-        buttonText: "Lihat",
+        buttonText: isPremiumLocked(caseData) ? "Beli" : "Lihat",
         onClick() {
             location.href =
                 `case.html?case=${caseData.file}`;
