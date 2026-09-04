@@ -157,7 +157,7 @@ function showComic() {
         buttonText: isPremiumLocked(comic) ? "Beli" : "Baca",
         onClick() {
             location.href =
-                `komik.html?id=${comic.id}`;
+                `comic.html?id=${comic.id}`;
         }
     });
     });
