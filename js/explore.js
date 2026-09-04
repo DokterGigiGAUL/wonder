@@ -107,7 +107,7 @@ function showQuiz() {
     caseTab.classList.remove("active");
 
     quizSection.innerHTML = "";
-    quizzes.slice(0, 4).forEach(quiz => {
+    quizzes.forEach(quiz => {
     createListCard({
         container: quizSection,
         thumbnail: quiz.thumbnail,
@@ -177,7 +177,7 @@ function showTTS() {
     caseTab.classList.remove("active");
 
     ttsSection.innerHTML = "";
-    ttsList.slice(0, 4).forEach(tts => {
+    ttsList.forEach(tts => {
     createListCard({
         container: ttsSection,
         thumbnail: tts.thumbnail,
