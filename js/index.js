@@ -91,10 +91,7 @@ function createContentCard({
 
     const badge = clone.querySelector(".featured-badge");
     if (badge) {
-        if (isEbook) {
-            badge.textContent = "👑 Premium";
-        } else {
-        if (item && item.premium) {
+        if (isEbook || (item && item.premium)) {
             badge.textContent = "👑 Premium";
         } else {
             badge.remove();
