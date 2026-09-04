@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const file = params.get("case") || "case1";
-
+  
   const imageFlip = document.getElementById("imageFlip");
   const infoFlip = document.getElementById("infoFlip");
 
