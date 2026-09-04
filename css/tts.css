@@ -230,7 +230,7 @@ pointer-events:none;
     font-weight: bold;
     cursor: pointer;
     transition: .2s;
-    font-weight: bold;
+    font-weight: 400!important;
 }
 .next-btn{
     width: auto;
@@ -240,7 +240,7 @@ pointer-events:none;
     color: #2563eb;
     padding: 12px;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 400!important;
     cursor: pointer;
     transition: .2s;
     margin-top: 8px;
