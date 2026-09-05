@@ -144,6 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = "index.html";
       };
     }
+    
   } 
   
   catch (err) {
