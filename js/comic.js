@@ -27,6 +27,30 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (title) title.textContent = currentComic.title;
 
+  const unlockedParam = params.get("unlocked");
+  if (unlockedParam && typeof Storage !== "undefined") {
+    Storage.unlock(unlockedParam);
+  }
+
+  const isUnlocked = !currentComic.premium || (typeof Storage !== "undefined" && Storage.isUnlocked(currentComic.productId));
+
+  if (!isUnlocked) {
+    const navigation = document.querySelector(".comic-navigation");
+    const actions = document.querySelector(".comic-actions");
+    if (navigation) navigation.style.display = "none";
+    if (actions) actions.style.display = "none";
+
+    const lock = document.getElementById("premiumLock");
+    if (lock) {
+      lock.style.display = "block";
+      const priceEl = document.getElementById("premiumLockPrice");
+      if (priceEl) priceEl.textContent = `Rp ${currentComic.price.toLocaleString("id-ID")}`;
+      const btn = document.getElementById("premiumLockBtn");
+      if (btn) btn.href = currentComic.mayarUrl || "#";
+    }
+    return;
+  }
+
   if (imageContainer) {
     imageContainer.innerHTML = "";
     currentComic.images.forEach((src) => {
