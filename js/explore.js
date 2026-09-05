@@ -189,7 +189,7 @@ function showComic() {
     caseTab.classList.remove("active");
 
     comicSection.innerHTML = "";
-    comics.slice(0, 4).forEach(comic => {
+    comics.forEach(comic => {
     
     createListCard({
         container: comicSection,
