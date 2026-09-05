@@ -220,11 +220,17 @@
 
 #premium-banner h3 {
   margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+#premium-banner p {
+  line-height: 1.25;
 }
 
 #premium-banner ul {
   margin: 12px 0;
   padding-left: 20px;
+  line-height: 1.25;
 }
 
 #premium-banner button {
