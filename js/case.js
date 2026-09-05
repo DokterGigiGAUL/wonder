@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const backBtn = document.getElementById("backBtn");
     if (backBtn) {
       backBtn.onclick = () => {
-        window.location.href = "index.html";
+        window.location.href = "/index.html";
       };
     }
   } catch (err) {
