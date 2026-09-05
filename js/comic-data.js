@@ -62,7 +62,7 @@ file: "komik4",
   episode: 4,
   premium: true,
   price: 5000,
-  mayarUrl: "https://gigital.myr.id/pl/GANTI-DENGAN-LINK-COMIC4", // TODO: link Mayar untuk beli Episode #4
+  mayarUrl: "https://gigital.myr.id/pl/comic4", // TODO: link Mayar untuk beli Episode #4
   title: "Episode #4",
   description: "Sariawan Karena Kekurangan Vitamin C?",
   thumbnail: "assets/images/komik/komik4/thumbnail4.webp",
@@ -79,7 +79,7 @@ file: "komik4",
   episode: 5,
   premium: true,
   price: 5000,
-  mayarUrl: "https://gigital.myr.id/pl/GANTI-DENGAN-LINK-COMIC5", // TODO: link Mayar untuk beli Episode #5
+  mayarUrl: "https://gigital.myr.id/pl/comic5", // TODO: link Mayar untuk beli Episode #5
   title: "Episode #5",
   description: "Kelahiran Prematur Akibat Peradangan Gusi?",
   thumbnail: "assets/images/komik/komik5/thumbnail5.webp",
@@ -96,7 +96,7 @@ file: "komik4",
   episode: 6,
   premium: true,
   price: 5000,
-  mayarUrl: "https://gigital.myr.id/pl/GANTI-DENGAN-LINK-COMIC6", // TODO: link Mayar untuk beli Episode #6
+  mayarUrl: "https://gigital.myr.id/pl/comic6", // TODO: link Mayar untuk beli Episode #6
   title: "Episode #6",
   description: "Ibu Hamil Boleh Cabut Gigi, Gak?",
   thumbnail: "assets/images/komik/komik6/thumbnail6.webp",
