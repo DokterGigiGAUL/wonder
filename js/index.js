@@ -144,7 +144,7 @@ function loadQuiz() {
     if (!quizList || typeof quizzes === "undefined") return;
     quizList.innerHTML = "";
 
-    quizzes.forEach(quiz => {
+    quizzes.slice(0, 6).forEach(quiz => {
         const finished = typeof Storage !== "undefined" && Storage.isFinished && Storage.isFinished(quiz.productId);
         const locked = isPremiumLocked(quiz);
 
@@ -192,7 +192,7 @@ function loadTTS() {
     if (!ttsContainer || typeof ttsList === "undefined") return;
     ttsContainer.innerHTML = "";
 
-    ttsList.forEach(tts => {
+    ttsList.slice(0, 6).forEach(tts => {
         const locked = isPremiumLocked(tts);
 
         createContentCard({
