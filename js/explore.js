@@ -252,7 +252,7 @@ function showCase() {
     caseTab.classList.add("active");
 
     caseSection.innerHTML = "";
-    cases.slice(0, 4).forEach(caseData => {
+    cases.forEach(caseData => {
 
     createListCard({
         container: caseSection,
