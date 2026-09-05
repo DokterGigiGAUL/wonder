@@ -20,6 +20,13 @@
     </header>
 
     <main class="container-explore">
+      <div class="search-bar-wrap">
+        <form id="siteSearchForm" class="search-bar" role="search">
+          <input type="search" id="siteSearchInput" name="q" class="search-input" placeholder="Cari kuis, TTS, kasus, komik..." aria-label="Cari konten">
+          <button type="submit" class="search-btn">Cari</button>
+        </form>
+      </div>
+
       <div class="explore-tabs">
         <button id="quizTab" class="tab-btn">Kuis</button>
         <button id="ttsTab" class="tab-btn">TTS</button>
@@ -33,6 +40,30 @@
       <section id="case-container" class="card-grid"></section>
       <section id="comics-container" class="card-grid"></section>
       <!--<section id="ebook-container" class="card-grid"></section>-->
+
+      <section id="search-results" class="search-results">
+        <p id="search-empty" class="search-empty"></p>
+
+        <div id="search-quiz-group" class="search-group">
+          <h2 class="search-group-title">Kuis</h2>
+          <div id="search-quiz-list" class="card-grid"></div>
+        </div>
+
+        <div id="search-tts-group" class="search-group">
+          <h2 class="search-group-title">TTS</h2>
+          <div id="search-tts-list" class="card-grid"></div>
+        </div>
+
+        <div id="search-case-group" class="search-group">
+          <h2 class="search-group-title">Kasus</h2>
+          <div id="search-case-list" class="card-grid"></div>
+        </div>
+
+        <div id="search-comic-group" class="search-group">
+          <h2 class="search-group-title">Komik</h2>
+          <div id="search-comic-list" class="card-grid"></div>
+        </div>
+      </section>
     </main>
 
     <!-- TEMPLATE CARD -->
@@ -69,6 +100,7 @@
     <script src="js/tts-data.js"></script>
     <script src="js/case-data.js"></script>
 
+    <script src="js/search.js"></script>
     <script src="js/explore.js"></script>
     
   </body>
