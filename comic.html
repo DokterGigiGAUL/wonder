@@ -21,6 +21,19 @@
 
 <main class="comic-page">
 
+  <div id="premiumLock" class="premium-lock" style="display:none;">
+      <h3>Komik Premium</h3>
+      <p id="premiumLockPrice"></p>
+      <div class="premium-lock-actions">
+          <a href="index.html" class="btn btn-outline">
+              Kembali ke Beranda
+          </a>
+          <a id="premiumLockBtn" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              Beli Sekarang
+          </a>
+      </div>
+  </div>
+
   <div id="comic-image"></div>
   <div class="comic-navigation">
     <button id="prev-comic" class="comic-nav-btn">
@@ -48,6 +61,7 @@
   </div>
 </div>
 
+<script src="js/storage.js"></script>
 <script src="js/comic-data.js"></script>
 <script src="js/comic.js"></script>
 
