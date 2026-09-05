@@ -7,60 +7,19 @@
 // =========================================================================
 // ELEMEN & VARIABEL UTAMA
 // =========================================================================
-const params = new URLSearchParams(location.search);
-const tab = params.get("tab") || "quiz";
-const query = params.get("q") || "";
+const quizList = document.getElementById("quiz-list");
+const comicsContainer = document.getElementById("comics-container");
+const ttsContainer = document.getElementById("tts-container");
+const caseContainer = document.getElementById("case-container");
+const ebookContainer = document.getElementById("ebook-container");
+
+const featuredHero = document.getElementById("featured-hero");
+const cardTemplate = document.getElementById("content-card-template");
 
 const searchForm = document.getElementById("siteSearchForm");
 const searchInput = document.getElementById("siteSearchInput");
-const exploreTabs = document.querySelector(".explore-tabs");
 
-const searchResultsSection = document.getElementById("search-results");
-const searchEmpty = document.getElementById("search-empty");
-const searchQuizGroup = document.getElementById("search-quiz-group");
-const searchTtsGroup = document.getElementById("search-tts-group");
-const searchCaseGroup = document.getElementById("search-case-group");
-const searchComicGroup = document.getElementById("search-comic-group");
-
-const searchQuizList = document.getElementById("search-quiz-list");
-const searchTtsList = document.getElementById("search-tts-list");
-const searchCaseList = document.getElementById("search-case-list");
-const searchComicList = document.getElementById("search-comic-list");
-
-const quizSection = document.getElementById("quiz-list");
-const comicSection = document.getElementById("comics-container");
-const ttsSection = document.getElementById("tts-container");
-const caseSection = document.getElementById("case-container");
-
-const quizTab = document.getElementById("quizTab");
-const comicTab = document.getElementById("comicTab");
-const ttsTab = document.getElementById("ttsTab");
-const caseTab = document.getElementById("caseTab");
-
-const pageTitle = document.getElementById("pageTitle");
-const listTemplate = document.getElementById("list-card-template");
-
-if (!listTemplate) {
-    console.error("Template #list-card-template tidak ditemukan.");
-    throw new Error("Explore gagal dimuat karena template card tidak tersedia.");
-}
-
-// =========================================================================
-// HELPER & UTILITY
-// =========================================================================
-function isPremiumLocked(item) {
-    if (!item || !item.premium) return false;
-    const unlocked = typeof Storage !== "undefined" && typeof Storage.isUnlocked === "function" && Storage.isUnlocked(item.productId);
-    return !unlocked;
-}
-
-// Set nilai input pencarian jika query ada di URL
-if (searchInput) {
-    searchInput.value = query;
-}
-
-// Handler Form Pencarian
-if (searchForm) {
+if (searchForm && searchInput) {
     searchForm.onsubmit = (e) => {
         e.preventDefault();
         const value = searchInput.value.trim();
@@ -69,25 +28,58 @@ if (searchForm) {
     };
 }
 
-// =========================================================================
-// INITIALIZATION / NAVIGASI UTAMA
-// =========================================================================
-if (query) {
-    showSearchResults(query);
-} else if (tab === "comic") {
-    showComic();
-} else if (tab === "tts") {
-    showTTS();
-} else if (tab === "case") {
-    showCase();
-} else {
-    showQuiz();
+/* -------------------------------------------------------------------------- */
+/* HELPER UNTUK LABEL TOMBOL AKSI BERDASARKAN TIPE KONTEN                     */
+/* -------------------------------------------------------------------------- */
+function getActionText(type) {
+    switch (type) {
+        case "quiz":
+            return "Mulai →";
+        case "comic":
+            return "Baca →";
+        case "tts":
+            return "Main →";
+        case "case":
+            return "Lihat →";
+        case "ebook":
+            return "Detail →";
+        default:
+            return "Buka →";
+    }
 }
 
-// =========================================================================
-// CARD CREATOR TEMPLATE
-// =========================================================================
-function createListCard({
+/* -------------------------------------------------------------------------- */
+/* HELPER UNTUK CEK APAKAH KONTEN PREMIUM & BELUM DIBELI                      */
+/* -------------------------------------------------------------------------- */
+function isPremiumLocked(item) {
+    if (!item || !item.premium) return false;
+    const unlocked = typeof Storage !== "undefined" && typeof Storage.isUnlocked === "function" && Storage.isUnlocked(item.productId);
+    return !unlocked;
+}
+
+/* -------------------------------------------------------------------------- */
+/* INIT                                                                       */
+/* -------------------------------------------------------------------------- */
+function initializeHome() {
+    renderFeaturedHero();
+    loadQuiz();
+    loadComics();
+    loadTTS();
+    loadCases();
+    loadEbooks();
+    
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeHome);
+} else {
+    initializeHome();
+}
+
+/* -------------------------------------------------------------------------- */
+/* CARD CREATOR                                                               */
+/* -------------------------------------------------------------------------- */
+function createContentCard({
     container,
     thumbnail,
     title,
@@ -98,36 +90,40 @@ function createListCard({
     item,
     onClick
 }) {
-    if (!container) return;
+    if (!cardTemplate || !container) return;
 
-    const clone = listTemplate.content.cloneNode(true);
-    const card = clone.querySelector(".list-card");
+    const clone = cardTemplate.content.cloneNode(true);
+    const card = clone.querySelector(".content-card");
+
     if (extraClass) {
         card.classList.add(extraClass);
     }
 
+    const isEbook = item?.type === "ebook" || extraClass.includes("ebook-card");
+
     const badge = clone.querySelector(".featured-badge");
     if (badge) {
-        if (item && item.premium) {
+        if (isEbook || (item && item.premium)) {
             badge.textContent = "👑 Premium";
         } else {
             badge.remove();
         }
     }
 
-    const thumbEl = clone.querySelector(".list-thumb");
+    const thumbEl = clone.querySelector(".content-thumb");
     if (thumbEl) {
         thumbEl.src = thumbnail || "";
         thumbEl.alt = title || "";
+        thumbEl.loading = "lazy";
     }
 
-    const titleEl = clone.querySelector(".list-title");
+    const titleEl = clone.querySelector(".content-title");
     if (titleEl) titleEl.textContent = title;
 
-    const descEl = clone.querySelector(".list-description");
+    const descEl = clone.querySelector(".content-description");
     if (descEl) descEl.textContent = description;
 
-    const button = clone.querySelector(".list-btn");
+    const button = clone.querySelector(".content-btn");
     if (button) {
         button.textContent = buttonText;
         button.disabled = disabled;
@@ -140,286 +136,260 @@ function createListCard({
     container.appendChild(clone);
 }
 
-// =========================================================================
-// DISPLAY HANDLERS (TAB VIEW)
-// =========================================================================
-function showQuiz() {
-    if (pageTitle) pageTitle.textContent = "Semua Kuis";
+/* -------------------------------------------------------------------------- */
+/* LOADERS                                                                    */
+/* -------------------------------------------------------------------------- */
 
-    if (quizSection) quizSection.style.display = "block";
-    if (comicSection) comicSection.style.display = "none";
-    if (ttsSection) ttsSection.style.display = "none";
-    if (caseSection) caseSection.style.display = "none";
-    if (searchResultsSection) searchResultsSection.style.display = "none";
-    if (exploreTabs) exploreTabs.style.display = "flex";
-
-    if (quizTab) quizTab.classList.add("active");
-    if (comicTab) comicTab.classList.remove("active");
-    if (ttsTab) ttsTab.classList.remove("active");
-    if (caseTab) caseTab.classList.remove("active");
-
-    if (!quizSection || typeof quizzes === "undefined") return;
-    quizSection.innerHTML = "";
+function loadQuiz() {
+    if (!quizList || typeof quizzes === "undefined") return;
+    quizList.innerHTML = "";
 
     quizzes.forEach(quiz => {
         const finished = typeof Storage !== "undefined" && Storage.isFinished && Storage.isFinished(quiz.productId);
+        const locked = isPremiumLocked(quiz);
 
-        createListCard({
-            container: quizSection,
+        createContentCard({
+            container: quizList,
+            item: quiz,
             thumbnail: quiz.thumbnail,
             title: quiz.title,
             description: quiz.description,
-            item: quiz,
-            buttonText: finished
-                ? "Sudah Selesai"
-                : (isPremiumLocked(quiz) ? "Beli" : "Mulai"),
+            buttonText: locked ? "Beli" : (finished ? "Sudah Selesai" : getActionText("quiz")),
             disabled: finished,
             onClick() {
                 location.href = `quiz.html?id=${quiz.file}`;
             }
         });
     });
+
+    //appendSeeAllCard(quizList, "Lihat semua", "explore.html?tab=quiz");
 }
 
-function showComic() {
-    if (pageTitle) pageTitle.textContent = "Semua Komik";
+function loadComics() {
+    if (!comicsContainer || typeof comics === "undefined") return;
+    comicsContainer.innerHTML = "";
 
-    if (quizSection) quizSection.style.display = "none";
-    if (comicSection) comicSection.style.display = "block";
-    if (ttsSection) ttsSection.style.display = "none";
-    if (caseSection) caseSection.style.display = "none";
-    if (searchResultsSection) searchResultsSection.style.display = "none";
-    if (exploreTabs) exploreTabs.style.display = "flex";
+    comics.slice(0, 3).forEach(comic => {
+        const locked = isPremiumLocked(comic);
 
-    if (quizTab) quizTab.classList.remove("active");
-    if (comicTab) comicTab.classList.add("active");
-    if (ttsTab) ttsTab.classList.remove("active");
-    if (caseTab) caseTab.classList.remove("active");
-
-    if (!comicSection || typeof comics === "undefined") return;
-    comicSection.innerHTML = "";
-
-    comics.slice(0, 4).forEach(comic => {
-        createListCard({
-            container: comicSection,
+        createContentCard({
+            container: comicsContainer,
+            item: comic,
             thumbnail: comic.thumbnail,
             title: comic.title,
             description: comic.description,
-            item: comic,
-            buttonText: isPremiumLocked(comic) ? "Beli" : "Baca",
+            buttonText: locked ? "Beli" : getActionText("comic"),
             onClick() {
                 location.href = `comic.html?id=${comic.id}`;
             }
         });
     });
+
+    //appendSeeAllCard(comicsContainer, "Lihat semua", "explore.html?tab=comic");
 }
 
-function showTTS() {
-    if (pageTitle) pageTitle.textContent = "Semua TTS";
-
-    if (quizSection) quizSection.style.display = "none";
-    if (comicSection) comicSection.style.display = "none";
-    if (ttsSection) ttsSection.style.display = "block";
-    if (caseSection) caseSection.style.display = "none";
-    if (searchResultsSection) searchResultsSection.style.display = "none";
-    if (exploreTabs) exploreTabs.style.display = "flex";
-
-    if (quizTab) quizTab.classList.remove("active");
-    if (comicTab) comicTab.classList.remove("active");
-    if (ttsTab) ttsTab.classList.add("active");
-    if (caseTab) caseTab.classList.remove("active");
-
-    if (!ttsSection || typeof ttsList === "undefined") return;
-    ttsSection.innerHTML = "";
+function loadTTS() {
+    if (!ttsContainer || typeof ttsList === "undefined") return;
+    ttsContainer.innerHTML = "";
 
     ttsList.forEach(tts => {
-        createListCard({
-            container: ttsSection,
+        const locked = isPremiumLocked(tts);
+
+        createContentCard({
+            container: ttsContainer,
+            item: tts,
             thumbnail: tts.thumbnail,
             title: tts.title,
             description: tts.description,
-            item: tts,
-            buttonText: isPremiumLocked(tts) ? "Beli" : "Main",
+            buttonText: locked ? "Beli" : getActionText("tts"),
             onClick() {
                 location.href = `tts.html?puzzle=tts${tts.id}`;
             }
         });
     });
+
+    //appendSeeAllCard(ttsContainer, "Lihat semua", "explore.html?tab=tts");
 }
 
-function showCase() {
-    if (pageTitle) pageTitle.textContent = "Semua Kartu Kasus";
+function loadCases() {
+    if (!caseContainer || typeof cases === "undefined") return;
+    caseContainer.innerHTML = "";
 
-    if (quizSection) quizSection.style.display = "none";
-    if (comicSection) comicSection.style.display = "none";
-    if (ttsSection) ttsSection.style.display = "none";
-    if (caseSection) caseSection.style.display = "block";
-    if (searchResultsSection) searchResultsSection.style.display = "none";
-    if (exploreTabs) exploreTabs.style.display = "flex";
+    cases.slice(0, 3).forEach(caseData => {
+        const locked = isPremiumLocked(caseData);
 
-    if (quizTab) quizTab.classList.remove("active");
-    if (comicTab) comicTab.classList.remove("active");
-    if (ttsTab) ttsTab.classList.remove("active");
-    if (caseTab) caseTab.classList.add("active");
-
-    if (!caseSection || typeof cases === "undefined") return;
-    caseSection.innerHTML = "";
-
-    cases.slice(0, 4).forEach(caseData => {
-        createListCard({
-            container: caseSection,
+        createContentCard({
+            container: caseContainer,
+            item: caseData,
             thumbnail: caseData.thumbnail,
             title: caseData.title,
             description: caseData.description,
-            item: caseData,
-            buttonText: isPremiumLocked(caseData) ? "Beli" : "Lihat",
+            buttonText: locked ? "Beli" : getActionText("case"),
             onClick() {
                 location.href = `case.html?case=${caseData.file}`;
             }
         });
     });
+
+    //appendSeeAllCard(caseContainer, "Lihat semua", "explore.html?tab=case");
 }
 
-// =========================================================================
-// EVENT LISTENERS UNTUK TAB
-// =========================================================================
-if (quizTab) {
-    quizTab.onclick = () => {
-        history.replaceState({}, "", "explore.html?tab=quiz");
-        showQuiz();
-    };
+function loadEbooks() {
+    if (!ebookContainer || typeof ebooks === "undefined") return;
+    ebookContainer.innerHTML = "";
+
+    ebooks
+        .slice()
+        .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))
+        .slice(0, 6)
+        .forEach(ebook => {
+            createContentCard({
+                container: ebookContainer,
+                item: { ...ebook, type: "ebook" },
+                thumbnail: ebook.thumbnail,
+                title: ebook.title,
+                description: ebook.description,
+                buttonText: "Detail →",
+                extraClass: "ebook-card",
+                onClick() {
+                    location.href = `ebook.html?ebook=${ebook.file}`;
+                }
+            });
+        });
+
+    // Panggil helper dengan parameter isExternal = true
+    //appendSeeAllCard(ebookContainer, "Katalog lengkap", "https://gigital.myr.id", true);
 }
 
-if (comicTab) {
-    comicTab.onclick = () => {
-        history.replaceState({}, "", "explore.html?tab=comic");
-        showComic();
-    };
-}
+/* -------------------------------------------------------------------------- */
+/* FEATURED HERO                                                              */
+/* -------------------------------------------------------------------------- */
 
-if (ttsTab) {
-    ttsTab.onclick = () => {
-        history.replaceState({}, "", "explore.html?tab=tts");
-        showTTS();
-    };
-}
+function renderFeaturedHero() {
+    if (!featuredHero) return;
 
-if (caseTab) {
-    caseTab.onclick = () => {
-        history.replaceState({}, "", "explore.html?tab=case");
-        showCase();
-    };
-}
+    const quizzesArr = typeof quizzes !== "undefined" ? quizzes : [];
+    const comicsArr = typeof comics !== "undefined" ? comics : [];
+    const ttsArr = typeof ttsList !== "undefined" ? ttsList : [];
+    const casesArr = typeof cases !== "undefined" ? cases : [];
 
-// =========================================================================
-// LOGIKA FITUR PENCARIAN
-// =========================================================================
-async function showSearchResults(searchQuery) {
-    if (pageTitle) pageTitle.textContent = `Hasil pencarian: "${searchQuery}"`;
+    const latestItems = [
+        ...quizzesArr,
+        ...comicsArr,
+        ...ttsArr,
+        ...casesArr
+    ].sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
 
-    if (exploreTabs) exploreTabs.style.display = "none";
-    if (quizSection) quizSection.style.display = "none";
-    if (comicSection) comicSection.style.display = "none";
-    if (ttsSection) ttsSection.style.display = "none";
-    if (caseSection) caseSection.style.display = "none";
+    const heroItem = latestItems[0];
+    if (!heroItem) return;
 
-    if (searchResultsSection) searchResultsSection.style.display = "block";
+//    const urlBg = "https://doktergigigaul.github.io/wonder/assets/images/premium-bg.jpeg";
+//    featuredHero.style.backgroundImage = `url(${urlBg})`;
+    
+// Menggunakan thumbnail dari konten terbaru yang ditemukan
+    const urlBg = heroItem.thumbnail || "assets/images/premium-bg.jpeg";
+    featuredHero.style.backgroundImage = `url('${urlBg}')`;
+    
+    const badge = featuredHero.querySelector(".featured-badge");
+    const title = featuredHero.querySelector(".featured-title");
+    const description = featuredHero.querySelector(".featured-description");
+    const button = featuredHero.querySelector(".featured-btn");
+    const catalogButton = featuredHero.querySelector(".featured-catalog-btn");
 
-    if (searchEmpty) {
-        searchEmpty.style.display = "none";
-        searchEmpty.innerHTML = "";
+    //if (badge) badge.remove();
+    // LOGIKA BADGE: Jika badge ada di HTML, tampilkan teks berdasarkan status premium/terbaru
+    if (badge) {
+        badge.textContent = "⭐ Terbaru";
+        badge.style.display = "inline-block";
     }
 
-    [searchQuizList, searchTtsList, searchCaseList, searchComicList].forEach(list => {
-        if (list) list.innerHTML = "";
-    });
+    if (title) title.textContent = heroItem.title;
+    if (description) description.textContent = heroItem.description;
 
-    if (typeof performSearch === "function") {
-        const results = await performSearch(searchQuery);
+    if (button) {
+        const locked = isPremiumLocked(heroItem);
+        button.textContent = locked ? "Beli" : getActionText(heroItem.type);
 
-        renderSearchGroup(searchQuizGroup, searchQuizList, results.quizzes, "quiz");
-        renderSearchGroup(searchTtsGroup, searchTtsList, results.tts, "tts");
-        renderSearchGroup(searchCaseGroup, searchCaseList, results.cases, "case");
-        renderSearchGroup(searchComicGroup, searchComicList, results.comics, "comic");
+        button.onclick = () => {
+            switch (heroItem.type) {
+                case "quiz":
+                    location.href = `quiz.html?id=${heroItem.file}`;
+                    break;
+                case "comic":
+                    location.href = `komik.html?id=${heroItem.id}`;
+                    break;
+                case "tts":
+                    location.href = `tts.html?puzzle=tts${heroItem.id}`;
+                    break;
+                case "case":
+                    location.href = `case.html?case=${heroItem.file}`;
+                    break;
+            }
+        };
+    }
 
-        const totalResults =
-            (results.quizzes ? results.quizzes.length : 0) +
-            (results.tts ? results.tts.length : 0) +
-            (results.cases ? results.cases.length : 0) +
-            (results.comics ? results.comics.length : 0);
-
-        if (totalResults === 0 && searchEmpty) {
-            searchEmpty.innerHTML =
-                `Tidak ditemukan hasil untuk "${searchQuery}".<br>` +
-                `Coba kata kunci lain, atau kembali ke <a href="index.html">Beranda</a> ` +
-                `/ <a href="explore.html?tab=quiz">Jelajah</a>.`;
-            searchEmpty.style.display = "block";
-        }
+    if (catalogButton) {
+        catalogButton.remove();
     }
 }
 
-function renderSearchGroup(groupEl, listEl, items, type) {
-    if (!groupEl || !listEl) return;
+/* -------------------------------------------------------------------------- */
+/* CATEGORY NAVIGATION                                                        */
+/* -------------------------------------------------------------------------- */
 
-    if (!items || !items.length) {
-        groupEl.style.display = "none";
-        return;
-    }
-    groupEl.style.display = "block";
-
-    items.forEach(item => {
-        if (type === "quiz") {
-            const finished = typeof Storage !== "undefined" && Storage.isFinished && Storage.isFinished(item.productId);
-            createListCard({
-                container: listEl,
-                thumbnail: item.thumbnail,
-                title: item.title,
-                description: item.description,
-                item,
-                buttonText: finished
-                    ? "Sudah Selesai"
-                    : (isPremiumLocked(item) ? "Beli" : "Mulai"),
-                disabled: finished,
-                onClick() {
-                    location.href = `quiz.html?id=${item.file}`;
-                }
-            });
-        } else if (type === "tts") {
-            createListCard({
-                container: listEl,
-                thumbnail: item.thumbnail,
-                title: item.title,
-                description: item.description,
-                item,
-                buttonText: isPremiumLocked(item) ? "Beli" : "Main",
-                onClick() {
-                    location.href = `tts.html?puzzle=tts${item.id}`;
-                }
-            });
-        } else if (type === "case") {
-            createListCard({
-                container: listEl,
-                thumbnail: item.thumbnail,
-                title: item.title,
-                description: item.description,
-                item,
-                buttonText: isPremiumLocked(item) ? "Beli" : "Lihat",
-                onClick() {
-                    location.href = `case.html?case=${item.file}`;
-                }
-            });
-        } else if (type === "comic") {
-            createListCard({
-                container: listEl,
-                thumbnail: item.thumbnail,
-                title: item.title,
-                description: item.description,
-                item,
-                buttonText: isPremiumLocked(item) ? "Beli" : "Baca",
-                onClick() {
-                    location.href = `comic.html?id=${item.id}`;
-                }
-            });
-        }
+function goToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    section.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
     });
 }
+
+document.querySelectorAll(".category-card").forEach(card => {
+    card.addEventListener("click", () => {
+        switch (card.dataset.category) {
+            case "quiz":
+                goToSection("quiz-section");
+                break;
+            case "case":
+                goToSection("case-section");
+                break;
+            case "tts":
+                goToSection("tts-section");
+                break;
+            case "comic":
+                goToSection("comic-section");
+                break;
+            case "ebook":
+                goToSection("ebook-section");
+                break;
+        }
+    });
+});
+
+/* -------------------------------------------------------------------------- */
+/* HELPER UNTUK KARTU "LIHAT SEMUA" GLOBAL                                   */
+/* -------------------------------------------------------------------------- 
+function appendSeeAllCard(container, label, url, isExternal = false) {
+    if (!container) return;
+
+    const seeAllCard = document.createElement("article");
+    seeAllCard.className = "content-card see-all-card";
+    
+    const targetAttr = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
+    
+    seeAllCard.innerHTML = `
+        <a href="${url}" class="see-all-link" ${targetAttr}>${label} →</a>
+    `;
+    
+    seeAllCard.addEventListener("click", () => {
+        if (isExternal) {
+            window.open(url, "_blank", "noopener,noreferrer");
+        } else {
+            location.href = url;
+        }
+    });
+
+    container.appendChild(seeAllCard);
+}*/
