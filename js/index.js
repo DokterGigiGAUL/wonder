@@ -215,7 +215,7 @@ function loadCases() {
     if (!caseContainer || typeof cases === "undefined") return;
     caseContainer.innerHTML = "";
 
-    cases.slice(0, 3).forEach(caseData => {
+    cases.slice(0, 6).forEach(caseData => {
         const locked = isPremiumLocked(caseData);
 
         createContentCard({
@@ -224,7 +224,7 @@ function loadCases() {
             thumbnail: caseData.thumbnail,
             title: caseData.title,
             description: caseData.description,
-            buttonText: locked ? "Beli" : getActionText("case"),
+            buttonText: getActionText("case"),
             onClick() {
                 location.href = `case.html?case=${caseData.file}`;
             }
@@ -308,7 +308,7 @@ function renderFeaturedHero() {
 
     if (button) {
         const locked = isPremiumLocked(heroItem);
-        button.textContent = locked ? "Beli" : getActionText(heroItem.type);
+        button.textContent = (locked && heroItem.type !== "case") ? "Beli" : getActionText(heroItem.type);
 
         button.onclick = () => {
             switch (heroItem.type) {
