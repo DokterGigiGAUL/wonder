@@ -44,7 +44,7 @@ const cases = [
         thumbnail: "assets/images/cases/case4.webp",
         premium: true,
         price: 5000,
-        mayarUrl: "https://gigital.myr.id/pl/GANTI-DENGAN-LINK-CASE4", // TODO: link Mayar untuk beli Kasus 4
+        mayarUrl: "https://gigital.myr.id/pl/case4", // TODO: link Mayar untuk beli Kasus 4
         releaseDate: "2026-06-20",
         type: "case"
     },
@@ -57,7 +57,7 @@ const cases = [
         thumbnail: "assets/images/cases/case5.webp",
         premium: true,
         price: 5000,
-        mayarUrl: "https://gigital.myr.id/pl/GANTI-DENGAN-LINK-CASE5", // TODO: link Mayar untuk beli Kasus 5
+        mayarUrl: "https://gigital.myr.id/pl/case5", // TODO: link Mayar untuk beli Kasus 5
         releaseDate: "2026-07-21",
         type: "case"
     },
@@ -70,7 +70,7 @@ const cases = [
         thumbnail: "assets/images/cases/case6.webp",
         premium: true,
         price: 5000,
-        mayarUrl: "https://gigital.myr.id/pl/GANTI-DENGAN-LINK-CASE6", // TODO: link Mayar untuk beli Kasus 6
+        mayarUrl: "https://gigital.myr.id/pl/case6", // TODO: link Mayar untuk beli Kasus 6
         releaseDate: "2026-07-20",
         type: "case"
     }
