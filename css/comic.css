@@ -42,7 +42,7 @@
     margin-top:24px;
 }
 .comic-nav-btn{
-    padding:15px;
+    padding:8px 12px;
     border:1px solid var(--primary);
     border-radius:8px;
     background:var(--card);
