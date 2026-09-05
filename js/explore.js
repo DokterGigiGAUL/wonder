@@ -260,7 +260,7 @@ function showCase() {
         title: caseData.title,
         description: caseData.description,
         item: caseData,
-        buttonText: isPremiumLocked(caseData) ? "Lihat",
+        buttonText: "Lihat",
         onClick() {
             location.href =
                 `case.html?case=${caseData.file}`;
@@ -386,7 +386,7 @@ function renderSearchGroup(groupEl, listEl, items, type) {
                 title: item.title,
                 description: item.description,
                 item,
-                buttonText: isPremiumLocked(item) ? "Lihat",
+                buttonText: "Lihat",
                 onClick() {
                     location.href = `case.html?case=${item.file}`;
                 }
