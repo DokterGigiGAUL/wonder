@@ -169,7 +169,7 @@ function loadComics() {
     if (!comicsContainer || typeof comics === "undefined") return;
     comicsContainer.innerHTML = "";
 
-    comics.slice(0, 3).forEach(comic => {
+    comics.slice(0, 6).forEach(comic => {
         const locked = isPremiumLocked(comic);
 
         createContentCard({
