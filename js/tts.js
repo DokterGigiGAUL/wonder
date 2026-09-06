@@ -19,6 +19,7 @@ class CrosswordEngine {
     try {
       const params = new URLSearchParams(location.search);
       const file = params.get("puzzle") || "tts1";
+      this.file = file;
 
       if (typeof ttsList === "undefined") {
         throw new Error("Data TTS tidak ditemukan");
@@ -65,6 +66,7 @@ class CrosswordEngine {
       this.resizeGrid();
       this.numberCells();
       this.renderGrid();
+      this.restoreProgress();
       this.renderClues();
       this.createHiddenInput();
       this.bindEvents();
@@ -236,6 +238,7 @@ class CrosswordEngine {
       this.grid[r][c].letter = "";
       this.cells[r][c].querySelector(".letter").textContent = "";
       this.checkAnswer();
+      this.saveProgress();
       return;
     }
     if (this.activeIndex === 0) return;
@@ -432,6 +435,7 @@ class CrosswordEngine {
     this.grid[r][c].letter = letter;
     this.cells[r][c].querySelector(".letter").textContent = letter;
     this.checkAnswer();
+    this.saveProgress();
     this.nextCell();
   }
 
@@ -444,6 +448,40 @@ class CrosswordEngine {
       this.currentRow++;
     }
     this.highlightWord();
+  }
+
+  restoreProgress() {
+    if (typeof Storage === "undefined") return;
+    const saved = Storage.getTTS(this.file);
+    if (!saved) return;
+
+    for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.cols; c++) {
+        const cell = this.grid[r][c];
+        if (!cell) continue;
+        const letter = saved[`${r},${c}`];
+        if (letter) {
+          cell.letter = letter;
+          const html = this.cells[r][c];
+          if (html) html.querySelector(".letter").textContent = letter;
+        }
+      }
+    }
+    this.checkAnswer();
+  }
+
+  saveProgress() {
+    if (typeof Storage === "undefined") return;
+    const letters = {};
+    for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.cols; c++) {
+        const cell = this.grid[r][c];
+        if (cell && cell.letter) {
+          letters[`${r},${c}`] = cell.letter;
+        }
+      }
+    }
+    Storage.saveTTS(this.file, letters);
   }
 
   checkAnswer() {
@@ -510,6 +548,7 @@ class CrosswordEngine {
     this.grid[r][c].letter = answer;
     this.cells[r][c].querySelector(".letter").textContent = answer;
     this.checkAnswer();
+    this.saveProgress();
     this.nextCell();
   }
 
@@ -523,9 +562,11 @@ class CrosswordEngine {
       this.cells[r][c].querySelector(".letter").textContent = answer;
     }
     this.checkAnswer();
+    this.saveProgress();
   }
 
   resetPuzzle() {
+    if (typeof Storage !== "undefined") Storage.clearTTS(this.file);
     const wrapper = document.querySelector(".progress-wrapper");
     if (wrapper && wrapper.innerHTML !== this.originalProgressHTML) {
       wrapper.innerHTML = this.originalProgressHTML;
