@@ -139,7 +139,7 @@ class CrosswordEngine {
     this.clearHighlight();
     this.highlightWord();
     this.updateActiveClue();
-    if (this.hiddenInput) this.hiddenInput.focus();
+    if (this.hiddenInput) this.hiddenInput.focus({ preventScroll: true });
   }
 
   buildGrid() {
@@ -370,7 +370,7 @@ class CrosswordEngine {
     this.clearHighlight();
     this.highlightWord();
     this.updateActiveClue();
-    if (this.hiddenInput) this.hiddenInput.focus();
+    if (this.hiddenInput) this.hiddenInput.focus({ preventScroll: true });
   }
 
   getCurrentWord() {
