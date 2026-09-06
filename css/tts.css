@@ -235,9 +235,9 @@ pointer-events:none;
 .next-btn{
     width: auto;
     border: 1px solid #2563eb;
-    border-radius: 12px;
-    background: transparent;
-    color: #2563eb;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #ffffff;
     padding: 12px;
     font-size: 15px;
     font-weight: 400!important;
