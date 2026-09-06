@@ -136,9 +136,10 @@ body {
 .search-input {
     flex: 1;
     min-width: 0;
-    padding: 10px 14px;
+    padding: 6px 18px;
     border: 1px solid var(--border);
-    border-radius: var(--button-radius);
+    /*border-radius: var(--button-radius);*/
+   border-radius:60px;
     font-size: 15px;
     background: var(--card);
     color: var(--text);
@@ -152,12 +153,13 @@ body {
 .search-btn {
     flex-shrink: 0;
     border: none;
-    border-radius: var(--button-radius);
-    padding: 10px 18px;
+    /*border-radius: var(--button-radius);*/
+   border-radius:60px;
+    padding: 12px 18px;
     background: var(--primary);
     color: #fff;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 400;
     cursor: pointer;
 }
 
@@ -741,8 +743,9 @@ body {
 
 .featured-btn {
     width: max-content;
-    padding: 6px 24px;
+    padding: 8px 24px;
     margin-top: auto;
+   border-radius:80px;
 }
 
 .featured-catalog-btn {
@@ -768,7 +771,7 @@ body {
 .case-btn {
     width: 100%;
    padding: 8px 12px;
-   border-radius:8px;
+   border-radius:80px;
 }
 
 .content-btn {
