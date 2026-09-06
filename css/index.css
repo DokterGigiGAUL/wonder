@@ -745,7 +745,7 @@ body {
     width: max-content;
     padding: 8px 24px;
     margin-top: auto;
-   border-radius:80px;
+   border-radius:10px;
 }
 
 .featured-catalog-btn {
