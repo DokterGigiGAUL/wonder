@@ -517,7 +517,7 @@ class CrosswordEngine {
       if (this.puzzle.next && wrapper) {
         wrapper.innerHTML = `
           <h3>🎉 Teka-teki silang selesai!</h3>
-          <button id="next-btn" class="next-btn">
+          <button id="next-btn" class="btn-primary next-btn">
           TTS Berikutnya →
           </button>
         `;
@@ -530,6 +530,7 @@ class CrosswordEngine {
       } else if (wrapper) {
         wrapper.innerHTML = `
           <h3>🎉 Semua TTS diselesaikan!</h3>
+          <p>Cek berkala untuk TTS berikutnya </p>
         `;
       }
       return;
