@@ -318,3 +318,44 @@
 .case-scroll {
   overscroll-behavior: contain;
 }
+
+/* ==========================================
+   FLIP CARD HINT
+   ========================================== */
+
+.image-face {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-face .case-image {
+    flex: 1;
+    min-height: 0;
+    border-radius: 20px 20px 0 0;
+}
+
+.flip-hint {
+    flex: 0 0 auto;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 8px 12px;
+
+    background: #f5f5f5;
+    border-radius: 0 0 20px 20px;
+
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+
+    text-align: center;
+}
+
+.flip-hint-icon {
+    font-size: 16px;
+    line-height: 1;
+    color: #777;
+}
