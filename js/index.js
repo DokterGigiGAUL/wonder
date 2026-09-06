@@ -154,7 +154,7 @@ function loadQuiz() {
             thumbnail: quiz.thumbnail,
             title: quiz.title,
             description: quiz.description,
-            buttonText: locked ? "Beli" : (finished ? "Sudah Selesai" : getActionText("quiz")),
+            buttonText: locked ? "Buka →" : (finished ? "Sudah Selesai" : getActionText("quiz")),
             disabled: finished,
             onClick() {
                 location.href = `quiz.html?id=${quiz.file}`;
@@ -178,7 +178,7 @@ function loadComics() {
             thumbnail: comic.thumbnail,
             title: comic.title,
             description: comic.description,
-            buttonText: locked ? "Beli" : getActionText("comic"),
+            buttonText: locked ? "Buka →" : getActionText("comic"),
             onClick() {
                 location.href = `comic.html?id=${comic.id}`;
             }
@@ -201,7 +201,7 @@ function loadTTS() {
             thumbnail: tts.thumbnail,
             title: tts.title,
             description: tts.description,
-            buttonText: locked ? "Beli" : getActionText("tts"),
+            buttonText: locked ? "Buka →" : getActionText("tts"),
             onClick() {
                 location.href = `tts.html?puzzle=tts${tts.id}`;
             }
@@ -308,7 +308,7 @@ function renderFeaturedHero() {
 
     if (button) {
         const locked = isPremiumLocked(heroItem);
-        button.textContent = (locked && heroItem.type !== "case") ? "Beli" : getActionText(heroItem.type);
+        button.textContent = (locked && heroItem.type !== "case") ? "Buka →" : getActionText(heroItem.type);
 
         button.onclick = () => {
             switch (heroItem.type) {
