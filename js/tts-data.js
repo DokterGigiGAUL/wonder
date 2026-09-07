@@ -7,7 +7,7 @@ const ttsList = [
         productId: "tts1",
         soal: 12,
         description: "Level: ★☆☆☆☆",
-        thumbnail: "assets/images/tts/D64390B9-FFB2-4D60-8BA0-9F714360822E.png",
+        thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: false,
         price: null, 
         hintMayarUrl: "https://gigital.myr.id/pl/tts1", // TODO: link Mayar untuk beli hint/reveal TTS #1
@@ -22,7 +22,7 @@ const ttsList = [
         productId: "tts2",
         soal: 11,
         description: "Level: ★★☆☆☆",
-        thumbnail: "assets/images/tts/D64390B9-FFB2-4D60-8BA0-9F714360822E.png",
+        thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: false,
         price: null, 
         hintMayarUrl: "https://gigital.myr.id/pl/tts2", // TODO: link Mayar untuk beli hint/reveal TTS #2
@@ -37,7 +37,7 @@ const ttsList = [
         productId: "tts3",
         soal: 12,
         description: "Level: ★★☆☆☆",
-        thumbnail: "assets/images/tts/D64390B9-FFB2-4D60-8BA0-9F714360822E.png",
+        thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: false,
         price: null, 
         hintMayarUrl: "https://gigital.myr.id/pl/tts3", // TODO: link Mayar untuk beli hint/reveal TTS #3
@@ -51,7 +51,7 @@ const ttsList = [
         productId: "tts4",
         soal: 11,
         description: "Level: ★★★☆☆",
-        thumbnail: "assets/images/tts/D64390B9-FFB2-4D60-8BA0-9F714360822E.png",
+        thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: true,
         price: 5000, 
         mayarUrl: "https://gigital.myr.id/pl/tts4", // TODO: link Mayar untuk beli puzzle TTS #4 (hint/reveal otomatis ikut)
@@ -65,7 +65,7 @@ const ttsList = [
         productId: "tts5",
         soal: 12,
         description: "Level: ★★★★☆",
-        thumbnail: "assets/images/tts/D64390B9-FFB2-4D60-8BA0-9F714360822E.png",
+        thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: true,
         price: 5000, 
         mayarUrl: "https://gigital.myr.id/pl/tts5", // TODO: link Mayar untuk beli puzzle TTS #5 (hint/reveal otomatis ikut)
