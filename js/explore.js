@@ -258,13 +258,9 @@ function showCase() {
         item: caseData,
         buttonText: "Lihat →",
         onClick() {
-            if (isPremiumLocked(caseData)) {
-                showBuyModal(caseData);
-                return;
-            }
-            location.href =
-                `case.html?case=${caseData.file}`;
-        }
+    location.href = `case.html?case=${caseData.file}`;
+}
+
     });
     });
 }
