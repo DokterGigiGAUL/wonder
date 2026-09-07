@@ -251,7 +251,7 @@ function loadCases() {
             thumbnail: caseData.thumbnail,
             title: caseData.title,
             description: caseData.description,
-            buttonText: "Lihat",
+            buttonText: "Lihat →",
             onClick() {
                 if (locked) {
                     showBuyModal(caseData);
