@@ -169,7 +169,7 @@ function loadQuiz() {
             thumbnail: quiz.thumbnail,
             title: quiz.title,
             description: quiz.description,
-            buttonText: locked ? "Beli" : (finished ? "Sudah Selesai" : getActionText("quiz")),
+            buttonText: locked ? "Beli" : (finished ? "Selesai" : getActionText("quiz")),
             disabled: finished,
             onClick() {
                 if (locked) {
