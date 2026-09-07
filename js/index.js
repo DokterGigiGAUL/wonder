@@ -17,6 +17,21 @@ const featuredHero = document.getElementById("featured-hero");
 const cardTemplate = document.getElementById("content-card-template");
 
 /* -------------------------------------------------------------------------- */
+/* PENANGANAN SEARCH FORM DI HEADER BERANDA                                   */
+/* -------------------------------------------------------------------------- */
+const searchForm = document.getElementById("siteSearchForm");
+const searchInput = document.getElementById("siteSearchInput");
+
+if (searchForm && searchInput) {
+    searchForm.onsubmit = (e) => {
+        e.preventDefault();
+        const value = searchInput.value.trim();
+        if (!value) return;
+        location.href = `explore.html?q=${encodeURIComponent(value)}`;
+    };
+}
+
+/* -------------------------------------------------------------------------- */
 /* HELPER UNTUK LABEL TOMBOL AKSI BERDASARKAN TIPE KONTEN                     */
 /* -------------------------------------------------------------------------- */
 function getActionText(type) {
