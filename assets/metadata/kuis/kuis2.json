@@ -8,12 +8,6 @@
   "thumbnail": "assets/images/kuis/thumbnail-kuis2.jpeg",
   "timeLimit": 480,
   "questions": [
-    {
-      "q": "Pasien laki-laki 32 tahun mengeluh luka nyeri berulang di mukosa mulut, muncul 3–4 kali per tahun, berukuran < 1 cm, sembuh sendiri dalam 7–14 hari tanpa jaringan parut. Diagnosis yang paling tepat adalah?",
-      "options": ["Ulkus traumatikus", "Eritema multiforme", "Herpes simpleks intraoral rekuren", "Stomatitis aftosa rekuren tipe minor"],
-      "answer": 3,
-      "explanation": "Stomatitis aftosa rekuren (SAR) tipe minor ditandai ulser bulat/oval berdiameter < 1 cm, nyeri, batas tegas dengan tepi eritematosa, terjadi berulang di mukosa non-keratin, dan sembuh spontan dalam 7–14 hari tanpa sikatrik. Herpes simpleks intraoral rekuren khas terjadi di mukosa berkeratin (gingiva attached, palatum keras)."
-},
 {
       "q": "Manifestasi oral primer pada infeksi HIV yang paling sering dan merupakan salah satu tanda awal imunosupresi adalah?",
       "options": ["Sarkoma Kaposi", "Oral hairy leukoplakia", "Kandidiasis oral", "Linear gingival erythema"],
@@ -51,17 +45,11 @@
       "explanation": "Manifestasi oral penyakit Crohn meliputi ulser aftosa rekuren (paling umum), cobblestone appearance mukosa (akibat edema submukosa dan fisura linier), mucosal tags, dan cheilitis granulomatosa. Lesi ini dapat mendahului atau menyertai gejala gastrointestinal."
 },
 {
-      "q": "Burning mouth syndrome (BMS) memiliki karakteristik klinis utama yaitu?",
-      "options": ["Rasa terbakar disertai lesi merah/putih yang jelas secara klinis", "Sensasi terbakar kronik pada mukosa mulut yang tampak normal secara klinis, terutama di ujung dan tepi lateral lidah", "Nyeri menjalar dari gigi ke mukosa bukal", "Ulserasi berulang disertai sensasi panas"],
-      "answer": 1,
-      "explanation": "BMS adalah kondisi nyeri orofasial kronik idiopatik dengan rasa terbakar/panas (terutama di lidah, bibir, palatum) namun tanpa kelainan klinis atau laboratorium yang dapat menjelaskan keluhan. Diagnosis ditegakkan setelah menyingkirkan penyebab lokal (kandida, hiposalivasi) dan sistemik (defisiensi nutrisi, diabetes, gangguan tiroid)."
-},
-{
       "q": "Pada pemeriksaan pasien dengan trismus, pemeriksaan klinis paling awal yang harus dilakukan untuk membedakan penyebab intra-artikular vs ekstra-artikular adalah?",
       "options": ["Radiografi panoramik", "Biopsi mukosa sekitar sendi", "Evaluasi pembukaan mulut maksimal dan pola deviasi mandibula", "Tes provokasi dengan kompres hangat"],
       "answer": 2,
       "explanation": "Evaluasi rentang pembukaan mulut (interinsisal distance normal ≥ 35 mm) dan pola gerakan mandibula (deviasi ipsi/kontralateral) merupakan langkah klinis pertama untuk membedakan penyebab trismus. Penyebab intra-artikular (ankilosis, kapsulitis) cenderung membatasi translasi kondilus, sedangkan ekstra-artikular (spasme otot, fibrosis, trismus pasca infeksi) menunjukkan pola berbeda."
-},
+},*/
 {
       "q": "Kandidiasis oral tipe eritematosa (atrophic candidiasis) yang sering terjadi pada pemakai gigi tiruan penuh di rahang atas dikenal sebagai?",
       "options": ["Angular cheilitis", "Oral hairy leukoplakia", "Median rhomboid glossitis", "Denture stomatitis (Chronic atrophic candidiasis)"],
