@@ -16,18 +16,6 @@ const ebookContainer = document.getElementById("ebook-container");
 const featuredHero = document.getElementById("featured-hero");
 const cardTemplate = document.getElementById("content-card-template");
 
-const searchForm = document.getElementById("siteSearchForm");
-const searchInput = document.getElementById("siteSearchInput");
-
-if (searchForm && searchInput) {
-    searchForm.onsubmit = (e) => {
-        e.preventDefault();
-        const value = searchInput.value.trim();
-        if (!value) return;
-        location.href = `explore.html?q=${encodeURIComponent(value)}`;
-    };
-}
-
 /* -------------------------------------------------------------------------- */
 /* HELPER UNTUK LABEL TOMBOL AKSI BERDASARKAN TIPE KONTEN                     */
 /* -------------------------------------------------------------------------- */
@@ -55,6 +43,33 @@ function isPremiumLocked(item) {
     if (!item || !item.premium) return false;
     const unlocked = typeof Storage !== "undefined" && typeof Storage.isUnlocked === "function" && Storage.isUnlocked(item.productId);
     return !unlocked;
+}
+
+/* -------------------------------------------------------------------------- */
+/* MODAL KONFIRMASI BELI                                                      */
+/* -------------------------------------------------------------------------- */
+function showBuyModal(item) {
+    const overlay = document.getElementById("buyModal");
+    if (!overlay || !item) return;
+
+    const priceEl = document.getElementById("buyModalPrice");
+    if (priceEl) priceEl.textContent = item.price ? `Rp ${item.price.toLocaleString("id-ID")}` : "";
+
+    const buyBtn = document.getElementById("buyModalBuy");
+    if (buyBtn) buyBtn.href = item.mayarUrl || "#";
+
+    overlay.classList.add("show");
+}
+
+const buyModalOverlay = document.getElementById("buyModal");
+const buyModalCancel = document.getElementById("buyModalCancel");
+if (buyModalCancel && buyModalOverlay) {
+    buyModalCancel.onclick = () => buyModalOverlay.classList.remove("show");
+}
+if (buyModalOverlay) {
+    buyModalOverlay.onclick = (e) => {
+        if (e.target === buyModalOverlay) buyModalOverlay.classList.remove("show");
+    };
 }
 
 /* -------------------------------------------------------------------------- */
@@ -103,7 +118,7 @@ function createContentCard({
 
     const badge = clone.querySelector(".featured-badge");
     if (badge) {
-        if (isEbook || (item && item.premium)) {
+        if (isEbook || item?.premium) {
             badge.textContent = "👑 Premium";
         } else {
             badge.remove();
@@ -144,7 +159,7 @@ function loadQuiz() {
     if (!quizList || typeof quizzes === "undefined") return;
     quizList.innerHTML = "";
 
-    quizzes.slice(0, 6).forEach(quiz => {
+    quizzes.slice(0, 3).forEach(quiz => {
         const finished = typeof Storage !== "undefined" && Storage.isFinished && Storage.isFinished(quiz.productId);
         const locked = isPremiumLocked(quiz);
 
@@ -154,9 +169,13 @@ function loadQuiz() {
             thumbnail: quiz.thumbnail,
             title: quiz.title,
             description: quiz.description,
-            buttonText: locked ? "Buka →" : (finished ? "Selesai" : getActionText("quiz")),
+            buttonText: locked ? "Beli" : (finished ? "Sudah Selesai" : getActionText("quiz")),
             disabled: finished,
             onClick() {
+                if (locked) {
+                    showBuyModal(quiz);
+                    return;
+                }
                 location.href = `quiz.html?id=${quiz.file}`;
             }
         });
@@ -169,7 +188,7 @@ function loadComics() {
     if (!comicsContainer || typeof comics === "undefined") return;
     comicsContainer.innerHTML = "";
 
-    comics.slice(0, 6).forEach(comic => {
+    comics.slice(0, 3).forEach(comic => {
         const locked = isPremiumLocked(comic);
 
         createContentCard({
@@ -178,8 +197,12 @@ function loadComics() {
             thumbnail: comic.thumbnail,
             title: comic.title,
             description: comic.description,
-            buttonText: locked ? "Buka →" : getActionText("comic"),
+            buttonText: locked ? "Beli" : getActionText("comic"),
             onClick() {
+                if (locked) {
+                    showBuyModal(comic);
+                    return;
+                }
                 location.href = `comic.html?id=${comic.id}`;
             }
         });
@@ -192,7 +215,7 @@ function loadTTS() {
     if (!ttsContainer || typeof ttsList === "undefined") return;
     ttsContainer.innerHTML = "";
 
-    ttsList.slice(0, 6).forEach(tts => {
+    ttsList.slice(0, 3).forEach(tts => {
         const locked = isPremiumLocked(tts);
 
         createContentCard({
@@ -201,8 +224,12 @@ function loadTTS() {
             thumbnail: tts.thumbnail,
             title: tts.title,
             description: tts.description,
-            buttonText: locked ? "Buka →" : getActionText("tts"),
+            buttonText: locked ? "Beli" : getActionText("tts"),
             onClick() {
+                if (locked) {
+                    showBuyModal(tts);
+                    return;
+                }
                 location.href = `tts.html?puzzle=tts${tts.id}`;
             }
         });
@@ -215,7 +242,7 @@ function loadCases() {
     if (!caseContainer || typeof cases === "undefined") return;
     caseContainer.innerHTML = "";
 
-    cases.slice(0, 6).forEach(caseData => {
+    cases.slice(0, 3).forEach(caseData => {
         const locked = isPremiumLocked(caseData);
 
         createContentCard({
@@ -224,8 +251,12 @@ function loadCases() {
             thumbnail: caseData.thumbnail,
             title: caseData.title,
             description: caseData.description,
-            buttonText: getActionText("case"),
+            buttonText: locked ? "Beli" : getActionText("case"),
             onClick() {
+                if (locked) {
+                    showBuyModal(caseData);
+                    return;
+                }
                 location.href = `case.html?case=${caseData.file}`;
             }
         });
@@ -308,9 +339,13 @@ function renderFeaturedHero() {
 
     if (button) {
         const locked = isPremiumLocked(heroItem);
-        button.textContent = (locked && heroItem.type !== "case") ? "Buka →" : getActionText(heroItem.type);
+        button.textContent = locked ? "Beli" : getActionText(heroItem.type);
 
         button.onclick = () => {
+            if (locked) {
+                showBuyModal(heroItem);
+                return;
+            }
             switch (heroItem.type) {
                 case "quiz":
                     location.href = `quiz.html?id=${heroItem.file}`;
