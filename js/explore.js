@@ -256,7 +256,7 @@ function showCase() {
         title: caseData.title,
         description: caseData.description,
         item: caseData,
-        buttonText: "Lihat",
+        buttonText: "Lihat →",
         onClick() {
             if (isPremiumLocked(caseData)) {
                 showBuyModal(caseData);
