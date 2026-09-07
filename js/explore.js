@@ -134,7 +134,7 @@ function showQuiz() {
     caseTab.classList.remove("active");
 
     quizSection.innerHTML = "";
-    quizzes.slice(0, 4).forEach(quiz => {
+    quizzes.forEach(quiz => {
     createListCard({
         container: quizSection,
         thumbnail: quiz.thumbnail,
@@ -177,7 +177,7 @@ function showComic() {
     caseTab.classList.remove("active");
 
     comicSection.innerHTML = "";
-    comics.slice(0, 4).forEach(comic => {
+    comics.forEach(comic => {
     
     createListCard({
         container: comicSection,
@@ -212,7 +212,7 @@ function showTTS() {
     caseTab.classList.remove("active");
 
     ttsSection.innerHTML = "";
-    ttsList.slice(0, 4).forEach(tts => {
+    ttsList.forEach(tts => {
     createListCard({
         container: ttsSection,
         thumbnail: tts.thumbnail,
@@ -248,7 +248,7 @@ function showCase() {
     caseTab.classList.add("active");
 
     caseSection.innerHTML = "";
-    cases.slice(0, 4).forEach(caseData => {
+    cases.forEach(caseData => {
 
     createListCard({
         container: caseSection,
