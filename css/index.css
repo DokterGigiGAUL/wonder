@@ -1127,3 +1127,51 @@ body {
         font-size: 18px;
     }
 }
+
+/* ==========================================
+   MODAL KONFIRMASI BELI
+   ========================================== */
+
+.buy-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .5);
+    z-index: 1000;
+    padding: 20px;
+}
+
+.buy-modal-overlay.show {
+    display: flex;
+}
+
+.buy-modal {
+    width: min(360px, 100%);
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+}
+
+.buy-modal h3 {
+    margin-bottom: 10px;
+}
+
+.buy-modal p {
+    color: var(--text-light);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.buy-modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.buy-modal-actions .btn {
+    flex: 1;
+    text-decoration: none;
+}
