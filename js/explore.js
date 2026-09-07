@@ -192,7 +192,7 @@ function showComic() {
                 return;
             }
             location.href =
-                `komik.html?id=${comic.id}`;
+                `comic.html?id=${comic.id}`;
         }
     });
     });
