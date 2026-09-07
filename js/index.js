@@ -253,12 +253,9 @@ function loadCases() {
             description: caseData.description,
             buttonText: "Lihat →",
             onClick() {
-                if (locked) {
-                    showBuyModal(caseData);
-                    return;
-                }
-                location.href = `case.html?case=${caseData.file}`;
-            }
+    location.href = `case.html?case=${caseData.file}`;
+}
+
         });
     });
 
@@ -342,11 +339,12 @@ function renderFeaturedHero() {
         button.textContent = locked ? "Beli" : getActionText(heroItem.type);
 
         button.onclick = () => {
-            if (locked) {
-                showBuyModal(heroItem);
-                return;
-            }
-            switch (heroItem.type) {
+    if (locked && heroItem.type !== "case") {
+        showBuyModal(heroItem);
+        return;
+    }
+    switch (heroItem.type) {
+
                 case "quiz":
                     location.href = `quiz.html?id=${heroItem.file}`;
                     break;
