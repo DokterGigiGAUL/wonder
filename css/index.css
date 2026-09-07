@@ -673,6 +673,13 @@ body {
    RESULT
 ========================= */
 
+.header-result {
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 16px;
+}
+
 .result-container{
     max-width:900px;
     margin:30px auto;
