@@ -7,6 +7,10 @@
 	<title>Wonder App Kedokteran Gigi</title> 
 	<link rel="icon" href="assets/images/favicon.ico" sizes="any">
 	<link rel="icon" type="image/png" href="assets/images/favicon-32x32.png">
+	<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#2563eb">
+	<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+	<meta name="apple-mobile-web-app-capable" content="yes">
 	<link rel="stylesheet" href="css/index.css" /> 
 </head>
 
@@ -18,13 +22,6 @@
         <span>Wonder App</span>
         </h1>
 	</header> 
-	<!-- Search Bar -->
-	<div class="search-bar-wrap">
-		<form id="siteSearchForm" class="search-bar" role="search">
-			<input type="search" id="siteSearchInput" name="q" class="search-input" placeholder="Cari kuis, TTS, kasus, komik..." aria-label="Cari konten">
-			<button type="submit" class="btn-primary search-btn">Cari</button>
-		</form>
-	</div>
 	<!-- Main Content -->
 	<main class="container"> 
 		<!-- Featured Hero Section -->
@@ -52,7 +49,7 @@
     					<img src="https://img.icons8.com/?size=24&id=3As91fPvDjeH&format=png" alt="Ikon Komik Edukasi">
     				</div>
     				<span>Komik Edukasi</span>
-    			</button> 
+    				</button> 
 				<button type="button" class="category-card" data-category="case"> 
 					<div class="category-icon">
 				        <img src="https://img.icons8.com/?size=24&id=azRXyH7B2uOy&format=png" alt="Ikon Kartu Kasus">
@@ -87,7 +84,7 @@
 		<section id="case-section" class="home-section"> 
 			<div class="section-header"> 
 				<h2>Kartu Kasus</h2>
-				<a href="explore.html?tab=case">Lihat semua →</a>
+				<a href="explore.html?tab=case">Lihat semua Kasus →</a>
 			</div> 
 			<div id="case-container" class="horizontal-scroll"></div>
 			</section> 
@@ -125,6 +122,18 @@
 			</div>
 		</article>
 	</template> 
+
+	<!-- Modal Konfirmasi Beli -->
+	<div id="buyModal" class="buy-modal-overlay">
+		<div class="buy-modal">
+			<h3>Konten Premium</h3>
+			<p id="buyModalPrice"></p>
+			<div class="buy-modal-actions">
+				<button id="buyModalCancel" class="btn btn-outline">Kembali</button>
+				<a id="buyModalBuy" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Beli Sekarang</a>
+			</div>
+		</div>
+	</div>
 	
 	<!-- Scripts -->
 	<script src="js/storage.js"></script>
@@ -134,6 +143,13 @@
 	<script src="js/case-data.js"></script>
 	<script src="js/ebook-data.js"></script>
 	<script src="js/index.js"></script>
+	<script>
+	if ("serviceWorker" in navigator) {
+	    window.addEventListener("load", () => {
+	        navigator.serviceWorker.register("sw.js").catch(() => {});
+	    });
+	}
+	</script>
 </body>
 
 </html>
