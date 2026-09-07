@@ -6,7 +6,10 @@
     <title>Katalog Konten Wonder App</title>
     <link rel="icon" href="assets/images/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="assets/images/favicon-32x32.png">
-    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/explore.css" />
 
@@ -14,21 +17,12 @@
 
   <body>
     <header class="explore-header">
-      <button class="explore-back-btn" onclick="window.location.href='index.html'">
-        <img src="https://img.icons8.com/?size=16&id=bb5otgOrCxAR&format=png&color=FFFFFF">
-      </button>
+      <button class="explore-back-btn" onclick="history.back()"><img src="https://img.icons8.com/?size=16&id=bb5otgOrCxAR&format=png&color=FFFFFF"></button>
 
       <h1 id="pageTitle">Semua Kuis</h1>
     </header>
 
     <main class="container-explore">
-      <div class="search-bar-wrap">
-        <form id="siteSearchForm" class="search-bar" role="search">
-          <input type="search" id="siteSearchInput" name="q" class="search-input" placeholder="Ketik kata kunci..." aria-label="Cari konten">
-          <button type="submit" class="search-btn">Cari konten</button>
-        </form>
-      </div>
-
       <div class="explore-tabs">
         <button id="quizTab" class="tab-btn">Kuis</button>
         <button id="ttsTab" class="tab-btn">TTS</button>
@@ -42,30 +36,6 @@
       <section id="case-container" class="card-grid"></section>
       <section id="comics-container" class="card-grid"></section>
       <!--<section id="ebook-container" class="card-grid"></section>-->
-
-      <section id="search-results" class="search-results">
-        <p id="search-empty" class="search-empty"></p>
-
-        <div id="search-quiz-group" class="search-group">
-          <h2 class="search-group-title">Kuis</h2>
-          <div id="search-quiz-list" class="card-grid"></div>
-        </div>
-
-        <div id="search-tts-group" class="search-group">
-          <h2 class="search-group-title">TTS</h2>
-          <div id="search-tts-list" class="card-grid"></div>
-        </div>
-
-        <div id="search-case-group" class="search-group">
-          <h2 class="search-group-title">Kasus</h2>
-          <div id="search-case-list" class="card-grid"></div>
-        </div>
-
-        <div id="search-comic-group" class="search-group">
-          <h2 class="search-group-title">Komik</h2>
-          <div id="search-comic-list" class="card-grid"></div>
-        </div>
-      </section>
     </main>
 
     <!-- TEMPLATE CARD -->
@@ -96,14 +66,32 @@
 
 </template>
 
+    <!-- Modal Konfirmasi Beli -->
+    <div id="buyModal" class="buy-modal-overlay">
+        <div class="buy-modal">
+            <h3>Konten Premium</h3>
+            <p id="buyModalPrice"></p>
+            <div class="buy-modal-actions">
+                <button id="buyModalCancel" class="btn btn-outline">Kembali</button>
+                <a id="buyModalBuy" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Beli Sekarang</a>
+            </div>
+        </div>
+    </div>
+
     <script src="js/storage.js"></script>
     <script src="js/quiz-data.js"></script>
     <script src="js/comic-data.js"></script>
     <script src="js/tts-data.js"></script>
     <script src="js/case-data.js"></script>
 
-    <script src="js/search.js"></script>
     <script src="js/explore.js"></script>
+    <script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("sw.js").catch(() => {});
+        });
+    }
+    </script>
     
   </body>
 </html>
