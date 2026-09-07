@@ -154,7 +154,7 @@ function loadQuiz() {
             thumbnail: quiz.thumbnail,
             title: quiz.title,
             description: quiz.description,
-            buttonText: locked ? "Buka →" : (finished ? "Sudah Selesai" : getActionText("quiz")),
+            buttonText: locked ? "Buka →" : (finished ? "Selesai" : getActionText("quiz")),
             disabled: finished,
             onClick() {
                 location.href = `quiz.html?id=${quiz.file}`;
