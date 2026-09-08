@@ -1,0 +1,10 @@
+{
+  "id": 5,
+  "productId": "comic5",
+  "episode": 5,
+  "title": "Episode #5",
+  "description": "Kelahiran Prematur Akibat Peradangan Gusi?",
+  "images": [
+    "assets/images/komik/komik5/panel.jpg"
+  ]
+}
