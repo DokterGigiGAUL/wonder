@@ -6,13 +6,8 @@
     <title>Katalog Konten Wonder App</title>
     <link rel="icon" href="assets/images/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="assets/images/favicon-32x32.png">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2563eb">
-    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/explore.css" />
-
   </head>
 
   <body>
@@ -21,12 +16,12 @@
 
       <h1 id="pageTitle">Semua Kuis</h1>
     </header>
-<div class="search-bar-wrap" style="margin-top:16px;">
+    <div class="search-bar-wrap" style="margin-top:16px;">
         <form id="siteSearchForm" class="search-bar" role="search">
           <input type="search" id="siteSearchInput" name="q" class="search-input" placeholder="Cari kuis, TTS, kasus, komik..." aria-label="Cari konten">
           <button type="submit" class="search-btn">Cari</button>
         </form>
-      </div>
+    </div>
     <main class="container-explore">
      
       <div class="explore-tabs">
@@ -34,14 +29,12 @@
         <button id="ttsTab" class="tab-btn">TTS</button>
         <button id="caseTab" class="tab-btn">Kasus</button>
         <button id="comicTab" class="tab-btn">Komik</button>
-        <!--<button id="ebookTab" class="tab-btn">Ebook</button>-->
       </div>
 
       <section id="quiz-list" class="card-grid"></section>
       <section id="tts-container" class="tts-grid"></section>
       <section id="case-container" class="card-grid"></section>
       <section id="comics-container" class="card-grid"></section>
-      <!--<section id="ebook-container" class="card-grid"></section>-->
       <section id="search-results" class="search-results">
         <p id="search-empty" class="search-empty"></p>
 
@@ -86,12 +79,6 @@
                 <button class="btn btn-outline list-btn" type="button"></button>
               </div>
         </div> 
-             <!-- <div class="list-info">
-            <h3 class="list-title"></h3>
-            <p class="list-description"></p>
-   
-            <button class="btn btn-outline list-btn" type="button"></button>
-              </div>-->
     </article>
 
 </template>
@@ -116,6 +103,7 @@
     <script src="js/case-data.js"></script>
 
     <script src="js/explore.js"></script>
+    <!--
     <script>
     if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
@@ -123,6 +111,6 @@
         });
     }
     </script>
-    
+    -->
   </body>
 </html>
