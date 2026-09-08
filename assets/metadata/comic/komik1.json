@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "productId": "comic1",
+  "episode": 1,
+  "title": "Episode #1",
+  "description": "Kenapa Gigi Hilang Perlu Diganti?",
+  "images": [
+    "assets/images/komik/komik1/Komik1panel1.webp",
+    "assets/images/komik/komik1/Komik1panel2.webp",
+    "assets/images/komik/komik1/Komik1panel3.webp"
+  ]
+}
