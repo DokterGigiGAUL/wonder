@@ -170,6 +170,7 @@ color:#666;
 .cell.correct{
     background:var(--correct);
     color:#cccccc;
+    margin:0px!important;
 }
 .cell.wrong{
     background:var(--wrong);
