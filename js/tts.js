@@ -273,6 +273,7 @@ class CrosswordEngine {
     Object.assign(this.hiddenInput.style, {
       position: "fixed",
       left: "-9999px",
+      top: "-9999px",
       opacity: 0,
     });
     document.body.appendChild(this.hiddenInput);
