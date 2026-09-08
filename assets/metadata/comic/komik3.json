@@ -1,0 +1,10 @@
+{
+  "id": 3,
+  "productId": "comic3",
+  "episode": 3,
+  "title": "Episode #3",
+  "description": "Bagaimana Alkohol Bisa Menyebabkan Kanker Mulut?",
+  "images": [
+    "assets/images/komik/komik3/panel.jpg"
+  ]
+}
