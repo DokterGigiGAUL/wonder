@@ -157,10 +157,12 @@ function showQuiz() {
     ttsSection.style.display = "none";
     caseSection.style.display = "none";
 
-    quizTab.classList.add("active");
-    comicTab.classList.remove("active");
-    ttsTab.classList.remove("active");
-    caseTab.classList.remove("active");
+// showQuiz()
+quizTab?.classList.add("active");
+comicTab?.classList.remove("active");
+ttsTab?.classList.remove("active");
+caseTab?.classList.remove("active");
+
 
     quizSection.innerHTML = "";
     quizzes.forEach(quiz => {
@@ -200,10 +202,11 @@ function showComic() {
     ttsSection.style.display = "none";
     caseSection.style.display = "none";
 
-    quizTab.classList.remove("active");
-    comicTab.classList.add("active");
-    ttsTab.classList.remove("active");
-    caseTab.classList.remove("active");
+// showComic()
+quizTab?.classList.remove("active");
+comicTab?.classList.add("active");
+ttsTab?.classList.remove("active");
+caseTab?.classList.remove("active");
 
     comicSection.innerHTML = "";
     comics.forEach(comic => {
@@ -235,10 +238,11 @@ function showTTS() {
     ttsSection.style.display = "block";
     caseSection.style.display = "none";
 
-    quizTab.classList.remove("active");
-    comicTab.classList.remove("active");
-    ttsTab.classList.add("active");
-    caseTab.classList.remove("active");
+// showTTS()
+quizTab?.classList.remove("active");
+comicTab?.classList.remove("active");
+ttsTab?.classList.add("active");
+caseTab?.classList.remove("active");
 
     ttsSection.innerHTML = "";
     ttsList.forEach(tts => {
@@ -271,10 +275,11 @@ function showCase() {
     ttsSection.style.display = "none";
     caseSection.style.display = "block";
 
-    quizTab.classList.remove("active");
-    comicTab.classList.remove("active");
-    ttsTab.classList.remove("active");
-    caseTab.classList.add("active");
+// showCase()
+quizTab?.classList.remove("active");
+comicTab?.classList.remove("active");
+ttsTab?.classList.remove("active");
+caseTab?.classList.add("active");
 
     caseSection.innerHTML = "";
     cases.forEach(caseData => {
@@ -294,41 +299,34 @@ function showCase() {
     });
 }
 
-quizTab.onclick = () => {
-    history.replaceState(
-        {},
-        "",
-        "explore.html?tab=quiz"
-    );
-    showQuiz();
-};
+if (quizTab) {
+    quizTab.onclick = () => {
+        history.replaceState({}, "", "explore.html?tab=quiz");
+        showQuiz();
+    };
+}
 
-comicTab.onclick = () => {
-    history.replaceState(
-        {},
-        "",
-        "explore.html?tab=comic"
-    );
-    showComic();
-};
+if (comicTab) {
+    comicTab.onclick = () => {
+        history.replaceState({}, "", "explore.html?tab=comic");
+        showComic();
+    };
+}
 
-ttsTab.onclick = () => {
-    history.replaceState(
-        {},
-        "",
-        "explore.html?tab=tts"
-    );
-    showTTS();
-};
+if (ttsTab) {
+    ttsTab.onclick = () => {
+        history.replaceState({}, "", "explore.html?tab=tts");
+        showTTS();
+    };
+}
 
-caseTab.onclick = () => {
-    history.replaceState(
-        {},
-        "",
-        "explore.html?tab=case"
-    );
-    showCase();
-};
+if (caseTab) {
+    caseTab.onclick = () => {
+        history.replaceState({}, "", "explore.html?tab=case");
+        showCase();
+    };
+}
+
 
 async function showSearchResults(searchQuery) {
     pageTitle.textContent = `Hasil pencarian: "${searchQuery}"`;
