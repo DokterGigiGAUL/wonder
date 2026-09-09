@@ -96,6 +96,13 @@ class CrosswordEngine {
     }
   }
 
+  const backBtn = document.getElementById("backBtn");
+    if (backBtn) {
+      backBtn.onclick = () => {
+        window.location.href = "index.html";
+      };
+    }
+
   showPuzzleLock(metadata, loader) {
     if (loader) loader.style.display = "none";
 
