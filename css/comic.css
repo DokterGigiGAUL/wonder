@@ -89,7 +89,7 @@
 }
 .komik-header{
     position:sticky;
-    height:60px
+    height:60px;
     top:0;
     z-index:100;
     background:var(--primary);
