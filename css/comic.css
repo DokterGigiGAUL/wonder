@@ -87,7 +87,7 @@
 #comic-list a{
     text-decoration:none;
 }
-.komik-header{
+.comic-header{
     position:sticky;
     height:60px;
     top:0;
@@ -99,7 +99,7 @@
     align-items:center;
     justify-content:space-between;
 }
-.komik-back-btn{
+.comic-back-btn{
     border:none;
     background:transparent;
     color:#fff;
@@ -108,11 +108,11 @@
     font-size:22px;
     cursor:pointer;
 }
-.komik-title-box{
+.comic-title-box{
     flex:1;
     text-align:center;
 }
-.komik-title-box h2{
+.comic-title-box h2{
     margin:0;
     padding:16px 0;
     font-size:20px;
