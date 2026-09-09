@@ -106,6 +106,10 @@ color:#666;
 .progress-wrapper{
     margin-bottom:30px;
 }
+
+progress-wrapper h3{
+    padding: 6px 0 12px;
+}
 .progress-bar{
     height:12px;
     background:#ddd;
