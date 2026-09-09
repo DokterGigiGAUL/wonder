@@ -1,32 +1,4 @@
 /* ==========================================
-   SEE ALL CARD (GLOBAL)
-   ========================================== */
-.see-all-card {
-    min-width: 160px;
-    align-items: center;
-    justify-content: center;
-    background: none !important;
-    box-shadow: none !important;
-    cursor: pointer;
-}
-
-.see-all-card:hover {
-    background: #e0ecff;
-    transform: translateY(-2px);
-}
-
-.see-all-link {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 400;
-    font-size: 15px;
-    padding: 16px;
-    text-align: center;
-    width: 100%;
-    display: block;
-}
-
-/* ==========================================
    1. RESET & CSS VARIABLES
    ========================================== */
 * {
@@ -85,13 +57,14 @@ body {
    2. HEADER & NAVIGATION
    ========================================== */
 .header {
-    background: var(--bg); 
-    color: var(--hitam);
+    background: var(--primary); 
+    color: var(--card);
     padding: 16px 24px;
     gap: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+   margin-bottom: 16px;
 }
 
 .header h1 {
@@ -125,7 +98,7 @@ body {
    2b. SEARCH BAR (GLOBAL — index & explore)
    ========================================== */
 .search-bar-wrap {
-    padding: 0 16px 16px;
+    padding: 0 16px;
 }
 
 .search-bar {
@@ -235,7 +208,7 @@ body {
     flex-direction: column;
     scroll-snap-align: start;
     background: var(--card);
-    border-radius: 12px;
+    border-radius: var(--border-radius);
     overflow: hidden;
     text-decoration: none;
     color: inherit;
@@ -351,7 +324,7 @@ body {
     position: relative;
     width: auto;
     aspect-ratio: 9 / 5;
-    margin: 8px 16px 24px 16px;
+    margin: 0px 16px;
     border-radius: 16px;
     display: block;
     background-color: #d1d5db;
@@ -602,6 +575,7 @@ body {
     gap: 16px; /* Jarak disesuaikan agar muat di layar HP */
 }
 
+
 .category-card {
       display: flex;
       flex-direction: row;
@@ -609,29 +583,14 @@ body {
       justify-content: flex-start;
       text-align: center;
       gap: 8px;
-      padding: 6px 18px;
+      padding: 0px 12px;
       background: var(--card);
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
       cursor: pointer;
       transition: .2s;
       min-height: 48px;
-    /*display: flex;
-     Susun elemen secara vertikal (Teks di atas, Ikon di bawah) 
-    flex-direction: column; 
-    align-items: center;
-    justify-content: space-between;
-    text-align: center;
-    gap: 0px;
-    padding: 3px 12px 9px;
-    background: var(--card);
-    border: none;
-    border-radius: 16px; /* Sudut lebih melengkung seperti contoh 
-    box-shadow: 0 4px 14px rgba(0,0,0,.08);
-    cursor: pointer;
-    transition: .2s;
-    min-height: 60px; /* Menjaga tinggi kartu tetap konsisten*/
 }
 
 .category-card:hover {
@@ -1175,3 +1134,33 @@ body {
     flex: 1;
     text-decoration: none;
 }
+
+
+/* ==========================================
+   SEE ALL CARD (GLOBAL)
+   ========================================== 
+.see-all-card {
+    min-width: 160px;
+    align-items: center;
+    justify-content: center;
+    background: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+
+.see-all-card:hover {
+    background: #e0ecff;
+    transform: translateY(-2px);
+}
+
+.see-all-link {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 400;
+    font-size: 15px;
+    padding: 16px;
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+*/
