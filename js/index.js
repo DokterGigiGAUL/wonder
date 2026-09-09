@@ -7,7 +7,7 @@
 // =========================================================================
 // ELEMEN & VARIABEL UTAMA
 // =========================================================================
-const quizList = document.getElementById("quiz-list");
+const quizList = document.getElementById("quiz-container");
 const comicsContainer = document.getElementById("comics-container");
 const ttsContainer = document.getElementById("tts-container");
 const caseContainer = document.getElementById("case-container");
