@@ -120,7 +120,7 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  padding: 24px;
+  padding: 8px 24px 24px;
 }
 
 .case-content h3,
@@ -151,17 +151,6 @@
 
 .patient {
   font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.tap-hint {
-  flex-shrink: 0;
-  margin: 24px 24px 12px;
-  padding: 12px;
-  text-align: center;
-  color: #f0f0f0;
-  background: var(--primary);
-  border-radius: 12px;
 }
 
 .diagnosis-hero {
@@ -338,7 +327,6 @@
 
 .flip-hint {
     flex: 0 0 auto;
-    min-height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
