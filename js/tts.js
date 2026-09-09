@@ -96,13 +96,6 @@ class CrosswordEngine {
     }
   }
 
-  const backBtn = document.getElementById("backBtn");
-    if (backBtn) {
-      backBtn.onclick = () => {
-        window.location.href = "index.html";
-      };
-    }
-
   showPuzzleLock(metadata, loader) {
     if (loader) loader.style.display = "none";
 
@@ -341,6 +334,13 @@ class CrosswordEngine {
       };
     }
 
+    const backBtn = document.getElementById("backBtn");
+    if (backBtn) {
+      backBtn.onclick = () => {
+        window.location.href = "index.html";
+      };
+    }
+    
     const hintLockOverlay = document.getElementById("hintLockModal");
     const hintLockCancel = document.getElementById("hintLockCancel");
     if (hintLockCancel && hintLockOverlay) {
