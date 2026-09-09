@@ -323,7 +323,7 @@ body {
 .featured-hero {
     position: relative;
     width: auto;
-    aspect-ratio: 4/ 3;
+    aspect-ratio:3 / 2;
     margin: 16px;
     border-radius: var(--border-radius);
     display: block;
