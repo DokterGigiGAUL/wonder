@@ -537,7 +537,7 @@ class CrosswordEngine {
         wrapper.innerHTML = `
           <h3>🎉 Semua TTS diselesaikan!</h3>
           <p>Cek berkala untuk TTS berikutnya </p>
-          <a href="index.html" class="tts-btn" style="display:block;text-decoration:none;box-sizing:border-box;text-align:center;">
+          <a href="index.html" class="btn-outline tts-btn" style="display:block;text-decoration:none;box-sizing:border-box;text-align:center;">
             Kembali ke Beranda
           </a>
         `;
