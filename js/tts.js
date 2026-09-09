@@ -519,7 +519,7 @@ class CrosswordEngine {
         wrapper.innerHTML = `
           <h3>🎉 Teka-teki silang selesai!</h3>
           <div class="premium-lock-actions">
-            <a href="index.html" class="tts-btn" style="text-decoration:none;box-sizing:border-box;text-align:center;">
+            <a href="index.html" class="btn-outline tts-btn" style="text-decoration:none;box-sizing:border-box;text-align:center;">
               Kembali ke Beranda
             </a>
             <button id="next-btn" class="btn-primary next-btn">
