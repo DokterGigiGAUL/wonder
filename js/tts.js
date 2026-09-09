@@ -512,15 +512,20 @@ class CrosswordEngine {
       }
     });
 
-    const persen = Math.round((benar / total) * 100);
+        const persen = Math.round((benar / total) * 100);
     const wrapper = document.querySelector(".progress-wrapper");
     if (persen === 100) {
       if (this.puzzle.next && wrapper) {
         wrapper.innerHTML = `
           <h3>🎉 Teka-teki silang selesai!</h3>
-          <button id="next-btn" class="btn-primary next-btn">
-          TTS Berikutnya →
-          </button>
+          <div class="premium-lock-actions">
+            <a href="index.html" class="tts-btn" style="text-decoration:none;box-sizing:border-box;text-align:center;">
+              Kembali ke Beranda
+            </a>
+            <button id="next-btn" class="btn-primary next-btn">
+              TTS Berikutnya →
+            </button>
+          </div>
         `;
         const nextBtn = document.getElementById("next-btn");
         if (nextBtn) {
@@ -532,10 +537,14 @@ class CrosswordEngine {
         wrapper.innerHTML = `
           <h3>🎉 Semua TTS diselesaikan!</h3>
           <p>Cek berkala untuk TTS berikutnya </p>
+          <a href="index.html" class="tts-btn" style="display:block;text-decoration:none;box-sizing:border-box;text-align:center;">
+            Kembali ke Beranda
+          </a>
         `;
       }
       return;
     }
+    
     const fill = document.getElementById("progress-fill");
     const text = document.getElementById("progress-text");
     if (fill) fill.style.width = persen + "%";
