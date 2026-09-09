@@ -333,13 +333,6 @@ class CrosswordEngine {
         }
       };
     }
-
-    const backBtn = document.getElementById("backBtn");
-    if (backBtn) {
-      backBtn.onclick = () => {
-        window.location.href = "index.html";
-      };
-    }
     
     const hintLockOverlay = document.getElementById("hintLockModal");
     const hintLockCancel = document.getElementById("hintLockCancel");
