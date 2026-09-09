@@ -17,7 +17,7 @@ const searchTtsList = document.getElementById("search-tts-list");
 const searchCaseList = document.getElementById("search-case-list");
 const searchComicList = document.getElementById("search-comic-list");
 const quizSection =
-    document.getElementById("quiz-list");
+    document.getElementById("quiz-container");
 const comicSection =
     document.getElementById("comics-container");
 const ttsSection =
