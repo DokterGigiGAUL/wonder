@@ -637,12 +637,17 @@ body {
     color: white;
     text-align: center;
     padding: 16px;
+   height:60px;
+}
+
+.header-result h1 {
+    font-size:24px;
 }
 
 .result-container{
     max-width:900px;
-    margin:30px auto;
-    padding:20px;
+    margin: 0px auto;
+    padding: 24px;
 }
 
 .score-card{
@@ -654,6 +659,9 @@ body {
     margin-bottom:20px;
 }
 
+.score-card h2{
+   font-size:21px;
+}
 .score-value{
     font-size:48px;
     font-weight:bold;
