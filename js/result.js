@@ -9,6 +9,26 @@ const data = JSON.parse(raw);
 const quiz = data.quiz;
 const session = data.session;
 
+const nextQuizBtn = document.getElementById("nextQuizBtn");
+if (nextQuizBtn) {
+  const idx =
+    typeof quizzes !== "undefined" && data.file
+      ? quizzes.findIndex((q) => q.file === data.file)
+      : -1;
+  const next = idx !== -1 ? quizzes[idx + 1] : null;
+
+  if (next) {
+    nextQuizBtn.disabled = false;
+    nextQuizBtn.onclick = () => {
+      window.location.href = `quiz.html?id=${next.file}`;
+    };
+  } else {
+    nextQuizBtn.disabled = true;
+    nextQuizBtn.textContent = "Kuis Berikutnya Segera Hadir";
+    nextQuizBtn.title = "Cek secara berkala untuk kuis berikutnya";
+  }
+}
+
 const scoreElement = document.getElementById("score");
 const summaryElement = document.getElementById("summary");
 const reviewList = document.getElementById("reviewList");
