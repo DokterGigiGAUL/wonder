@@ -682,7 +682,7 @@ body {
    ========================================== */
 
 /* Tablet Breakpoint (min-width: 480px) */
-@media (min-width: 481px) {
+@media (min-width: 480px) {
     .header h1 {
         font-size: 28px;
     }
@@ -729,14 +729,6 @@ body {
         min-height: calc(1.25em * 2);
         -webkit-line-clamp: 2;
     }
-
-   .category-card {
-    padding: 18px;
-}
-
-   .category-card span {
-    font-size: 18px;
-}
 
       .category-section {
     margin: 0px 16px 16px;
@@ -793,7 +785,7 @@ body {
 .category-card:nth-child(4) svg { fill: #ff8b2b; }
 
 .category-card span {
-    font-size: 15px; /* Ukuran teks diperkecil agar pas 4 kolom */
+    font-size: 18px; /* Ukuran teks diperkecil agar pas 4 kolom */
     font-weight: 400;
     color: #222;
     text-align: center;
