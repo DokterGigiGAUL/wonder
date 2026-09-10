@@ -9,7 +9,7 @@ const ttsList = [
         description: "Level: ★☆☆☆☆",
         thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: false,
-        price: null, 
+        price: 0, 
         hintMayarUrl: "https://gigital.myr.id/pl/tts1", 
         releaseDate: "2026-06-20",
         type: "tts"
@@ -24,7 +24,7 @@ const ttsList = [
         description: "Level: ★★☆☆☆",
         thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: false,
-        price: null, 
+        price: 0, 
         hintMayarUrl: "https://gigital.myr.id/pl/tts2", 
         releaseDate: "2026-06-20",
         type: "tts"
@@ -39,7 +39,7 @@ const ttsList = [
         description: "Level: ★★☆☆☆",
         thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: false,
-        price: null, 
+        price: 0, 
         hintMayarUrl: "https://gigital.myr.id/pl/tts3", 
         releaseDate: "2026-06-20",
         type: "tts"
