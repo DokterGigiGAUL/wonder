@@ -113,8 +113,7 @@ body {
     min-width: 0;
     padding: 6px 18px;
     border: 1px solid var(--border);
-    /*border-radius: var(--button-radius);*/
-   border-radius:60px;
+    border-radius: var(--border-radius);
     font-size: 15px;
     background: var(--card);
     color: var(--text);
@@ -128,8 +127,7 @@ body {
 .search-btn {
     flex-shrink: 0;
     border: none;
-    /*border-radius: var(--button-radius);*/
-   border-radius:60px;
+    border-radius: var(--button-radius);
     padding: 12px 18px;
     background: var(--primary);
     color: #fff;
