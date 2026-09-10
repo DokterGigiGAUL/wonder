@@ -144,7 +144,7 @@ function createContentCard({
     if (thumbEl) {
         thumbEl.src = thumbnail || "";
         thumbEl.alt = title || "";
-        thumbEl.loading = "lazy";
+        thumbEl.loading = "eager";
     }
 
     const titleEl = clone.querySelector(".content-title");
