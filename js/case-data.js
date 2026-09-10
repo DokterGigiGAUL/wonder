@@ -7,7 +7,7 @@ const cases = [
         description: "Level: ★☆☆☆☆",
         thumbnail: "assets/images/cases/case1.webp",
         premium: false,
-        price: null,
+        price: 0,
         releaseDate: "2026-06-20",
         type: "case"
     },
@@ -19,7 +19,7 @@ const cases = [
         description: "Level: ★☆☆☆☆",
         thumbnail: "assets/images/cases/case2.webp",
         premium: false,
-        price: null,
+        price: 0,
         releaseDate: "2026-06-20",
         type: "case"
     },
@@ -31,7 +31,7 @@ const cases = [
         description: "Level: ★★☆☆☆",
         thumbnail: "assets/images/cases/case3.webp",
         premium: false,
-        price: null,
+        price: 0,
         releaseDate: "2026-06-20",
         type: "case"
     },
