@@ -7,7 +7,7 @@ const quizzes = [
         description: "Level: ★★☆☆☆",
         thumbnail: "assets/images/kuis/thumbnail-kuis1.webp",
         premium: false,
-        price: null,
+        price: 0,
         releaseDate: "2026-06-20",
         type: "quiz"
     },
@@ -19,7 +19,7 @@ const quizzes = [
         description: "Level: ★★★☆☆",
         thumbnail: "assets/images/kuis/thumbnail-kuis2.webp",
         premium: false,
-        price: null,
+        price: 0,
         releaseDate: "2026-06-20",
         type: "quiz"
     },
@@ -31,7 +31,7 @@ const quizzes = [
         description: "Level: ★★☆☆☆",
         thumbnail: "assets/images/kuis/thumbnail-kuis3.webp",
         premium: false,
-        price: null,
+        price: 0,
         releaseDate: "2026-06-20",
         type: "quiz"
     },
