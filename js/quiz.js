@@ -202,6 +202,7 @@ function submitQuiz() {
     JSON.stringify({
       quiz: quiz,
       session: session,
+      file: quizId,
     })
   );
   window.location.href = "result.html";
