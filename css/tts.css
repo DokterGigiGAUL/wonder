@@ -8,7 +8,7 @@
     --white:#ffffff;
     --active:#4da3ff;
     --word:#ddeeff;
-    --correct:#ffffff;
+    --correct:#008000;
     --number:#999;
     --radius:10px;
     --bg: #f4f7fb;
@@ -318,7 +318,7 @@ pointer-events:none;
 }
 
 .premium-lock p{
-    color:var(--success);
+    color:var(--correct);
     font-size:20px;
     font-weight:700;
     margin-bottom:20px;
