@@ -1,0 +1,108 @@
+{
+  "id": "tts6",
+  "productId": "tts6",
+  "title": "TTS #6",
+  "premium": true,
+  "price": 5000,
+  "next": "tts7",
+  "words": [
+    {
+      "answer": "EPULIS",
+      "clue": "Istilah klinis umum untuk massa atau tumor hiperplastik jinak yang tumbuh pada gusi.",
+      "row": 0,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "CUSP",
+      "clue": "Tonjolan piramidal pada permukaan oklusal gigi posterior atau kaninus",
+      "row": 0,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "GNATHOLOGY",
+      "clue": "Cabang ilmu akademis yang mempelajari biomekanika sistem stomatognati dan hubungan oklusal",
+      "row": 2,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "PERIMYLOLYSIS",
+      "clue": "Erosi kimiawi pada jaringan keras gigi akibat erosi asam lambung kronis.",
+      "row": 5,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "MUCIN",
+      "clue": " Glikoprotein glikosilasi tinggi dalam saliva yang bertanggung jawab atas sifat viskositas dan lubrikasi mukosa.",
+      "row": 7,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "ODONTOKLAS",
+      "clue": " Sel multinukleat yang berfungsi menyerap atau meresorpsi jaringan keras gigi.",
+      "row": 9,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "ABFRAKSI",
+      "clue": " Kerusakan servikal gigi akibat tekanan oklusal berlebih yang menyebabkan lenturan mikroskopis.",
+      "row": 11,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "PELIKEL",
+      "clue": "Lapisan tipis aseluler dari protein saliva yang mengendap pada permukaan email.",
+      "row": 0,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "SULKUS",
+      "clue": "Celah dangkal berbentuk 'V' antara mukosa bebas gusi dan permukaan gigi.",
+      "row": 0,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "AMELOGENESIS",
+      "clue": "Pembentukan jaringan email gigi oleh sel ameloblas selama tahap perkembangan.",
+      "row": 2,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "SINISTRA",
+      "clue": "Sisi kiri; penandaan posisi anatomis yang berlawanan dengan dextra.",
+      "row": 5,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "MEDIAN",
+      "clue": "Bidang khayal anatomis yang membagi tubuh atau lengkung gigi menjadi dua bagian simetris (kiri dan kanan).",
+      "row": 7,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "RUGAE",
+      "clue": "Lipatan atau pematang mukosa transversal pada bagian anterior palatum durum.",
+      "row": 8,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "KISTA",
+      "clue": "Rongga patologis tertutup yang dilapisi oleh epitel dan berisi cairan atau semi-cairan.",
+      "row": 9,
+      "col": 9,
+      "direction": "down"
+    }
+  ]
+}
