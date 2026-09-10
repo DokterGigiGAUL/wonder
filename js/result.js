@@ -29,6 +29,14 @@ if (nextQuizBtn) {
   }
 }
 
+const backBtn = document.getElementById("backBtn");
+
+  if (backBtn) {
+    backBtn.onclick = () => {
+      window.location.href = "index.html";
+    };
+  }
+
 const scoreElement = document.getElementById("score");
 const summaryElement = document.getElementById("summary");
 const reviewList = document.getElementById("reviewList");
