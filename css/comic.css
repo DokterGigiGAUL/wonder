@@ -139,7 +139,7 @@
 }
 
 .premium-lock p{
-    color:var(--text-light);
+    color:#008000;
     font-size:20px;
     font-weight:700;
     margin-bottom:20px;
