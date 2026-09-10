@@ -10,7 +10,7 @@ const ttsList = [
         thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: false,
         price: null, 
-        hintMayarUrl: "https://gigital.myr.id/pl/tts1", // TODO: link Mayar untuk beli hint/reveal TTS #1
+        hintMayarUrl: "https://gigital.myr.id/pl/tts1", 
         releaseDate: "2026-06-20",
         type: "tts"
     },
@@ -25,7 +25,7 @@ const ttsList = [
         thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: false,
         price: null, 
-        hintMayarUrl: "https://gigital.myr.id/pl/tts2", // TODO: link Mayar untuk beli hint/reveal TTS #2
+        hintMayarUrl: "https://gigital.myr.id/pl/tts2", 
         releaseDate: "2026-06-20",
         type: "tts"
     },
@@ -40,7 +40,7 @@ const ttsList = [
         thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: false,
         price: null, 
-        hintMayarUrl: "https://gigital.myr.id/pl/tts3", // TODO: link Mayar untuk beli hint/reveal TTS #3
+        hintMayarUrl: "https://gigital.myr.id/pl/tts3", 
         releaseDate: "2026-06-20",
         type: "tts"
     },
@@ -54,7 +54,7 @@ const ttsList = [
         thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: true,
         price: 5000, 
-        mayarUrl: "https://gigital.myr.id/pl/tts4", // TODO: link Mayar untuk beli puzzle TTS #4 (hint/reveal otomatis ikut)
+        mayarUrl: "https://gigital.myr.id/pl/tts4", 
         releaseDate: "2026-07-21",
         type: "tts"
     },
@@ -68,9 +68,22 @@ const ttsList = [
         thumbnail: "assets/images/tts/thumbnail-tts.webp",
         premium: true,
         price: 5000, 
-        mayarUrl: "https://gigital.myr.id/pl/tts5", // TODO: link Mayar untuk beli puzzle TTS #5 (hint/reveal otomatis ikut)
+        mayarUrl: "https://gigital.myr.id/pl/tts5", 
+        releaseDate: "2026-08-22",
+        type: "tts"
+    },
+    {
+        id: 6,
+        title: "TTS 6",
+        file: "tts6",
+        productId: "tts6",
+        soal: 14,
+        description: "Level: ★★★★☆",
+        thumbnail: "assets/images/tts/thumbnail-tts.webp",
+        premium: true,
+        price: 5000, 
+        mayarUrl: "https://gigital.myr.id/pl/tts6", 
         releaseDate: "2026-08-22",
         type: "tts"
     }
-
 ];
