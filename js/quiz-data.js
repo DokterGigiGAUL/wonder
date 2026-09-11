@@ -42,8 +42,8 @@ const quizzes = [
         title: "Kuis 4",
         description: "Level: ★★★★☆",
         thumbnail: "assets/images/kuis/thumbnail-kuis4.webp",
-        premium: true,
-        price: 5000,
+        premium: false,
+        price: 0,
         mayarUrl: "https://gigital.myr.id/pl/kuis4", // TODO: ganti dengan payment link Mayar untuk Kuis #4
         releaseDate: "2026-06-20",
         type: "quiz"
