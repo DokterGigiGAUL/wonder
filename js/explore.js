@@ -52,6 +52,20 @@ function isPremiumLocked(item) {
     return !unlocked;
 }
 
+function withHouseAds(items) {
+    if (typeof houseAds === "undefined" || !houseAds.length) return items;
+    const result = [];
+    let adIndex = 0;
+    items.forEach((item, i) => {
+        result.push(item);
+        if ((i + 1) % 5 === 0) {
+            result.push({ ...houseAds[adIndex % houseAds.length], isAd: true });
+            adIndex++;
+        }
+    });
+    return result;
+}
+
 /* -------------------------------------------------------------------------- */
 /* MODAL KONFIRMASI BELI                                                      */
 /* -------------------------------------------------------------------------- */
@@ -124,7 +138,10 @@ function createListCard({
 
     const badge = clone.querySelector(".featured-badge");
     if (badge) {
-        if (item && item.premium) {
+        if (item && item.isAd) {
+            badge.textContent = "📢 Iklan";
+            badge.classList.add("ad-badge");
+        } else if (item && item.premium) {
             badge.textContent = "👑 Premium";
         } else {
             badge.remove();
@@ -165,7 +182,22 @@ caseTab?.classList.remove("active");
 
 
     quizSection.innerHTML = "";
-    quizzes.forEach(quiz => {
+    withHouseAds(quizzes).forEach(quiz => {
+    if (quiz.isAd) {
+        createListCard({
+            container: quizSection,
+            thumbnail: quiz.thumbnail,
+            title: quiz.title,
+            description: quiz.description,
+            item: quiz,
+            buttonText: "Lihat",
+            extraClass: "ad-card",
+            onClick() {
+                window.open(quiz.url, "_blank", "noopener");
+            }
+        });
+        return;
+    }
     createListCard({
         container: quizSection,
         thumbnail: quiz.thumbnail,
@@ -208,8 +240,23 @@ comicTab?.classList.add("active");
 ttsTab?.classList.remove("active");
 caseTab?.classList.remove("active");
 
-    comicSection.innerHTML = "";
-    comics.forEach(comic => {
+   comicSection.innerHTML = "";
+    withHouseAds(comics).forEach(comic => {
+    if (comic.isAd) {
+        createListCard({
+            container: comicSection,
+            thumbnail: comic.thumbnail,
+            title: comic.title,
+            description: comic.description,
+            item: comic,
+            buttonText: "Lihat",
+            extraClass: "ad-card",
+            onClick() {
+                window.open(comic.url, "_blank", "noopener");
+            }
+        });
+        return;
+    }
     
     createListCard({
         container: comicSection,
@@ -245,7 +292,23 @@ ttsTab?.classList.add("active");
 caseTab?.classList.remove("active");
 
     ttsSection.innerHTML = "";
-    ttsList.forEach(tts => {
+    withHouseAds(ttsList).forEach(tts => {
+    if (tts.isAd) {
+        createListCard({
+            container: ttsSection,
+            thumbnail: tts.thumbnail,
+            title: tts.title,
+            description: tts.description,
+            item: tts,
+            buttonText: "Lihat",
+            extraClass: "ad-card",
+            onClick() {
+                window.open(tts.url, "_blank", "noopener");
+            }
+        });
+        return;
+    }
+        
     createListCard({
         container: ttsSection,
         thumbnail: tts.thumbnail,
@@ -282,8 +345,24 @@ ttsTab?.classList.remove("active");
 caseTab?.classList.add("active");
 
     caseSection.innerHTML = "";
-    cases.forEach(caseData => {
-
+    withHouseAds(cases).forEach(caseData => {
+ 
+    if (caseData.isAd) {
+        createListCard({
+            container: caseSection,
+            thumbnail: caseData.thumbnail,
+            title: caseData.title,
+            description: caseData.description,
+            item: caseData,
+            buttonText: "Lihat",
+            extraClass: "ad-card",
+            onClick() {
+                window.open(caseData.url, "_blank", "noopener");
+            }
+        });
+        return;
+    }
+        
     createListCard({
         container: caseSection,
         thumbnail: caseData.thumbnail,
