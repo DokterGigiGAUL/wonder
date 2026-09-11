@@ -18,22 +18,36 @@ const houseAds = [
   },
   {
     label: "Iklan",
-    title: "Poster Edukasi Gigital",
-    description: "Poster premium Kedokteran Gigi. Ukuran A3.",
+    title: "Poster Kedokteran Gigi",
+    description: "Line Art Dokter Gigi Hijab.",
     thumbnail: "https://static.desty.app/desty-omni/20230630/1c4fb8d720c94cdaafe36e3052c78b31.jpg", 
     url: "#" // TODO: isi link pembelian Poster
   },
   {
     label: "Ads",
-    title: "Dentabook - Ebook Kedokteran Gigi Gigital",
+    title: "Ebook Kedokteran Gigi Gigital",
     description: "Panduan Peresepan Obat untuk Dokter Gigi",
     thumbnail: "https://media-myr.b-cdn.net/images/resized/600/6a709c40-0029-4cdc-b274-fe862da5f260.jpeg",
     url: "https://gigital.myr.id/ebook/ebook-gigital-panduan-peresepan-dokter-gigi"
   },
   {
     label: "Ads",
-    title: "Dentabook - Ebook Kedokteran Gigi Gigital",
-    description: "Panduan Peresepan Obat untuk Dokter Gigi",
+    title: "Poster Kedokteran Gigi",
+    description: "Line Art Dokter Gigi.",
+    thumbnail: "https://static.desty.app/desty-omni/20230630/94ef5667095d4095af7029ace2d7b807.jpg", 
+    url: "#" // TODO: isi link pembelian Poster
+  },
+  {
+    label: "Ads",
+    title: "Ebook Kedokteran Gigi Gigital",
+    description: " Panduan Prinsip Tatalaksana Lesi Oral",
+    thumbnail: "https://media-myr.b-cdn.net/images/resized/600/98236151-2996-436d-91be-5bf8e506b999.jpeg",
+    url: "https://gigital.myr.id/ebook/ebook-gigital-tatalaksana-lesi-oral"
+  },
+  {
+    label: "Iklan",
+    title: "Ebook Kedokteran Gigi Gigital",
+    description: "Manajemen Dental pada Kehamilan",
     thumbnail: "https://media-myr.b-cdn.net/images/resized/600/3a6baa2d-38c9-43a0-90c3-167cad21b2b1.jpeg",
     url: "https://gigital.myr.id/ebook/ebook-gigital-panduan-manajemen-dental-kehamilan"
   }
