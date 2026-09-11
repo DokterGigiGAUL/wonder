@@ -566,7 +566,7 @@ class CrosswordEngine {
     const ad = houseAds[Math.floor(Math.random() * houseAds.length)];
 
     slot.innerHTML = `
-      <span class="tts-ad-label">📢 Iklan</span>
+      <span class="tts-ad-label">Iklan</span>
       <img class="tts-ad-image" src="${ad.thumbnail}" alt="${ad.title}">
       <div class="tts-ad-text">
         <h4 class="tts-ad-title">${ad.title}</h4>
