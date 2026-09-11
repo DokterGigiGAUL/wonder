@@ -58,7 +58,7 @@ function withHouseAds(items) {
     let adIndex = 0;
     items.forEach((item, i) => {
         result.push(item);
-        if ((i + 1) % 5 === 0) {
+        if ((i + 1) % 4 === 0) {
             result.push({ ...houseAds[adIndex % houseAds.length], isAd: true });
             adIndex++;
         }
