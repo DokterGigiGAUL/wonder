@@ -21,7 +21,7 @@
 .list-card {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 3fr 2fr;
+    grid-template-columns: 1fr 2.5fr 1.5fr;
     gap: var(--list-gap);
     align-items: center;
     background: var(--card);
