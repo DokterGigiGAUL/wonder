@@ -147,7 +147,7 @@ function createListCard({
     const badges = clone.querySelector(".feature-badge");
     if (badges) {
         if (item && item.isAd) {
-            badges.textContent = "📢 Iklan";
+            badges.textContent = "Iklan";
             badges.classList.add("ad-badge");
         } else {
             badges.remove();
