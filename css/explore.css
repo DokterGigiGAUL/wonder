@@ -16,6 +16,18 @@
     --success: #008000;
 }
 
+.ad-label{
+    position: absolute;
+    top: 8px;
+    left: 24px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    width: max-content;
+}
 /* ===   2. LIST CARD COMPONENT   === */
 
 .list-card {
