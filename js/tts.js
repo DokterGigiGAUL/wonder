@@ -549,6 +549,7 @@ class CrosswordEngine {
           </a>
         `;
       }
+      this.renderBottomAd();
       return;
     }
     
@@ -558,6 +559,24 @@ class CrosswordEngine {
     if (text) text.textContent = persen + "%";
   }
 
+  renderBottomAd() {
+    const slot = document.getElementById("tts-bottom-ad");
+    if (!slot || typeof houseAds === "undefined" || !houseAds.length) return;
+
+    const ad = houseAds[Math.floor(Math.random() * houseAds.length)];
+
+    slot.innerHTML = `
+      <span class="tts-ad-label">📢 Iklan</span>
+      <img class="tts-ad-image" src="${ad.thumbnail}" alt="${ad.title}">
+      <div class="tts-ad-text">
+        <h4 class="tts-ad-title">${ad.title}</h4>
+        <p class="tts-ad-description">${ad.description}</p>
+      </div>
+      <a class="tts-ad-cta" href="${ad.url}" target="_blank" rel="noopener noreferrer">Lihat</a>
+    `;
+    slot.style.display = "grid";
+  }
+  
   useHint() {
     if (!this.activeWord) return;
     const r = this.direction === "across" ? this.activeWord.row : this.activeWord.row + this.activeIndex;
