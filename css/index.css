@@ -378,6 +378,20 @@ body {
     width: max-content;
 }
 
+.feature-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 12px 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff;
+    background: rgba(0, 0, 0, .25);
+    backdrop-filter: blur(6px);
+    width: max-content;
+}
+
 .featured-item {
     align-self: flex-start;
     font-size: 16px;
