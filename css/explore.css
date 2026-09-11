@@ -43,7 +43,7 @@
     flex-direction: column;
     gap: 6px;
     padding: 12px;
-    align-self: center;
+    align-self: self-start;
 }
 
 .list-title {
@@ -69,7 +69,7 @@
     display: grid;
     flex-direction: row;
     gap: 6px;
-    padding: 6px 0;
+    padding: 6px 12px;
     align-items: center;
     justify-content: space-between;
 }
