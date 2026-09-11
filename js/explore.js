@@ -55,12 +55,11 @@ function isPremiumLocked(item) {
 function withHouseAds(items) {
     if (typeof houseAds === "undefined" || !houseAds.length) return items;
     const result = [];
-    let adIndex = 0;
     items.forEach((item, i) => {
         result.push(item);
         if ((i + 1) % 4 === 0) {
-            result.push({ ...houseAds[adIndex % houseAds.length], isAd: true });
-            adIndex++;
+            const randomAd = houseAds[Math.floor(Math.random() * houseAds.length)];
+            result.push({ ...randomAd, isAd: true });
         }
     });
     return result;
