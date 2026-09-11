@@ -207,7 +207,7 @@ caseTab?.classList.remove("active");
 
         buttonText:
             Storage.isFinished(quiz.productId)
-                ? "Sudah Selesai"
+                ? "Selesai"
                 : (isPremiumLocked(quiz) ? "Beli" : "Mulai"),
 
         disabled: Storage.isFinished(quiz.productId),
