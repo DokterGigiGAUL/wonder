@@ -105,7 +105,7 @@ color:#666;
     margin-bottom:20px;
 }
 .progress-wrapper{
-    margin-bottom:30px;
+    margin-bottom:24px;
 }
 
 .progress-wrapper h3{
@@ -186,7 +186,7 @@ color:#666;
 }
 .active-clue-card{
     background:#fff;
-    border-radius:12px;
+    border-radius:10px;
     padding:18px;
     box-shadow:var(--shadow);
 }
