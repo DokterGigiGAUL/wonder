@@ -66,11 +66,11 @@
 
 .list-info {
     min-width: 0;
-    display: grid;
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     gap: 6px;
-    padding: 6px 18px 6px 12px;
-    align-items: center;
+    padding: 6px 18px 18px 12px;
+    align-self: end;
     justify-content: space-between;
 }
 
