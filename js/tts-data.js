@@ -52,8 +52,8 @@ const ttsList = [
         soal: 11,
         description: "Level: ★★★☆☆",
         thumbnail: "assets/images/tts/thumbnail-tts.webp",
-        premium: true,
-        price: 5000, 
+        premium: false,
+        price: 0, 
         mayarUrl: "https://gigital.myr.id/pl/tts4", 
         releaseDate: "2026-07-21",
         type: "tts"
