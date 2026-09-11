@@ -42,8 +42,8 @@ const cases = [
         title: "Kasus 4",
         description: "Level: ★★☆☆☆",
         thumbnail: "assets/images/cases/case4.webp",
-        premium: true,
-        price: 5000,
+        premium: false,
+        price: 0,
         mayarUrl: "https://gigital.myr.id/pl/case4", // TODO: link Mayar untuk beli Kasus 4
         releaseDate: "2026-06-20",
         type: "case"
