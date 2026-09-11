@@ -368,7 +368,7 @@ caseTab?.classList.add("active");
         title: caseData.title,
         description: caseData.description,
         item: caseData,
-        buttonText: "Lihat →",
+        buttonText: "Lihat"
         onClick() {
     location.href = `case.html?case=${caseData.file}`;
 }
