@@ -137,13 +137,20 @@ function createListCard({
 
     const badge = clone.querySelector(".featured-badge");
     if (badge) {
-        if (item && item.isAd) {
-            badge.textContent = "📢 Iklan";
-            badge.classList.add("ad-badge");
-        } else if (item && item.premium) {
+        if (item && item.premium) {
             badge.textContent = "👑 Premium";
         } else {
             badge.remove();
+        }
+    }
+
+    const badges = clone.querySelector(".feature-badge");
+    if (badges) {
+        if (item && item.isAd) {
+            badges.textContent = "📢 Iklan";
+            badges.classList.add("ad-badge");
+        } else {
+            badges.remove();
         }
     }
 
