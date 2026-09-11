@@ -137,7 +137,7 @@ body {
 }
 
 .search-btn:hover {
-    background: var(--primary-dark);
+    background: #333333;
 }
 
 /* ==========================================
