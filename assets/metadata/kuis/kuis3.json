@@ -5,7 +5,7 @@
   "price": 0,
   "title": "Kuis #3",
   "description": "Uji pengetahuanmu",
-  "thumbnail": "assets/images/kuis/thumbnail-kuis3.jpeg",
+  "thumbnail": "assets/images/kuis/thumbnail-kuis3.web",
   "timeLimit": 480,
   "questions": [
     {
