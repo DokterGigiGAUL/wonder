@@ -86,5 +86,18 @@ const quizzes = [
         mayarUrl: "https://gigital.myr.id/pl/kuis7", // TODO: ganti dengan payment link Mayar untuk Kuis #7
         releaseDate: "2026-09-20",
         type: "quiz"
+    },
+    {
+        id: 8,
+        file: "kuis8",
+        productId: "kuis8",
+        title: "Kuis 8",
+        description: "Level: ★★★★☆",
+        thumbnail: "assets/images/kuis/thumbnail-kuis8.webp",
+        premium: true,
+        price: 5000,
+        mayarUrl: "https://gigital.myr.id/pl/kuis8", // TODO: ganti dengan payment link Mayar untuk Kuis #7
+        releaseDate: "2026-09-20",
+        type: "quiz"
     }
 ];
