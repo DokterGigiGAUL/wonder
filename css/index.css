@@ -903,3 +903,7 @@ body {
     flex: 1;
     text-decoration: none;
 }
+
+.lego-card .content-thumb {
+    aspect-ratio: 1 / 1;
+}
