@@ -317,6 +317,7 @@ function loadLego() {
             thumbnail: lego.thumbnail,
             title: lego.title,
             description: lego.description,
+            extraClass: "lego-card",
             buttonText: "Detail →",
             onClick() {
                 window.open(lego.buyUrl, "_blank", "noopener,noreferrer");
