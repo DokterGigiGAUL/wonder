@@ -9,7 +9,7 @@ const legoSets = [
         id: "Lego-001",
         title: "Mini",
         description: "Minimal. Maksimal.",
-        thumbnail: "assets/images/lego/lego-001.jpg",
+        thumbnail: "assets/images/Mini.webp",
         price: 150000,
         buyUrl: "#"
     },
