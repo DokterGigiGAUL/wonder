@@ -317,7 +317,7 @@ function loadLego() {
             thumbnail: lego.thumbnail,
             title: lego.title,
             description: lego.description,
-            buttonText: "Beli →",
+            buttonText: "Detail →",
             onClick() {
                 window.open(lego.buyUrl, "_blank", "noopener,noreferrer");
             }
