@@ -12,6 +12,7 @@ const comicsContainer = document.getElementById("comics-container");
 const ttsContainer = document.getElementById("tts-container");
 const caseContainer = document.getElementById("case-container");
 const ebookContainer = document.getElementById("ebook-container");
+const legoContainer = document.getElementById("lego-container");
 
 const featuredHero = document.getElementById("featured-hero");
 const cardTemplate = document.getElementById("content-card-template");
@@ -97,7 +98,8 @@ function initializeHome() {
     loadTTS();
     loadCases();
     loadEbooks();
-    
+    loadLego();
+
 }
 
 if (document.readyState === "loading") {
@@ -302,6 +304,25 @@ function loadEbooks() {
 
     // Panggil helper dengan parameter isExternal = true
     //appendSeeAllCard(ebookContainer, "Katalog lengkap", "https://gigital.myr.id", true);
+}
+
+function loadLego() {
+    if (!legoContainer || typeof legoSets === "undefined") return;
+    legoContainer.innerHTML = "";
+
+    legoSets.slice(0, 6).forEach(lego => {
+        createContentCard({
+            container: legoContainer,
+            item: lego,
+            thumbnail: lego.thumbnail,
+            title: lego.title,
+            description: lego.description,
+            buttonText: "Beli →",
+            onClick() {
+                window.open(lego.buyUrl, "_blank", "noopener,noreferrer");
+            }
+        });
+    });
 }
 
 /* -------------------------------------------------------------------------- */
