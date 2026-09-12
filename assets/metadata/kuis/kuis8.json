@@ -2,7 +2,7 @@
   "id": "kuis8",
   "title": "Kuis 8",
   "description": "Tebak Diagnosis Penyakit Mulut",
-  "thumbnail": "assets/images/kuis8.jpg",
+  "thumbnail": "assets/images/kuis/thumbnail-kuis8.web",
   "timeLimit": 600,
   "questions": [
     {
