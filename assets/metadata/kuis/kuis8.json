@@ -1,0 +1,115 @@
+{
+  "id": "kuis8",
+  "title": "Kuis 8",
+  "description": "Tebak Diagnosis Penyakit Mulut",
+  "thumbnail": "assets/images/kuis8.jpg",
+  "timeLimit": 600,
+  "questions": [
+    {
+      "q": "Seorang pria 52 tahun memiliki plak putih pada mukosa bukal yang tidak dapat dikerok. Lesi tampak berlipat dan berkerut, bersifat bilateral, serta tidak menimbulkan keluhan. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Leukoplakia",
+        "White sponge nevus",
+        "Morsicatio buccarum",
+        "Lichen planus retikular"
+      ],
+      "answer": 1,
+      "explanation": "White sponge nevus merupakan kelainan genetik keratinisasi yang biasanya menyebabkan lesi putih bilateral, berlipat, dan tidak dapat dikerok, terutama pada mukosa bukal."
+    },
+    {
+      "q": "Seorang wanita 35 tahun mengeluhkan benjolan lunak pada mukosa bukal yang sudah ada selama beberapa tahun. Lesi berwarna kekuningan, berbatas jelas, tidak nyeri, dan terasa kenyal saat dipalpasi. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Lipoma",
+        "Fibroma iritasi",
+        "Papiloma skuamosa",
+        "Neurofibroma"
+      ],
+      "answer": 0,
+      "explanation": "Lipoma merupakan tumor jinak jaringan adiposa yang biasanya tumbuh lambat, berbatas jelas, lunak atau kenyal, dan dapat tampak kekuningan melalui mukosa."
+    },
+    {
+      "q": "Seorang pria 47 tahun memiliki ulkus pada palatum keras yang awalnya berupa pembengkakan nyeri. Dua minggu kemudian lesi berubah menjadi ulkus dengan dasar nekrotik. Pemeriksaan umum tidak menunjukkan keganasan. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Karsinoma sel skuamosa",
+        "Ulkus traumatik",
+        "Sialometaplasia nekrotik",
+        "Tuberkulosis oral"
+      ],
+      "answer": 2,
+      "explanation": "Sialometaplasia nekrotik merupakan kondisi inflamasi dan nekrosis kelenjar ludah minor yang sering mengenai palatum dan dapat menyerupai karsinoma secara klinis."
+    },
+    {
+      "q": "Mucous membrane pemphigoid merupakan penyakit autoimun yang terutama menyebabkan pemisahan epitel dari jaringan ikat pada membran basal.",
+      "options": [
+        "Benar",
+        "Salah"
+      ],
+      "answer": 0,
+      "explanation": "Benar. Mucous membrane pemphigoid merupakan penyakit autoimun subepitelial yang menyebabkan terbentuknya bula akibat pemisahan epitel dan jaringan ikat pada area membran basal."
+    },
+    {
+      "q": "Seorang pria 60 tahun memiliki pembengkakan pada sisi lateral leher dan dasar mulut yang terasa penuh. Pemeriksaan menunjukkan massa kistik pada dasar mulut yang dapat menyeberang ke ruang submandibular melalui celah otot mylohyoid. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Ranula plunging",
+        "Kista dermoid",
+        "Sialadenitis submandibular",
+        "Limfangioma"
+      ],
+      "answer": 0,
+      "explanation": "Ranula plunging berasal dari kelenjar sublingual dan dapat meluas melewati atau melalui celah pada otot mylohyoid menuju ruang submandibular."
+    },
+    {
+      "q": "Seorang pasien mengeluhkan rasa terbakar pada lidah dan mukosa oral selama beberapa bulan. Pemeriksaan klinis tidak menunjukkan lesi mukosa yang dapat menjelaskan keluhan. Gejala sering memburuk sepanjang hari. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Glossitis atrofi",
+        "Burning mouth syndrome",
+        "Neuralgia trigeminal",
+        "Glossopharyngeal neuralgia"
+      ],
+      "answer": 1,
+      "explanation": "Burning mouth syndrome ditandai sensasi terbakar atau nyeri pada mukosa oral tanpa temuan klinis yang memadai untuk menjelaskan gejala tersebut."
+    },
+    {
+      "q": "Seorang wanita 41 tahun memiliki nodul kecil pada mukosa bibir bawah yang telah tumbuh perlahan selama beberapa tahun. Lesi berwarna sama dengan mukosa, berbatas tegas, tidak nyeri, dan tidak mudah berdarah. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Granuloma piogenik",
+        "Papiloma skuamosa",
+        "Fibroma iritasi",
+        "Hemangioma"
+      ],
+      "answer": 2,
+      "explanation": "Fibroma iritasi merupakan hiperplasia jaringan ikat fibrosa reaktif akibat trauma atau iritasi kronis. Lesi biasanya berupa nodul berwarna menyerupai mukosa normal, tumbuh lambat, dan tidak nyeri."
+    },
+    {
+      "q": "Seorang pria 58 tahun memiliki lesi eksofitik pada mukosa bukal yang tumbuh lambat selama beberapa tahun. Permukaan lesi tampak sangat keratinisasi dan menyerupai kembang kol. Secara klinis lesi tampak lebih invasif daripada papilloma biasa, tetapi pertumbuhannya lambat. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Verrucous carcinoma",
+        "Squamous papilloma",
+        "Condyloma acuminatum",
+        "Leukoplakia verrukosa proliferatif"
+      ],
+      "answer": 0,
+      "explanation": "Verrucous carcinoma merupakan varian karsinoma skuamosa dengan pertumbuhan lambat, permukaan verukosa, dan pola invasi lokal yang khas."
+    },
+    {
+      "q": "Sialometaplasia nekrotik paling sering mengenai kelenjar ludah minor pada palatum dan dapat secara klinis menyerupai karsinoma sel skuamosa.",
+      "options": [
+        "Benar",
+        "Salah"
+      ],
+      "answer": 0,
+      "explanation": "Benar. Sialometaplasia nekrotik sering terjadi pada palatum karena keterlibatan kelenjar ludah minor dan dapat menyerupai keganasan secara klinis."
+    },
+    {
+      "q": "Seorang pria 49 tahun mengalami pembengkakan berulang pada area submandibular yang terutama muncul saat makan. Pemeriksaan menunjukkan aliran saliva dari duktus Wharton berkurang dan terdapat massa keras yang dapat dipalpasi di sepanjang dasar mulut. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Sialadenosis",
+        "Sialolithiasis kelenjar submandibular",
+        "Sialadenitis virus",
+        "Tumor kelenjar submandibular"
+      ],
+      "answer": 1,
+      "explanation": "Sialolithiasis submandibular menyebabkan obstruksi aliran saliva sehingga pembengkakan dan nyeri dapat muncul atau memburuk saat makan. Batu dapat teraba pada sepanjang duktus Wharton."
+    }
+  ]
+}
