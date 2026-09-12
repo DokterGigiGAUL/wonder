@@ -30,13 +30,13 @@
    --border-radius: 10px;
 
     --home-card-gap: 16px;
-    --home-card-per-view: 2.5;
+    --home-card-per-view: 2.25;
 }
 
 /* Responsiveness on Variables */
-@media (min-width: 481px)  { :root { --home-card-per-view: 3.5; } }
-@media (min-width: 1024px) { :root { --home-card-per-view: 4.5; } }
-@media (min-width: 1440px) { :root { --home-card-per-view: 5.5; } }
+@media (min-width: 481px)  { :root { --home-card-per-view: 3.25; } }
+@media (min-width: 1024px) { :root { --home-card-per-view: 4.25; } }
+@media (min-width: 1440px) { :root { --home-card-per-view: 5.25; } }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
