@@ -248,7 +248,7 @@ body {
 .content-description {
     font-size: 14px;
     color: var(--text-light);
-    margin-bottom: 0;
+    margin-bottom: 8px;
     line-height: 1.25;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -689,7 +689,7 @@ body {
 }
 
 .content-btn {
-    margin-top: 8px;
+    margin-top: auto;
 }
 
 /* ==========================================
