@@ -945,7 +945,7 @@ body {
 .lego-card .content-btn {
     width: max-content;
     align-self: center;
-    border-radius: 999px;
+    border-radius: 10px;
     padding: 10px 24px;
    margin-top:0;
 }
