@@ -318,7 +318,7 @@ function loadLego() {
             title: lego.title,
             description: lego.description,
             extraClass: "lego-card",
-            buttonText: "Detail →",
+            buttonText: "Beli",
             onClick() {
                 window.open(lego.buyUrl, "_blank", "noopener,noreferrer");
             }
