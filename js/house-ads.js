@@ -19,6 +19,13 @@ const houseAds = [
   {
     label: "Ads",
     title: "Dentabrix - Lego Dental Chair",
+    description: "Dentabrix Gigital Modern",
+    thumbnail: "assets/images/Modern.webp",
+    url: "https://shopee.co.id/-LIMITED-STOCKS-Dentabrix-Mini-—-Miniatur-Kursi-Dokter-Gigi-i.1515012100.40677691196"
+  },
+  {
+    label: "Ads",
+    title: "Dentabrix - Lego Dental Chair",
     description: "Dentabrix Gigital Retro",
     thumbnail: "assets/images/Retro.webp",
     url: "https://shopee.co.id/-LIMITED-STOCKS-Dentabrix-Mini-—-Miniatur-Kursi-Dokter-Gigi-i.1515012100.40677691196"
