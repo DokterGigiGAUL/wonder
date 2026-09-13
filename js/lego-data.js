@@ -9,7 +9,7 @@ const legoSets = [
         id: "Lego-001",
         title: "Mini",
         description: "Minimal Maksimal.",
-        thumbnail: "assets/images/Mini.webp",
+        thumbnail: "assets/images/IMG_4746.jpeg",
         price: 150000,
         buyUrl: "https://id.shp.ee/qazhVmbL"
     },
@@ -17,7 +17,7 @@ const legoSets = [
         id: "Lego-002",
         title: "Modern",
         description: "Kursi Gigi Banget.",
-        thumbnail: "assets/images/Modern.webp",
+        thumbnail: "assets/images/IMG_4747.jpeg",
         price: 300000,
         buyUrl: "https://id.shp.ee/qazhVmbL"
     },
@@ -25,7 +25,7 @@ const legoSets = [
         id: "Lego-003",
         title: "Retro",
         description: "Yang Tua Tua Aja.",
-        thumbnail: "assets/images/Retro.webp",
+        thumbnail: "assets/images/IMG_4748.jpeg",
         price: 350000,
         buyUrl: "https://id.shp.ee/qazhVmbL"
     }
