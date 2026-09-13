@@ -233,6 +233,7 @@ body {
 .content-description, 
 .content-price {
     padding-left: 3px;
+   white-space: pre-line;
 }
 
 .content-title {
