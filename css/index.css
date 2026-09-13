@@ -930,9 +930,9 @@ body {
 .lego-card .content-description {
     //*order: -1;*/
     margin: 0;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 400;
-    letter-spacing: .12em;
+    /*letter-spacing: .12em;*/
     text-transform: none;
     color: var(--text-light);
 }
