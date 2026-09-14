@@ -242,6 +242,7 @@ function loadTTS() {
             title: tts.title,
             description: tts.description,
             buttonText: locked ? "Beli" : getActionText("tts"),
+            extraClass: "tts-card",
             onClick() {
                 if (locked) {
                     showBuyModal(tts);
