@@ -213,8 +213,10 @@ body {
     box-shadow: var(--shadow-card);
     margin-right:16px!important;
 }
-.content-card.tts-card.content-thumb{
-aspect-ratio: 5 / 4!important;
+.tts-card .content-thumb{
+   aspect-ratio: 5 / 4;
+   width:100%;
+   height:100%;
 }
 .content-thumb {
     width: 100%;
