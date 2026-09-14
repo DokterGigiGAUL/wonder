@@ -11,7 +11,7 @@ const legoSets = [
         description: "Minimal Maksimal.",
         thumbnail: "assets/images/lego/IMG_4746.jpeg",
         price: 150000,
-        buyUrl: "https://id.shp.ee/qazhVmbL"
+        buyUrl: "https://gigital.myr.id/checkout/dental-chair-lego-mikro"
     },
       {
         id: "Lego-002",
