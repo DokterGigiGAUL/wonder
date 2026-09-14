@@ -67,9 +67,10 @@ color:#666;
     font-size:13px;
     opacity:.9;
 }
-.content-card .tts-card .content-thumb{
-aspect-ratio:5/4!important;
+.tts-card .content-thumb {
+    aspect-ratio:5 / 4!important;
 }
+
 .toolbar{
     display:flex;
     gap:8px;
