@@ -1,0 +1,45 @@
+.lego-card {
+    position: relative;
+   aspect-ratio:2/3;
+}
+
+.lego-card .content-thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    z-index: 1;
+}
+
+.lego-card .content-info {
+    position: relative;
+    z-index: 2;
+    align-items: center;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.lego-card .content-description {
+    //*order: -1;*/
+    margin: 0;
+    font-size: 13px;
+    font-weight: 400;
+    /*letter-spacing: .12em;*/
+    text-transform: none;
+    color: var(--text-light);
+}
+
+.lego-card .content-title {
+    font-size: 17px;
+    line-height: 1.25;
+}
+
+.lego-card .content-btn {
+    width: max-content;
+    align-self: center;
+    border-radius: 10px;
+    padding: 10px 24px;
+   margin-top:0;
+}
