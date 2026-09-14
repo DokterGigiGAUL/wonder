@@ -27,7 +27,7 @@ const legoSets = [
         description: "Yang Tua Tua Aja.",
         thumbnail: "assets/images/lego/IMG_4748.jpeg",
         price: 350000,
-        buyUrl: "https://id.shp.ee/qazhVmbL"
+        buyUrl: "https://gigital.myr.id/checkout/dental-chair-lego-mikro?iframe=true"
     }
     // tambah item lain di sini
 ];
