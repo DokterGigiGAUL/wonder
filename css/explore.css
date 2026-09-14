@@ -5,7 +5,9 @@
     --list-gap: 10px;
     --list-padding: 10px;
     --list-radius: 10px;
-    
+    --border-radius:10px;
+    --button-radius:10px;
+
     /* Colors */
     --primary: #2563eb;
     --primary-dark: #1d4ed8;
