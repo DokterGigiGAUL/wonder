@@ -214,6 +214,7 @@ function loadComics() {
             thumbnail: comic.thumbnail,
             title: comic.title,
             description: comic.description,
+            extraClass: "comic-card",
             buttonText: locked ? "Beli" : getActionText("comic"),
             onClick() {
                 if (locked) {
