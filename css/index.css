@@ -213,7 +213,9 @@ body {
     box-shadow: var(--shadow-card);
     margin-right:16px!important;
 }
-
+.content-card.tts-card.content-thumb{
+aspect-ratio: 5 / 4!important;
+}
 .content-thumb {
     width: 100%;
     aspect-ratio: 3 / 2;
