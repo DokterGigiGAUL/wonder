@@ -47,7 +47,7 @@ const comics = [
     price: 0,
     mayarUrl: "https://gigital.myr.id/pl/comic4",
     title: "Komik #4",
-    description: "Sariawan Karena Kekurangan Vitamin C?",
+    description: "Sariawan Bukan Karena Kekurangan Vitamin C",
     thumbnail: "assets/images/komik/komik4/thumbnail4.webp",
     releaseDate: "2026-07-20",
     type: "comic"
