@@ -19,7 +19,7 @@ const legoSets = [
         description: "Kursi Gigi Banget.",
         thumbnail: "assets/images/lego/IMG_4747.jpeg",
         price: 300000,
-        mayarUrl: "https://id.shp.ee/qazhVmbL"
+        mayarUrl: "https://gigital.myr.id/checkout/dental-chair-lego-modern"
     },
       {
         id: "Lego-003",
@@ -27,7 +27,7 @@ const legoSets = [
         description: "Yang Tua Tua Aja.",
         thumbnail: "assets/images/lego/IMG_4748.jpeg",
         price: 350000,
-        mayarUrl: "https://gigital.myr.id/checkout/dental-chair-lego-mikro"
+        mayarUrl: "https://gigital.myr.id/checkout/dental-chair-lego-retro/https://id.shp.ee/qazhVmbL"
     }
     // tambah item lain di sini
 ];
