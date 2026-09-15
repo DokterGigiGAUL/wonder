@@ -241,12 +241,6 @@ body {
    height:100%;
 }
 
-.comic-card .content-thumb{
-   aspect-ratio: 3 / 2;
-   width:100%;
-   height:100%;
-}
-
 /* Multiline Truncation */
 .ebook-title,
 .content-title .ebook-title, 
