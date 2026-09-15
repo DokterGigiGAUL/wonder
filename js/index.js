@@ -325,12 +325,8 @@ function loadLego() {
 
         const btn = legoContainer.lastElementChild.querySelector(".content-btn"); 
         if (btn) { 
-            btn.outerHTML =  
-                <a class="btn btn-primary content-btn iframe-lightbox-link" 
-                            href="${lego.mayarUrl}?iframe=true" 
-                            data-padding-bottom="30%" 
-                            data-scrolling="true"> Detail 
-                </a>; }
+            btn.outerHTML = '<a class="btn btn-primary content-btn iframe-lightbox-link" href="' + lego.mayarUrl + '?iframe=true" data-padding-bottom="30%" data-scrolling="true">Detail</a>';
+            }
     });
 }
 
