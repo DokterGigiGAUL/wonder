@@ -99,7 +99,7 @@ body {
     flex: 1;
     min-width: 0;
     padding: 6px 18px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--text-light);
     border-radius: var(--border-radius);
     font-size: 15px;
     background: var(--card);
@@ -108,7 +108,7 @@ body {
 
 .search-input:focus {
     outline: none;
-    border-color: var(--primary);
+    border-color: #666666;
 }
 
 .search-btn {
@@ -489,13 +489,6 @@ body {
     color: #666;
     border: none;
     cursor: not-allowed;
-}
-
-#loginBtn, #logoutBtn {
-    padding: 8px 12px;
-    background: var(--bg);
-    color: var(--primary);
-    border: 1px solid var(--primary);
 }
 
 .back-btn {
