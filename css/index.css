@@ -242,7 +242,7 @@ body {
 }
 
 .comic-card .content-thumb{
-   aspect-ratio: 4 / 3;
+   aspect-ratio: 3 / 2;
    width:100%;
    height:100%;
 }
