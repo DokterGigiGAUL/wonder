@@ -323,6 +323,7 @@ function loadLego() {
             buttonText: "Beli",
             onClick() {
                 window.open(lego.buyUrl, "_blank", "noopener,noreferrer");
+
             }
         });
     });
