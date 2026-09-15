@@ -88,6 +88,29 @@ if (buyModalOverlay) {
     };
 }
 
+const checkoutModal = document.getElementById("checkoutModal");
+const checkoutModalFrame = document.getElementById("checkoutModalFrame");
+const checkoutModalClose = document.getElementById("checkoutModalClose");
+
+function openCheckoutModal(url) {
+    if (!checkoutModal || !checkoutModalFrame || !url) return;
+    checkoutModalFrame.src = url;
+    checkoutModal.classList.add("show");
+}
+
+function closeCheckoutModal() {
+    if (!checkoutModal || !checkoutModalFrame) return;
+    checkoutModal.classList.remove("show");
+    checkoutModalFrame.src = "";
+}
+
+if (checkoutModalClose) checkoutModalClose.onclick = closeCheckoutModal;
+if (checkoutModal) {
+    checkoutModal.onclick = (e) => {
+        if (e.target === checkoutModal) closeCheckoutModal();
+    };
+}
+
 /* -------------------------------------------------------------------------- */
 /* INIT                                                                       */
 /* -------------------------------------------------------------------------- */
@@ -320,16 +343,13 @@ function loadLego() {
             title: lego.title,
             description: lego.description,
             buttonText: "Beli",
-            extraClass: "lego-card"
-        });
-
-        const btn = legoContainer.lastElementChild.querySelector(".content-btn"); 
-        if (btn) { 
-            btn.outerHTML = '<a class="btn btn-primary content-btn iframe-lightbox-link" href="' + lego.mayarUrl + '?iframe=true" data-padding-bottom="30%" data-scrolling="true">Beli</a>';
+            extraClass: "lego-card",
+            onClick() {
+                openCheckoutModal(lego.mayarUrl);
             }
+        });
     });
 }
-
 
 /* -------------------------------------------------------------------------- */
 /* FEATURED HERO                                                              */
