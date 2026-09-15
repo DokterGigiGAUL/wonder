@@ -375,3 +375,27 @@ body {
         font-size: 17px;
     }
 }
+
+.checkout-modal {
+    position: relative;
+    width: min(480px, 100%);
+    height: min(640px, 90vh);
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.checkout-modal-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
