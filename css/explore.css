@@ -88,6 +88,8 @@
     line-height: 1.25;
     overflow: hidden;
     text-overflow: ellipsis;
+       white-space: pre-line;
+
 }
 
 .list-info {
