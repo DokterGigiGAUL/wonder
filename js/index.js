@@ -319,15 +319,24 @@ function loadLego() {
             thumbnail: lego.thumbnail,
             title: lego.title,
             description: lego.description,
-            extraClass: "lego-card",
             buttonText: "Beli",
-            onClick() {
-                window.open(lego.buyUrl, "_blank", "noopener,noreferrer");
-
-            }
+            extraClass: "lego-card"
         });
+
+        const btn = legoContainer.lastElementChild.querySelector(".content-btn");
+        if (btn) {
+            btn.outerHTML = `
+
+    class="btn btn-primary content-btn iframe-lightbox-link"
+    href="${lego.mayarUrl}?iframe=true"
+    data-padding-bottom="30%"
+    data-scrolling="true">
+    Detail
+</a>`;
+        }
     });
 }
+
 
 /* -------------------------------------------------------------------------- */
 /* FEATURED HERO                                                              */
