@@ -769,3 +769,13 @@ body {
     font-size: 20px;
     cursor: pointer;
 }
+
+.banner-ad{
+    padding: 16px;
+}
+
+.iklan{
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
