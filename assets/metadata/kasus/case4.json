@@ -7,8 +7,8 @@
   "gender": "Laki-laki",
   "age": "23 tahun",
 
-  "anamnesis": "Pasien datang dengan keluhan pembengkakan di daerah gigi geraham bungsu kanan bawah sejak dua minggu yang lalu. Nyeri terutama saat mengunyah dan pasien merasa sulit membuka mulut secara maksimal.",
-  "clinicalExaminations": "Pada daerah operkulum gigi molar ketiga tampak jaringan gingiva hiperemis dan edema yang sebagian menutupi mahkota gigi. Terlihat akumulasi debris makanan di bawah operkulum. Palpasi menimbulkan nyeri dan dapat keluar eksudat purulen ringan.",
+  "anamnesis": "Pasien datang dengan keluhan pembengkakan di daerah gigi geraham bungsu kanan bawah sejak dua minggu lalu. Terasa nyeri saat mengunyah dan sulit membuka mulut.",
+  "clinicalExaminations": "Pada daerah operkulum gigi molar ketiga tampak jaringan gingiva hiperemis dan edema yang sebagian menutupi mahkota gigi. Palpasi menimbulkan nyeri dan dapat keluar eksudat purulen ringan.",
   "diagnosis": "Operkulitis",
 
   "differentialDiagnosis": [
