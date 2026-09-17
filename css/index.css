@@ -32,23 +32,34 @@
     --home-card-gap: 16px;
     --home-card-per-view: 2;
    --font-size: 15px;
+   --font-title: 17px;
+   --font-h2: 20px;
 }
 
 /* Responsiveness on Variables */
 @media (min-width: 481px)  { 
    :root { 
       --home-card-per-view: 3; 
-      --font-size: 18px; }
+      --font-size: 18px; 
+      --font-title: 20px;
+      --font-h2: 23px;
+   }
 }
 @media (min-width: 1024px) { 
    :root { 
       --home-card-per-view: 4; 
-      --font-size: 24px; }
+      --font-size: 21px; 
+      --font-title: 23px;
+      --font-h2: 26px;
+   }
 }
 @media (min-width: 1440px) { 
    :root { 
       --home-card-per-view: 4; 
-      --font-size: 28px; }
+      --font-size: 24px; 
+      --font-title: 26px;
+      --font-h2: 29px;
+   }
 }
 
 body {
@@ -131,7 +142,7 @@ body {
     padding: 12px 18px;
     background: var(--hitam);
     color: #fff;
-    font-size: 15px;
+    font-size: var(--font-size);
     font-weight: 400;
     cursor: pointer;
 }
@@ -156,7 +167,7 @@ body {
 
 .section-header h2 {
     margin: 0;
-    font-size: 20px;
+    font-size: var(--font-h2);
 }
 
 .section-header a {
@@ -223,7 +234,7 @@ body {
 
 .content-title {
     margin: 0;
-    font-size: 16px;
+    font-size: var(--font-title);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.01rem;
@@ -232,7 +243,7 @@ body {
 }
 
 .content-description {
-    font-size: 14px;
+    font-size: var(--font-size);
     color: var(--text-light);
     margin-bottom: 8px;
     line-height: 1.25;
