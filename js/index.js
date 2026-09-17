@@ -199,7 +199,7 @@ function loadQuiz() {
     if (!quizList || typeof quizzes === "undefined") return;
     quizList.innerHTML = "";
 
-    quizzes.slice(0, 6).forEach(quiz => {
+    quizzes.slice(0, 4).forEach(quiz => {
         const finished = typeof Storage !== "undefined" && Storage.isFinished && Storage.isFinished(quiz.productId);
         const locked = isPremiumLocked(quiz);
 
@@ -228,7 +228,7 @@ function loadComics() {
     if (!comicsContainer || typeof comics === "undefined") return;
     comicsContainer.innerHTML = "";
 
-    comics.slice(0, 6).forEach(comic => {
+    comics.slice(0, 4).forEach(comic => {
         const locked = isPremiumLocked(comic);
 
         createContentCard({
@@ -256,7 +256,7 @@ function loadTTS() {
     if (!ttsContainer || typeof ttsList === "undefined") return;
     ttsContainer.innerHTML = "";
 
-    ttsList.slice(0, 6).forEach(tts => {
+    ttsList.slice(0, 4).forEach(tts => {
         const locked = isPremiumLocked(tts);
 
         createContentCard({
@@ -284,7 +284,7 @@ function loadCases() {
     if (!caseContainer || typeof cases === "undefined") return;
     caseContainer.innerHTML = "";
 
-    cases.slice(0, 6).forEach(caseData => {
+    cases.slice(0, 4).forEach(caseData => {
         const locked = isPremiumLocked(caseData);
 
         createContentCard({
@@ -335,7 +335,7 @@ function loadLego() {
     if (!legoContainer || typeof legoSets === "undefined") return;
     legoContainer.innerHTML = "";
 
-    legoSets.slice(0, 6).forEach(lego => {
+    legoSets.slice(0, 3).forEach(lego => {
         createContentCard({
             container: legoContainer,
             item: lego,
