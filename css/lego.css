@@ -28,7 +28,7 @@
     font-weight: 400;
     /*letter-spacing: .12em;*/
     text-transform: none;
-    color: var(--text-light);
+    color: #333333;
 }
 
 .lego-card .content-title {
