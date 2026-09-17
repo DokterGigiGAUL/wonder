@@ -4,7 +4,6 @@
   align-items: flex-start;
   min-height: 100vh;
   padding: 20px;
-  margin-top:60px;
 }
 
 .case-wrapper {
@@ -278,7 +277,7 @@
 .info-flip {
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 480px;
   transform-style: preserve-3d;
   transition: transform .6s;
 }
