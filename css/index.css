@@ -36,16 +36,19 @@
 
 /* Responsiveness on Variables */
 @media (min-width: 481px)  { 
-   :root { --home-card-per-view: 3; } 
-   --font-size: 18px;
+   :root { 
+      --home-card-per-view: 3; 
+      --font-size: 18px; }
 }
 @media (min-width: 1024px) { 
-   :root { --home-card-per-view: 4; } 
-   --font-size: 24px;
+   :root { 
+      --home-card-per-view: 4; 
+      --font-size: 24px; }
 }
 @media (min-width: 1440px) { 
-   :root { --home-card-per-view: 4; } 
-   --font-size: 28px;
+   :root { 
+      --home-card-per-view: 4; 
+      --font-size: 28px; }
 }
 
 body {
