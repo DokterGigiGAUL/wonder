@@ -155,7 +155,7 @@ body {
 
 .list-card .list-btn { 
     margin-left: auto;
-    font-size: 13px;
+    font-size: var(--font-size);
 }
 
 .ad-badge{
