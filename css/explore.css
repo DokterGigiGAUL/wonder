@@ -40,9 +40,9 @@
          --font-header:28px;
         --font-list:16px;
            --list-thumb-size: 120px;
-
    }
 }
+
 @media (min-width: 1024px) { 
    :root { 
       --home-card-per-view: 4.25; 
@@ -52,6 +52,7 @@
          --font-header:32px;
 --font-list:19px;
            --list-thumb-size: 128px;
+   }
 .list-card {
     grid-template-columns: 1fr 6fr 1fr;
    }
@@ -65,7 +66,6 @@
          --font-header:36px;
 --font-list:22px;
            --list-thumb-size: 136px;
-
    }
 }
 
