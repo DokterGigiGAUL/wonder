@@ -128,7 +128,7 @@ body {
 
 .list-description {
     margin: 0;
-    font-size: 14px;
+    font-size: var(--font-size);
     color: var(--text-muted);
     line-height: 1.25;
     overflow: hidden;
@@ -443,7 +443,7 @@ body {
 
 /* ===   5. RESPONSIVE MEDIA QUERIES   === */
 
-@media (min-width: 480px) {
+@media (min-width: 481px) {
     .tts-grid {
         display: flex;
         gap: 24px;
@@ -460,10 +460,5 @@ body {
     .tts-title {
         font-size: 24px;
         margin-bottom: 6px;
-    }
-
-    .tab-btn {
-        padding: 16px;
-    font-size: var(--font-title);
     }
 }
