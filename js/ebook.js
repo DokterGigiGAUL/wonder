@@ -32,6 +32,13 @@ document.getElementById("ebook-release").textContent =
         year: "numeric"
     })}`;
 
+    const backBtn = document.getElementById("backBtn");
+    if (backBtn) {
+      backBtn.onclick = () => {
+        window.location.href = "index.html";
+      };
+    }
+
 //const buyButton =
 //    document.getElementById("buyButton");
 
