@@ -1,6 +1,38 @@
+:root {
+    --font-size: 15px;
+    --font-title: 17px;
+    --font-h2: 20px;
+    --font-header:24px;
+}
+
+/* Responsiveness on Variables */
+@media (min-width: 481px)  { 
+   :root {
+       --font-size: 18px;
+       --font-title: 20px;
+       --font-h2: 23px;
+       --font-header:28px;
+   }
+}
+@media (min-width: 1024px) { 
+   :root {
+       --font-size: 21px;
+       --font-title: 23px;
+       --font-h2: 26px;
+       --font-header:32px;
+   }
+}
+@media (min-width: 1440px) { 
+   :root { 
+       --font-size: 24px; 
+       --font-title: 26px;
+       --font-h2: 29px;
+        --font-header:36px;
+   }
+}
 .lego-card {
     position: relative;
-   aspect-ratio:2/3;
+    aspect-ratio:2 / 3;
 }
 
 .lego-card .content-thumb {
@@ -8,7 +40,6 @@
     inset: 0;
     width: 100%;
     height: 100%;
-
     object-fit: cover;
     z-index: 1;
 }
@@ -24,7 +55,7 @@
 .lego-card .content-description {
     //*order: -1;*/
     margin: 0;
-    font-size: 13px;
+    font-size: var(--font-size);
     font-weight: 400;
     /*letter-spacing: .12em;*/
     text-transform: none;
@@ -32,7 +63,7 @@
 }
 
 .lego-card .content-title {
-    font-size: 17px;
+    font-size: var(--font-title);
     line-height: 1.25;
 }
 
@@ -41,5 +72,5 @@
     align-self: center;
     border-radius: 10px;
     padding: 10px 24px;
-   margin-top:0;
+    margin-top:0;
 }
