@@ -30,7 +30,7 @@
    --border-radius: 10px;
 
     --home-card-gap: 16px;
-    --home-card-per-view: 2;
+    --home-card-per-view: 2.25;
    --font-size: 15px;
    --font-title: 17px;
    --font-h2: 20px;
@@ -50,7 +50,7 @@
 }
 @media (min-width: 1024px) { 
    :root { 
-      --home-card-per-view: 4; 
+      --home-card-per-view: 4.25; 
       --font-size: 21px; 
       --font-title: 23px;
       --font-h2: 26px;
@@ -60,7 +60,7 @@
 }
 @media (min-width: 1440px) { 
    :root { 
-      --home-card-per-view: 4; 
+      --home-card-per-view: 5; 
       --font-size: 24px; 
       --font-title: 26px;
       --font-h2: 29px;
@@ -618,9 +618,14 @@ body {
 /* ==========================================
    9. RESPONSIVE MEDIA QUERIES
    ========================================== */
-
+/* Tablet Breakpoint (max-width: 480px) */
+@media (max-width: 480px) {
+   horizontal-scroll{
+      margin-right: 0px;
+   }
+}
 /* Tablet Breakpoint (min-width: 480px) */
-@media (min-width: 480px) {
+@media (min-width: 481px) {
 
     .featured-hero {
         aspect-ratio: 2 / 1;
@@ -628,11 +633,11 @@ body {
     }
 
     .featured-overlay {
-        top: 60px;
+        top: 40px;
     }
         
     .featured-item {
-        font-size: 17px;
+        font-size: var(--font-size);
     }
         
     .featured-latest {
