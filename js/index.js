@@ -411,7 +411,7 @@ function renderFeaturedHero() {
                     location.href = `quiz.html?id=${heroItem.file}`;
                     break;
                 case "comic":
-                    location.href = `komik.html?id=${heroItem.id}`;
+                    location.href = `comic.html?id=${heroItem.id}`;
                     break;
                 case "tts":
                     location.href = `tts.html?puzzle=tts${heroItem.id}`;
