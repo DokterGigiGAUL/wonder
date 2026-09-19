@@ -620,7 +620,7 @@ body {
    ========================================== */
 /* Tablet Breakpoint (max-width: 480px) */
 @media (max-width: 480px) {
-   horizontal-scroll{
+   .horizontal-scroll{
       margin-right: 0px;
    }
 }
