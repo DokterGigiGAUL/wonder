@@ -32,7 +32,7 @@
 }
 .lego-card {
     position: relative;
-    aspect-ratio:4 / 5;
+    aspect-ratio:3 / 5;
 }
 
 .lego-card .content-thumb {
