@@ -247,7 +247,7 @@
 }
 
 .choice.selected{
-    border-color:#2563eb;
+    border-color:var(--primary);
     background:#eff6ff;
 }
 
