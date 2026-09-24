@@ -47,7 +47,7 @@
       --font-h2: 27px;
       --font-header:32px;
       --font-list:19px;
-           --list-thumb-size: 128px;
+      --list-thumb-size: 128px;
    }
 .list-card {
     grid-template-columns: 1fr 6fr 1fr;
@@ -116,7 +116,7 @@ color:#666;
     opacity:.9;
 }
 .tts-card .content-thumb {
-    aspect-ratio:5 / 4!important;
+    aspect-ratio:10 / 9!important;
 }
 
 .toolbar{
