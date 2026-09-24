@@ -148,7 +148,7 @@ body {
     border: none;
     border-radius: var(--button-radius);
     padding: 12px 18px;
-    background: var(--hitam);
+    background: var(--primary);
     color: #fff;
     font-size: var(--font-size);
     font-weight: 400;
@@ -228,16 +228,14 @@ body {
     display: block;
        border-radius: var(--border-radius);
        aspect-ratio: 10 / 9;
-
-
 }
 
 .content-info {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 12px;
+    gap: 4px;
     flex: 1;
+      padding: 12px 4px 0px;    
 }
 
 .content-title, 
@@ -513,7 +511,8 @@ body {
 }
 
 .btn-outline {
-    background: var(--card);
+    /*background: var(--card);*/
+    background: #transparent;
     color: var(--primary);
     border: 1px solid var(--primary);
 }
