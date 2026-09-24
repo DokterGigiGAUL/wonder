@@ -23,7 +23,46 @@
     --card-radius: 18px;
     --button-radius: 14px;
    --border-radius: 10px;
+    --home-card-gap: 16px;
+    --home-card-per-view: 2.25;
+   --font-size: 15px;
+   --font-title: 17px;
+   --font-h2: 20px;
+   --font-header:24px;
 }
+
+/* Responsiveness on Variables */
+@media (min-width: 481px)  { 
+   :root { 
+      --home-card-per-view: 3; 
+      --font-size: 18px; 
+      --font-title: 20px;
+      --font-h2: 23px;
+         --font-header:28px;
+
+   }
+}
+@media (min-width: 1024px) { 
+   :root { 
+      --home-card-per-view: 4.25; 
+      --font-size: 21px; 
+      --font-title: 23px;
+      --font-h2: 26px;
+         --font-header:32px;
+
+   }
+}
+@media (min-width: 1440px) { 
+   :root { 
+      --home-card-per-view: 5; 
+      --font-size: 24px; 
+      --font-title: 26px;
+      --font-h2: 29px;
+         --font-header:36px;
+
+   }
+}
+
 .quiz-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
