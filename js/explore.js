@@ -52,6 +52,14 @@ function isPremiumLocked(item) {
     return !unlocked;
 }
 
+function sortByNewest(items) {
+    return [...items].sort((a, b) => {
+        const dateA = new Date(a.dateAdded || 0);
+        const dateB = new Date(b.dateAdded || 0);
+        return dateB - dateA; // descending, terbaru dulu
+    });
+}
+
 function withHouseAds(items) {
     if (typeof houseAds === "undefined" || !houseAds.length) return items;
     const result = [];
@@ -188,7 +196,8 @@ caseTab?.classList.remove("active");
 
 
     quizSection.innerHTML = "";
-    withHouseAds(quizzes).forEach(quiz => {
+    const sortedQuizzes = sortByNewest(quizzes);
+    withHouseAds(sortedQuizzes).forEach(quiz => {
     if (quiz.isAd) {
         createListCard({
             container: quizSection,
@@ -247,7 +256,8 @@ ttsTab?.classList.remove("active");
 caseTab?.classList.remove("active");
 
    comicSection.innerHTML = "";
-    withHouseAds(comics).forEach(comic => {
+    const sortedComics = sortByNewest(comics);
+    withHouseAds(sortedComics).forEach(comic => {
     if (comic.isAd) {
         createListCard({
             container: comicSection,
@@ -298,7 +308,8 @@ ttsTab?.classList.add("active");
 caseTab?.classList.remove("active");
 
     ttsSection.innerHTML = "";
-    withHouseAds(ttsList).forEach(tts => {
+        const sortedTtsList = sortByNewest(ttsList);
+    withHouseAds(sortedTtsList).forEach(tts => {
     if (tts.isAd) {
         createListCard({
             container: ttsSection,
@@ -351,7 +362,9 @@ ttsTab?.classList.remove("active");
 caseTab?.classList.add("active");
 
     caseSection.innerHTML = "";
-    withHouseAds(cases).forEach(caseData => {
+        const sortedCases = sortByNewest(cases);
+
+    withHouseAds(sortedCases).forEach(caseData => {
  
     if (caseData.isAd) {
         createListCard({
