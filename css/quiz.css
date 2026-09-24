@@ -1,7 +1,29 @@
 /* ==========================
    KUIS
 ========================== */
+:root {
+    /* Colors #2563eb */
 
+    --primary: #123456;
+    --primary-dark: #1d4ed8;
+    --hitam: #1e1e1e;
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --text: #1f2937;
+    --text-muted: #6b7280;
+    --text-light: #999999;
+    --border: #e5e7eb;
+    --success: #008000;
+    --danger: #e53935;
+    
+    /* Layout & Spacing */
+    --shadow: 0 10px 20px rgba(0, 0, 0, .1);
+    --shadow-card: 0 6px 18px rgba(0, 0, 0, .15);
+    --radius: 12px;
+    --card-radius: 18px;
+    --button-radius: 14px;
+   --border-radius: 10px;
+}
 .quiz-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
