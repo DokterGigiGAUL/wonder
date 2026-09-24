@@ -550,6 +550,7 @@ body {
    border-radius:10px;
    color:#f0f0f0;
    border:1px solid #f0f0f0;
+   background:transparent;
    /*background: var(--primary-dark) !important;*/
 }
 
