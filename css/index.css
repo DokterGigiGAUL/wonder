@@ -28,7 +28,7 @@
     --radius: 12px;
     --card-radius: 18px;
     --button-radius: 14px;
-   --border-radius: 10px;
+   --border-radius: 20px;
 
     --home-card-gap: 16px;
     --home-card-per-view: 2.25;
@@ -211,20 +211,25 @@ body {
     display: flex;
     flex-direction: column;
     scroll-snap-align: start;
-    background: var(--card);
-    border-radius: var(--border-radius);
+    /*
+   border-radius: var(--border-radius);
+   background: var(--card);
+   box-shadow: var(--shadow-card);
+   */
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    box-shadow: var(--shadow-card);
     margin-right:16px!important;
 }
 
 .content-thumb {
     width: 100%;
-    aspect-ratio: 3 / 2;
     object-fit: cover;
     display: block;
+       border-radius: var(--border-radius);
+       aspect-ratio: 10 / 9;
+
+
 }
 
 .content-info {
