@@ -25,6 +25,7 @@
    --border-radius: 10px;
     --home-card-gap: 16px;
     --home-card-per-view: 2.25;
+      --font-list: 13px;
    --font-size: 15px;
    --font-title: 17px;
    --font-h2: 20px;
@@ -35,6 +36,7 @@
 @media (min-width: 481px)  { 
    :root { 
       --home-card-per-view: 3; 
+   --font-list: 16px;
       --font-size: 18px; 
       --font-title: 20px;
       --font-h2: 23px;
@@ -45,6 +47,7 @@
 @media (min-width: 1024px) { 
    :root { 
       --home-card-per-view: 4.25; 
+         --font-list: 19px;
       --font-size: 21px; 
       --font-title: 23px;
       --font-h2: 26px;
@@ -55,6 +58,7 @@
 @media (min-width: 1440px) { 
    :root { 
       --home-card-per-view: 5; 
+         --font-list: 22px;
       --font-size: 24px; 
       --font-title: 26px;
       --font-h2: 29px;
@@ -95,7 +99,7 @@
 }
 
 .quiz-title, .tts-title, .case-title{
-    font-size:20px;
+    font-size:var(--font-h2);
     line-height:1.15;
     margin-bottom:6px;
 }
@@ -108,7 +112,7 @@
     
 .quiz-description {
     color: var(--text-light);
-    font-size: .85rem;    
+
     line-height: 1.25;
     margin-bottom:6px;
    white-space: pre-line;
@@ -140,6 +144,18 @@
         display: flex;
         justify-content: space-between;
     }
+
+       .quiz-header{
+        padding:16px;
+    }
+
+    .timer{
+        font-size:var(--font-title);
+    }
+
+    .question-card{
+        padding:16px;
+    }
 }
 
 .quiz-header{
@@ -159,7 +175,7 @@
     width:36px;
     height:36px;
     border-radius:50%;
-    font-size:15px;
+    font-size:var(--font-title);
     font-weight:700;
     cursor:pointer;
 }
@@ -170,16 +186,16 @@
 }
 
 .quiz-title-box h2{
-    font-size:20px;
+    font-size:var(--font-h2);
 }
 
 .quiz-title-box p{
-    font-size:13px;
+    font-size:var(--font-list);
     opacity:.9;
 }
 
 .timer{
-    font-size:22px;
+    font-size:var(--font-title);
     font-weight:bold;
 }
 
@@ -222,11 +238,11 @@
     padding:15px;
     cursor:pointer;
     transition:.2s;
-    font-size: 15px;
+    font-size: var(--font-size);
 }
 
 .choice:hover{
-    border-color:#2563eb;
+    border-color:var(--primary);
 }
 
 .choice.selected{
@@ -246,26 +262,6 @@
     border-radius: 8px;
 }
 
-.primary{
-    background:#2563eb;
-    color:white;
-}
-
-@media(max-width:480px){
-
-    .quiz-header{
-        padding:16px;
-    }
-
-    .timer{
-        font-size:18px;
-    }
-
-    .question-card{
-        padding:16px;
-    }
-
-}
 
 /* ==========================
    PREMIUM LOCK
