@@ -19,8 +19,8 @@
     --danger: #e53935;
     
     /* Fallback/Shared theme tokens */
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
+    --primary: #123456;
+    --primary-dark: #012345;
     --bg-tab: #ececec;
     --success: #008000;
  --font-size: 15px;
@@ -130,7 +130,7 @@ section{
     background:#d0d0d0;
 }
 .preview-dot.active{
-    background:#2563eb;
+    background:var(--primary);
 }
 .ebook-info{
     text-align:left;
