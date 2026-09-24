@@ -1,0 +1,115 @@
+{
+  "id": "kuis9",
+  "title": "Kuis 9",
+  "description": "Tebak Diagnosis dan Kasus Kedokteran Gigi",
+  "thumbnail": "assets/images/kuis8.jpg",
+  "timeLimit": 600,
+  "questions": [
+    {
+      "q": "Seorang pasien 24 tahun mengeluhkan nyeri tajam singkat pada gigi molar saat minum dingin. Nyeri berlangsung beberapa detik dan menghilang setelah rangsangan dihilangkan. Tidak terdapat nyeri spontan. Diagnosis pulpa yang paling tepat adalah?",
+      "options": [
+        "Pulpitis reversibel",
+        "Pulpitis ireversibel simptomatik",
+        "Nekrosis pulpa",
+        "Periodontitis apikalis simptomatik"
+      ],
+      "answer": 0,
+      "explanation": "Pulpitis reversibel ditandai nyeri singkat yang dipicu rangsangan, terutama dingin, dan menghilang setelah rangsangan dihentikan."
+    },
+    {
+      "q": "Seorang pasien 32 tahun mengeluhkan nyeri spontan berdenyut pada gigi molar. Nyeri semakin berat pada malam hari dan tetap berlangsung beberapa menit setelah rangsangan dingin dihentikan. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Pulpitis reversibel",
+        "Hipersensitivitas dentin",
+        "Pulpitis ireversibel simptomatik",
+        "Nekrosis pulpa"
+      ],
+      "answer": 2,
+      "explanation": "Nyeri spontan, berdenyut, serta nyeri yang menetap setelah rangsangan dingin merupakan karakteristik pulpitis ireversibel simptomatik."
+    },
+    {
+      "q": "Seorang pasien 19 tahun mengalami trauma pada gigi insisivus sentral maksila. Gigi berubah warna menjadi abu-abu beberapa minggu kemudian dan tidak memberikan respons terhadap tes dingin. Diagnosis pulpa yang paling mungkin adalah?",
+      "options": [
+        "Pulpitis reversibel",
+        "Nekrosis pulpa",
+        "Pulpitis ireversibel",
+        "Pulpitis hiperplastik"
+      ],
+      "answer": 1,
+      "explanation": "Perubahan warna menjadi abu-abu setelah trauma disertai hilangnya respons terhadap tes pulpa mengarah pada nekrosis pulpa."
+    },
+    {
+      "q": "Karies dentin yang belum mencapai pulpa selalu menyebabkan pulpitis ireversibel.",
+      "options": [
+        "Benar",
+        "Salah"
+      ],
+      "answer": 1,
+      "explanation": "Salah. Karies dentin tidak selalu menyebabkan pulpitis ireversibel. Respons pulpa bergantung pada kedalaman lesi, invasi bakteri, durasi iritasi, dan kemampuan jaringan pulpa mempertahankan vitalitas."
+    },
+    {
+      "q": "Seorang pasien 45 tahun datang dengan gigi molar bawah yang terasa sakit saat menggigit. Tes perkusi positif, tetapi tes vitalitas pulpa masih memberikan respons normal. Pemeriksaan radiografis belum menunjukkan radiolusensi periapikal. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Periodontitis apikalis simptomatik",
+        "Abses apikal akut",
+        "Nekrosis pulpa",
+        "Pulpitis ireversibel"
+      ],
+      "answer": 0,
+      "explanation": "Periodontitis apikalis simptomatik dapat menyebabkan nyeri saat menggigit atau perkusi meskipun pulpa masih vital. Perubahan radiografis belum tentu terlihat pada fase awal."
+    },
+    {
+      "q": "Seorang pasien 28 tahun mengeluhkan gusi mudah berdarah saat menyikat gigi. Pemeriksaan menunjukkan gingiva merah, edema, dan perdarahan saat probing, tetapi tidak terdapat kehilangan perlekatan klinis. Diagnosis yang paling tepat adalah?",
+      "options": [
+        "Periodontitis stadium awal",
+        "Gingivitis akibat plak",
+        "Necrotizing periodontitis",
+        "Gingival enlargement"
+      ],
+      "answer": 1,
+      "explanation": "Gingivitis akibat plak ditandai inflamasi gingiva dengan kemerahan, edema, dan perdarahan saat probing tanpa kehilangan perlekatan akibat periodontitis."
+    },
+    {
+      "q": "Seorang pasien 56 tahun memiliki kedalaman probing 6 mm pada beberapa gigi, kehilangan perlekatan klinis, dan kehilangan tulang alveolar pada pemeriksaan radiografis. Diagnosis yang paling tepat adalah?",
+      "options": [
+        "Gingivitis",
+        "Periodontitis",
+        "Abses gingiva",
+        "Trauma oklusal primer"
+      ],
+      "answer": 1,
+      "explanation": "Periodontitis ditandai kehilangan perlekatan periodontal akibat inflamasi serta kehilangan tulang alveolar yang dapat terlihat secara klinis dan radiografis."
+    },
+    {
+      "q": "Seorang pasien 35 tahun mengeluhkan gigi depan tampak lebih panjang setelah mengalami resesi gingiva. Tidak ditemukan karies servikal, tetapi permukaan akar terasa sensitif terhadap rangsangan dingin. Kondisi tersebut paling sesuai dengan?",
+      "options": [
+        "Abrasi",
+        "Resesi gingiva",
+        "Abfraksi",
+        "Erosi"
+      ],
+      "answer": 1,
+      "explanation": "Resesi gingiva menyebabkan perpindahan margin gingiva ke arah apikal sehingga permukaan akar terekspos. Kondisi ini dapat menyebabkan hipersensitivitas dentin."
+    },
+    {
+      "q": "Seorang pasien 42 tahun menggunakan gigi tiruan sebagian lepasan dan mengeluhkan nyeri pada mukosa di bawah basis gigi tiruan. Pemeriksaan menunjukkan area eritematosa berbatas jelas tepat pada daerah yang berkontak dengan basis gigi tiruan. Diagnosis yang paling mungkin adalah?",
+      "options": [
+        "Denture stomatitis",
+        "Leukoplakia",
+        "Lichen planus",
+        "Traumatic ulcer"
+      ],
+      "answer": 0,
+      "explanation": "Denture stomatitis merupakan inflamasi mukosa yang berkaitan dengan penggunaan gigi tiruan, sering ditemukan pada palatum di bawah basis gigi tiruan dan dapat berhubungan dengan Candida serta kebersihan gigi tiruan yang buruk."
+    },
+    {
+      "q": "Gigi impaksi paling sering terjadi pada molar ketiga mandibula karena keterbatasan ruang pada posterior mandibula.",
+      "options": [
+        "Benar",
+        "Salah"
+      ],
+      "answer": 0,
+      "explanation": "Benar. Molar ketiga mandibula merupakan salah satu gigi yang paling sering mengalami impaksi karena erupsi terjadi paling akhir dan ruang retromolar sering tidak mencukupi."
+    }
+  ]
+}
