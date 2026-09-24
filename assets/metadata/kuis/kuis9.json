@@ -2,7 +2,7 @@
   "id": "kuis9",
   "title": "Kuis 9",
   "description": "Tebak Diagnosis dan Kasus Kedokteran Gigi",
-  "thumbnail": "assets/images/kuis8.jpg",
+  "thumbnail": "assets/images/kuis/thumbnail-kuis9.web",
   "timeLimit": 600,
   "questions": [
     {
