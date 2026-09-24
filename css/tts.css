@@ -1,6 +1,6 @@
 :root{
     --primary: #123456;
-    --primary-dark: #1d4ed8;
+    --primary-dark: #012345;
     --cell-size:48px;
     --gap:0px;
     --border:#444;
@@ -131,13 +131,13 @@ color:#666;
     width: 100%;
     padding: 12px 6px;
     border-radius: 8px;
-    border: 1px solid #2563eb;
+    border: 1px solid var(--primary);
     cursor: pointer;
     font-size: 15px;
     box-shadow: var(--shadow);
     white-space: nowrap;
     background: #fff;
-    color: #2563eb;
+    color: var(--primary);
     white-space:nowrap;
 }
 .premium-btn{
@@ -173,7 +173,7 @@ color:#666;
 #progress-fill{
     width:0%;
     height:100%;
-    background:#2563eb;
+    background:var(--primary);
     transition:width .3s ease;
 }
 .crossword-section{
@@ -280,10 +280,10 @@ pointer-events:none;
 }
 .tts-btn {
     width: 100%;
-    border: 1px solid #2563eb;
+    border: 1px solid var(--primary);
     border-radius: 10px;
     background-color: #ffffff;
-    color: #2563eb;
+    color: var(--primary);
     padding: 12px;
     font-size: 15px;
     font-weight: bold;
@@ -293,9 +293,9 @@ pointer-events:none;
 }
 .next-btn{
     width: auto;
-    border: 1px solid #2563eb;
+    border: 1px solid var(--primary);
     border-radius: 10px;
-    background: #2563eb;
+    background: var(--primary);
     color: #ffffff;
     padding: 12px;
     font-size: 15px;
@@ -326,7 +326,7 @@ pointer-events:none;
     padding:12px 20px;
     border:none;
     border-radius:10px;
-    background:#2563eb;
+    background:var(--primary);
     color:#fff;
     cursor:pointer;
     width: auto; 
@@ -510,7 +510,7 @@ pointer-events:none;
 .tts-ad-cta {
     display: block;
     text-align: center;
-    background: #2563eb;
+    background: var(--primary);
     color: #fff;
     font-size: var(--font-list);
     font-weight: 600;
