@@ -16,8 +16,7 @@
     --text: #1f2937;
     --text-light: #6b7280;
     --shadow:0 2px 10px rgba(0,0,0,.08); /* Fallback/Shared theme tokens */
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
+
     --bg-tab: #ececec;
     --success: #008000;
     --font-size: 15px;
