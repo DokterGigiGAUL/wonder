@@ -1,6 +1,35 @@
 /* =========================
    RESULT
 ========================= */
+:root {
+    --list-thumb-size: 112px;
+    --list-gap: 10px;
+    --list-padding: 10px;
+    --list-radius: 10px;
+    --border-radius:10px;
+    --button-radius:10px;
+
+    /* Colors */
+    --hitam: #1e1e1e;
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --text: #1f2937;
+    --text-muted: #6b7280;
+    --text-light: #999999;
+    --border: #e5e7eb;
+    --danger: #e53935;
+    
+    /* Fallback/Shared theme tokens */
+    --primary: #123456;
+    --primary-dark: #012345;
+    --bg-tab: #ececec;
+    --success: #008000;
+ --font-size: 15px;
+   --font-title: 18px;
+   --font-h2: 21px;
+   --font-header:24px;
+    --font-list:13px;
+}
 
 .header-result {
     background: var(--primary);
@@ -35,7 +64,7 @@
 .score-value{
     font-size:48px;
     font-weight:bold;
-    color:#2563eb;
+    color:var(--primary);
     margin:15px 0;
 }
 
@@ -97,7 +126,7 @@
 
 .home-btn{
     display:inline-block;
-    background:#2563eb;
+    background:var(--primary);
     color:#fff;
     text-decoration:none;
     padding:12px 24px;
