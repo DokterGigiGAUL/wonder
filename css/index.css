@@ -512,7 +512,7 @@ body {
 
 .btn-outline {
     /*background: var(--card);*/
-    background: #transparent;
+    background: transparent;
     color: var(--primary);
     border: 1px solid var(--primary);
 }
