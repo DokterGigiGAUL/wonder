@@ -224,6 +224,7 @@
     margin-bottom: 18px;
     line-height: 1.25;
     font-weight: 700!important;
+   font-size:var(--font-title);
 }
 
 .choices{
