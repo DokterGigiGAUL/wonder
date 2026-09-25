@@ -9,7 +9,7 @@ const comics = [
     title: "Komik #1",
     description: "Kenapa Gigi Hilang Perlu Diganti?",
     thumbnail: "assets/images/komik/komik1/thumbnail1.webp",
-    releaseDate: "2026-06-20",
+    releaseDate: "2026-06-16",
     type: "comic"
   },
   {
@@ -22,7 +22,7 @@ const comics = [
     title: "Komik #2",
     description: "Sariawan Karena Infeksi Jamur?",
     thumbnail: "assets/images/komik/komik2/thumbnail2.webp",
-    releaseDate: "2026-06-20",
+    releaseDate: "2026-06-17",
     type: "comic"
   },
   {
@@ -35,7 +35,7 @@ const comics = [
     title: "Komik #3",
     description: "Bagaimana Alkohol Bisa Menyebabkan Kanker Mulut?",
     thumbnail: "assets/images/komik/komik3/thumbnail3.webp",
-    releaseDate: "2026-06-20",
+    releaseDate: "2026-06-18",
     type: "comic"
   },
   {
@@ -49,7 +49,7 @@ const comics = [
     title: "Komik #4",
     description: "Sariawan Bukan Karena Kekurangan Vitamin C",
     thumbnail: "assets/images/komik/komik4/thumbnail4.webp",
-    releaseDate: "2026-07-20",
+    releaseDate: "2026-06-19",
     type: "comic"
   },
   {
@@ -63,7 +63,7 @@ const comics = [
     title: "Komik #5",
     description: "Kelahiran Prematur Akibat Peradangan Gusi?",
     thumbnail: "assets/images/komik/komik5/thumbnail5.webp",
-    releaseDate: "2026-06-20",
+    releaseDate: "2026-07-20",
     type: "comic"
   },
   {
@@ -77,7 +77,7 @@ const comics = [
     title: "Komik #6",
     description: "Ibu Hamil Boleh Cabut Gigi, Gak?",
     thumbnail: "assets/images/komik/komik6/thumbnail6.webp",
-    releaseDate: "2026-06-21",
+    releaseDate: "2026-08-21",
     type: "comic"
   }
 ];
