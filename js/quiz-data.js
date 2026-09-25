@@ -9,7 +9,7 @@ const quizzes = [
         thumbnail: "assets/images/kuis/thumbnail-kuis1.webp",
         premium: false,
         price: 0,
-        releaseDate: "2026-06-20",
+        releaseDate: "2026-06-15",
         type: "quiz"
     },
     {
@@ -22,7 +22,7 @@ const quizzes = [
         thumbnail: "assets/images/kuis/thumbnail-kuis2.webp",
         premium: false,
         price: 0,
-        releaseDate: "2026-06-20",
+        releaseDate: "2026-06-16",
         type: "quiz"
     },
     {
@@ -35,7 +35,7 @@ const quizzes = [
         thumbnail: "assets/images/kuis/thumbnail-kuis3.webp",
         premium: false,
         price: 0,
-        releaseDate: "2026-06-20",
+        releaseDate: "2026-06-17",
         type: "quiz"
     },
     {
@@ -49,7 +49,7 @@ const quizzes = [
         premium: false,
         price: 0,
         mayarUrl: "https://gigital.myr.id/pl/kuis4", // TODO: ganti dengan payment link Mayar untuk Kuis #4
-        releaseDate: "2026-06-20",
+        releaseDate: "2026-06-18",
         type: "quiz"
     },
     {
@@ -63,7 +63,7 @@ const quizzes = [
         premium: true,
         price: 5000,
         mayarUrl: "https://gigital.myr.id/pl/kuis5", // TODO: ganti dengan payment link Mayar untuk Kuis #5
-        releaseDate: "2026-06-20",
+        releaseDate: "2026-06-19",
         type: "quiz"
     },
     {
