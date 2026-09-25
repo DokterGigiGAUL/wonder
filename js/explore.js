@@ -54,9 +54,14 @@ function isPremiumLocked(item) {
 
 function sortByNewest(items) {
     return [...items].sort((a, b) => {
-        const dateA = new Date(a.dateAdded || 0);
-        const dateB = new Date(b.dateAdded || 0);
-        return dateB - dateA; // descending, terbaru dulu
+        const dateA = new Date(a.releaseDate || 0);
+        const dateB = new Date(b.releaseDate || 0);
+
+        if (dateB - dateA !== 0) {
+            return dateB - dateA; // urutkan berdasarkan tanggal, terbaru dulu
+        }
+        // kalau tanggal sama persis, urutkan berdasarkan id terbesar (terbaru) dulu
+        return (b.id || 0) - (a.id || 0);
     });
 }
 
