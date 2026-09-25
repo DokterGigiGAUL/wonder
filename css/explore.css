@@ -349,7 +349,7 @@ body {
     border: none;
     border-radius: var(--button-radius);
     padding: 12px 18px;
-    background: var(--hitam);
+    background: var(--primary);
     color: #fff;
     font-size: var(--font-size);
     font-weight: 400;
@@ -357,7 +357,7 @@ body {
 }
 
 .search-btn:hover {
-    background: #333333;
+    background: var(--primary-dark);
 }
 
 /* ===   4b. SEARCH RESULTS   === */
@@ -372,7 +372,7 @@ body {
 
 .search-group-title {
     margin: 0 0 12px;
-    font-size: 18px;
+    font-size: var(--font-title);
     font-weight: 700;
 }
 
@@ -381,7 +381,7 @@ body {
     padding: 24px 0;
     color: var(--text-light);
     font-size: var(--font-size);
-    line-height: 1.5;
+    line-height: 1.25;
 }
 
 .search-empty a {
@@ -441,7 +441,7 @@ body {
     text-decoration: none;
 }
 
-/* ===   5. RESPONSIVE MEDIA QUERIES   === */
+/* ===   5. RESPONSIVE MEDIA QUERIES   === 
 
 @media (min-width: 481px) {
     .tts-grid {
@@ -458,7 +458,7 @@ body {
     }
 
     .tts-title {
-        font-size: 24px;
+        font-size: var(--font-title);
         margin-bottom: 6px;
     }
-}
+}*/
