@@ -9,7 +9,7 @@ const cases = [
         thumbnail: "assets/images/cases/case1.webp",
         premium: false,
         price: 0,
-        releaseDate: "2026-06-20",
+        releaseDate: "2026-06-17",
         type: "case"
     },
     {
@@ -22,7 +22,7 @@ const cases = [
         thumbnail: "assets/images/cases/case2.webp",
         premium: false,
         price: 0,
-        releaseDate: "2026-06-20",
+        releaseDate: "2026-06-18",
         type: "case"
     },
     {
@@ -35,7 +35,7 @@ const cases = [
         thumbnail: "assets/images/cases/case3.webp",
         premium: false,
         price: 0,
-        releaseDate: "2026-06-20",
+        releaseDate: "2026-06-19",
         type: "case"
     },
     {
@@ -63,7 +63,7 @@ const cases = [
         premium: true,
         price: 5000,
         mayarUrl: "https://gigital.myr.id/pl/case5", // TODO: link Mayar untuk beli Kasus 5
-        releaseDate: "2026-07-21",
+        releaseDate: "2026-07-20",
         type: "case"
     },
     {
@@ -77,7 +77,7 @@ const cases = [
         premium: true,
         price: 5000,
         mayarUrl: "https://gigital.myr.id/pl/case6", // TODO: link Mayar untuk beli Kasus 6
-        releaseDate: "2026-07-20",
+        releaseDate: "2026-07-21",
         type: "case"
     }
 
