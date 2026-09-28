@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head> 
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Wonder App Kedokteran Gigi</title> 
+	<link rel="icon" type="image/png" href="assets/images/favicon.ico" sizes="any">
+	<link rel="stylesheet" href="css/index.css" /> 
+	<link rel="stylesheet" href="css/lego.css" /> 
+  <style>
+    *.home-section{
+    margin-top:16px;
+    }
+    :root {
+    --home-card-per-view: 3.25;
+    }
+  </style>
+</head>
+
+<body> 
+	<!-- Header -->
+	<header class="header"> 
+		<div class="app-brand">
+        <img src="assets/images/logo-gigital-app-typo.png" alt="Wonder App Logo">
+        <h1>Gigital App</h1>
+        </div>
+	</header> 
+	<!-- Search Bar -->
+	<div class="search-bar-wrap">
+		<form id="siteSearchForm" class="search-bar" role="search">
+			<input type="search" id="siteSearchInput" name="q" class="search-input" placeholder="Cari kuis, TTS, kasus, komik..." aria-label="Cari konten">
+			<button type="submit" class="search-btn">Cari</button>
+		</form>
+	</div>
+	
+	<!-- Main Content -->
+	<main class="container"> 
+		
+		<!-- Featured Hero Section 
+		<section id="featured-hero" class="featured-hero"> 
+			<div class="featured-overlay">
+			    <span class="featured-badge"></span>
+				<h2 class="featured-title"></h2>
+				<p class="featured-description"></p> 
+				<div class="featured-actions"> 
+					<button type="button" class="btn btn-primary featured-btn"> Buka </button> 
+				</div>
+			</div>
+		</section> 
+-->
+		
+		<!-- Quiz Section -->
+		<section id="quiz-section" class="home-section"> 
+			<div class="section-header"> 
+				<h2>Kuis Trivia</h2>
+				<a href="explore.html?tab=quiz">Lihat semua →</a>
+				</div> 
+			<div id="quiz-container" class="horizontal-scroll"></div>
+			</section> 
+		
+		<!-- TTS Section -->
+		<section id="tts-section" class="home-section"> 
+			<div class="section-header"> 
+				<h2>Teka Teki Silang</h2>
+				<a href="explore.html?tab=tts">Lihat semua →</a>
+				</div> 
+			<div id="tts-container" class="horizontal-scroll"></div>
+			</section> 
+
+		<!-- Ebook Section -->
+		<section id="ebook-section" class="home-section"> 
+			<div class="section-header"> 
+				<h2>Ebook</h2>
+				<a href="https://gigital.myr.id/ebook" target="_blank" rel="noopener noreferrer">Katalog lengkap →</a>
+			</div> 
+			<div id="ebook-container" class="horizontal-scroll"></div>
+		</section>
+
+        <!-- Banner Iklan -->
+        <section class="banner-ad">
+			<a href="https://www.youtube.com/@doktergigigaul" target="_blank" rel="noopener noreferrer">
+			   <img src="https://live.staticflickr.com/65535/55529890632_3d502ffa7c_b.jpg" alt="Gigital" class="iklan">
+		   </a>
+		</section>
+		
+		<!-- Case Section -->
+		<section id="case-section" class="home-section"> 
+			<div class="section-header"> 
+				<h2>Kartu Kasus</h2>
+				<a href="explore.html?tab=case">Lihat semua →</a>
+			</div> 
+			<div id="case-container" class="horizontal-scroll"></div>
+			</section> 
+		
+		<!-- Comic Section -->
+		<section id="comic-section" class="home-section"> 
+			<div class="section-header"> 
+				<h2>Komik Edukasi</h2>
+				<a href="explore.html?tab=comic">Lihat semua →</a>
+			</div> 
+			<div id="comics-container" class="horizontal-scroll"></div>
+		</section> 
+		
+		<!-- Dentabrix Lego Section -->
+		<section id="lego-section" class="home-section"> 
+			<div class="section-header"> 
+				<h2>Dentabrix Lego</h2>
+				<a href="https://dentabrix.carrd.co" target="_blank" rel="noopener noreferrer">Katalog lengkap →</a>
+			</div> 
+			<div id="lego-container" class="horizontal-scroll"></div>
+</section>
+
+	</main>
+	
+	<!-- Component Templates -->
+	<template id="content-card-template"> 
+		<article class="content-card"> 
+			<div class="featured-card-overlay">
+			    <span class="featured-badge"></span>
+			</div>
+			<img class="content-thumb">
+			<div class="content-info"> 
+				<h3 class="content-title"></h3>
+				<p class="content-description"></p> 
+				<button type="button" class="btn btn-outline content-btn">
+				    Buka →
+				</button>
+			</div>
+		</article>
+	</template> 
+
+	<!-- Modal Konfirmasi Beli -->
+	<div id="buyModal" class="buy-modal-overlay">
+		<div class="buy-modal">
+			<h3>Konten Premium</h3>
+			<p id="buyModalPrice"></p>
+			<div class="buy-modal-actions">
+				<button id="buyModalCancel" class="btn btn-outline">Kembali</button>
+				<a id="buyModalBuy" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Beli Sekarang</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Checkout Mayar -->
+	<div id="checkoutModal" class="buy-modal-overlay">
+		<div class="checkout-modal">
+			<button id="checkoutModalClose" class="checkout-modal-close">&times;</button>
+			<iframe
+				id="checkoutModalFrame"
+				src=""
+				allowfullscreen
+				allowpaymentrequest
+				scrolling="no"
+				frameborder="0"
+				width="100%"
+				height="100%">
+			</iframe>
+		</div>
+	</div>
+	
+	<!-- Scripts -->
+	<script src="https://mayarembed.r2.mayar.id/mayarEmbed.min.js"></script>	
+	<script src="js/storage.js"></script>
+	<script src="js/quiz-data.js"></script>
+	<script src="js/comic-data.js"></script>
+	<script src="js/tts-data.js"></script>
+	<script src="js/case-data.js"></script>
+	<script src="js/ebook-data.js"></script>
+	<script src="js/lego-data.js"></script>
+
+	<script src="js/index.js"></script>
+</body>
+</html>
