@@ -77,6 +77,15 @@
 				</button>
 			</div>
 		</section> 
+
+		<!-- Latest Content Section -->
+		<section id="latest-section" class="home-section">
+			<div class="section-header">
+				<h2>Konten Terbaru</h2>
+				<a href="explore.html">Lihat Semua →</a>
+			</div>
+			<div id="latest-container" class="latest-list"></div>
+		</section>
 		
 		<!-- Quiz Section -->
 		<section id="quiz-section" class="home-section"> 
@@ -142,6 +151,22 @@
 	</main>
 	
 	<!-- Component Templates -->
+	<template id="latest-card-template">
+		<article class="latest-card">
+			<img class="latest-thumb">
+			<div class="latest-info">
+				<span class="latest-badge"></span>
+				<h3 class="latest-title"></h3>
+				<p class="latest-description"></p>
+			</div>
+			<span class="latest-arrow">
+				<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M9 6l6 6-6 6"/>
+				</svg>
+			</span>
+		</article>
+	</template>
+	
 	<template id="content-card-template"> 
 		<article class="content-card"> 
 			<div class="featured-card-overlay">
