@@ -17,6 +17,9 @@ const legoContainer = document.getElementById("lego-container");
 const featuredHero = document.getElementById("featured-hero");
 const cardTemplate = document.getElementById("content-card-template");
 
+const latestContainer = document.getElementById("latest-container");
+const latestCardTemplate = document.getElementById("latest-card-template");
+
 /* -------------------------------------------------------------------------- */
 /* PENANGANAN SEARCH FORM DI HEADER BERANDA                                   */
 /* -------------------------------------------------------------------------- */
@@ -116,6 +119,7 @@ if (checkoutModal) {
 /* -------------------------------------------------------------------------- */
 function initializeHome() {
     renderFeaturedHero();
+        loadLatest();
     loadQuiz();
     loadComics();
     loadTTS();
@@ -348,6 +352,80 @@ function loadLego() {
                 openCheckoutModal(lego.mayarUrl);
             }
         });
+    });
+}
+
+/* -------------------------------------------------------------------------- */
+/* LATEST CONTENT                                                             */
+/* -------------------------------------------------------------------------- */
+function goToDetail(item) {
+    switch (item.type) {
+        case "quiz":
+            location.href = `quiz.html?id=${item.file}`;
+            break;
+        case "comic":
+            location.href = `comic.html?id=${item.id}`;
+            break;
+        case "tts":
+            location.href = `tts.html?puzzle=tts${item.id}`;
+            break;
+        case "case":
+            location.href = `case.html?case=${item.file}`;
+            break;
+    }
+}
+
+function loadLatest() {
+    if (!latestContainer || !latestCardTemplate) return;
+    latestContainer.innerHTML = "";
+
+    const quizzesArr = typeof quizzes !== "undefined" ? quizzes.map(x => ({ ...x, type: "quiz" })) : [];
+    const comicsArr = typeof comics !== "undefined" ? comics.map(x => ({ ...x, type: "comic" })) : [];
+    const ttsArr = typeof ttsList !== "undefined" ? ttsList.map(x => ({ ...x, type: "tts" })) : [];
+    const casesArr = typeof cases !== "undefined" ? cases.map(x => ({ ...x, type: "case" })) : [];
+
+    const latestItems = [...quizzesArr, ...comicsArr, ...ttsArr, ...casesArr]
+        .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))
+        .slice(0, 4);
+
+    latestItems.forEach(item => {
+        const locked = isPremiumLocked(item);
+        const clone = latestCardTemplate.content.cloneNode(true);
+
+        const thumb = clone.querySelector(".latest-thumb");
+        if (thumb) {
+            thumb.src = item.thumbnail || "";
+            thumb.alt = item.title || "";
+        }
+
+        const badge = clone.querySelector(".latest-badge");
+        if (badge) {
+            if (item.premium) {
+                badge.textContent = "👑 Premium";
+                badge.classList.add("premium");
+            } else {
+                badge.textContent = "Gratis";
+            }
+        }
+
+        const title = clone.querySelector(".latest-title");
+        if (title) title.textContent = item.title;
+
+        const desc = clone.querySelector(".latest-description");
+        if (desc) desc.textContent = item.description;
+
+        const card = clone.querySelector(".latest-card");
+        if (card) {
+            card.onclick = () => {
+                if (locked) {
+                    showBuyModal(item);
+                    return;
+                }
+                goToDetail(item);
+            };
+        }
+
+        latestContainer.appendChild(clone);
     });
 }
 
