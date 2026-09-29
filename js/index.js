@@ -389,7 +389,7 @@ function renderFeaturedHero() {
     //if (badge) badge.remove();
     // LOGIKA BADGE: Jika badge ada di HTML, tampilkan teks berdasarkan status premium/terbaru
     if (badge) {
-        badge.textContent = "⭐ Terbaru";
+        badge.textContent = "⭐ Kedokteran Gigi era Digital";
         badge.style.display = "inline-block";
     }
 
