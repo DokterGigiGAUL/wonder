@@ -346,13 +346,13 @@
         const judul = document.createElement("h3");
         judul.className = "latest-title";
         judul.textContent = teksBersih(post.title);
-/*
+
         const tanggal = document.createElement("span");
         tanggal.className = "blog-date";
         tanggal.textContent = new Date(post.date).toLocaleDateString("id-ID", {
           day: "numeric", month: "long", year: "numeric",
         });
-*/
+
         const ringkasan = document.createElement("p");
         ringkasan.className = "latest-description";
         ringkasan.textContent = teksBersih(post.excerpt);
