@@ -901,14 +901,7 @@ body {
 }
 
 .latest-arrow {
-    flex-shrink
-Sets the flex shrink factor. Negative numbers are invalid.
-
-Widely available across major browsers (Baseline since March 2018)
-Learn more
-
-Don’t show
-: 0;
+    flex-shrink: 0;
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -918,4 +911,36 @@ Don’t show
     color: var(--primary);
     padding-right: 16px;
     /*background: #eef4fc;*/
+}
+
+/* ==========================================
+   BLOG LIST (memakai gaya latest-card)
+   ========================================== */
+.blog-card .latest-info {
+    padding: 10px 0;
+}
+
+.blog-card .latest-title {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.blog-card .latest-description {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.blog-date {
+    font-size: var(--font-badge);
+    color: var(--text-muted);
+}
+
+.blog-message {
+    padding: 0 16px 16px;
+    color: var(--text-muted);
+    font-size: var(--font-size);
 }
