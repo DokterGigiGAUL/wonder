@@ -394,7 +394,7 @@ function loadLatest() {
 
         const thumb = clone.querySelector(".latest-thumb");
         if (thumb) {
-            thumb.src = item.thumbnail || "";
+            thumb.src = quiz.thumbnail || "";
             thumb.alt = item.title || "";
         }
 
