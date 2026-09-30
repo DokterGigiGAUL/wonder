@@ -542,7 +542,7 @@ document.querySelectorAll(".category-card").forEach(card => {
 });
  */
 function goToSection(sectionId) {
-    window.location.href = "index.html#" + sectionId;
+    window.location.href = "indeks.html#" + sectionId;
 }
 
 document.querySelectorAll(".category-card").forEach(card => {
