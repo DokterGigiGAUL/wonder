@@ -808,7 +808,7 @@ body {
 }
 
 .banner-ad{
-    padding: 8px 16px;
+    padding: 8px 16px 16px;
 }
 
 .iklan{
@@ -824,9 +824,9 @@ body {
 .latest-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     margin: 0 16px;
-    padding-bottom: 8px;
+    padding-bottom: 16px;
 }
 
 .latest-card {
