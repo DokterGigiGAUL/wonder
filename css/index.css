@@ -209,6 +209,14 @@ body {
     display: none;
 }
 
+#ebook-container.horizontal-scroll {
+   padding-bottom:6px;
+}
+
+#ebook-container.horizontal-scroll::-webkit-scrollbar,
+#ebook-container.featured-latest::-webkit-scrollbar {
+    display: none;
+}
 /* ==========================================
    4. CARDS & CONTENT
    ========================================== */
