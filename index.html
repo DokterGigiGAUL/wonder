@@ -115,7 +115,61 @@
 			</div> 
 			<div id="ebook-container" class="horizontal-scroll"></div>
 		</section>
+<section id="blog">
+  <h2>Artikel Terbaru</h2>
+  <div id="blog-list">Memuat artikel...</div>
+</section>
 
+<script>
+  const SITE = "doktergigigaul.wordpress.com";
+  const API_URL =
+    "https://public-api.wordpress.com/rest/v1.1/sites/" + SITE +
+    "/posts/?number=6&fields=ID,title,excerpt,URL,date";
+
+  // Mengubah teks HTML dari WordPress menjadi teks biasa
+  function teks(html) {
+    return new DOMParser().parseFromString(html, "text/html").body.textContent.trim();
+  }
+
+  fetch(API_URL)
+    .then((res) => res.json())
+    .then((data) => {
+      const list = document.getElementById("blog-list");
+      list.innerHTML = "";
+
+      if (!data.posts || data.posts.length === 0) {
+        list.textContent = "Belum ada artikel.";
+        return;
+      }
+
+      data.posts.forEach((post) => {
+        const item = document.createElement("article");
+
+        const judul = document.createElement("h3");
+        const link = document.createElement("a");
+        link.href = post.URL;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = teks(post.title);
+        judul.appendChild(link);
+
+        const tanggal = document.createElement("small");
+        tanggal.textContent = new Date(post.date).toLocaleDateString("id-ID", {
+          day: "numeric", month: "long", year: "numeric",
+        });
+
+        const ringkasan = document.createElement("p");
+        ringkasan.textContent = teks(post.excerpt);
+
+        item.append(judul, tanggal, ringkasan);
+        list.appendChild(item);
+      });
+    })
+    .catch(() => {
+      document.getElementById("blog-list").textContent =
+        "Artikel belum dapat dimuat. Silakan coba lagi nanti.";
+    });
+</script>
         <!-- Banner Iklan -->
         <section class="banner-ad">
 			<div class="section-header" style="padding:8px 16px 16px;"> 
