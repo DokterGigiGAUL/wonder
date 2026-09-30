@@ -570,9 +570,7 @@ body {
     height: 50px;
    padding: 8px 24px;
     margin-top: auto;
-   border-radius:99px;
    color:#f0f0f0;
-   border:2px solid #f0f0f0;
    background:transparent;
    /*background: var(--primary-dark) !important;*/
 }
@@ -902,14 +900,15 @@ body {
 
 .latest-arrow {
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--primary);
     padding-right: 16px;
+   font-size:24px;
     /*background: #eef4fc;*/
 }
 
