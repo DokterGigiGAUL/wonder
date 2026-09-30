@@ -2,7 +2,7 @@ const ebooks = [
     {
         id: 1,
         file: "ebook1",
-        title: "Panduan Resep Bagi Dokter Gigi",
+        title: "Panduan Resep Obat Bagi Dokter Gigi",
         description: "Panduan peresepan dari obat-obatan yang umum diresepkan pada terapi penyakit gigi dan mulut. ",
         /*thumbnail: "assets/images/ebook/ebook1.jpg",*/
         thumbnail: "https://media-myr.b-cdn.net/images/resized/600/6a709c40-0029-4cdc-b274-fe862da5f260.jpeg",
