@@ -55,7 +55,7 @@ const ttsList = [
         premium: false,
         price: 0, 
         mayarUrl: "https://gigital.myr.id/pl/tts4", 
-        releaseDate: "2026-07-21",
+        releaseDate: "2026-06-21",
         type: "tts"
     },
     {
@@ -69,7 +69,7 @@ const ttsList = [
         premium: true,
         price: 5000, 
         mayarUrl: "https://gigital.myr.id/pl/tts5", 
-        releaseDate: "2026-08-21",
+        releaseDate: "2026-07-20",
         type: "tts"
     },
     {
