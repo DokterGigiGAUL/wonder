@@ -77,7 +77,7 @@ const cases = [
         premium: true,
         price: 5000,
         mayarUrl: "https://gigital.myr.id/pl/case6", // TODO: link Mayar untuk beli Kasus 6
-        releaseDate: "2026-07-21",
+        releaseDate: "2026-08-21",
         type: "case"
     }
 
