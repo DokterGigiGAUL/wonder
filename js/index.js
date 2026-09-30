@@ -386,7 +386,7 @@ function loadLatest() {
 
     const latestItems = [...quizzesArr, ...comicsArr, ...ttsArr, ...casesArr]
         .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))
-        .slice(1, 4);
+        .slice(1, 5);
 
     latestItems.forEach(item => {
         const locked = isPremiumLocked(item);
