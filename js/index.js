@@ -394,7 +394,7 @@ function loadLatest() {
 
         const thumb = clone.querySelector(".latest-thumb");
         if (thumb) {
-            thumb.src = quiz.thumbnail || "";
+            thumb.src = item.thumbnail || "";
             thumb.alt = item.title || "";
         }
 
@@ -451,11 +451,11 @@ function renderFeaturedHero() {
     const heroItem = latestItems[0];
     if (!heroItem) return;
 
-//    const urlBg = "https://doktergigigaul.github.io/wonder/assets/images/premium-bg.jpeg";
+    const urlBg = "https://doktergigigaul.wordpress.com/wp-content/uploads/2026/09/oral-cancer.webp";
 //    featuredHero.style.backgroundImage = `url(${urlBg})`;
     
 // Menggunakan thumbnail dari konten terbaru yang ditemukan
-    const urlBg = heroItem.thumbnail || "assets/images/premium-bg.jpeg";
+//    const urlBg = heroItem.thumbnail || "assets/images/premium-bg.jpeg";
     featuredHero.style.backgroundImage = `url('${urlBg}')`;
     
     const badge = featuredHero.querySelector(".featured-badge");
