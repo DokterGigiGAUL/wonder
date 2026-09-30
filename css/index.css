@@ -49,6 +49,9 @@
          --font-header:28px;
 
    }
+   .featured-overlay {
+   gap:18px;
+   }
 }
 @media (min-width: 1024px) { 
    :root { 
@@ -327,7 +330,7 @@ body {
     background: linear-gradient(
         to top,
         rgba(0,0,0,.82) 10%,
-        rgba(0,0,0,.45) 45%,
+        rgba(0,0,0,.45) 55%,
         rgba(0,0,0,.15) 100%
     );
     border-radius: 16px;
@@ -340,7 +343,7 @@ body {
     padding: 24px 24px 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 6px;
     color: #fff;
 }
 
@@ -374,13 +377,13 @@ body {
 
 .hero-featured-title {
     margin: 0;
-    font-size: var(--font-h2);
+    font-size: var(--font-header);
     line-height: 1.2;
 }
 
 .hero-featured-description {
     margin: 0;
-    max-width: 400px;
+    max-width: auto;
     line-height: 1.2;
     padding-bottom: 8px;
     color: rgba(255,255,255,.9);
@@ -551,12 +554,13 @@ body {
 }
 
 .feature-btn {
-    width: max-content;
-    padding: 8px 24px;
+    width: 50px;
+    height: 50px;
+   padding: 8px 24px;
     margin-top: auto;
    border-radius:99px;
    color:#f0f0f0;
-   border:1px solid #f0f0f0;
+   border:2px solid #f0f0f0;
    background:transparent;
    /*background: var(--primary-dark) !important;*/
 }
