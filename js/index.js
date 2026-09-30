@@ -508,7 +508,7 @@ function renderFeaturedHero() {
 
 /* -------------------------------------------------------------------------- */
 /* CATEGORY NAVIGATION                                                        */
-/* -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
 
 function goToSection(sectionId) {
     const section = document.getElementById(sectionId);
@@ -540,7 +540,32 @@ document.querySelectorAll(".category-card").forEach(card => {
         }
     });
 });
+ */
+function goToSection(sectionId) {
+    window.location.href = "index.html#" + sectionId;
+}
 
+document.querySelectorAll(".category-card").forEach(card => {
+    card.addEventListener("click", () => {
+        switch (card.dataset.category) {
+            case "quiz":
+                goToSection("quiz-section");
+                break;
+            case "case":
+                goToSection("case-section");
+                break;
+            case "tts":
+                goToSection("tts-section");
+                break;
+            case "comic":
+                goToSection("comic-section");
+                break;
+            case "ebook":
+                goToSection("ebook-section");
+                break;
+        }
+    });
+});
 /* -------------------------------------------------------------------------- */
 /* HELPER UNTUK KARTU "LIHAT SEMUA" GLOBAL                                   */
 /* -------------------------------------------------------------------------- 
