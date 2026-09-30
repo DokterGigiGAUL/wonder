@@ -33,6 +33,7 @@
 
     --home-card-gap: 16px;
     --home-card-per-view: 2.25;
+   --font-badge: 11px;
    --font-size: 15px;
    --font-title: 17px;
    --font-h2: 20px;
@@ -43,6 +44,7 @@
 @media (min-width: 481px)  { 
    :root { 
       --home-card-per-view: 3; 
+         --font-badge: 13px;
       --font-size: 18px; 
       --font-title: 20px;
       --font-h2: 23px;
@@ -56,6 +58,7 @@
 @media (min-width: 1024px) { 
    :root { 
       --home-card-per-view: 4.25; 
+         --font-badge: 15px;
       --font-size: 21px; 
       --font-title: 23px;
       --font-h2: 26px;
@@ -66,6 +69,7 @@
 @media (min-width: 1440px) { 
    :root { 
       --home-card-per-view: 5; 
+         --font-badge: 17px;
       --font-size: 24px; 
       --font-title: 26px;
       --font-h2: 29px;
@@ -820,8 +824,8 @@ body {
 .latest-card {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px;
+    gap: 16px;
+    padding: 0px;
     background: var(--card);
     border-radius: 16px;
     box-shadow: 0 4px 14px rgba(0,0,0,.08);
@@ -837,11 +841,11 @@ body {
 }
 
 .latest-thumb {
-    width: 56px;
-    height: 56px;
+    width: 112px;
+    height: 112px;
     flex-shrink: 0;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 12px 0 0 12px;
     background: #e5e7eb;
 }
 
@@ -855,13 +859,13 @@ body {
 
 .latest-badge {
     align-self: flex-start;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 8px;
+    font-size: var(--font-badge);
+    font-weight: 400;
+    padding: 6px 12px;
     border-radius: 999px;
     color: #fff;
     background: var(--success);
-    margin-bottom: 2px;
+    margin-bottom: 6px;
 }
 
 .latest-badge.premium {
@@ -889,13 +893,21 @@ body {
 }
 
 .latest-arrow {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+    flex-shrink
+Sets the flex shrink factor. Negative numbers are invalid.
+
+Widely available across major browsers (Baseline since March 2018)
+Learn more
+
+Don’t show
+: 0;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--primary);
-    background: #eef4fc;
+    padding-right: 16px;
+    /*background: #eef4fc;*/
 }
