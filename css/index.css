@@ -24,15 +24,16 @@
     
     /* Layout & Spacing */
    
-    --shadow: 0px 0px 6px rgba(0, 0, 0, 0.6);
-    --shadow-card: 0 6px 18px rgba(0, 0, 0, .15);
-    --radius: 12px;
-    --card-radius: 18px;
-    --button-radius: 14px;
+   --shadow: 0px 0px 6px rgba(0, 0, 0, 0.6);
+   --shadow-card: 0 6px 18px rgba(0, 0, 0, .15);
+   --radius: 12px;
+   --card-radius: 18px;
+   --button-radius: 14px;
    --border-radius: 20px;
-
-    --home-card-gap: 16px;
-    --home-card-per-view: 2.25;
+   --thumb-size:128px;
+   
+   --home-card-gap: 16px;
+   --home-card-per-view: 2.25;
    --font-badge: 11px;
    --font-size: 15px;
    --font-title: 17px;
@@ -43,13 +44,13 @@
 /* Responsiveness on Variables */
 @media (min-width: 481px)  { 
    :root { 
+      --thumb-size:160px;
       --home-card-per-view: 3; 
-         --font-badge: 13px;
+      --font-badge: 13px;
       --font-size: 18px; 
       --font-title: 20px;
       --font-h2: 23px;
-         --font-header:28px;
-
+      --font-header:28px;
    }
    .featured-overlay {
    gap:18px;
@@ -57,24 +58,24 @@
 }
 @media (min-width: 1024px) { 
    :root { 
+      --thumb-size:196px;
       --home-card-per-view: 4.25; 
-         --font-badge: 15px;
+      --font-badge: 15px;
       --font-size: 21px; 
       --font-title: 23px;
       --font-h2: 26px;
-         --font-header:32px;
-
+      --font-header:32px;
    }
 }
 @media (min-width: 1440px) { 
    :root { 
+      --thumb-size:128px;
       --home-card-per-view: 5; 
-         --font-badge: 17px;
+      --font-badge: 17px;
       --font-size: 24px; 
       --font-title: 26px;
       --font-h2: 29px;
-         --font-header:36px;
-
+      --font-header:36px;
    }
 }
 
@@ -480,7 +481,7 @@ body {
 .category-card:nth-child(4) svg { fill: #ff8b2b; }
 
 .category-card span {
-    font-size: 15px;
+    font-size: var(--font-size);
     font-weight: 400;
     color: #222;
     text-align: left;
@@ -829,7 +830,7 @@ body {
 
 .latest-card {
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: 16px;
     padding: 0px;
     background: var(--card);
@@ -847,8 +848,8 @@ body {
 }
 
 .latest-thumb {
-    width: 112px;
-    height: 112px;
+    width: var(--thumb-size);
+    height: var(--thumb-size);
     flex-shrink: 0;
     object-fit: cover;
     border-radius: 12px 0 0 12px;
@@ -861,13 +862,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2px;
+   padding: 16px 8px;
 }
 
 .latest-badge {
     align-self: flex-start;
     font-size: var(--font-badge);
     font-weight: 400;
-    padding: 6px 12px;
+    padding: 4px 8px;
     border-radius: 999px;
     color: #fff;
     background: var(--success);
@@ -875,7 +877,7 @@ body {
 }
 
 .latest-badge.premium {
-    background: #f5a623;
+    background: #b79001;
 }
 
 .latest-title {
