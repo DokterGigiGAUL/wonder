@@ -46,6 +46,46 @@ if (!listTemplate) {
     );
 }
 
+/* -------------------------------------------------------------------------- */
+/* HERO PER TAB                                                               */
+/* -------------------------------------------------------------------------- */
+const exploreHero = document.getElementById("explore-hero");
+const exploreHeroTitle = document.getElementById("exploreHeroTitle");
+const exploreHeroDesc = document.getElementById("exploreHeroDesc");
+
+// Ganti judul, deskripsi, dan gambar sesuai keinginan
+const HERO_TAB = {
+    quiz: {
+        title: "Kuis Interaktif",
+        desc: "Uji pemahamanmu lewat soal-soal seputar kedokteran gigi.",
+        image: "assets/images/hero-quiz.jpg"
+    },
+    tts: {
+        title: "Teka Teki Silang",
+        desc: "Asah istilah kedokteran gigi sambil bermain.",
+        image: "assets/images/hero-tts.jpg"
+    },
+    case: {
+        title: "Kartu Kasus",
+        desc: "Latihan menalar kasus klinis langkah demi langkah.",
+        image: "assets/images/hero-case.jpg"
+    },
+    comic: {
+        title: "Komik Edukasi",
+        desc: "Belajar konsep sulit lewat cerita bergambar.",
+        image: "assets/images/hero-comic.jpg"
+    }
+};
+
+function updateHero(tabKey) {
+    const data = HERO_TAB[tabKey];
+    if (!exploreHero || !data) return;
+    exploreHero.style.display = "block";
+    exploreHero.style.backgroundImage = `url("${data.image}")`;
+    if (exploreHeroTitle) exploreHeroTitle.textContent = data.title;
+    if (exploreHeroDesc) exploreHeroDesc.textContent = data.desc;
+}
+
 function isPremiumLocked(item) {
     if (!item || !item.premium) return false;
     const unlocked = typeof Storage !== "undefined" && typeof Storage.isUnlocked === "function" && Storage.isUnlocked(item.productId);
@@ -187,6 +227,7 @@ function createListCard({
 function showQuiz() {
 
     pageTitle.textContent = "Semua Kuis";
+    updateHero("quiz");          // <- tambahkan
 
     quizSection.style.display = "block";
     comicSection.style.display = "none";
@@ -248,6 +289,7 @@ caseTab?.classList.remove("active");
 function showComic() {
 
     pageTitle.textContent = "Semua Komik";
+    updateHero("comic");         // <- tambahkan
 
     quizSection.style.display = "none";
     comicSection.style.display = "block";
@@ -300,6 +342,7 @@ caseTab?.classList.remove("active");
 function showTTS() {
 
     pageTitle.textContent = "Semua TTS";
+    updateHero("tts");           // <- tambahkan
 
     quizSection.style.display = "none";
     comicSection.style.display = "none";
@@ -354,6 +397,7 @@ caseTab?.classList.remove("active");
 function showCase() {
 
     pageTitle.textContent = "Semua Kartu Kasus";
+    updateHero("case");          // <- tambahkan
 
     quizSection.style.display = "none";
     comicSection.style.display = "none";
@@ -435,6 +479,7 @@ async function showSearchResults(searchQuery) {
     pageTitle.textContent = `Hasil pencarian: "${searchQuery}"`;
 
     if (exploreTabs) exploreTabs.style.display = "none";
+    if (exploreHero) exploreHero.style.display = "none";
     quizSection.style.display = "none";
     comicSection.style.display = "none";
     ttsSection.style.display = "none";
