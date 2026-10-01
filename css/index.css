@@ -434,7 +434,7 @@ body {
     font-size: 13px;
     font-weight: 400;
     color: #fff;
-    background: rgba(0, 0, 0, .25);
+    background: #0076DF;
     backdrop-filter: blur(6px);
     width: max-content;
 }
@@ -608,6 +608,14 @@ body {
    border-radius:10px;
 }
 
+.contents-btn {
+    margin-top: auto;
+   width: 100%;
+   padding: 8px 12px;
+   border-radius:10px;
+   background: var(--success)!important;
+    color: #fff;
+}
 
 /* ==========================================
    MODAL KONFIRMASI BELI
