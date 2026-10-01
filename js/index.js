@@ -401,7 +401,7 @@ function loadLatest() {
         const badge = clone.querySelector(".latest-badge");
         if (badge) {
             if (item.premium) {
-                badge.textContent = "👑 Premium";
+                badge.textContent = "Premium";
                 badge.classList.add("premium");
             } else {
                 badge.textContent = "Gratis";
