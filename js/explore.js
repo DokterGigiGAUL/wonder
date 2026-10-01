@@ -58,22 +58,22 @@ const HERO_TAB = {
     quiz: {
         title: "Kuis Interaktif",
         desc: "Uji pemahamanmu lewat soal-soal seputar kedokteran gigi.",
-        image: "assets/images/hero-quiz.jpg"
+        image: "assets/images/kuis/thumbnail-kuis2.webp"
     },
     tts: {
         title: "Teka Teki Silang",
         desc: "Asah istilah kedokteran gigi sambil bermain.",
-        image: "assets/images/hero-tts.jpg"
+        image: "assets/images/tts/thumbnail-tts.webp"
     },
     case: {
         title: "Kartu Kasus",
         desc: "Latihan menalar kasus klinis langkah demi langkah.",
-        image: "assets/images/hero-case.jpg"
+        image: "assets/images/cases/case3.webp"
     },
     comic: {
         title: "Komik Edukasi",
         desc: "Belajar konsep sulit lewat cerita bergambar.",
-        image: "assets/images/hero-comic.jpg"
+        image: "assets/images/komik/komik2/thumbnail2.webp"
     }
 };
 
