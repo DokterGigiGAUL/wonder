@@ -441,6 +441,68 @@ body {
     text-decoration: none;
 }
 
+/* ===   HERO PER TAB   === */
+
+.explore-hero {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    margin: 0 0 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #d1d5db;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .15);
+}
+
+/* Lapisan gelap agar teks putih tetap terbaca di gambar apa pun */
+.explore-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, .75) 10%,
+        rgba(0, 0, 0, .5) 55%,
+        rgba(0, 0, 0, .35) 100%
+    );
+}
+
+.explore-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #fff;
+}
+
+.explore-hero-title {
+    margin: 0;
+    font-size: var(--font-header);
+    line-height: 1.2;
+}
+
+.explore-hero-desc {
+    margin: 0;
+    font-size: var(--font-title);
+    line-height: 1.25;
+    color: rgba(255, 255, 255, .9);
+    white-space: pre-line;
+}
+
+@media (min-width: 481px) {
+    .explore-hero { aspect-ratio: 2 / 1; }
+    .explore-hero-overlay { padding: 32px; }
+}
+
+@media (min-width: 1024px) {
+    .explore-hero { aspect-ratio: 3 / 1; }
+}
+
 /* ===   5. RESPONSIVE MEDIA QUERIES   === 
 
 @media (min-width: 481px) {
