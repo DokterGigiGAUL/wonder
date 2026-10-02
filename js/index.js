@@ -542,14 +542,16 @@ document.querySelectorAll(".category-card").forEach(card => {
 });
  */
 function goToSection(sectionId) {
-    window.location.href = "indeks.html#" + sectionId;
+    //window.location.href = "indeks.html#" + sectionId;
+    window.location.href = "explore.html?tab=" + sectionId;
 }
 
 document.querySelectorAll(".category-card").forEach(card => {
     card.addEventListener("click", () => {
         switch (card.dataset.category) {
             case "quiz":
-                goToSection("quiz-section");
+                //goToSection("quiz-section");
+                goToSection("quiz");
                 break;
             case "case":
                 goToSection("case-section");
