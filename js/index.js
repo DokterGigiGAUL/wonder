@@ -553,14 +553,17 @@ document.querySelectorAll(".category-card").forEach(card => {
                 //goToSection("quiz-section");
                 goToSection("quiz");
                 break;
-            case "case":
-                goToSection("case-section");
-                break;
             case "tts":
-                goToSection("tts-section");
+                //goToSection("tts-section");
+                goToSection("tts");
+                break;
+            case "case":
+                //goToSection("case-section");
+                goToSection("case");
                 break;
             case "comic":
-                goToSection("comic-section");
+                //goToSection("comic-section");
+                goToSection("comic");
                 break;
             case "ebook":
                 goToSection("ebook-section");
