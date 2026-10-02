@@ -1,4 +1,5 @@
 :root {
+    --font-small: 13px;
     --font-size: 15px;
     --font-title: 17px;
     --font-h2: 20px;
@@ -8,6 +9,7 @@
 /* Responsiveness on Variables */
 @media (min-width: 481px)  { 
    :root {
+       --font-small: 15px;
        --font-size: 18px;
        --font-title: 20px;
        --font-h2: 23px;
@@ -16,6 +18,7 @@
 }
 @media (min-width: 1024px) { 
    :root {
+       --font-small: 17px;
        --font-size: 21px;
        --font-title: 23px;
        --font-h2: 26px;
@@ -24,6 +27,7 @@
 }
 @media (min-width: 1440px) { 
    :root { 
+       --font-small: 19px;
        --font-size: 24px; 
        --font-title: 26px;
        --font-h2: 29px;
@@ -71,10 +75,12 @@
 .lego-card .content-btn {
     width: max-content;
     align-self: center;
-    border-radius: 10px;
-    padding: 10px 24px;
-    margin-top:0;
-    /*background:#0076DF;*/
-    background:#008000;
-    color:#ffffff;
+    border-radius: 8px;
+    padding: 8px 16px !important;
+    margin-top: 0;
+    /* background: #0076DF; */
+    background: #008000;
+    color: #ffffff;
+    border: none;
+    font-size: var(--font-small);
 }
