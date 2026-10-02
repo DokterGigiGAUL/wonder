@@ -445,7 +445,7 @@ body {
 
 .explore-hero {
     position: relative;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 2 / 1;
     margin: 0 0 24px;
     border-radius: 16px;
     overflow: hidden;
@@ -489,7 +489,7 @@ body {
 .explore-hero-desc {
     margin: 0;
     font-size: var(--font-title);
-    line-height: 1.25;
+    line-height: 1.5;
     color: rgba(255, 255, 255, .9);
     white-space: pre-line;
 }
