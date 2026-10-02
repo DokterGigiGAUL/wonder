@@ -34,6 +34,7 @@
    
    --home-card-gap: 16px;
    --home-card-per-view: 2.25;
+   --font-small:13px;
    --font-badge: 11px;
    --font-size: 15px;
    --font-title: 17px;
@@ -46,6 +47,7 @@
    :root { 
       --thumb-size:160px;
       --home-card-per-view: 3; 
+         --font-small:15px;
       --font-badge: 13px;
       --font-size: 18px; 
       --font-title: 20px;
@@ -64,6 +66,7 @@
    :root { 
       --thumb-size:196px;
       --home-card-per-view: 4.25; 
+         --font-small:17px;
       --font-badge: 15px;
       --font-size: 21px; 
       --font-title: 23px;
@@ -79,6 +82,7 @@
    :root { 
       --thumb-size:128px;
       --home-card-per-view: 5; 
+         --font-small:19px;
       --font-badge: 17px;
       --font-size: 24px; 
       --font-title: 26px;
@@ -289,7 +293,6 @@ body {
 }
 
 .content-description {
-    font-size: var(--font-size);
     color: var(--text-light);
     margin-bottom: 8px;
     line-height: 1.25;
@@ -327,6 +330,7 @@ body {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+       font-size: var(--font-small);   
 }
 
 /* ==========================================
