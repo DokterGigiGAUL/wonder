@@ -57,22 +57,22 @@ const exploreHeroDesc = document.getElementById("exploreHeroDesc");
 const HERO_TAB = {
     quiz: {
         title: "Kuis Interaktif",
-        desc: "Uji pemahamanmu lewat soal-soal seputar kedokteran gigi.",
+        desc: "Uji pemahamanmu lewat kuis digital Kedokteran Gigi Gigital.",
         image: "assets/images/kuis/thumbnail-kuis2.webp"
     },
     tts: {
         title: "Teka Teki Silang",
-        desc: "Asah istilah kedokteran gigi sambil bermain.",
+        desc: "Asah otak sambil bermain TTS virtual Kedokteran Gigi Gigital.",
         image: "assets/images/tts/thumbnail-tts.webp"
     },
     case: {
         title: "Kartu Kasus",
-        desc: "Latihan menalar kasus klinis langkah demi langkah.",
+        desc: "Latihan menalar langkah demi langkah kasus-kasus klinis Gigital.",
         image: "assets/images/cases/case3.webp"
     },
     comic: {
         title: "Komik Edukasi",
-        desc: "Belajar konsep sulit lewat cerita bergambar.",
+        desc: "Edukasi visual topik umum Kedokteran Gigi via komik Gigital.",
         image: "assets/images/komik/komik2/thumbnail2.webp"
     }
 };
