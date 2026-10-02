@@ -63,7 +63,7 @@ const comics = [
     title: "Komik #5",
     description: "Kelahiran Prematur Akibat Peradangan Gusi?",
     thumbnail: "assets/images/komik/komik5/thumbnail5.webp",
-    releaseDate: "2026-06-20",
+    releaseDate: "2026-07-20",
     type: "comic"
   },
   {
@@ -77,7 +77,7 @@ const comics = [
     title: "Komik #6",
     description: "Ibu Hamil Boleh Cabut Gigi, Gak?",
     thumbnail: "assets/images/komik/komik6/thumbnail6.webp",
-    releaseDate: "2026-07-21",
+    releaseDate: "2026-08-21",
     type: "comic"
   }
 ];
