@@ -61,6 +61,15 @@
    .latest-info {
    padding: 24px 16px;
    }
+
+   .section-header h2 {
+    margin: 0;
+    font-size: var(--font-header);
+}
+   .latest-title {
+    margin: 0;
+    font-size: var(--font-h2);
+   }
 }
 @media (min-width: 1024px) { 
    :root { 
@@ -75,6 +84,16 @@
    }
       .latest-info {
    padding: 24px 16px;
+   }
+
+   .section-header h2 {
+    margin: 0;
+    font-size: var(--font-header);
+   }
+
+   .latest-title {
+    margin: 0;
+    font-size: var(--font-h2);
    }
 }
 
@@ -91,6 +110,15 @@
    }
       .latest-info {
    padding: 24px 16px;
+   }
+
+   .section-header h2 {
+    margin: 0;
+    font-size: var(--font-header);
+}
+   .latest-title {
+    margin: 0;
+    font-size: var(--font-h2);
    }
 }
 
@@ -426,7 +454,7 @@ body {
     align-items: center;
     gap: var(--home-card-gap);
     flex-wrap: wrap;
-    justify-content: right;
+    justify-content: left;
 }
 
 .feature-badge {
@@ -583,13 +611,13 @@ body {
 }
 
 .feature-btn {
-    width: 50px;
-    height: 24px;
+   width: 50px;
+   height: 24px;
    padding: 8px 24px;
-    margin-top: auto;
-   color:#f0f0f0;
-   background:transparent;
-   /*background: var(--primary-dark) !important;*/
+      margin-top: 6px;
+   color: #f0f0f0;
+   background: transparent !important;
+   border: 2px solid #f0f0f0;
 }
 
 .featured-catalog-btn {
@@ -731,19 +759,19 @@ body {
 
    .category-card {
          display: flex;
-         flex-direction: row;
-         align-items: center;
-         justify-content: flex-start;
-         text-align: center;
-         gap: 8px;
-         padding: 0px 12px;
-         background: var(--card);
-         border: none;
-         border-radius: 10px;
-   box-shadow: var(--shadow);
-         cursor: pointer;
-         transition: .2s;
-         min-height: 48px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        gap: 8px;
+        padding: 12px 12px;
+        background: var(--card);
+        border: none;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        cursor: pointer;
+        transition: .2s;
+        min-height: 60px;
    }
    
    .category-card:hover {
@@ -773,7 +801,7 @@ body {
    .category-card:nth-child(4) svg { fill: #ff8b2b; }
    
    .category-card span {
-       font-size: var(--font-size); /* Ukuran teks diperkecil agar pas 4 kolom */
+       font-size: var(--font-title); /* Ukuran teks diperkecil agar pas 4 kolom */
        font-weight: 400;
        color: #222;
        text-align: center;
@@ -802,6 +830,9 @@ body {
         width: 100%;
     }
 
+   .category-card span {
+       font-size: var(--font-title); /* Ukuran teks diperkecil agar pas 4 kolom */
+   }
 }
 
 .checkout-modal {
