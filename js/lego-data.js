@@ -10,6 +10,7 @@ const legoSets = [
         file: "lego1",
         title: "Mini",
         description: "Minimal Maksimal.",
+        deskripsi: "Ini adalah contoh deskripsi produk.",
         thumbnail: "assets/images/lego/IMG_4746.jpeg",
         gallery: [
             "https://down-id.img.susercontent.com/file/id-11134207-8224r-miy0chfmx1j898.webp",
@@ -26,6 +27,7 @@ const legoSets = [
         file: "lego2",
         title: "Modern",
         description: "Kursi Gigi Banget.",
+        deskripsi: "Ini adalah contoh deskripsi produk.",
         thumbnail: "assets/images/lego/IMG_4747.jpeg",
           gallery: [
             "https://down-id.img.susercontent.com/file/id-11134207-8224y-miy1j1mkg7wn98.webp",
@@ -43,6 +45,7 @@ const legoSets = [
         file: "lego3",
         title: "Retro",
         description: "Yang Tua Tua Aja.",
+        deskripsi: "Ini adalah contoh deskripsi produk.",
         thumbnail: "assets/images/lego/IMG_4748.jpeg",
           gallery: [
             "https://down-id.img.susercontent.com/file/id-11134207-8224y-miy1j1mkg7wn98.webp",
