@@ -28,7 +28,7 @@ const legoSets = [
         description: "Kursi Gigi Banget.",
         thumbnail: "assets/images/lego/IMG_4747.jpeg",
           gallery: [
-            "https://down-ws-id.vod.susercontent.com/api/v4/11110107/mms/id-11110107-6vdvn-miy1zl94osubb3.16000081767246122.mp4",
+            "https://down-id.img.susercontent.com/file/id-11134207-8224y-miy1j1mkg7wn98.webp",
             "https://down-id.img.susercontent.com/file/id-11134207-8224r-miy0chfmx1j898.webp",
             "https://down-id.img.susercontent.com/file/id-11134207-82251-miy0chfinxmp4d.webp",
             "https://down-id.img.susercontent.com/file/id-11134207-8224o-miy0chfnxkaq2c.webp",
@@ -45,7 +45,7 @@ const legoSets = [
         description: "Yang Tua Tua Aja.",
         thumbnail: "assets/images/lego/IMG_4748.jpeg",
           gallery: [
-            "https://down-ws-id.vod.susercontent.com/api/v4/11110107/mms/id-11110107-6vdvn-miy1zl94osubb3.16000081767246122.mp4",
+            "https://down-id.img.susercontent.com/file/id-11134207-8224y-miy1j1mkg7wn98.webp",
             "https://down-id.img.susercontent.com/file/id-11134207-82251-miy0chfinxmp4d.webp",
             "https://down-id.img.susercontent.com/file/id-11134207-8224o-miy0chfnxkaq2c.webp",
             "https://down-id.img.susercontent.com/file/id-11134207-8224y-miy1j1mkg7wn98.webp"
