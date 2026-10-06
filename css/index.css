@@ -78,13 +78,13 @@
 @media (min-width: 1024px) { 
    :root { 
       --thumb-size:196px;
-      --home-card-per-view: 4.25; 
+      --home-card-per-view: 3.25; 
          --font-small:17px;
       --font-badge: 15px;
       --font-size: 21px; 
       --font-title: 23px;
       --font-h2: 26px;
-      --font-header:32px;
+      --font-header:48px;
    }
       .latest-info {
    padding: 24px 16px;
@@ -108,7 +108,7 @@
 @media (min-width: 1440px) { 
    :root { 
       --thumb-size:128px;
-      --home-card-per-view: 5; 
+      --home-card-per-view: 4.25; 
          --font-small:19px;
       --font-badge: 17px;
       --font-size: 24px; 
@@ -725,7 +725,7 @@ body {
     }
 
     .featured-overlay {
-        top: 40px;
+        top: 24px;
     }
         
     .featured-item {
