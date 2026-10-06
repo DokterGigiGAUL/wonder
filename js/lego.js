@@ -16,7 +16,7 @@ document.getElementById('lego-title').textContent = "Dentabrix " + lego.title;
 document.getElementById("lego-price").textContent =
     `Rp ${lego.price.toLocaleString("id-ID")}`;
 
-document.getElementById("lego-description").textContent = lego.description;
+document.getElementById("lego-description").textContent = lego.deskripsi;
 
 const backBtn = document.getElementById("legoBackBtn");
 if (backBtn) {
