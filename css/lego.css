@@ -97,7 +97,7 @@ section{
     margin-bottom:0px;
 }
 
-.ebook-header{
+.lego-header{
     position:sticky;
     top:0;
     z-index:100;
@@ -118,7 +118,7 @@ section{
     cursor:pointer;
 }
 
-.ebook-preview{
+.lego-preview{
     margin-top:0px;
 }
 .preview-slider{
