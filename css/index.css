@@ -969,6 +969,34 @@ body {
 }
 
 /* ==========================================
+   LATEST CONTENT FILTER TABS
+   ========================================== */
+.latest-tabs {
+    display: flex;
+    gap: 20px;
+    margin: 0 16px 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.latest-tab {
+    background: none;
+    border: none;
+    padding: 0 0 10px;
+    font-size: var(--font-size);
+    font-weight: 400;
+    color: var(--text-light);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+
+.latest-tab.active {
+    font-weight: 700;
+    color: var(--text);
+    border-bottom: 2px solid var(--primary);
+}
+
+/* ==========================================
    BLOG LIST (memakai gaya latest-card)
    ========================================== */
 .blog-card .latest-info {
