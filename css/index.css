@@ -70,6 +70,10 @@
     margin: 0;
     font-size: var(--font-h2);
    }
+
+   .hero-featured-description {
+    font-size: var(--font-title);
+   }
 }
 @media (min-width: 1024px) { 
    :root { 
@@ -95,6 +99,10 @@
     margin: 0;
     font-size: var(--font-h2);
    }
+
+   .hero-featured-description {
+    font-size: var(--font-title);
+   }
 }
 
 @media (min-width: 1440px) { 
@@ -119,6 +127,10 @@
    .latest-title {
     margin: 0;
     font-size: var(--font-h2);
+   }
+
+   .hero-featured-description {
+    font-size: var(--font-title);
    }
 }
 
@@ -444,7 +456,7 @@ body {
     line-height: 1.5;
     padding-bottom: 0px;
     color: rgba(255,255,255,.9);
-    font-size: var(--font-title);
+    font-size: var(--font-size);
       white-space: pre-line;
 
 }
@@ -976,6 +988,7 @@ body {
     gap: 20px;
     margin: 0 16px 16px;
     border-bottom: 1px solid var(--border);
+   justify-content: space-around;
 }
 
 .latest-tab {
@@ -986,7 +999,7 @@ body {
     font-weight: 400;
     color: var(--text-light);
     cursor: pointer;
-    border-bottom: 2px solid transparent;
+    border-bottom: 4px solid transparent;
     margin-bottom: -1px;
 }
 
@@ -995,6 +1008,7 @@ body {
     color: var(--text);
     border-bottom: 2px solid var(--primary);
 }
+
 
 /* ==========================================
    BLOG LIST (memakai gaya latest-card)
