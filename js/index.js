@@ -374,21 +374,35 @@ function goToDetail(item) {
             break;
     }
 }
+let latestItemsAll = [];
+let latestActiveFilter = "all";
 
 function loadLatest() {
     if (!latestContainer || !latestCardTemplate) return;
-    latestContainer.innerHTML = "";
 
     const quizzesArr = typeof quizzes !== "undefined" ? quizzes.map(x => ({ ...x, type: "quiz" })) : [];
     const comicsArr = typeof comics !== "undefined" ? comics.map(x => ({ ...x, type: "comic" })) : [];
     const ttsArr = typeof ttsList !== "undefined" ? ttsList.map(x => ({ ...x, type: "tts" })) : [];
     const casesArr = typeof cases !== "undefined" ? cases.map(x => ({ ...x, type: "case" })) : [];
 
-    const latestItems = [...quizzesArr, ...comicsArr, ...ttsArr, ...casesArr]
-        .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))
-        .slice(0, 4);
+    latestItemsAll = [...quizzesArr, ...comicsArr, ...ttsArr, ...casesArr]
+        .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
 
-    latestItems.forEach(item => {
+    renderLatest();
+}
+
+function renderLatest() {
+    if (!latestContainer || !latestCardTemplate) return;
+    latestContainer.innerHTML = "";
+
+    let filtered = latestItemsAll;
+    if (latestActiveFilter === "free") {
+        filtered = latestItemsAll.filter(item => !item.premium);
+    } else if (latestActiveFilter === "premium") {
+        filtered = latestItemsAll.filter(item => item.premium);
+    }
+
+    filtered.slice(0, 4).forEach(item => {
         const locked = isPremiumLocked(item);
         const clone = latestCardTemplate.content.cloneNode(true);
 
@@ -401,7 +415,7 @@ function loadLatest() {
         const badge = clone.querySelector(".latest-badge");
         if (badge) {
             if (item.premium) {
-                badge.textContent = "Premium";
+                badge.textContent = "👑 Premium";
                 badge.classList.add("premium");
             } else {
                 badge.textContent = "Gratis";
@@ -429,6 +443,14 @@ function loadLatest() {
     });
 }
 
+document.querySelectorAll(".latest-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll(".latest-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        latestActiveFilter = tab.dataset.filter;
+        renderLatest();
+    });
+});
 /* -------------------------------------------------------------------------- */
 /* FEATURED HERO                                                              */
 /* -------------------------------------------------------------------------- */
