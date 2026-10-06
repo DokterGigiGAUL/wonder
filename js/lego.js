@@ -10,7 +10,8 @@ if (!lego) {
 
 document.title = lego.title;
 
-document.getElementById("lego-title").textContent = lego.title;
+document.getElementById('lego-title').textContent = "Dentabrix " + lego.title;
+
 
 document.getElementById("lego-price").textContent =
     `Rp ${lego.price.toLocaleString("id-ID")}`;
