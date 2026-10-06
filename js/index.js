@@ -349,7 +349,7 @@ function loadLego() {
             buttonText: "Beli",
             extraClass: "lego-card",
             onClick() {
-                openCheckoutModal(lego.mayarUrl);
+                location.href = `lego.html?lego=${lego.file}`;
             }
         });
     });
