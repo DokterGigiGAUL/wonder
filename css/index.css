@@ -870,7 +870,7 @@
    .feature-btn{
       margin-top:24px;
 }
-
+}
 .checkout-modal {
     position: relative;
     width: min(480px, 100%);
@@ -905,7 +905,7 @@
     border-radius: 12px;
    box-shadow: var(--shadow);
 }
-}
+
 /* ==========================================
    LATEST CONTENT LIST (HORIZONTAL ROW CARDS)
    ========================================== */
