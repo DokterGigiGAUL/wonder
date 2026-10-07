@@ -51,7 +51,7 @@
       --font-badge: 13px;
       --font-size: 18px; 
       --font-title: 20px;
-      --font-h2: 23px;
+      --font-h2: 25px;
       --font-header:28px;
    }
    .featured-overlay {
@@ -75,6 +75,7 @@
    .hero-featured-description {
     font-size: var(--font-title);
    }
+   
 }
 @media (min-width: 1024px) { 
    :root { 
@@ -84,8 +85,8 @@
       --font-badge: 15px;
       --font-size: 21px; 
       --font-title: 23px;
-      --font-h2: 26px;
-      --font-header:48px;
+      --font-h2: 30px;
+      --font-header:36px;
    }
       .latest-info {
    padding: 24px 16px;
@@ -104,6 +105,9 @@
    .hero-featured-description {
     font-size: var(--font-title);
    }
+
+   .feature-btn{
+      margin-top:24px;
 }
 
 @media (min-width: 1440px) { 
@@ -114,8 +118,8 @@
       --font-badge: 17px;
       --font-size: 24px; 
       --font-title: 26px;
-      --font-h2: 29px;
-      --font-header:36px;
+      --font-h2: 35px;
+      --font-header:42px;
    }
       .latest-info {
    padding: 24px 16px;
@@ -133,6 +137,9 @@
    .hero-featured-description {
     font-size: var(--font-title);
    }
+   
+   .feature-btn{
+      margin-top:24px;
 }
 
 body {
