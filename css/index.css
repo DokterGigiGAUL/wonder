@@ -82,6 +82,7 @@
     margin: 0;
     font-size: var(--font-header);
    }
+   
    .latest-title {
     margin: 0;
     font-size: var(--font-h2);
@@ -133,7 +134,7 @@
 
    .lego-card {
     position: relative;
-    aspect-ratio:2 / 3;
+    aspect-ratio:2 / 3!important;
    }
    
    .latest-arrow {
@@ -1078,7 +1079,6 @@
 
 .lego-card {
     position: relative;
-    aspect-ratio:2 / 3;
 }
 
 .lego-card .content-thumb {
