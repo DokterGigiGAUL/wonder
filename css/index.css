@@ -129,24 +129,25 @@
 
 @media (min-width: 1440px) { 
    :root { 
-      --thumb-size:128px;
-      --home-card-per-view: 4.25; 
+      --thumb-size:160px;
+      --home-card-per-view: 3; 
          --font-small:19px;
       --font-badge: 17px;
-      --font-size: 24px; 
+      --font-size: 20px; 
       --font-title: 26px;
-      --font-h2: 35px;
+      --font-h2: 30px;
       --font-header:42px;
    }
       .container {
-      max-width:1024px;
+         max-width:1024px;
+         margin: 0 auto;
       }
       .latest-info {
    padding: 24px 16px;
    }
 
    .section-header h2 {
-    margin: 0;
+    margin: 24px 0;
     font-size: var(--font-header);
 }
    .latest-title {
