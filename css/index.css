@@ -90,7 +90,12 @@
    .hero-featured-description {
     font-size: var(--font-title);
    }
-   
+
+   .latest-arrow {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+   }
 }
 
 @media (min-width: 1024px) { 
@@ -124,6 +129,11 @@
 
    .feature-btn{
       margin-top:24px;
+   }
+   .latest-arrow {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
    }
 }
 
@@ -161,6 +171,12 @@
    
    .feature-btn{
       margin-top:24px;
+   }
+
+   .latest-arrow {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
    }
 }
 
@@ -1109,7 +1125,7 @@
     align-self: center;
     border-radius: 8px;
     padding: 8px 16px !important;
-    margin-top: 0;
+    margin-top: 16px;
     /* background: #0076DF; */
     background: #008000;
     color: #ffffff;
