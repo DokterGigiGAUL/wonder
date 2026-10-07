@@ -138,6 +138,9 @@
       --font-h2: 35px;
       --font-header:42px;
    }
+      .container {
+      max-width:1024px;
+      }
       .latest-info {
    padding: 24px 16px;
    }
@@ -833,6 +836,10 @@
        text-align: center;
        line-height: 1.25;
    }
+
+   .feature-btn{
+      margin-top:16px;
+   }
 }
 
 /* Desktop Breakpoint (min-width: 1024px) */
@@ -857,8 +864,11 @@
     }
 
    .category-card span {
-       font-size: var(--font-title); /* Ukuran teks diperkecil agar pas 4 kolom */
+       font-size: var(--font-size); /* Ukuran teks diperkecil agar pas 4 kolom */
    }
+
+   .feature-btn{
+      margin-top:24px;
 }
 
 .checkout-modal {
