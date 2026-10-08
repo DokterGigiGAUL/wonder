@@ -43,6 +43,24 @@
         --font-list:16px;
            --list-thumb-size: 120px;
    }
+    .list-detail {padding: 16px 0px 0px 16px;}
+    
+    .list-card .list-btn {
+        margin-left: auto;
+    }
+    .list-title {
+    font-size: var(--font-h2);
+    }
+    
+    .list-card .list-btn, .list-description {
+    font-size: var(--font-title);
+    }
+
+    .explore-badge, .ad-badge {
+    font-size: var(--font-size);
+        border-radius:999px;
+        padding:6px 12px;
+    }
 }
 
 @media (min-width: 1024px) { 
@@ -521,7 +539,7 @@ body {
 
 .explore-hero-desc {
     margin: 0;
-    font-size: var(--font-title);
+    font-size: var(--font-size);
     line-height: 1.5;
     color: rgba(255, 255, 255, .9);
     white-space: pre-line;
