@@ -336,7 +336,11 @@
    .lego-card {
       box-shadow: var(--shadow);
       border-radius: 20px;
-      aspect-ratio:2/3;
+
+   }
+
+   .lego-card .content-thumb {
+          aspect-ratio: 2 / 3;
    }
 
    .content-thumb {
