@@ -188,25 +188,38 @@ function createListCard({
         card.classList.add(extraClass);
     }
 
-    const badge = clone.querySelector(".featured-badge");
+//   const badge = clone.querySelector(".featured-badge");
+//    if (badge) {
+//        if (item && item.premium) {
+//            badge.textContent = "👑 Premium";
+//        } else {
+//            badge.remove();
+//        }
+//    }
+
+//    const badges = clone.querySelector(".feature-badge");
+//    if (badges) {
+//        if (item && item.isAd) {
+//           badges.textContent = "Iklan";
+//            badges.classList.add("ad-badge");
+//        } else {
+//            badges.remove();
+//        }
+//    }
+
+        const badge = clone.querySelector(".feature-badge");
     if (badge) {
-        if (item && item.premium) {
-            badge.textContent = "👑 Premium";
-        } else {
-            badge.remove();
-        }
-    }
-
-    const badges = clone.querySelector(".feature-badge");
-    if (badges) {
         if (item && item.isAd) {
-            badges.textContent = "Iklan";
-            badges.classList.add("ad-badge");
+            badge.textContent = "Iklan";
+            badge.classList.add("ad-badge");
+        } else if (item && item.premium) {
+            badge.textContent = "👑 Premium";
+            badge.classList.add("badge-premium");
         } else {
-            badges.remove();
+            badge.textContent = "Gratis";
         }
     }
-
+    
     clone.querySelector(".list-thumb").src = thumbnail;
     clone.querySelector(".list-thumb").alt = title;
 
