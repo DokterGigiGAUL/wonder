@@ -333,16 +333,6 @@
     margin-right:16px!important;
    }
 
-   .lego-card {
-      box-shadow: var(--shadow);
-      border-radius: 20px;
-
-   }
-
-   .content-card .lego-card {
-          aspect-ratio: 2 / 3;
-   }
-
    .content-thumb {
        width: 100%;
        object-fit: cover;
@@ -1081,9 +1071,16 @@
     font-size: var(--font-size);
 }
 
-.lego-card {
+   .lego-card {
+      box-shadow: var(--shadow);
+      border-radius: 20px;
     position: relative;
-}
+      aspect-ratio:2 / 3;
+   }
+
+  .lego-card .content-card  {
+          aspect-ratio: 2 / 3;
+   }
 
 .lego-card .content-thumb {
     position: absolute;
