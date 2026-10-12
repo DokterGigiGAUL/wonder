@@ -66,7 +66,7 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
   </section>
 </main>
 
-<script src="/assets/games/wordle.js"></script>
+<script src="../assets/games/wordle.js"></script>
 <script>
 (function(){
   // Daftar kata ada di kata.js. Hanya kata A-Z, 4-12 huruf yang dipakai.
@@ -93,7 +93,7 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
   }
 
   function start(){
-    if(!WORDS.length){$("msg").textContent="Daftar kata kosong. Periksa file kata.js.";return}
+    if(!WORDS.length){$("msg").textContent="Daftar kata kosong. Periksa file wordle.js.";return}
     if(!queue.length) queue=shuffle(WORDS.slice());
     cur=queue.pop(); guessed={}; wrong=0; over=false;
     $("len").textContent=cur.length;
