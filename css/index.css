@@ -110,6 +110,21 @@
       --font-h2: 30px;
       --font-header:36px;
    }
+
+   .category-icon{
+   display:none!important;
+   }
+
+   .category-iconz {
+      width:48px;
+      height:48px;
+       flex-shrink: 0;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       border-radius: 6px;
+   }
+   
       .latest-info {
    padding: 24px 16px;
    }
@@ -564,6 +579,10 @@
    .category-card:hover {
        transform: translateY(-2px);
       box-shadow: var(--shadow);
+   }
+
+   .category-iconz{
+   display:none!important;
    }
 
    .category-icon {
