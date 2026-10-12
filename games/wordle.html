@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tebak Istilah Gigi</title>
+<style>
+:root{
+  --bg:#e8f2f0; --panel:#ffffff; --ink:#10303a; --muted:#5b7780;
+  --mint:#1f9d85; --gum:#d9566f; --line:#c7dad6;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0d2128;--panel:#13303a;--ink:#e6f3f0;--muted:#8fb0b8;--mint:#3cc6aa;--gum:#ee7a90;--line:#27505a}
+}
+*,*::before,*::after{box-sizing:inherit}
+html,body{margin:0;height:auto}
+body{background:var(--bg);color:var(--ink);font-family:ui-rounded,"Nunito","Segoe UI",system-ui,sans-serif;line-height:1.45;padding:16px}
+.game{max-width:520px;margin:0 auto}
+h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
+.sub{margin:0 0 14px;color:var(--muted);font-size:.9rem}
+.stats{display:flex;gap:16px;font-size:.9rem;color:var(--muted);margin-bottom:10px}
+.stats b{color:var(--ink)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px}
+.teeth{display:flex;justify-content:center;gap:6px;margin:4px 0 12px}
+.tooth{width:46px;height:56px}
+.tooth path{fill:#fbfdfc;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tooth path{fill:#eef7f5}}
+.tooth.lost{opacity:.2}
+.word{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:16px 0 8px;min-height:48px}
+.slot{width:clamp(22px,7.2vw,34px);height:44px;border-bottom:3px solid var(--ink);display:flex;align-items:flex-end;justify-content:center;font-size:1.5rem;font-weight:800;padding-bottom:2px}
+.slot.miss{color:var(--gum);border-color:var(--gum)}
+.msg{min-height:3.2em;text-align:center;font-size:.95rem;margin:6px 0 10px}
+.msg strong{display:block;font-size:1.05rem}
+.keys{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.key{font:inherit;font-weight:700;font-size:1rem;padding:10px 0;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.key:hover:not(:disabled){border-color:var(--mint)}
+.key.ok{background:var(--mint);border-color:var(--mint);color:#fff}
+.key.no{background:transparent;color:var(--muted);text-decoration:line-through;opacity:.55}
+.key:disabled{cursor:default}
+.actions{margin-top:14px}
+.btn{font:inherit;font-weight:700;padding:12px 14px;border-radius:12px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer;width:100%}
+.btn[hidden]{display:none}
+:focus-visible{outline:3px solid var(--gum);outline-offset:2px}
+</style>
+</head>
+<body>
+<main class="game">
+  <h1>Tebak Istilah Gigi</h1>
+  <p class="sub">Salah menebak, satu gigi memudar. Enam gigi habis, ronde berakhir.</p>
+
+  <div class="stats" aria-live="polite">
+    <span>Beruntun: <b id="streak">0</b></span>
+    <span>Benar: <b id="solved">0</b></span>
+    <span>Kata: <b id="len">-</b> huruf</span>
+  </div>
+
+  <section class="card">
+    <div class="teeth" id="teeth" role="img" aria-label="Sisa gigi"></div>
+    <div class="word" id="word" aria-label="Kata yang ditebak"></div>
+    <div class="msg" id="msg" aria-live="polite"></div>
+    <div class="keys" id="keys"></div>
+    <div class="actions">
+      <button class="btn" id="next" hidden>Kata berikutnya</button>
+    </div>
+  </section>
+</main>
+
+<script src="kata.js"></script>
+<script>
+(function(){
+  // Daftar kata ada di kata.js. Hanya kata A-Z, 4-12 huruf yang dipakai.
+  var WORDS=(window.KATA_GIGI||[]).filter(function(w){return /^[A-Z]{4,12}$/.test(w)});
+
+  var MAX=6, ALPHA="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var TOOTH='<svg class="tooth" viewBox="0 0 40 48" aria-hidden="true"><path d="M8 8C8 2 16 2 20 6C24 2 32 2 32 8C32 16 30 22 29 32C28 42 24 46 22 40C21 34 19 34 18 40C16 46 12 42 11 32C10 22 8 16 8 8Z"/></svg>';
+
+  var $=function(id){return document.getElementById(id)};
+  var queue=[], cur, guessed, wrong, over, streak=0, solved=0;
+
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+  function build(){
+    $("teeth").innerHTML=new Array(MAX+1).join(TOOTH);
+    var k=$("keys"); k.innerHTML="";
+    ALPHA.split("").forEach(function(l){
+      var b=document.createElement("button");
+      b.className="key"; b.textContent=l; b.dataset.l=l;
+      b.setAttribute("aria-label","Huruf "+l);
+      b.addEventListener("click",function(){guess(l)});
+      k.appendChild(b);
+    });
+  }
+
+  function start(){
+    if(!WORDS.length){$("msg").textContent="Daftar kata kosong. Periksa file kata.js.";return}
+    if(!queue.length) queue=shuffle(WORDS.slice());
+    cur=queue.pop(); guessed={}; wrong=0; over=false;
+    $("len").textContent=cur.length;
+    $("msg").textContent="Pilih huruf untuk memulai.";
+    $("next").hidden=true;
+    Array.prototype.forEach.call(document.querySelectorAll(".key"),function(b){b.className="key";b.disabled=false});
+    draw();
+  }
+
+  function draw(){
+    var w=$("word"); w.innerHTML="";
+    cur.split("").forEach(function(c){
+      var s=document.createElement("div"); s.className="slot";
+      if(guessed[c]) s.textContent=c;
+      else if(over){s.textContent=c; s.className="slot miss"}
+      w.appendChild(s);
+    });
+    var t=document.querySelectorAll("#teeth .tooth");
+    for(var i=0;i<t.length;i++) t[i].classList.toggle("lost",i<wrong);
+    $("streak").textContent=streak; $("solved").textContent=solved;
+  }
+
+  function won(){return cur.split("").every(function(c){return guessed[c]})}
+
+  function finish(win){
+    over=true;
+    if(win){streak++;solved++}else streak=0;
+    Array.prototype.forEach.call(document.querySelectorAll(".key"),function(b){b.disabled=true});
+    $("msg").innerHTML=win?"<strong>Benar!</strong>":"<strong>Gigi habis.</strong>Jawabannya: "+cur;
+    $("next").hidden=false;
+    draw(); $("next").focus();
+  }
+
+  function guess(l){
+    if(over||guessed[l]) return;
+    guessed[l]=true;
+    var key=document.querySelector('.key[data-l="'+l+'"]');
+    key.disabled=true;
+    if(cur.indexOf(l)>-1){
+      key.classList.add("ok");
+      draw();
+      if(won()) finish(true);
+    }else{
+      key.classList.add("no"); wrong++;
+      draw();
+      if(wrong>=MAX) finish(false);
+      else $("msg").textContent="Salah. Sisa gigi: "+(MAX-wrong)+".";
+    }
+  }
+
+  document.addEventListener("keydown",function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey) return;
+    var l=e.key.length===1?e.key.toUpperCase():"";
+    if(l && ALPHA.indexOf(l)>-1) guess(l);
+    else if(e.key==="Enter"&&over) start();
+  });
+  $("next").addEventListener("click",start);
+
+  build(); start();
+})();
+</script>
+</body>
+</html>
