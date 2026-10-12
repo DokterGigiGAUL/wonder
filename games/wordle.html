@@ -46,8 +46,8 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
 </head>
 <body>
 <main class="game">
-  <h1>Tebak Istilah Gigi</h1>
-  <p class="sub">Salah menebak, satu gigi memudar. Enam gigi habis, ronde berakhir.</p>
+  <h1>Tebak Istilah Kedokteran Gigi</h1>
+  <p class="sub">Salah menebak, satu gigi lepas. Enam gigi lepas, game berakhir.</p>
 
   <div class="stats" aria-live="polite">
     <span>Beruntun: <b id="streak">0</b></span>
@@ -70,7 +70,7 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
 <script>
 (function(){
   // Daftar kata ada di kata.js. Hanya kata A-Z, 4-12 huruf yang dipakai.
-  var WORDS=(window.KATA_GIGI||[]).filter(function(w){return /^[A-Z]{4,12}$/.test(w)});
+  var WORDS=(window.KATA_GIGI||[]).filter(function(w){return /^[A-Z]{4,9}$/.test(w)});
 
   var MAX=6, ALPHA="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var TOOTH='<svg class="tooth" viewBox="0 0 40 48" aria-hidden="true"><path d="M8 8C8 2 16 2 20 6C24 2 32 2 32 8C32 16 30 22 29 32C28 42 24 46 22 40C21 34 19 34 18 40C16 46 12 42 11 32C10 22 8 16 8 8Z"/></svg>';
@@ -97,7 +97,7 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
     if(!queue.length) queue=shuffle(WORDS.slice());
     cur=queue.pop(); guessed={}; wrong=0; over=false;
     $("len").textContent=cur.length;
-    $("msg").textContent="Pilih huruf untuk memulai.";
+    $("msg").textContent="Pilih/ketik satu huruf untuk memulai.";
     $("next").hidden=true;
     Array.prototype.forEach.call(document.querySelectorAll(".key"),function(b){b.className="key";b.disabled=false});
     draw();
