@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tooth Hop</title>
+<style>
+:root{--bg:#e9e1f7;--fg:#2d1b4e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1228;--fg:#ece4fa}}
+:root[data-theme="dark"]{--bg:#1a1228;--fg:#ece4fa}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:Trebuchet MS,Verdana,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none}
+canvas{max-width:100%;max-height:92%;border-radius:14px}
+p{margin:6px 10px;font-size:13px;text-align:center}
+</style></head><body>
+<canvas id="c" width="360" height="640"></canvas>
+<p>Ketuk layar untuk melompat. Mendarat tepat di keranjang.</p>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d'),W=360,H=640,D=170,BY=500;
+let best=0;try{best=+localStorage.getItem('toothhop')||0}catch(e){}
+let baskets,cur,nxt,tooth,cam,camT,score,lives,state='start',last=0,now=0;
+const leaves=Array.from({length:16},(_,i)=>({x:(i*97)%W,y:(i*173)%H,r:30+(i*13)%40,l:i%2}));
+function mk(y,first){
+  const sp=first?0:(1+Math.random()*2.5)*(Math.random()<.5?-1:1);
+  return{x:first?W/2:50+Math.random()*(W-100),y,sp};
+}
+function reset(){
+  score=0;lives=3;cam=0;camT=0;
+  cur=mk(BY,1);nxt=mk(BY-D);baskets=[cur,nxt,mk(BY-2*D)];
+  tooth={mode:'rest',x:cur.x,y:cur.y-14,vy:0,t:0,y0:0,st:0,sq:1};
+  state='play';
+}
+function end(){
+  state='over';
+  if(score>best){best=score;try{localStorage.setItem('toothhop',best)}catch(e){}}
+}
+function tap(){
+  if(state!=='play'){reset();return}
+  if(tooth.mode!=='rest')return;
+  tooth.mode='jump';tooth.t=0;tooth.y0=tooth.y;tooth.st=performance.now();
+}
+function step(dt){
+  if(state!=='play')return;
+  for(const b of baskets){
+    if(!b.sp)continue;
+    b.x+=b.sp*dt;
+    if(b.x<45){b.x=45;b.sp=-b.sp}
+    if(b.x>W-45){b.x=W-45;b.sp=-b.sp}
+  }
+  cam+=(camT-cam)*(1-Math.pow(.88,dt));
+  if(tooth.mode==='rest'){tooth.x=cur.x;tooth.y=cur.y-14}
+  else if(tooth.mode==='jump'){
+    tooth.t=Math.min(Math.max(now-tooth.st,0)/500,1);
+    const t=tooth.t,dy=tooth.y0-(nxt.y-14),P=dy+55,k2=(2*P-dy)+2*Math.sqrt(P*(P-dy)),k1=dy+k2;
+    tooth.y=tooth.y0-(k1*t-k2*t*t);
+    tooth.sq=1+.14*(k1-2*k2*t)/k1;
+    if(t>=1){
+      if(Math.abs(tooth.x-nxt.x)<26){
+        const i=baskets.indexOf(nxt);cur=nxt;score++;nxt=baskets[i+1];baskets.push(mk(nxt.y-D));
+        camT=cur.y-BY;tooth.mode='rest';
+        baskets=baskets.filter(b=>b.y<camT+H+120);
+      }else{tooth.mode='fall';tooth.vy=0}
+    }
+  }else if(tooth.mode==='fall'){
+    tooth.vy+=.6*dt;tooth.y+=tooth.vy*dt;
+    if(tooth.y>cam+H+40){
+      lives--;
+      if(lives<=0)end();else tooth.mode='rest';
+    }
+  }
+}
+function bg(){
+  const g=x.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'#b7a0e2');g.addColorStop(.6,'#d6c6f3');g.addColorStop(1,'#c4aeea');
+  x.fillStyle=g;x.fillRect(0,0,W,H);
+  for(const l of leaves){
+    const y=((l.y+cam*.3)%(H+80)+H+80)%(H+80)-40;
+    x.fillStyle=l.l?'rgba(255,255,255,.2)':'rgba(120,85,180,.14)';
+    x.beginPath();x.arc(l.x,y,l.r,0,7);x.fill();
+  }
+  const r=x.createRadialGradient(300,430,10,300,430,260);
+  r.addColorStop(0,'rgba(255,255,255,.5)');r.addColorStop(1,'rgba(255,255,255,0)');
+  x.fillStyle=r;x.fillRect(0,0,W,H);
+}
+function basket(b){
+  const sx=b.x,sy=b.y-cam;
+  const g=x.createLinearGradient(0,sy,0,sy+30);
+  g.addColorStop(0,'#f6b13c');g.addColorStop(1,'#b8681a');
+  x.fillStyle=g;x.beginPath();x.moveTo(sx-34,sy);
+  x.quadraticCurveTo(sx-30,sy+30,sx,sy+30);
+  x.quadraticCurveTo(sx+30,sy+30,sx+34,sy);x.fill();
+  x.strokeStyle='rgba(110,55,10,.45)';x.lineWidth=1.5;
+  for(const k of[10,19]){x.beginPath();x.moveTo(sx-30+k*.2,sy+k);x.lineTo(sx+30-k*.2,sy+k);x.stroke()}
+  x.fillStyle='#f9c25a';x.beginPath();x.roundRect(sx-40,sy-5,80,9,4);x.fill();
+}
+function tooth_(a,b,s,al,sq=1){
+  x.save();x.globalAlpha=al;x.translate(a,b);x.scale(s*2.1/sq,s*1.2*sq);
+  x.fillStyle='#fff';x.strokeStyle='#111111';x.lineWidth=1.5;
+  x.beginPath();x.moveTo(-14,-14);
+  x.bezierCurveTo(-14,-25,-4,-23,0,-18);
+  x.bezierCurveTo(4,-23,14,-25,14,-14);
+  x.bezierCurveTo(14,-2,10,4,9,16);
+  x.quadraticCurveTo(6,21,3,10);
+  x.quadraticCurveTo(0,6,-3,10);
+  x.quadraticCurveTo(-6,21,-9,16);
+  x.bezierCurveTo(-10,4,-14,-2,-14,-14);
+  x.fill();x.stroke();
+  x.fillStyle='#111111';
+  x.beginPath();x.arc(-5,-9,2,0,7);x.arc(5,-9,2,0,7);x.fill();
+  x.beginPath();x.arc(0,-4,4,.2,Math.PI-.2);x.stroke();
+  x.restore();
+}
+function txt(t,px,py,size,al){
+  x.textAlign=al;x.font='bold '+size+'px Trebuchet MS,sans-serif';
+  x.lineWidth=5;x.strokeStyle='rgba(60,30,100,.6)';x.strokeText(t,px,py);
+  x.fillStyle='#fff';x.fillText(t,px,py);
+}
+function draw(){
+  bg();
+  for(const b of baskets){
+    if(b===cur&&tooth.mode!=='fall'||b===cur&&tooth.mode==='fall'){}
+    if(b.y-cam>-60&&b.y-cam<H+60){
+      if(b===nxt&&tooth.mode==='jump'){if(tooth.t>.68)tooth_(tooth.x,tooth.y-cam,.95,1,tooth.sq);basket(b)}
+      else if(b===cur){
+        if(tooth.mode==='rest')tooth_(tooth.x,tooth.y-cam,.95,1);
+        basket(b);
+      }else basket(b);
+    }
+  }
+  if((tooth.mode==='jump'&&tooth.t<=.68)||tooth.mode==='fall')tooth_(tooth.x,tooth.y-cam,.95,1,tooth.mode==='jump'?tooth.sq:1);
+  x.fillStyle='rgba(60,30,100,.3)';x.beginPath();x.roundRect(W/2-52,24,104,44,16);x.fill();
+  for(let i=0;i<3;i++)tooth_(W/2-32+i*32,48,.42,i<lives?1:.22);
+  txt('Terbaik',58,48,20,'center');txt(best,58,92,42,'center');
+  txt('Skor',W-58,48,20,'center');txt(score,W-58,92,42,'center');
+  if(state!=='play'){
+    x.fillStyle='rgba(45,25,78,.72)';x.fillRect(0,0,W,H);
+    txt(state==='start'?'Tooth Hop':'Gigi jatuh!',W/2,250,36,'center');
+    if(state==='over')txt('Skor '+score,W/2,296,22,'center');
+    txt('Ketuk untuk '+(state==='start'?'mulai':'main lagi'),W/2,350,20,'center');
+  }
+}
+function loop(ts){
+  now=performance.now();const dt=Math.min((ts-last)/16.67||1,3);last=ts;
+  step(dt);draw();requestAnimationFrame(loop);
+}
+c.addEventListener('pointerdown',e=>{e.preventDefault();tap()});
+addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();tap()}});
+reset();state='start';requestAnimationFrame(loop);
+</script>
+</body></html>
