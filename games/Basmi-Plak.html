@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Basmi Plak!</title>
+<style>
+:root{--bg:#e8f6f8;--card:#fff;--tx:#12343b;--ac:#16a3b8;--bad:#d9534f;--tooth:#fdfdfd;--bd:#b9dde3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e2227;--card:#17343b;--tx:#e6f4f6;--ac:#3cc4d8;--tooth:#e9eef0;--bd:#2b525b}}
+:root[data-theme="dark"]{--bg:#0e2227;--card:#17343b;--tx:#e6f4f6;--ac:#3cc4d8;--tooth:#e9eef0;--bd:#2b525b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;justify-content:center;min-height:100vh}
+#app{width:100%;max-width:420px;padding:14px;display:flex;flex-direction:column;gap:12px}
+h1{margin:4px 0 0;font-size:22px;text-align:center}
+.bar{display:flex;justify-content:space-between;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px 12px;font-weight:600;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.t{aspect-ratio:1/1.1;background:var(--tooth);border:2px solid var(--bd);border-radius:18px 18px 34px 34px;font-size:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .08s}
+.t:active{transform:scale(.93)}
+.t.p{background:#c9e6a4}
+.t.k{background:#5a4a3a}
+.t.f{background:#ffd0cc}
+.t.d{background:#fff3a8}
+.dmg{height:12px;background:var(--card);border:1px solid var(--bd);border-radius:8px;overflow:hidden}
+.dmg i{display:block;height:100%;width:0;background:var(--bad);transition:width .2s}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+.box{background:var(--card);border-radius:16px;padding:20px;max-width:360px;text-align:center}
+.box p{margin:8px 0;line-height:1.45}
+button.go{background:var(--ac);color:#fff;border:0;border-radius:12px;padding:12px 28px;font-size:17px;font-weight:700;margin-top:6px}
+.hide{display:none}
+small{opacity:.8}
+</style></head>
+<body><div id="app">
+<h1>🦷 Basmi Plak!</h1>
+<div class="bar"><span>Skor: <b id="sc">0</b></span><span>⏱ <b id="tm">45</b>s</span><span>Rekor: <b id="hi">0</b></span></div>
+<div class="dmg" title="Kerusakan"><i id="dm"></i></div>
+<div class="grid" id="g"></div>
+<small>Ketuk hanya plak 🦠 (+10). Hindari mengetuk gigi berkilau ✨ (skor berkurang). Plak terlambat = kerusakan naik. Makin lama, makin cepat.</small>
+</div>
+<div class="ov" id="ov"><div class="box">
+<h2 id="ot">Siap, drg.?</h2>
+<p id="om">Bersihkan plak sebelum merusak gigi. Bertahan 45 detik.</p>
+<button class="go" id="gb">Mulai</button>
+</div></div>
+<script>
+const FACTS=["Plak yang tidak dibersihkan dapat mengeras menjadi karang gigi (kalkulus) yang hanya bisa dilepas dengan scaling.","Karies terjadi saat bakteri mengubah gula menjadi asam yang melarutkan email gigi.","Menyikat gigi malam sebelum tidur penting karena produksi saliva menurun saat tidur.","Pasta gigi berfluoride membantu remineralisasi email pada lesi karies awal.","Sikat gigi sebaiknya diganti sekitar tiap 3 bulan atau saat bulu sikat mengembang."];
+const g=document.getElementById('g'),sc=document.getElementById('sc'),tm=document.getElementById('tm'),hi=document.getElementById('hi'),dm=document.getElementById('dm'),ov=document.getElementById('ov');
+let best=0;try{best=+localStorage.getItem('basmiPlakBest')||0}catch(e){}
+hi.textContent=best;
+const teeth=[];
+for(let i=0;i<12;i++){const d=document.createElement('div');d.className='t';d.textContent='🦷';d.onpointerdown=()=>tap(i);g.appendChild(d);teeth.push({el:d,s:0,hp:0,exp:0})}
+let score,time,dmg,run,last,spawnAt,clock;
+function draw(t){t.el.className='t'+(t.s==1?' p':t.s==2?' k':t.s==3?' d':'');t.el.textContent=t.s==1?'🦠':t.s==2?'🕳️':t.s==3?'✨':'🦷'}
+function flash(t,c){t.el.classList.add(c);setTimeout(()=>draw(t),160)}
+function tap(i){if(!run)return;const t=teeth[i];
+ if(t.s==0||t.s==3){const lv=(45-time)/45;score=Math.max(0,score-(t.s==3?10:5)-Math.round(lv*10));t.s=0;draw(t);flash(t,'f')}
+ else if(t.s==1){score+=10;t.s=0;draw(t)}
+ else{t.hp--;if(t.hp<=0){score+=25;t.s=0;draw(t)}else{t.el.style.transform='scale(.9)';setTimeout(()=>t.el.style.transform='',90)}}
+ sc.textContent=score}
+function spawn(){const free=teeth.filter(t=>t.s==0);if(!free.length)return;const t=free[Math.floor(Math.random()*free.length)];
+ const el=45-time,lv=el/45;if(Math.random()<0.1+0.3*lv){t.s=3;t.exp=performance.now()+Math.max(700,1500-el*15)}else{t.s=1;t.hp=1;t.exp=performance.now()+Math.max(800,1600-el*18)}draw(t)}
+function loop(now){if(!run)return;
+ if(now>=spawnAt){spawn();spawnAt=now+Math.max(300,900-(45-time)*13)}
+ for(const t of teeth){if(t.s&&now>t.exp){if(t.s==2){dmg+=2;score=Math.max(0,score-15);sc.textContent=score}else if(t.s==1){dmg+=1}t.s=0;draw(t);dm.style.width=Math.min(100,dmg*10)+'%'}}
+ if(dmg>=10)return end('Gigi rusak parah!');
+ requestAnimationFrame(loop)}
+function start(){score=0;time=45;dmg=0;run=true;sc.textContent=0;tm.textContent=time;dm.style.width='0';
+ teeth.forEach(t=>{t.s=0;draw(t)});ov.classList.add('hide');spawnAt=performance.now()+500;
+ clearInterval(clock);clock=setInterval(()=>{time--;tm.textContent=time;if(time<=0)end('Waktu habis!')},1000);
+ requestAnimationFrame(loop)}
+function end(msg){if(!run)return;run=false;clearInterval(clock);
+ let nb=score>best;if(nb){best=score;hi.textContent=best;try{localStorage.setItem('basmiPlakBest',best)}catch(e){}}
+ document.getElementById('ot').textContent=msg;
+ document.getElementById('om').innerHTML='Skor: <b>'+score+'</b>'+(nb?' 🏆 Rekor baru!':'')+'<br><br>💡 '+FACTS[Math.floor(Math.random()*FACTS.length)];
+ document.getElementById('gb').textContent='Main lagi';ov.classList.remove('hide')}
+document.getElementById('gb').onclick=start;
+</script></body></html>
