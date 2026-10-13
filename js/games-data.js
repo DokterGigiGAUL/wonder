@@ -2,7 +2,7 @@
 const games = [
     {
         id: 1,
-        file: "tebak-kata",
+        file: "wordle",
         title: "Tebak Kata",
         thumbnail: "assets/images/games/tebak-kata.png",
         premium: false,
