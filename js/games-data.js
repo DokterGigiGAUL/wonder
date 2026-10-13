@@ -26,7 +26,7 @@ const games = [
         title: "Plaque Buster!",
         thumbnail: "assets/images/games/plaque-buster.png",
         premium: false,
-        productId: "game-1",
+        productId: "game-3",
         price: 0,
         mayarUrl: ""
     },
@@ -36,7 +36,7 @@ const games = [
         title: "Dental Wars",
         thumbnail: "assets/images/games/tooth-jump.png",
         premium: true,
-        productId: "game-1",
+        productId: "game-4",
         price: 5000,
         mayarUrl: ""
     }
