@@ -34,7 +34,7 @@ const games = [
         id: 4,
         file: "plaque-wars",
         title: "Plaque Wars",
-        thumbnail: "assets/images/games/tooth-jump.png",
+        thumbnail: "assets/images/games/97759D3A-03E3-4C70-808C-B29A87E1A290.png",
         premium: true,
         productId: "game-4",
         price: 5000,
