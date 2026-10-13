@@ -115,24 +115,6 @@
 			<div id="latest-container" class="latest-list"></div>
 		</section>
 		
-		<!-- Quiz Section 
-		<section id="quiz-section" class="home-section"> 
-			<div class="section-header"> 
-				<h2>Kuis Trivia</h2>
-				<a href="explore.html?tab=quiz">Lihat semua →</a>
-				</div> 
-			<div id="quiz-container" class="horizontal-scroll"></div>
-			</section> 
-		-->
-		<!-- TTS Section 
-		<section id="tts-section" class="home-section"> 
-			<div class="section-header"> 
-				<h2>Teka Teki Silang</h2>
-				<a href="explore.html?tab=tts">Lihat semua →</a>
-				</div> 
-			<div id="tts-container" class="horizontal-scroll"></div>
-			</section> 
--->
 		<!-- Ebook Section -->
 		<section id="ebook-section" class="home-section"> 
 			<div class="section-header"> 
@@ -141,66 +123,6 @@
 			</div> 
 			<div id="ebook-container" class="horizontal-scroll"></div>
 		</section>
-<!--		
-<section id="blog">
-<div class="section-header" style="padding:16px;"> 
-				<h2>Teman Ngopi</h2>
-			</div> 
-	<div id="blog-list">Memuat artikel...</div>
-</section>
-
-<script>
-  const SITE = "doktergigigaul.wordpress.com";
-  const API_URL =
-    "https://public-api.wordpress.com/rest/v1.1/sites/" + SITE +
-    "/posts/?number=6&fields=ID,title,excerpt,URL,date";
-
-  // Mengubah teks HTML dari WordPress menjadi teks biasa
-  function teks(html) {
-    return new DOMParser().parseFromString(html, "text/html").body.textContent.trim();
-  }
-
-  fetch(API_URL)
-    .then((res) => res.json())
-    .then((data) => {
-      const list = document.getElementById("blog-list");
-      list.innerHTML = "";
-
-      if (!data.posts || data.posts.length === 0) {
-        list.textContent = "Belum ada artikel.";
-        return;
-      }
-
-      data.posts.forEach((post) => {
-        const item = document.createElement("article");
-
-        const judul = document.createElement("h3");
-        const link = document.createElement("a");
-        link.href = post.URL;
-        link.target = "_blank";
-        link.rel = "noopener";
-        link.textContent = teks(post.title);
-        judul.appendChild(link);
-
-        const tanggal = document.createElement("small");
-        tanggal.textContent = new Date(post.date).toLocaleDateString("id-ID", {
-          day: "numeric", month: "long", year: "numeric",
-        });
-
-        const ringkasan = document.createElement("p");
-        ringkasan.textContent = teks(post.excerpt);
-
-        item.append(judul, tanggal, ringkasan);
-        list.appendChild(item);
-      });
-    })
-    .catch(() => {
-      document.getElementById("blog-list").textContent =
-        "Artikel belum dapat dimuat. Silakan coba lagi nanti.";
-    });
-</script>
-		-->
-
 		<section class="home-section" id="blog">
     <div class="section-header" style="padding:24px 16px 16px;"> 
 				<h2>Bacaan Teman Ngopi</h2>
@@ -229,27 +151,8 @@
 				   src="assets/images/Channel-youtube-doktergigigaul-gigital.webp" 
 				   alt="channel youtube Gigital" 
 				   class="iklan">		   
-				 <!--  <img src="https://live.staticflickr.com/65535/55529890632_3d502ffa7c_b.jpg" alt="Gigital" class="iklan"> -->
 		</section>
 		
-		<!-- Case Section 
-		<section id="case-section" class="home-section"> 
-			<div class="section-header"> 
-				<h2>Kartu Kasus</h2>
-				<a href="explore.html?tab=case">Lihat semua →</a>
-			</div> 
-			<div id="case-container" class="horizontal-scroll"></div>
-			</section> 
-		-->
-		<!-- Comic Section 
-		<section id="comic-section" class="home-section"> 
-			<div class="section-header"> 
-				<h2>Komik Edukasi</h2>
-				<a href="explore.html?tab=comic">Lihat semua →</a>
-			</div> 
-			<div id="comics-container" class="horizontal-scroll"></div>
-		</section> 
-		-->
 		<!-- Dentabrix Lego Section -->
 		<section id="lego-section" class="home-section"> 
 			<div class="section-header"> 
@@ -293,14 +196,6 @@
 			</div>
 		</article>
 	</template> 
-
-	<template id="game-card-template">
-	<article class="content-card game-card">
-		<span class="feature-badge game-badge"></span>
-		<img class="content-thumb">
-		<button type="button" class="game-play-btn">Mainkan →</button>
-	</article>
-</template>
 	
 	<!-- Modal Konfirmasi Beli -->
 	<div id="buyModal" class="buy-modal-overlay">
