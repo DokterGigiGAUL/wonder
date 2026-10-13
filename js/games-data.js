@@ -14,7 +14,7 @@ const games = [
         id: 2,
         file: "tooth-hop",
         title: "Tooth Jump",
-        thumbnail: "assets/images/games/tooth-jump.png",
+        thumbnail: "assets/images/games/tooth-hop.png",
         premium: false,
         productId: "game-2",
         price: 0,
