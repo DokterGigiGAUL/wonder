@@ -24,7 +24,7 @@ const games = [
         id: 3,
         file: "plaque-buster",
         title: "Plaque Buster!",
-        thumbnail: "assets/images/games/plaque-buster.jpg",
+        thumbnail: "assets/images/games/D837713F-CE8E-427C-944D-65BAAE01DE42.jpeg",
         premium: false,
         productId: "game-3",
         price: 0,
