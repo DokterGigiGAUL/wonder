@@ -1,428 +1,661 @@
-<!DOCTYPE html>
-<html lang="id">
+/*
+|--------------------------------------------------------------------------
+| index.js
+|--------------------------------------------------------------------------
+*/
 
-<head> 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Wonder App Kedokteran Gigi</title> 
-	<link rel="icon" type="image/png" href="assets/images/favicon.ico" sizes="any">
-	<link rel="stylesheet" href="css/index.css" /> 
-</head>
+// =========================================================================
+// ELEMEN & VARIABEL UTAMA
+// =========================================================================
+const quizList = document.getElementById("quiz-container");
+const comicsContainer = document.getElementById("comics-container");
+const ttsContainer = document.getElementById("tts-container");
+const caseContainer = document.getElementById("case-container");
+const ebookContainer = document.getElementById("ebook-container");
+const legoContainer = document.getElementById("lego-container");
 
-<body> 
-	<!-- Header -->
-	<header class="header"> 
-		<div class="app-brand">
-			<a href="index.html">
-        		<img src="assets/images/logo-gigital-app-typo.png" alt="Wonder App Logo">
-			</a>
-				<h1>Gigital App</h1>
-        </div>
-	</header> 
-	<!-- Search Bar -->
-	<div class="search-bar-wrap">
-		<form id="siteSearchForm" class="search-bar" role="search">
-			<input type="search" id="siteSearchInput" name="q" class="search-input" placeholder="Cari kuis, TTS, kasus, komik..." aria-label="Cari konten">
-			<button type="submit" class="search-btn">Cari</button>
-		</form>
-	</div>
-	
-	<!-- Main Content -->
-	<main class="container">
+const featuredHero = document.getElementById("featured-hero");
+const cardTemplate = document.getElementById("content-card-template");
 
-  <div class="top-layout">
+const latestContainer = document.getElementById("latest-container");
+const latestCardTemplate = document.getElementById("latest-card-template");
+const gamesContainer = document.getElementById("games-container");
+const gameCardTemplate = document.getElementById("game-card-template");
 
-    <!-- Featured Hero Section -->
-		<section id="featured-hero" class="featured-hero"> 
-			<div class="featured-overlay">
-			    <span class="featured-badge"></span>
-				<h2 class="hero-featured-title">Tingkatkan Kompetensi Kedokteran Gigi</h2>
-				<p class="hero-featured-description">Akses berbagai materi edukasi digital yang dikurasi oleh para ahli.</p> 
-				<div class="hero-featured-actions"> 
-				<a href="indeks.html">
-					<button type="button" class="btn btn-primary feature-btn">Mulai jelajah →</button> 
-						<!-- <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-							<path d="M5 12h14M13 6l6 6-6 6"/> 
-						</svg>-->
-					
-				</a>
-				</div>
-			</div>
-		</section> 
+/* -------------------------------------------------------------------------- */
+/* PENANGANAN SEARCH FORM DI HEADER BERANDA                                   */
+/* -------------------------------------------------------------------------- */
+const searchForm = document.getElementById("siteSearchForm");
+const searchInput = document.getElementById("siteSearchInput");
 
-    <!-- Category Grid -->
-		<section class="category-section"> 
-			<div class="section-header" style="padding:8px 0px 16px;"> 
-				<h2>Jelajahi Konten</h2>
-			</div> 
-			<div class="category-grid"> 
-				
-					<button type="button" class="category-card" data-category="quiz"> 
-					<div class="category-icon">
-                        <img src="https://img.icons8.com/?size=24&id=C39yrLwypzvJ&format=png" alt="Ikon Kuis Interaktif">
-                    </div>
-					<div class="category-iconz">
-                        <img src="https://img.icons8.com/?size=48&id=C39yrLwypzvJ&format=png" alt="Ikon Kuis Interaktif">
-                    </div>
-					<span>Kuis Interaktif</span>
-				</button>
-				
-				<button type="button" class="category-card" data-category="tts"> 
-					<div class="category-icon">
-					    <img src="https://img.icons8.com/?size=24&id=oSaVJS0JhbLs&format=png" alt="Ikon Teka Teki Silang">
-					</div>
-					<div class="category-iconz">
-					    <img src="https://img.icons8.com/?size=48&id=oSaVJS0JhbLs&format=png" alt="Ikon Teka Teki Silang">
-					</div>
-					<span>Teka Teki Silang</span>
-				</button> 
-								
-				<button type="button" class="category-card" data-category="case"> 
-					<div class="category-icon">
-				        <img src="https://img.icons8.com/?size=24&id=azRXyH7B2uOy&format=png" alt="Ikon Kartu Kasus">
-				    </div>
-					<div class="category-iconz">
-				        <img src="https://img.icons8.com/?size=48&id=azRXyH7B2uOy&format=png" alt="Ikon Kartu Kasus">
-				    </div>
-				    <span>Kartu Kasus</span>
-                </button> 
-				
-				<button type="button" class="category-card" data-category="comic"> 
-					<div class="category-icon">
-    					<img src="https://img.icons8.com/?size=24&id=3As91fPvDjeH&format=png" alt="Ikon Komik Edukasi">
-    				</div>
-					<div class="category-iconz">
-    					<img src="https://img.icons8.com/?size=48&id=3As91fPvDjeH&format=png" alt="Ikon Komik Edukasi">
-    				</div>
-    				<span>Komik Edukasi</span>
-    				</button> 
-				
-			</div>
-		</section> 
+if (searchForm && searchInput) {
+    searchForm.onsubmit = (e) => {
+        e.preventDefault();
+        const value = searchInput.value.trim();
+        if (!value) return;
+        location.href = `explore.html?q=${encodeURIComponent(value)}`;
+    };
+}
 
-  </div>
+/* -------------------------------------------------------------------------- */
+/* HELPER UNTUK LABEL TOMBOL AKSI BERDASARKAN TIPE KONTEN                     */
+/* -------------------------------------------------------------------------- */
+function getActionText(type) {
+    switch (type) {
+        case "quiz":
+            return "Mulai →";
+        case "comic":
+            return "Baca →";
+        case "tts":
+            return "Main →";
+        case "case":
+            return "Lihat →";
+        case "ebook":
+            return "Detail →";
+        default:
+            return "Buka →";
+    }
+}
 
-  <!-- Latest Content Section -->
-  <section id="latest-section" class="home-section">
-			<div class="section-header">
-				<h2>Konten Terbaru</h2>
-			</div>
-			<div class="latest-tabs">
-		<button type="button" class="latest-tab active" data-filter="all">SEMUA</button>
-		<button type="button" class="latest-tab" data-filter="free">GRATIS</button>
-		<button type="button" class="latest-tab" data-filter="premium">PREMIUM</button>
-			</div>
-			<div id="latest-container" class="latest-list"></div>
-		</section>
-		
-		<!-- Quiz Section 
-		<section id="quiz-section" class="home-section"> 
-			<div class="section-header"> 
-				<h2>Kuis Trivia</h2>
-				<a href="explore.html?tab=quiz">Lihat semua →</a>
-				</div> 
-			<div id="quiz-container" class="horizontal-scroll"></div>
-			</section> 
-		-->
-		<!-- TTS Section 
-		<section id="tts-section" class="home-section"> 
-			<div class="section-header"> 
-				<h2>Teka Teki Silang</h2>
-				<a href="explore.html?tab=tts">Lihat semua →</a>
-				</div> 
-			<div id="tts-container" class="horizontal-scroll"></div>
-			</section> 
--->
-		<!-- Ebook Section -->
-		<section id="ebook-section" class="home-section"> 
-			<div class="section-header"> 
-				<h2>Ebook</h2>
-				<a href="https://gigital.myr.id/ebook" target="_blank" rel="noopener noreferrer">Katalog lengkap →</a>
-			</div> 
-			<div id="ebook-container" class="horizontal-scroll"></div>
-		</section>
-<!--		
-<section id="blog">
-<div class="section-header" style="padding:16px;"> 
-				<h2>Teman Ngopi</h2>
-			</div> 
-	<div id="blog-list">Memuat artikel...</div>
-</section>
+/* -------------------------------------------------------------------------- */
+/* HELPER UNTUK CEK APAKAH KONTEN PREMIUM & BELUM DIBELI                      */
+/* -------------------------------------------------------------------------- */
+function isPremiumLocked(item) {
+    if (!item || !item.premium) return false;
+    const unlocked = typeof Storage !== "undefined" && typeof Storage.isUnlocked === "function" && Storage.isUnlocked(item.productId);
+    return !unlocked;
+}
 
-<script>
-  const SITE = "doktergigigaul.wordpress.com";
-  const API_URL =
-    "https://public-api.wordpress.com/rest/v1.1/sites/" + SITE +
-    "/posts/?number=6&fields=ID,title,excerpt,URL,date";
+/* -------------------------------------------------------------------------- */
+/* MODAL KONFIRMASI BELI                                                      */
+/* -------------------------------------------------------------------------- */
+function showBuyModal(item) {
+    const overlay = document.getElementById("buyModal");
+    if (!overlay || !item) return;
 
-  // Mengubah teks HTML dari WordPress menjadi teks biasa
-  function teks(html) {
-    return new DOMParser().parseFromString(html, "text/html").body.textContent.trim();
-  }
+    const priceEl = document.getElementById("buyModalPrice");
+    if (priceEl) priceEl.textContent = item.price ? `Rp ${item.price.toLocaleString("id-ID")}` : "";
 
-  fetch(API_URL)
-    .then((res) => res.json())
-    .then((data) => {
-      const list = document.getElementById("blog-list");
-      list.innerHTML = "";
+    const buyBtn = document.getElementById("buyModalBuy");
+    if (buyBtn) buyBtn.href = item.mayarUrl || "#";
 
-      if (!data.posts || data.posts.length === 0) {
-        list.textContent = "Belum ada artikel.";
-        return;
-      }
+    overlay.classList.add("show");
+}
 
-      data.posts.forEach((post) => {
-        const item = document.createElement("article");
+const buyModalOverlay = document.getElementById("buyModal");
+const buyModalCancel = document.getElementById("buyModalCancel");
+if (buyModalCancel && buyModalOverlay) {
+    buyModalCancel.onclick = () => buyModalOverlay.classList.remove("show");
+}
+if (buyModalOverlay) {
+    buyModalOverlay.onclick = (e) => {
+        if (e.target === buyModalOverlay) buyModalOverlay.classList.remove("show");
+    };
+}
 
-        const judul = document.createElement("h3");
-        const link = document.createElement("a");
-        link.href = post.URL;
-        link.target = "_blank";
-        link.rel = "noopener";
-        link.textContent = teks(post.title);
-        judul.appendChild(link);
+const checkoutModal = document.getElementById("checkoutModal");
+const checkoutModalFrame = document.getElementById("checkoutModalFrame");
+const checkoutModalClose = document.getElementById("checkoutModalClose");
 
-        const tanggal = document.createElement("small");
-        tanggal.textContent = new Date(post.date).toLocaleDateString("id-ID", {
-          day: "numeric", month: "long", year: "numeric",
-        });
+function openCheckoutModal(url) {
+    if (!checkoutModal || !checkoutModalFrame || !url) return;
+    checkoutModalFrame.src = url;
+    checkoutModal.classList.add("show");
+}
 
-        const ringkasan = document.createElement("p");
-        ringkasan.textContent = teks(post.excerpt);
+function closeCheckoutModal() {
+    if (!checkoutModal || !checkoutModalFrame) return;
+    checkoutModal.classList.remove("show");
+    checkoutModalFrame.src = "";
+}
 
-        item.append(judul, tanggal, ringkasan);
-        list.appendChild(item);
-      });
-    })
-    .catch(() => {
-      document.getElementById("blog-list").textContent =
-        "Artikel belum dapat dimuat. Silakan coba lagi nanti.";
-    });
-</script>
-		-->
+if (checkoutModalClose) checkoutModalClose.onclick = closeCheckoutModal;
+if (checkoutModal) {
+    checkoutModal.onclick = (e) => {
+        if (e.target === checkoutModal) closeCheckoutModal();
+    };
+}
 
-		<section class="home-section" id="blog">
-    <div class="section-header" style="padding:24px 16px 16px;"> 
-				<h2>Bacaan Teman Ngopi</h2>
-    <a href="https://doktergigigaul.wordpress.com" target="_blank" rel="noopener">Semua artikel →</a>
-  </div>
-  <div class="latest-list" id="blog-list">
-    <p class="blog-message">Memuat artikel...</p>
-  </div>
-</section>
+/* -------------------------------------------------------------------------- */
+/* INIT                                                                       */
+/* -------------------------------------------------------------------------- */
+function initializeHome() {
+    renderFeaturedHero();
+        loadLatest();
+    loadQuiz();
+    loadComics();
+    loadTTS();
+    loadCases();
+    loadEbooks();
+    loadLego();
+    loadGames();
+}
 
-		<!-- Games Section -->
-<section id="games-section" class="home-section">
-	<div class="section-header">
-		<h2>Games</h2>
-	</div>
-	<div id="games-container" class="horizontal-scroll"></div>
-</section>
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeHome);
+} else {
+    initializeHome();
+}
 
-        <!-- Banner Iklan -->
-        <section class="banner-ad">
-			<div class="section-header" style="padding:8px 0px 16px;"> 
-				<h2>Video Edukasi</h2>
-				<a href="https://youtube.com/@doktergigigaul">Lihat channel Youtube →</a>
-			</div> 
-			   <img 
-				   src="assets/images/Channel-youtube-doktergigigaul-gigital.webp" 
-				   alt="channel youtube Gigital" 
-				   class="iklan">		   
-				 <!--  <img src="https://live.staticflickr.com/65535/55529890632_3d502ffa7c_b.jpg" alt="Gigital" class="iklan"> -->
-		</section>
-		
-		<!-- Case Section 
-		<section id="case-section" class="home-section"> 
-			<div class="section-header"> 
-				<h2>Kartu Kasus</h2>
-				<a href="explore.html?tab=case">Lihat semua →</a>
-			</div> 
-			<div id="case-container" class="horizontal-scroll"></div>
-			</section> 
-		-->
-		<!-- Comic Section 
-		<section id="comic-section" class="home-section"> 
-			<div class="section-header"> 
-				<h2>Komik Edukasi</h2>
-				<a href="explore.html?tab=comic">Lihat semua →</a>
-			</div> 
-			<div id="comics-container" class="horizontal-scroll"></div>
-		</section> 
-		-->
-		<!-- Dentabrix Lego Section -->
-		<section id="lego-section" class="home-section"> 
-			<div class="section-header"> 
-				<h2>Dentabrix Lego</h2>
-				<a href="https://dentabrix.carrd.co" target="_blank" rel="noopener noreferrer">Katalog lengkap →</a>
-			</div> 
-			<div id="lego-container" class="horizontal-scroll"></div>
-</section>
+/* -------------------------------------------------------------------------- */
+/* CARD CREATOR                                                               */
+/* -------------------------------------------------------------------------- */
+function createContentCard({
+    container,
+    thumbnail,
+    title,
+    description,
+    buttonText,
+    disabled = false,
+    extraClass = "",
+    item,
+    onClick
+}) {
+    if (!cardTemplate || !container) return;
 
-	</main>
-	
-	<!-- Component Templates -->
-	<template id="latest-card-template">
-		<article class="latest-card">
-			<img class="latest-thumb">
-			<div class="latest-info">
-				<span class="latest-badge"></span>
-				<h3 class="latest-title"></h3>
-				<p class="latest-description"></p>
-			</div>
-			<span class="latest-arrow">
-				<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-					<path d="M9 6l6 6-6 6"/>
-				</svg>
-			</span>
-		</article>
-	</template>
-	
-	<template id="content-card-template"> 
-		<article class="content-card"> 
-			<div class="featured-card-overlay">
-			    <span class="featured-badge"></span>
-			</div>
-			<img class="content-thumb">
-			<div class="content-info"> 
-				<h3 class="content-title"></h3>
-				<p class="content-description"></p> 
-				<button type="button" class="btn btn-outline content-btn">
-				    Buka →
-				</button>
-			</div>
-		</article>
-	</template> 
+    const clone = cardTemplate.content.cloneNode(true);
+    const card = clone.querySelector(".content-card");
 
-	<template id="game-card-template">
-	<article class="content-card game-card">
-		<span class="feature-badge game-badge"></span>
-		<img class="content-thumb">
-		<button type="button" class="game-play-btn">Mainkan →</button>
-	</article>
-</template>
-	
-	<!-- Modal Konfirmasi Beli -->
-	<div id="buyModal" class="buy-modal-overlay">
-		<div class="buy-modal">
-			<h3>Konten Premium</h3>
-			<p id="buyModalPrice"></p>
-			<div class="buy-modal-actions">
-				<button id="buyModalCancel" class="btn btn-outline">Kembali</button>
-				<a id="buyModalBuy" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Beli Sekarang</a>
-			</div>
-		</div>
-	</div>
+    if (extraClass) {
+        card.classList.add(extraClass);
+    }
 
-	<!-- Modal Checkout Mayar -->
-	<div id="checkoutModal" class="buy-modal-overlay">
-		<div class="checkout-modal">
-			<button id="checkoutModalClose" class="checkout-modal-close">&times;</button>
-			<iframe
-				id="checkoutModalFrame"
-				src=""
-				allowfullscreen
-				allowpaymentrequest
-				scrolling="no"
-				frameborder="0"
-				width="100%"
-				height="100%">
-			</iframe>
-		</div>
-	</div>
-	
-	<!-- Scripts -->
-	<script>
-  const BLOG_SITE = "doktergigigaul.wordpress.com";
-  const BLOG_API =
-    "https://public-api.wordpress.com/rest/v1.1/sites/" + BLOG_SITE +
-    "/posts/?number=4&fields=ID,title,excerpt,URL,date,featured_image";
+    const isEbook = item?.type === "ebook" || extraClass.includes("ebook-card");
 
-  // Ubah HTML dari WordPress menjadi teks biasa (tanpa link "Continue reading")
-  function teksBersih(html) {
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    doc.querySelectorAll("a").forEach((a) => a.remove());
-    return doc.body.textContent.trim();
-  }
-
-  function pesan(teks) {
-    const list = document.getElementById("blog-list");
-    list.innerHTML = "";
-    const p = document.createElement("p");
-    p.className = "blog-message";
-    p.textContent = teks;
-    list.appendChild(p);
-  }
-
-  fetch(BLOG_API)
-    .then((res) => res.json())
-    .then((data) => {
-      if (!data.posts || data.posts.length === 0) {
-        pesan("Belum ada artikel.");
-        return;
-      }
-
-      const list = document.getElementById("blog-list");
-      list.innerHTML = "";
-
-      data.posts.forEach((post) => {
-        const card = document.createElement("a");
-        card.className = "latest-card blog-card";
-        card.href = post.URL;
-        card.target = "_blank";
-        card.rel = "noopener";
-
-        // Gambar utama (kalau tidak ada, tampil kotak abu-abu)
-        let thumb;
-        if (post.featured_image) {
-          thumb = document.createElement("img");
-          thumb.src = post.featured_image;
-          thumb.alt = "";
-          thumb.loading = "lazy";
+    const badge = clone.querySelector(".featured-badge");
+    if (badge) {
+        if (isEbook || item?.premium) {
+            badge.textContent = "👑 Premium";
         } else {
-          thumb = document.createElement("div");
+            badge.remove();
         }
-        thumb.className = "latest-thumb";
+    }
 
-        const info = document.createElement("div");
-        info.className = "latest-info";
+    const thumbEl = clone.querySelector(".content-thumb");
+    if (thumbEl) {
+        thumbEl.src = thumbnail || "";
+        thumbEl.alt = title || "";
+        thumbEl.loading = "eager";
+    }
 
-        const judul = document.createElement("h3");
-        judul.className = "latest-title";
-        judul.textContent = teksBersih(post.title);
+    const titleEl = clone.querySelector(".content-title");
+    if (titleEl) titleEl.textContent = title;
 
-        const tanggal = document.createElement("span");
-        tanggal.className = "blog-date";
-        tanggal.textContent = new Date(post.date).toLocaleDateString("id-ID", {
-          day: "numeric", month: "long", year: "numeric",
+    const descEl = clone.querySelector(".content-description");
+    if (descEl) descEl.textContent = description;
+
+    const button = clone.querySelector(".content-btn");
+    if (button) {
+        button.textContent = buttonText;
+        button.disabled = disabled;
+
+        if (!disabled && onClick) {
+            button.onclick = onClick;
+        }
+    }
+
+    container.appendChild(clone);
+}
+
+/* -------------------------------------------------------------------------- */
+/* LOADERS                                                                    */
+/* -------------------------------------------------------------------------- */
+
+function loadQuiz() {
+    if (!quizList || typeof quizzes === "undefined") return;
+    quizList.innerHTML = "";
+
+    quizzes.slice(0, 4).forEach(quiz => {
+        const finished = typeof Storage !== "undefined" && Storage.isFinished && Storage.isFinished(quiz.productId);
+        const locked = isPremiumLocked(quiz);
+
+        createContentCard({
+            container: quizList,
+            item: quiz,
+            thumbnail: quiz.thumbnail,
+            title: quiz.title,
+            description: quiz.description,
+            buttonText: locked ? "Beli" : (finished ? "Selesai" : getActionText("quiz")),
+            disabled: finished,
+            onClick() {
+                if (locked) {
+                    showBuyModal(quiz);
+                    return;
+                }
+                location.href = `quiz.html?id=${quiz.file}`;
+            }
+        });
+    });
+
+    //appendSeeAllCard(quizList, "Lihat semua", "explore.html?tab=quiz");
+}
+
+function loadComics() {
+    if (!comicsContainer || typeof comics === "undefined") return;
+    comicsContainer.innerHTML = "";
+
+    comics.slice(0, 4).forEach(comic => {
+        const locked = isPremiumLocked(comic);
+
+        createContentCard({
+            container: comicsContainer,
+            item: comic,
+            thumbnail: comic.thumbnail,
+            title: comic.title,
+            description: comic.description,
+            extraClass: "comic-card",
+            buttonText: locked ? "Beli" : getActionText("comic"),
+            onClick() {
+                if (locked) {
+                    showBuyModal(comic);
+                    return;
+                }
+                location.href = `comic.html?id=${comic.id}`;
+            }
+        });
+    });
+
+    //appendSeeAllCard(comicsContainer, "Lihat semua", "explore.html?tab=comic");
+}
+
+function loadTTS() {
+    if (!ttsContainer || typeof ttsList === "undefined") return;
+    ttsContainer.innerHTML = "";
+
+    ttsList.slice(0, 4).forEach(tts => {
+        const locked = isPremiumLocked(tts);
+
+        createContentCard({
+            container: ttsContainer,
+            item: tts,
+            thumbnail: tts.thumbnail,
+            title: tts.title,
+            description: tts.description,
+            buttonText: locked ? "Beli" : getActionText("tts"),
+            extraClass: "tts-card",
+            onClick() {
+                if (locked) {
+                    showBuyModal(tts);
+                    return;
+                }
+                location.href = `tts.html?puzzle=tts${tts.id}`;
+            }
+        });
+    });
+
+    //appendSeeAllCard(ttsContainer, "Lihat semua", "explore.html?tab=tts");
+}
+
+function loadCases() {
+    if (!caseContainer || typeof cases === "undefined") return;
+    caseContainer.innerHTML = "";
+
+    cases.slice(0, 4).forEach(caseData => {
+        const locked = isPremiumLocked(caseData);
+
+        createContentCard({
+            container: caseContainer,
+            item: caseData,
+            thumbnail: caseData.thumbnail,
+            title: caseData.title,
+            description: caseData.description,
+            buttonText: "Lihat →",
+            onClick() {
+    location.href = `case.html?case=${caseData.file}`;
+}
+
+        });
+    });
+
+    //appendSeeAllCard(caseContainer, "Lihat semua", "explore.html?tab=case");
+}
+
+function loadEbooks() {
+    if (!ebookContainer || typeof ebooks === "undefined") return;
+    ebookContainer.innerHTML = "";
+
+    ebooks
+        .slice()
+        .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))
+        .slice(0, 6)
+        .forEach(ebook => {
+            createContentCard({
+                container: ebookContainer,
+                item: { ...ebook, type: "ebook" },
+                thumbnail: ebook.thumbnail,
+                title: ebook.title,
+                description: ebook.description,
+                buttonText: "Detail →",
+                extraClass: "ebook-card",
+                onClick() {
+                    location.href = `ebook.html?ebook=${ebook.file}`;
+                }
+            });
         });
 
-        const ringkasan = document.createElement("p");
-        ringkasan.className = "latest-description";
-        ringkasan.textContent = teksBersih(post.excerpt);
+    // Panggil helper dengan parameter isExternal = true
+    //appendSeeAllCard(ebookContainer, "Katalog lengkap", "https://gigital.myr.id", true);
+}
 
-        info.append(judul, tanggal, ringkasan);
+function loadLego() {
+    if (!legoContainer || typeof legoSets === "undefined") return;
+    legoContainer.innerHTML = "";
 
-        const panah = document.createElement("div");
-        panah.className = "latest-arrow";
-        panah.textContent = "›";
+    legoSets.slice(0, 3).forEach(lego => {
+        createContentCard({
+            container: legoContainer,
+            item: lego,
+            thumbnail: lego.thumbnail,
+            title: lego.title,
+            description: lego.description,
+            buttonText: "Beli",
+            extraClass: "lego-card",
+            onClick() {
+                location.href = `lego.html?lego=${lego.file}`;
+            }
+        });
+    });
+}
 
-        card.append(thumb, info, panah);
-        list.appendChild(card);
-      });
-    })
-    .catch(() => pesan("Artikel belum dapat dimuat. Silakan coba lagi nanti."));
-</script>
-		
-	<script src="https://mayarembed.r2.mayar.id/mayarEmbed.min.js"></script>	
-	<script src="js/storage.js"></script>
-	<script src="js/quiz-data.js"></script>
-	<script src="js/comic-data.js"></script>
-	<script src="js/tts-data.js"></script>
-	<script src="js/case-data.js"></script>
-	<script src="js/ebook-data.js"></script>
-	<script src="js/lego-data.js"></script>
-	<script src="js/games-data.js"></script>
-	<script src="js/index.js"></script>
-</body>
-</html>
+function loadGames() {
+    if (!gamesContainer || !gameCardTemplate || typeof games === "undefined") return;
+    gamesContainer.innerHTML = "";
+
+    games.forEach(game => {
+        const locked = isPremiumLocked(game);
+        const clone = gameCardTemplate.content.cloneNode(true);
+
+        const badge = clone.querySelector(".game-badge");
+        if (badge) {
+            if (game.premium) {
+                badge.textContent = "👑 Premium";
+            } else {
+                badge.remove();
+            }
+        }
+
+        const thumb = clone.querySelector(".content-thumb");
+        if (thumb) {
+            thumb.src = game.thumbnail || "";
+            thumb.alt = game.title || "";
+        }
+
+        const playBtn = clone.querySelector(".game-play-btn");
+        if (playBtn) {
+            playBtn.textContent = locked ? "Beli →" : "Mainkan →";
+            playBtn.onclick = () => {
+                if (locked) {
+                    showBuyModal(game);
+                    return;
+                }
+                location.href = `games/${game.file}.html`;
+            };
+        }
+
+        gamesContainer.appendChild(clone);
+    });
+}
+
+/* -------------------------------------------------------------------------- */
+/* LATEST CONTENT                                                             */
+/* -------------------------------------------------------------------------- */
+function goToDetail(item) {
+    switch (item.type) {
+        case "quiz":
+            location.href = `quiz.html?id=${item.file}`;
+            break;
+        case "comic":
+            location.href = `comic.html?id=${item.id}`;
+            break;
+        case "tts":
+            location.href = `tts.html?puzzle=tts${item.id}`;
+            break;
+        case "case":
+            location.href = `case.html?case=${item.file}`;
+            break;
+    }
+}
+let latestItemsAll = [];
+let latestActiveFilter = "all";
+
+function loadLatest() {
+    if (!latestContainer || !latestCardTemplate) return;
+
+    const quizzesArr = typeof quizzes !== "undefined" ? quizzes.map(x => ({ ...x, type: "quiz" })) : [];
+    const comicsArr = typeof comics !== "undefined" ? comics.map(x => ({ ...x, type: "comic" })) : [];
+    const ttsArr = typeof ttsList !== "undefined" ? ttsList.map(x => ({ ...x, type: "tts" })) : [];
+    const casesArr = typeof cases !== "undefined" ? cases.map(x => ({ ...x, type: "case" })) : [];
+
+    latestItemsAll = [...quizzesArr, ...comicsArr, ...ttsArr, ...casesArr]
+        .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+
+    renderLatest();
+}
+
+function renderLatest() {
+    if (!latestContainer || !latestCardTemplate) return;
+    latestContainer.innerHTML = "";
+
+    let filtered = latestItemsAll;
+    if (latestActiveFilter === "free") {
+        filtered = latestItemsAll.filter(item => !item.premium);
+    } else if (latestActiveFilter === "premium") {
+        filtered = latestItemsAll.filter(item => item.premium);
+    }
+
+    filtered.slice(0, 4).forEach(item => {
+        const locked = isPremiumLocked(item);
+        const clone = latestCardTemplate.content.cloneNode(true);
+
+        const thumb = clone.querySelector(".latest-thumb");
+        if (thumb) {
+            thumb.src = item.thumbnail || "";
+            thumb.alt = item.title || "";
+        }
+
+        const badge = clone.querySelector(".latest-badge");
+        if (badge) {
+            if (item.premium) {
+                badge.textContent = "👑 Premium";
+                badge.classList.add("premium");
+            } else {
+                badge.textContent = "Gratis";
+            }
+        }
+
+        const title = clone.querySelector(".latest-title");
+        if (title) title.textContent = item.title;
+
+        const desc = clone.querySelector(".latest-description");
+        if (desc) desc.textContent = item.description;
+
+        const card = clone.querySelector(".latest-card");
+        if (card) {
+            card.onclick = () => {
+                if (locked) {
+                    showBuyModal(item);
+                    return;
+                }
+                goToDetail(item);
+            };
+        }
+
+        latestContainer.appendChild(clone);
+    });
+}
+
+document.querySelectorAll(".latest-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll(".latest-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        latestActiveFilter = tab.dataset.filter;
+        renderLatest();
+    });
+});
+/* -------------------------------------------------------------------------- */
+/* FEATURED HERO                                                              */
+/* -------------------------------------------------------------------------- */
+
+function renderFeaturedHero() {
+    if (!featuredHero) return;
+
+    const quizzesArr = typeof quizzes !== "undefined" ? quizzes : [];
+    const comicsArr = typeof comics !== "undefined" ? comics : [];
+    const ttsArr = typeof ttsList !== "undefined" ? ttsList : [];
+    const casesArr = typeof cases !== "undefined" ? cases : [];
+
+    const latestItems = [
+        ...quizzesArr,
+        ...comicsArr,
+        ...ttsArr,
+        ...casesArr
+    ].sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+
+    const heroItem = latestItems[0];
+    if (!heroItem) return;
+
+    const urlBg = "https://doktergigigaul.wordpress.com/wp-content/uploads/2026/09/oral-cancer.webp";
+//    featuredHero.style.backgroundImage = `url(${urlBg})`;
+    
+// Menggunakan thumbnail dari konten terbaru yang ditemukan
+//    const urlBg = heroItem.thumbnail || "assets/images/premium-bg.jpeg";
+    featuredHero.style.backgroundImage = `url('${urlBg}')`;
+    
+    const badge = featuredHero.querySelector(".featured-badge");
+    const title = featuredHero.querySelector(".featured-title");
+    const description = featuredHero.querySelector(".featured-description");
+    const button = featuredHero.querySelector(".featured-btn");
+    const catalogButton = featuredHero.querySelector(".featured-catalog-btn");
+
+    //if (badge) badge.remove();
+    // LOGIKA BADGE: Jika badge ada di HTML, tampilkan teks berdasarkan status premium/terbaru
+    if (badge) {
+        badge.textContent = "⭐ Kedokteran Gigi era Digital";
+        badge.style.display = "inline-block";
+    }
+
+    if (title) title.textContent = heroItem.title;
+    if (description) description.textContent = heroItem.description;
+
+    if (button) {
+        const locked = isPremiumLocked(heroItem);
+        button.textContent = locked ? "Beli" : getActionText(heroItem.type);
+
+        button.onclick = () => {
+    if (locked && heroItem.type !== "case") {
+        showBuyModal(heroItem);
+        return;
+    }
+    switch (heroItem.type) {
+
+                case "quiz":
+                    location.href = `quiz.html?id=${heroItem.file}`;
+                    break;
+                case "comic":
+                    location.href = `comic.html?id=${heroItem.id}`;
+                    break;
+                case "tts":
+                    location.href = `tts.html?puzzle=tts${heroItem.id}`;
+                    break;
+                case "case":
+                    location.href = `case.html?case=${heroItem.file}`;
+                    break;
+            }
+        };
+    }
+
+    if (catalogButton) {
+        catalogButton.remove();
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/* CATEGORY NAVIGATION                                                        */
+/* --------------------------------------------------------------------------
+
+function goToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    section.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+document.querySelectorAll(".category-card").forEach(card => {
+    card.addEventListener("click", () => {
+        switch (card.dataset.category) {
+            case "quiz":
+                goToSection("quiz-section");
+                break;
+            case "case":
+                goToSection("case-section");
+                break;
+            case "tts":
+                goToSection("tts-section");
+                break;
+            case "comic":
+                goToSection("comic-section");
+                break;
+            case "ebook":
+                goToSection("ebook-section");
+                break;
+        }
+    });
+});
+ */
+function goToSection(sectionId) {
+    //window.location.href = "indeks.html#" + sectionId;
+    window.location.href = "explore.html?tab=" + sectionId;
+}
+
+document.querySelectorAll(".category-card").forEach(card => {
+    card.addEventListener("click", () => {
+        switch (card.dataset.category) {
+            case "quiz":
+                //goToSection("quiz-section");
+                goToSection("quiz");
+                break;
+            case "tts":
+                //goToSection("tts-section");
+                goToSection("tts");
+                break;
+            case "case":
+                //goToSection("case-section");
+                goToSection("case");
+                break;
+            case "comic":
+                //goToSection("comic-section");
+                goToSection("comic");
+                break;
+            case "ebook":
+                goToSection("ebook-section");
+                break;
+        }
+    });
+});
+/* -------------------------------------------------------------------------- */
+/* HELPER UNTUK KARTU "LIHAT SEMUA" GLOBAL                                   */
+/* -------------------------------------------------------------------------- 
+function appendSeeAllCard(container, label, url, isExternal = false) {
+    if (!container) return;
+
+    const seeAllCard = document.createElement("article");
+    seeAllCard.className = "content-card see-all-card";
+    
+    const targetAttr = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
+    
+    seeAllCard.innerHTML = `
+        <a href="${url}" class="see-all-link" ${targetAttr}>${label} →</a>
+    `;
+    
+    seeAllCard.addEventListener("click", () => {
+        if (isExternal) {
+            window.open(url, "_blank", "noopener,noreferrer");
+        } else {
+            location.href = url;
+        }
+    });
+
+    container.appendChild(seeAllCard);
+}*/
