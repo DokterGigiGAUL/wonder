@@ -2,8 +2,8 @@
 const games = [
     {
         id: 1,
-        file: "game1",
-        title: "Dental Wordle",
+        file: "tebak-kata",
+        title: "Tebak Kata",
         thumbnail: "assets/images/games/tebak-kata.png",
         premium: false,
         productId: "game-1",
@@ -12,7 +12,7 @@ const games = [
     },
     {
         id: 2,
-        file: "game2",
+        file: "tooth-hop",
         title: "Tooth Jump",
         thumbnail: "assets/images/games/tooth-jump.png",
         premium: false,
@@ -22,7 +22,7 @@ const games = [
     },
     {
         id: 3,
-        file: "game3",
+        file: "plaque-buster",
         title: "Plaque Buster!",
         thumbnail: "assets/images/games/plaque-buster.png",
         premium: false,
@@ -32,8 +32,8 @@ const games = [
     },
     {
         id: 4,
-        file: "game4",
-        title: "Dental Wars",
+        file: "plaque-wars",
+        title: "Plaque Wars",
         thumbnail: "assets/images/games/tooth-jump.png",
         premium: true,
         productId: "game-4",
