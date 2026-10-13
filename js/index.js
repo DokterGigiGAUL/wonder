@@ -13,14 +13,13 @@ const ttsContainer = document.getElementById("tts-container");
 const caseContainer = document.getElementById("case-container");
 const ebookContainer = document.getElementById("ebook-container");
 const legoContainer = document.getElementById("lego-container");
+const gamesContainer = document.getElementById("games-container");
 
 const featuredHero = document.getElementById("featured-hero");
 const cardTemplate = document.getElementById("content-card-template");
 
 const latestContainer = document.getElementById("latest-container");
 const latestCardTemplate = document.getElementById("latest-card-template");
-const gamesContainer = document.getElementById("games-container");
-const gameCardTemplate = document.getElementById("game-card-template");
 
 /* -------------------------------------------------------------------------- */
 /* PENANGANAN SEARCH FORM DI HEADER BERANDA                                   */
@@ -358,41 +357,28 @@ function loadLego() {
 }
 
 function loadGames() {
-    if (!gamesContainer || !gameCardTemplate || typeof games === "undefined") return;
+    if (!gamesContainer || typeof games === "undefined") return;
     gamesContainer.innerHTML = "";
 
     games.forEach(game => {
         const locked = isPremiumLocked(game);
-        const clone = gameCardTemplate.content.cloneNode(true);
 
-        const badge = clone.querySelector(".game-badge");
-        if (badge) {
-            if (game.premium) {
-                badge.textContent = "👑 Premium";
-            } else {
-                badge.remove();
-            }
-        }
-
-        const thumb = clone.querySelector(".content-thumb");
-        if (thumb) {
-            thumb.src = game.thumbnail || "";
-            thumb.alt = game.title || "";
-        }
-
-        const playBtn = clone.querySelector(".game-play-btn");
-        if (playBtn) {
-            playBtn.textContent = locked ? "Beli →" : "Mainkan →";
-            playBtn.onclick = () => {
+        createContentCard({
+            container: gamesContainer,
+            item: game,
+            thumbnail: game.thumbnail,
+            title: game.title,
+            description: "",
+            extraClass: "game-card",
+            buttonText: locked ? "Beli →" : "Mainkan →",
+            onClick() {
                 if (locked) {
                     showBuyModal(game);
                     return;
                 }
                 location.href = `games/${game.file}.html`;
-            };
-        }
-
-        gamesContainer.appendChild(clone);
+            }
+        });
     });
 }
 
