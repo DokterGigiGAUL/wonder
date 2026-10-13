@@ -4,7 +4,7 @@ const games = [
         id: 1,
         file: "wordle",
         title: "Tebak Kata",
-        thumbnail: "assets/images/games/tebak-kata.png",
+        thumbnail: "assets/images/games/4A26C124-0C5B-4B14-93BE-EE94B3DD72C9.jpeg",
         premium: false,
         productId: "game-1",
         price: 0,
