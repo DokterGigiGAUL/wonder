@@ -32,11 +32,21 @@ const games = [
     },
     {
         id: 4,
+        file: "tebak-kartu",
+        title: "Tebak Kartu",
+        thumbnail: "assets/images/games/tebak-kartu.png",
+        premium: false,
+        productId: "game-4",
+        price: 0,
+        mayarUrl: ""
+    },
+    {
+        id: 5,
         file: "plaque-wars",
         title: "Plaque Wars",
         thumbnail: "assets/images/games/97759D3A-03E3-4C70-808C-B29A87E1A290.png",
         premium: false,
-        productId: "game-4",
+        productId: "game-5",
         price: 0,
         mayarUrl: ""
     }
