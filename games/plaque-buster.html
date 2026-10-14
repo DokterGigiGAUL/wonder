@@ -1,4 +1,491 @@
 <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Whack - Jaga Kesehatan Gigi</title>
+    <style>
+        :root {
+            --bg-color: #f0f4f1;
+            --card-bg: #ffffff;
+            --primary: #4a7c59;
+            --primary-hover: #385e43;
+            --secondary: #64748b;
+            --secondary-hover: #475569;
+            --danger: #d9534f;
+            --text-main: #2c3e50;
+            --gum-color: #f7d6d0;
+            --tooth-color: #ffffff;
+            --tooth-shadow: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .game-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+            color: var(--primary);
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            background: #f8fafc;
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .damage-wrapper {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .damage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--danger);
+        }
+
+        .damage-bar-container {
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .damage-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--danger);
+            transition: width 0.2s ease;
+        }
+
+        /* Arch Area */
+        .arch-section {
+            background: var(--gum-color);
+            border-radius: 16px 16px 0 0;
+            padding: 12px;
+            margin-bottom: 0px;
+        }
+        .arch-section2 {
+            background: var(--gum-color);
+            border-radius: 0 0 16px 16px;
+            padding: 12px;
+            margin-bottom: 0px;
+        }
+
+
+        .arch-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8c5a53;
+            margin: 8px 0;
+            font-weight: 700;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .tooth-slot {
+            aspect-ratio: 1;
+            background: var(--tooth-color);
+            border-radius: 12px;
+            border: 2px solid var(--tooth-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.1s ease, background-color 0.2s ease;
+            position: relative;
+        }
+
+        .tooth-slot:active {
+            transform: scale(0.92);
+        }
+
+        .tooth-slot.hit {
+            background-color: #d1fae5;
+        }
+
+        .tooth-slot.wrong {
+            background-color: #fee2e2;
+        }
+
+        .tooth-slot.missed {
+            background-color: #cc000050 !important;
+        }
+
+        /* Pop-up Window Overlay Styles */
+        .overlay-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .popup-box {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 360px;
+            padding: 24px;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .overlay-screen.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .overlay-screen.active .popup-box {
+            transform: scale(1);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            margin-top: 14px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-hover);
+        }
+
+        .instructions {
+            text-align: left;
+            font-size: 0.82rem;
+            color: #475569;
+            margin-bottom: 16px;
+            line-height: 1.5;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .instructions ul {
+            padding-left: 18px;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-wrapper">
+        <!-- GAMEPLAY SCREEN -->
+        <div id="game-screen">
+            <h1>🦷 Dental Whack</h1>
+            <div class="score-board">
+                <span>Skor: <span id="score-val">0</span></span>
+                <span>Waktu: <span id="time-val">0</span>s</span>
+            </div>
+
+            <div class="damage-wrapper">
+                <div class="damage-label">
+                    <span>Indikator Kerusakan Gigi</span>
+                    <span id="damage-val">0%</span>
+                </div>
+                <div class="damage-bar-container">
+                    <div id="damage-fill" class="damage-bar-fill"></div>
+                </div>
+            </div>
+
+            <!-- Upper Arch (4 teeth) -->
+            <div class="arch-section">
+                <div class="arch-title">Rahang Atas</div>
+                <div class="grid-4">
+                    <div class="tooth-slot" onclick="handleTap(0)">🦷</div>
+                    <div class="tooth-slot" onclick="handleTap(1)">🦷</div>
+                    <div class="tooth-slot" onclick="handleTap(2)">🦷</div>
+                    <div class="tooth-slot" onclick="handleTap(3)">🦷</div>
+                </div>
+            </div>
+
+            <!-- Lower Arch (4 teeth) -->
+            <div class="arch-section2">
+                <div class="grid-4">
+                    <div class="tooth-slot" onclick="handleTap(4)">🦷</div>
+                    <div class="tooth-slot" onclick="handleTap(5)">🦷</div>
+                    <div class="tooth-slot" onclick="handleTap(6)">🦷</div>
+                    <div class="tooth-slot" onclick="handleTap(7)">🦷</div>
+                </div>
+                <div class="arch-title">Rahang Bawah</div>
+
+            </div>
+        </div>
+
+        <!-- START SCREEN POP-UP -->
+        <div id="start-screen" class="overlay-screen active">
+            <div class="popup-box">
+                <h1>🦷 Dental Whack</h1>
+                <p class="subtitle">Lindungi gigi dari ancaman kerusakan!</p>
+                
+                <div class="instructions">
+                    <strong>Cara Bermain:</strong>
+                    <ul>
+                        <li>Ketuk 🦠 <strong>Bakteri</strong> atau 🍬 <strong>Permen</strong> sebelum waktunya habis!</li>
+                        <li>Terlambat mengetuk membuat kotak menjadi merah & Bar Kerusakan bertambah.</li>
+                        <li>Bar Kerusakan penuh = Game Over!</li>
+                    </ul>
+                </div>
+
+                <button class="btn" onclick="startGame()">Mulai Game</button>
+            </div>
+        </div>
+
+        <!-- GAME OVER SCREEN POP-UP -->
+        <div id="gameover-screen" class="overlay-screen">
+            <div class="popup-box">
+                <h1>Game Over</h1>
+                <p class="subtitle">Gigi sudah berlubang parah!</p>
+                
+                <div style="background: #f8fafc; padding: 14px; border-radius: 12px; margin: 14px 0; width: 100%;">
+                    <p style="font-size: 0.85rem; color: #64748b;">Skor Akhir</p>
+                    <h2 id="final-score" style="font-size: 1.8rem; color: var(--primary); margin: 2px 0;">0</h2>
+                    <p style="font-size: 0.78rem; color: #64748b;">Waktu bertahan: <span id="final-time">0</span> detik</p>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="startGame()">Main Lagi</button>
+                    <button class="btn btn-secondary" onclick="finishGame()">Selesai Main</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ITEMS = ['🦷', '🦠', '🍬'];
+        let boardState = Array(8).fill(0);
+        let itemTimers = Array(8).fill(null);
+        
+        let score = 0;
+        let damage = 0;
+        let gameSeconds = 0;
+        let gameInterval = null;
+        let spawnerInterval = null;
+        let spawnIntervalTime = 1500;
+
+        const slots = document.querySelectorAll('.tooth-slot');
+
+        function startGame() {
+            score = 0;
+            damage = 0;
+            gameSeconds = 0;
+            spawnIntervalTime = 1500;
+            boardState.fill(0);
+            
+            itemTimers.forEach(t => clearTimeout(t));
+            itemTimers.fill(null);
+
+            document.getElementById('score-val').innerText = score;
+            document.getElementById('time-val').innerText = gameSeconds;
+            updateDamageBar();
+            renderBoard();
+
+            document.getElementById('start-screen').classList.remove('active');
+            document.getElementById('gameover-screen').classList.remove('active');
+
+            gameInterval = setInterval(() => {
+                gameSeconds++;
+                document.getElementById('time-val').innerText = gameSeconds;
+                
+                if (gameSeconds % 10 === 0 && spawnIntervalTime > 800) {
+                    spawnIntervalTime -= 300;
+                    restartSpawner();
+                }
+            }, 1000);
+
+            startSpawner();
+        }
+
+        function startSpawner() {
+            clearInterval(spawnerInterval);
+            spawnerInterval = setInterval(() => {
+                spawnRandomItem();
+            }, spawnIntervalTime);
+        }
+
+        function restartSpawner() {
+            clearInterval(spawnerInterval);
+            startSpawner();
+        }
+
+        function spawnRandomItem() {
+            let emptySlots = [];
+            boardState.forEach((val, idx) => {
+                if (val === 0) emptySlots.push(idx);
+            });
+
+            if (emptySlots.length === 0) return;
+
+            let randomSlotIndex = emptySlots[Math.floor(Math.random() * emptySlots.length)];
+            let threatType = Math.random() < 0.7 ? 1 : 2;
+            
+            boardState[randomSlotIndex] = threatType;
+            renderBoard();
+
+            let activeTime = Math.max(800, spawnIntervalTime * 0.8);
+            
+            itemTimers[randomSlotIndex] = setTimeout(() => {
+                if (boardState[randomSlotIndex] === 1 || boardState[randomSlotIndex] === 2) {
+                    boardState[randomSlotIndex] = 0;
+                    addDamage(15);
+                    renderBoard();
+
+                    slots[randomSlotIndex].classList.add('missed');
+                    setTimeout(() => {
+                        slots[randomSlotIndex].classList.remove('missed');
+                    }, 500);
+                }
+            }, activeTime);
+        }
+
+        function handleTap(index) {
+            let currentItem = boardState[index];
+
+            if (currentItem === 1 || currentItem === 2) {
+                clearTimeout(itemTimers[index]);
+                boardState[index] = 0;
+                score += (currentItem === 1 ? 10 : 15);
+                document.getElementById('score-val').innerText = score;
+                
+                slots[index].classList.add('hit');
+                setTimeout(() => slots[index].classList.remove('hit'), 150);
+                
+                renderBoard();
+            } 
+            else if (currentItem === 0) {
+                addDamage(5);
+                slots[index].classList.add('wrong');
+                setTimeout(() => slots[index].classList.remove('wrong'), 150);
+            }
+        }
+
+        function addDamage(amount) {
+            damage += amount;
+            if (damage >= 100) {
+                damage = 100;
+                updateDamageBar();
+                endGame();
+            } else {
+                updateDamageBar();
+            }
+        }
+
+        function updateDamageBar() {
+            document.getElementById('damage-val').innerText = damage + '%';
+            document.getElementById('damage-fill').style.width = damage + '%';
+        }
+
+        function renderBoard() {
+            boardState.forEach((val, idx) => {
+                slots[idx].innerText = ITEMS[val];
+            });
+        }
+
+        function endGame() {
+            clearInterval(gameInterval);
+            clearInterval(spawnerInterval);
+            itemTimers.forEach(t => clearTimeout(t));
+
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('final-time').innerText = gameSeconds;
+
+            document.getElementById('gameover-screen').classList.add('active');
+        }
+
+        function finishGame() {
+            document.getElementById('gameover-screen').classList.remove('active');
+            document.getElementById('start-screen').classList.add('active');
+        }
+    </script>
+</body>
+</html>
+<!--
+<!DOCTYPE html>
 <html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Plaque Buster!</title>
@@ -73,3 +560,4 @@ function end(msg){if(!run)return;run=false;clearInterval(clock);
  document.getElementById('gb').textContent='Main lagi';ov.classList.remove('hide')}
 document.getElementById('gb').onclick=start;
 </script></body></html>
+-->
