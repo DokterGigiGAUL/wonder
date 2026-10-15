@@ -29,8 +29,10 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
 .teeth{display:flex;justify-content:center;gap:6px;margin:4px 0 12px}
 .tooth{display:block;width:min(44px,11vw);aspect-ratio:132/168;background:var(--toothimg) center/contain no-repeat;filter:drop-shadow(0 2px 2px rgba(16,48,58,.28))}
 .tooth.lost{opacity:.2;filter:none}
-.teeth.danger .tooth:not(.lost){filter:drop-shadow(1.5px 0 0 var(--danger)) drop-shadow(-1.5px 0 0 var(--danger)) drop-shadow(0 1.5px 0 var(--danger)) drop-shadow(0 -1.5px 0 var(--danger))}
-.word{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:16px 0 8px;min-height:48px}
+/*
+  .teeth.danger .tooth:not(.lost){filter:drop-shadow(1.5px 0 0 var(--danger)) drop-shadow(-1.5px 0 0 var(--danger)) drop-shadow(0 1.5px 0 var(--danger)) drop-shadow(0 -1.5px 0 var(--danger))}
+*/
+  .word{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:16px 0 8px;min-height:48px}
 .slot{width:clamp(22px,7.2vw,34px);height:44px;border-bottom:3px solid var(--ink);display:flex;align-items:flex-end;justify-content:center;font-size:1.5rem;font-weight:800;padding-bottom:2px}
 .slot.miss{color:var(--gum);border-color:var(--gum)}
 .msg{min-height:3.2em;text-align:center;font-size:.95rem;margin:6px 0 10px}
