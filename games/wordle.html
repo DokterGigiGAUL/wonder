@@ -132,7 +132,7 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
   }
 
   function start(){
-    if(!WORDS.length){$("msg").textContent="Daftar kata kosong. Periksa file kata.js.";return}
+    if(!WORDS.length){$("msg").textContent="Daftar kata kosong. Periksa file wordle.js.";return}
     if(!queue.length) queue=shuffle(WORDS.slice());
     cur=queue.pop(); guessed={}; wrong=0; over=false;
     $("len").textContent=cur.length;
