@@ -10,12 +10,12 @@
 <style>
 :root{
   --bg:#e8f2f0; --panel:#ffffff; --ink:#10303a; --muted:#5b7780;
-  --mint:#1f9d85; --gum:#d9566f; --danger:#d92d20; --line:#c7dad6;
+  --mint:#1f9d85; --gum:#d9566f; --danger:#d92d20; --line:#c7dad6; --green:#17806c; --on-green:#fff;
   --g:0px;
   box-sizing:border-box;
 }
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--bg:#0d2128;--panel:#13303a;--ink:#e6f3f0;--muted:#8fb0b8;--mint:#3cc6aa;--gum:#ee7a90;--danger:#ff6b5e;--line:#27505a}
+  :root:not([data-theme="light"]){--bg:#0d2128;--panel:#13303a;--ink:#e6f3f0;--muted:#8fb0b8;--mint:#3cc6aa;--gum:#ee7a90;--danger:#ff6b5e;--line:#27505a;--green:#3cc6aa;--on-green:#0d2128}
 }
 *,*::before,*::after{box-sizing:inherit}
 html,body{margin:0;height:auto}
@@ -29,10 +29,8 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
 .teeth{display:flex;justify-content:center;gap:6px;margin:4px 0 12px}
 .tooth{display:block;width:min(44px,11vw);aspect-ratio:132/168;background:var(--toothimg) center/contain no-repeat;filter:drop-shadow(0 2px 2px rgba(16,48,58,.28))}
 .tooth.lost{opacity:.2;filter:none}
-/*
-  .teeth.danger .tooth:not(.lost){filter:drop-shadow(1.5px 0 0 var(--danger)) drop-shadow(-1.5px 0 0 var(--danger)) drop-shadow(0 1.5px 0 var(--danger)) drop-shadow(0 -1.5px 0 var(--danger))}
-*/
-  .word{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:16px 0 8px;min-height:48px}
+.teeth.danger .tooth:not(.lost){filter:drop-shadow(1.5px 0 0 var(--danger)) drop-shadow(-1.5px 0 0 var(--danger)) drop-shadow(0 1.5px 0 var(--danger)) drop-shadow(0 -1.5px 0 var(--danger))}
+.word{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:16px 0 8px;min-height:48px}
 .slot{width:clamp(22px,7.2vw,34px);height:44px;border-bottom:3px solid var(--ink);display:flex;align-items:flex-end;justify-content:center;font-size:1.5rem;font-weight:800;padding-bottom:2px}
 .slot.miss{color:var(--gum);border-color:var(--gum)}
 .msg{min-height:3.2em;text-align:center;font-size:.95rem;margin:6px 0 10px}
@@ -67,6 +65,23 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
 .btn{flex:1;font:inherit;font-weight:800;padding:12px 14px;border-radius:12px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
 .btn.primary{background:var(--ink);color:var(--bg)}
 .btn[hidden]{display:none}
+.btn.go{background:var(--green);border-color:var(--green);color:var(--on-green)}
+
+/* Popup */
+.overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(10,30,36,.5);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+.overlay[hidden]{display:none}
+.modal{width:100%;max-width:380px;max-height:100%;overflow:auto;background:var(--panel);color:var(--ink);border-radius:20px;padding:22px 20px 20px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.modal h2{margin:0;text-align:center;font-size:1.5rem;color:var(--green);letter-spacing:-.01em}
+.modal h2 .tooth{display:inline-block;width:22px;vertical-align:-4px;margin-right:6px}
+.msub{margin:4px 0 14px;text-align:center;color:var(--muted);font-size:.95rem}
+.how{background:rgba(127,160,170,.13);border-radius:14px;padding:14px 16px;font-size:.95rem}
+.how ul{margin:8px 0 0;padding-left:18px}
+.how li{margin:6px 0}
+.modal>.btn{display:block;width:100%;margin-top:16px}
+.modal .actions{margin-top:16px}
+.answer{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:4px 0 12px}
+.answer span{width:26px;height:36px;border-bottom:3px solid var(--gum);color:var(--gum);font-weight:800;font-size:1.35rem;display:flex;align-items:flex-end;justify-content:center}
+.stat{margin:0;text-align:center;color:var(--muted);font-size:.9rem}
 :focus-visible{outline:3px solid var(--gum);outline-offset:2px}
 </style>
 </head>
@@ -93,7 +108,36 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
   </section>
 </main>
 
-<script src="../assets/games/wordle.js"></script>
+<div class="overlay" id="introModal" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+  <div class="modal">
+    <h2 id="introTitle"><span class="tooth" aria-hidden="true"></span>Tebak Istilah Gigi</h2>
+    <p class="msub">Tebak istilah kedokteran gigi sebelum gigimu habis!</p>
+    <div class="how">
+      <b>Cara Bermain:</b>
+      <ul>
+        <li>Ketuk huruf untuk menebak kata. Keyboard fisik juga bisa dipakai.</li>
+        <li>Huruf benar muncul di kata. Huruf salah membuat satu gigi memudar.</li>
+        <li>Enam gigi habis = Game Over!</li>
+      </ul>
+    </div>
+    <button class="btn go" id="go">Mulai Game</button>
+  </div>
+</div>
+
+<div class="overlay" id="overModal" role="dialog" aria-modal="true" aria-labelledby="overTitle" hidden>
+  <div class="modal">
+    <h2 id="overTitle">Game Over</h2>
+    <p class="msub">Gigimu habis. Jawabannya:</p>
+    <div class="answer" id="answer"></div>
+    <p class="stat" id="overStat"></p>
+    <div class="actions">
+      <button class="btn go" id="again">Main Lagi</button>
+      <button class="btn" id="share2">Bagikan</button>
+    </div>
+  </div>
+</div>
+
+<script src="kata.js"></script>
 <script>
 (function(){
   // Daftar kata ada di kata.js. Hanya kata A-Z, 4-12 huruf yang dipakai.
@@ -103,7 +147,7 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
   var TOOTH='<span class="tooth" aria-hidden="true"></span>';
 
   var $=function(id){return document.getElementById(id)};
-  var queue=[], cur, guessed, wrong, over, lastWin, streak=0, solved=0;
+  var queue=[], cur, guessed, wrong, over, lastWin, runLen=0, blocked=true, streak=0, solved=0;
 
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 
@@ -134,12 +178,13 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
   }
 
   function start(){
-    if(!WORDS.length){$("msg").textContent="Daftar kata kosong. Periksa file wordle.js.";return}
+    if(!WORDS.length){$("msg").textContent="Daftar kata kosong. Periksa file kata.js.";return}
     if(!queue.length) queue=shuffle(WORDS.slice());
     cur=queue.pop(); guessed={}; wrong=0; over=false;
     $("len").textContent=cur.length;
     $("msg").textContent="Pilih huruf untuk memulai.";
     $("actions").hidden=true;
+    $("overModal").hidden=true;
     Array.prototype.forEach.call(document.querySelectorAll(".key:not(.dead)"),function(b){b.className="key";b.disabled=false});
     draw();
   }
@@ -160,17 +205,26 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
 
   function won(){return cur.split("").every(function(c){return guessed[c]})}
 
+  function showOver(){
+    var a=$("answer"); a.innerHTML="";
+    cur.split("").forEach(function(c){var s=document.createElement("span");s.textContent=c;a.appendChild(s)});
+    $("overStat").textContent="Beruntun terakhir: "+runLen+"  |  Total benar: "+solved;
+    $("overModal").hidden=false;
+    $("again").focus();
+  }
+
   function finish(win){
     over=true; lastWin=win;
-    if(win){streak++;solved++}else streak=0;
+    if(win){streak++;solved++}else{runLen=streak;streak=0}
     Array.prototype.forEach.call(document.querySelectorAll(".key:not(.dead)"),function(b){b.disabled=true});
     $("msg").innerHTML=win?"<strong>Benar!</strong>":"<strong>Gigi habis.</strong>Jawabannya: "+cur;
-    $("actions").hidden=false;
-    draw(); $("next").focus();
+    draw();
+    if(win){$("actions").hidden=false;$("next").focus()}
+    else setTimeout(function(){if(over&&!lastWin) showOver()},700);
   }
 
   function guess(l){
-    if(over||guessed[l]) return;
+    if(over||blocked||guessed[l]) return;
     guessed[l]=true;
     var key=document.querySelector('.key[data-l="'+l+'"]');
     key.disabled=true;
@@ -192,36 +246,39 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
     for(i=0;i<MAX;i++) left+=i<MAX-wrong?"\uD83E\uDDB7":"\u2B1C";
     return "Tebak Istilah Gigi\n"+left+"\n"+
       (lastWin?"Berhasil menebak":"Gagal menebak")+" kata "+cur.length+" huruf\n"+
-      "Beruntun: "+streak+" | Total benar: "+solved+"\n"+location.href;
+      "Beruntun: "+(lastWin?streak:runLen)+" | Total benar: "+solved+"\n"+location.href;
   }
-  function copyText(t){
+  function copyText(t,btn){
     function fallback(){window.prompt("Salin hasil:",t)}
     if(navigator.clipboard&&navigator.clipboard.writeText){
       navigator.clipboard.writeText(t).then(function(){
-        var b=$("share"),old=b.textContent;
-        b.textContent="Tersalin!";
-        setTimeout(function(){b.textContent=old},1500);
+        var old=btn.textContent;
+        btn.textContent="Tersalin!";
+        setTimeout(function(){btn.textContent=old},1500);
       },fallback);
     }else fallback();
   }
-  function share(){
+  function share(btn){
     if(!over) return;
     var t=shareText();
     if(navigator.share){
-      navigator.share({text:t}).catch(function(e){if(!e||e.name!=="AbortError") copyText(t)});
-    }else copyText(t);
+      navigator.share({text:t}).catch(function(e){if(!e||e.name!=="AbortError") copyText(t,btn)});
+    }else copyText(t,btn);
   }
 
   document.addEventListener("keydown",function(e){
-    if(e.ctrlKey||e.metaKey||e.altKey) return;
+    if(blocked||e.ctrlKey||e.metaKey||e.altKey) return;
     var l=e.key.length===1?e.key.toUpperCase():"";
     if(l && ALPHA.indexOf(l)>-1) guess(l);
-    else if(e.key==="Enter"&&over&&document.activeElement.id!=="share") start();
+    else if(e.key==="Enter"&&over&&document.activeElement.tagName!=="BUTTON") start();
   });
+  $("go").addEventListener("click",function(){$("introModal").hidden=true;blocked=false});
   $("next").addEventListener("click",start);
-  $("share").addEventListener("click",share);
+  $("again").addEventListener("click",start);
+  $("share").addEventListener("click",function(){share(this)});
+  $("share2").addEventListener("click",function(){share(this)});
 
-  build(); start();
+  build(); start(); $("go").focus();
 })();
 </script>
 </body>
