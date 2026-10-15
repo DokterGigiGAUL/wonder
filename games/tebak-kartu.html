@@ -145,7 +145,7 @@ async function start(){
   setMsg('Mengocok...','','Level '+(level+1));
   await shuffle();
   phase='pick';
-  setMsg('Pilih kartu!','','Mana gigi sehat?');
+  setMsg('Pilih kartu gigi sehat!');
 }
 function toStart(){
   level=0;phase='idle';
@@ -157,8 +157,8 @@ async function pick(c){
   flip(c,false);
   await sleep(550);
   cards.forEach(x=>{if(x!==c)flip(x,false)});
-  if(c.good){won++;level=Math.min(level+1,8);setMsg('Benar! Gigi sehat','ok','Berikutnya level '+(level+1));showBtns([['Main lagi',start]])}
-  else{lost++;setMsg('Salah! Gigi berlubang','bad','Kecepatan saat ini: level '+(level+1));showBtns([['Lanjutkan main',start],['Kembali ke Awal',toStart,1]])}
+  if(c.good){won++;level=Math.min(level+1,8);setMsg('Benar!','ok','Berikutnya level '+(level+1));showBtns([['Lanjutkan main',start]])}
+  else{lost++;setMsg('Salah!','bad','Kecepatan saat ini: level '+(level+1));showBtns([['Lanjutkan main',start],['Kembali ke Awal',toStart,1]])}
   updScore();
 }
 stage.addEventListener('click',e=>{
