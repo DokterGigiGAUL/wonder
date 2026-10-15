@@ -60,7 +60,7 @@
 @media (min-width: 481px)  { 
    :root { 
       --thumb-size:160px;
-      --home-card-per-view: 3; 
+      --home-card-per-view: 3.25; 
          --font-small:15px;
       --font-badge: 13px;
       --font-size: 18px; 
@@ -101,8 +101,8 @@
 
 @media (min-width: 1024px) { 
    :root { 
-      --thumb-size:196px;
-      --home-card-per-view: 3.25; 
+      --thumb-size:160px;
+      --home-card-per-view: 4.25; 
          --font-small:17px;
       --font-badge: 15px;
       --font-size: 21px; 
@@ -152,12 +152,12 @@
    }
    
    .latest-arrow {
-  width: 48px;
-  height: 48px;
+  width: 64px!important;
+  height: 64px!important;
    }
 
    .category-card img {
-   width:48px;
+   width:36px;
    }
 
    .category-card {
@@ -179,7 +179,7 @@
 @media (min-width: 1440px) { 
    :root { 
       --thumb-size:160px;
-      --home-card-per-view: 3; 
+      --home-card-per-view: 3.25; 
          --font-small:19px;
       --font-badge: 17px;
       --font-size: 20px; 
