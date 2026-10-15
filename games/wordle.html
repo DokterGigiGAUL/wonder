@@ -111,16 +111,16 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
 <div class="overlay" id="introModal" role="dialog" aria-modal="true" aria-labelledby="introTitle">
   <div class="modal">
     <h2 id="introTitle"><span class="tooth" aria-hidden="true"></span>Tebak Istilah Gigi</h2>
-    <p class="msub">Tebak istilah kedokteran gigi sebelum gigimu habis!</p>
+    <p class="msub">Tebak istilah kedokteran gigi dalam enam gigi!</p>
     <div class="how">
       <b>Cara Bermain:</b>
       <ul>
         <li>Ketuk huruf untuk menebak kata. Keyboard fisik juga bisa dipakai.</li>
         <li>Huruf benar muncul di kata. Huruf salah membuat satu gigi memudar.</li>
-        <li>Enam gigi habis = Game Over!</li>
+        <li>Enam gigi pudar = Game Over!</li>
       </ul>
     </div>
-    <button class="btn go" id="go">Mulai Game</button>
+    <button class="btn go" id="go" style="border:none!important;">Mulai Game</button>
   </div>
 </div>
 
@@ -137,7 +137,7 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em}
   </div>
 </div>
 
-<script src="kata.js"></script>
+<script src="../assets/games/wordle.js"></script>
 <script>
 (function(){
   // Daftar kata ada di kata.js. Hanya kata A-Z, 4-12 huruf yang dipakai.
