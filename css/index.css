@@ -116,10 +116,10 @@
    }
 
    .category-iconz {
-      width:48px;
-      height:48px;
+      width:42px;
+      height:42px;
        flex-shrink: 0;
-       display: flex;
+       display: flex!important;
        justify-content: center;
        align-items: center;
        border-radius: 6px;
