@@ -7,14 +7,14 @@
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1228;--fg:#ece4fa}}
 :root[data-theme="dark"]{--bg:#1a1228;--fg:#ece4fa}
 html,body{height:100%;margin:0}
-body{background:var(--bg);color:var(--fg);font-family:Trebuchet MS,Verdana,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none}
+body{background:var(--bg);color:var(--fg);font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none}
 canvas{max-width:100%;max-height:92%;border-radius:14px}
 p{margin:6px 10px;font-size:13px;text-align:center}
 [hidden]{display:none!important}
 #ov{position:fixed;display:flex;align-items:center;justify-content:center;background:rgba(45,25,78,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border-radius:14px;z-index:5}
-.modal{background:#fff;color:#222222;border-radius:18px;padding:16px;width:70%;max-width:310px;box-shadow:0 10px 30px rgba(30,10,60,.35);text-align:center;font-family:Trebuchet MS,Verdana,sans-serif}
+.modal{background:#fff;color:#222222;border-radius:18px;padding:16px;width:70%;max-width:310px;box-shadow:0 10px 30px rgba(30,10,60,.35);text-align:center;font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif}
 .modal h3{margin:0;font-size:24px;color:#6a45b0}
-.modal .sub2{margin:2px 0 12px;font-size:13px;color:#666666}
+.modal .sub2{margin:8px 0 16px;font-size:13px;color:#666666;line-height:0.8}
 .ti{width:28px;vertical-align:middle;margin-right:6px}
 .dim{filter:grayscale(1);opacity:.6}
 .how{background:#f6f2fd;border-radius:12px;padding:10px 12px;text-align:left;font-size:13px;line-height:1.4;margin-bottom:14px}
@@ -23,11 +23,11 @@ p{margin:6px 10px;font-size:13px;text-align:center}
 .stats{display:flex;gap:10px;margin:0 0 10px}
 .stats div{flex:1;background:#f6f2fd;border-radius:12px;padding:8px 4px;font-size:12px;color:#6b6480}
 .stats b{display:block;font-size:28px;color:#2d1b4e}
-.rec{margin:0 0 10px;font-size:14px;font-weight:700;color:#c2571a}
+.rec{margin:0 0 10px;font-size:14px;font-weight:500;color:#c2571a}
 .btns{display:flex;gap:10px}
-.btn{flex:1;border:0;border-radius:12px;padding:13px 6px;font:700 16px Trebuchet MS,Verdana,sans-serif;cursor:pointer}
+.btn{flex:1;border:0;border-radius:12px;padding:16px 8px;font:400 15px -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;cursor:pointer}
 .btn-p{background:#7a56c2;color:#fff}.btn-s{background:#ece4fa;color:#4b2f82}
-#toast{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(30,15,55,.9);color:#fff;padding:8px 14px;border-radius:10px;font:13px Trebuchet MS,sans-serif;white-space:nowrap}
+#toast{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(30,15,55,.9);color:#fff;padding:8px 14px;border-radius:10px;font:13px -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;white-space:nowrap}
 </style></head><body>
 <canvas id="c" width="360" height="640"></canvas>
 <p>Ketuk layar untuk melompat. Mendarat tepat di keranjang.</p>
@@ -42,7 +42,7 @@ p{margin:6px 10px;font-size:13px;text-align:center}
   <div class="btns"><button class="btn btn-p" id="b-start">Mulai Game</button></div>
  </div>
  <div class="modal" id="m-over" hidden>
-  <h3><img class="ti dim" alt="">Game Berakhir!</h3>
+  <h3><img class="ti dim" alt="" style="display:none;>Game Berakhir!</h3>
   <p class="sub2">Coba lagi untuk skor lebih tinggi.</p>
   <div class="stats"><div>Skor<b id="o-score">0</b></div><div>Terbaik<b id="o-best">0</b></div></div>
   <p class="rec" id="o-rec" hidden>Rekor baru!</p>
@@ -131,6 +131,17 @@ function bg(){
   // 2. Gambar background image menutupi seluruh canvas
   if (bgImg.complete) {
     x.drawImage(bgImg, 0, 0, W, H);
+   // --- TAMBAHKAN OVERLAY DI SINI ---
+    // Contoh overlay hitam transparan (menggelapkan background sebesar 30%)
+    x.fillStyle = 'rgba(255, 255, 255, 0.6)'; 
+    x.fillRect(0, 0, W, H);
+    
+    /* 
+    // Atau jika ingin    overlay putih transparan (mencerahkan background):
+    x.fillStyle = 'rgba(255, 255, 255, 0.2)'; 
+    x.fillRect(0, 0, W, H);
+    */
+
   } else {
     // Fallback warna jika gambar belum selesai dimuat
     const g=x.createLinearGradient(0,0,0,H);
@@ -142,11 +153,11 @@ function bg(){
   /*
   for(const l of leaves){
     const y=((l.y+cam*.3)%(H+80)+H+80)%(H+80)-40;
-    x.fillStyle=l.l?'rgba(255,255,255,.2)':'rgba(120,85,180,.14)';
-    x.beginPath();x.arc(l.x,y,l.r,0,7);x.fill();
+    x.fillStyle=l.l?'rgba(255,255,255,.15)':'rgba(120,85,180,.15)';
+    x.beginPath();x.arc(l.x,y,l.r,0,9);x.fill();
   }
   const r=x.createRadialGradient(300,430,10,300,430,260);
-  r.addColorStop(0,'rgba(255,255,255,.5)');r.addColorStop(1,'rgba(255,255,255,0)');
+  r.addColorStop(0,'rgba(0,0,0,.3)');r.addColorStop(1,'rgba(255,255,255,0)');
   x.fillStyle=r;x.fillRect(0,0,W,H);
   */
 }
