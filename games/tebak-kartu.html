@@ -152,7 +152,7 @@ function swap(a,b,dur){
 }
 const atSlot=s=>cards.find(c=>c.slot===s);
 async function shuffle(){
-  const rounds=Math.min(16,7+level*2),dur=Math.max(170,430-level*45);
+const rounds=Math.min(26,7+level),dur=Math.max(100,Math.round(430-level*17.4));
   let last='';
   for(let i=0;i<rounds;i++){
     let p,q,key;
@@ -193,7 +193,7 @@ async function pick(c){
   flip(c,false);
   await sleep(550);
   cards.forEach(x=>{if(x!==c)flip(x,false)});
-  if(c.good){won++;level=Math.min(level+1,8);setMsg('Benar!','ok','Berikutnya level '+(level+1));showBtns([['Lanjutkan main',start]])}
+  if(c.good){won++;level=Math.min(level+1,19);setMsg('Benar!','ok','Berikutnya level '+(level+1));showBtns([['Lanjutkan main',start]])}
   else{lost++;setMsg('Salah!','bad','Kecepatan saat ini: level '+(level+1));showBtns([['Lanjutkan main',start],['Kembali ke Awal',toStart,1]])}
   updScore();
 }
