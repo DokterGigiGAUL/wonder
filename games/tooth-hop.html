@@ -7,12 +7,50 @@
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1228;--fg:#ece4fa}}
 :root[data-theme="dark"]{--bg:#1a1228;--fg:#ece4fa}
 html,body{height:100%;margin:0}
-body{background-image:no-repeat url("assets/images/games/IMG_2150.jpeg");color:var(--fg);font-family:Trebuchet MS,Verdana,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none}
+body{background:var(--bg);color:var(--fg);font-family:Trebuchet MS,Verdana,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none}
 canvas{max-width:100%;max-height:92%;border-radius:14px}
 p{margin:6px 10px;font-size:13px;text-align:center}
+[hidden]{display:none!important}
+#ov{position:fixed;display:flex;align-items:center;justify-content:center;background:rgba(45,25,78,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border-radius:14px;z-index:5}
+.modal{background:#fff;color:#2d1b4e;border-radius:18px;padding:16px;width:88%;max-width:310px;box-shadow:0 10px 30px rgba(30,10,60,.35);text-align:center;font-family:Trebuchet MS,Verdana,sans-serif}
+.modal h3{margin:0;font-size:24px;color:#6a45b0}
+.modal .sub2{margin:2px 0 12px;font-size:13px;color:#6b6480}
+.ti{width:28px;vertical-align:middle;margin-right:6px}
+.dim{filter:grayscale(1);opacity:.6}
+.how{background:#f6f2fd;border-radius:12px;padding:10px 12px;text-align:left;font-size:13px;line-height:1.4;margin-bottom:14px}
+.how b.t{display:block;margin-bottom:4px;font-size:14px}
+.how ul{margin:0;padding-left:18px}.how li{margin:3px 0}
+.stats{display:flex;gap:10px;margin:0 0 10px}
+.stats div{flex:1;background:#f6f2fd;border-radius:12px;padding:8px 4px;font-size:12px;color:#6b6480}
+.stats b{display:block;font-size:28px;color:#2d1b4e}
+.rec{margin:0 0 10px;font-size:14px;font-weight:700;color:#c2571a}
+.btns{display:flex;gap:10px}
+.btn{flex:1;border:0;border-radius:12px;padding:13px 6px;font:700 16px Trebuchet MS,Verdana,sans-serif;cursor:pointer}
+.btn-p{background:#7a56c2;color:#fff}.btn-s{background:#ece4fa;color:#4b2f82}
+#toast{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(30,15,55,.9);color:#fff;padding:8px 14px;border-radius:10px;font:13px Trebuchet MS,sans-serif;white-space:nowrap}
 </style></head><body>
 <canvas id="c" width="360" height="640"></canvas>
 <p>Ketuk layar untuk melompat. Mendarat tepat di keranjang.</p>
+<div id="ov" hidden>
+ <div class="modal" id="m-start" hidden>
+  <h3><img class="ti" alt="">Tooth Hop!</h3>
+  <p class="sub2">Lompatkan gigi ke dalam keranjang!</p>
+  <div class="how"><b class="t">Cara Bermain:</b><ul>
+   <li>Ketuk layar, gigi melompat <b>lurus ke atas</b>.</li>
+   <li>Ketuk saat keranjang tujuan tepat di atas gigi. Keranjang bergerak!</li>
+   <li>Mendarat di keranjang = <b>+1 skor</b>. Meleset = satu gigi memudar.</li>
+   <li>Tiga gigi memudar = <b>Game Over</b>!</li></ul></div>
+  <div class="btns"><button class="btn btn-p" id="b-start">Mulai Game</button></div>
+ </div>
+ <div class="modal" id="m-over" hidden>
+  <h3><img class="ti dim" alt="">Game Over!</h3>
+  <p class="sub2">Gigi jatuh. Coba lagi untuk skor lebih tinggi.</p>
+  <div class="stats"><div>Skor<b id="o-score">0</b></div><div>Terbaik<b id="o-best">0</b></div></div>
+  <p class="rec" id="o-rec" hidden>Rekor baru!</p>
+  <div class="btns"><button class="btn btn-p" id="b-retry">Coba lagi</button><button class="btn btn-s" id="b-share">Bagikan</button></div>
+ </div>
+ <div id="toast" hidden></div>
+</div>
 <script>
 const c=document.getElementById('c'),x=c.getContext('2d'),W=360,H=640,D=170,BY=500;
 let best=0;try{best=+localStorage.getItem('toothhop')||0}catch(e){}
@@ -30,10 +68,12 @@ function reset(){
 }
 function end(){
   state='over';
+  const rec=score>best&&score>0;
   if(score>best){best=score;try{localStorage.setItem('toothhop',best)}catch(e){}}
+  showOver(rec);
 }
 function tap(){
-  if(state!=='play'){reset();return}
+  if(state!=='play'){const b=document.querySelector('.modal:not([hidden]) .btn-p');if(b)b.click();return}
   if(tooth.mode!=='rest')return;
   tooth.mode='jump';tooth.t=0;tooth.y0=tooth.y;tooth.st=performance.now();
 }
@@ -121,12 +161,6 @@ function draw(){
   for(let i=0;i<3;i++)tooth_(W/2-32+i*32,48,.42,i<lives?1:.22);
   txt('Terbaik',58,48,20,'center');txt(best,58,92,42,'center');
   txt('Skor',W-58,48,20,'center');txt(score,W-58,92,42,'center');
-  if(state!=='play'){
-    x.fillStyle='rgba(45,25,78,.72)';x.fillRect(0,0,W,H);
-    txt(state==='start'?'Tooth Hop':'Gigi jatuh!',W/2,250,36,'center');
-    if(state==='over')txt('Skor '+score,W/2,296,22,'center');
-    txt('Ketuk untuk '+(state==='start'?'mulai':'main lagi'),W/2,350,20,'center');
-  }
 }
 function loop(ts){
   now=performance.now();const dt=Math.min((ts-last)/16.67||1,3);last=ts;
@@ -134,6 +168,28 @@ function loop(ts){
 }
 c.addEventListener('pointerdown',e=>{e.preventDefault();tap()});
 addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();tap()}});
-reset();state='start';requestAnimationFrame(loop);
+const ov=document.getElementById('ov'),ms=document.getElementById('m-start'),mo=document.getElementById('m-over'),tt=document.getElementById('toast');
+document.querySelectorAll('.ti').forEach(i=>{i.src=IMG.src});
+function place(){const r=c.getBoundingClientRect();Object.assign(ov.style,{left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px'})}
+function show(m){place();ov.hidden=false;ms.hidden=m!==ms;mo.hidden=m!==mo}
+function hide(){ov.hidden=true}
+function toast(t){tt.textContent=t;tt.hidden=false;clearTimeout(toast.k);toast.k=setTimeout(()=>{tt.hidden=true},2200)}
+function showOver(rec){
+  document.getElementById('o-score').textContent=score;
+  document.getElementById('o-best').textContent=best;
+  document.getElementById('o-rec').hidden=!rec;
+  show(mo);
+}
+async function share(){
+  const t='Skor saya di Tooth Hop: '+score+'. Bisa kalahkan? '+location.href;
+  try{if(navigator.share){await navigator.share({title:'Tooth Hop',text:t});return}}catch(e){if(e&&e.name==='AbortError')return}
+  try{await navigator.clipboard.writeText(t);toast('Teks skor disalin');return}catch(e){}
+  try{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();toast('Teks skor disalin')}catch(e){toast('Gagal membagikan')}
+}
+document.getElementById('b-start').onclick=()=>{hide();reset()};
+document.getElementById('b-retry').onclick=()=>{hide();reset()};
+document.getElementById('b-share').onclick=share;
+addEventListener('resize',place);
+reset();state='start';requestAnimationFrame(loop);show(ms);
 </script>
 </body></html>
