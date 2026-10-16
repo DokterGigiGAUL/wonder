@@ -12,9 +12,9 @@ canvas{max-width:100%;max-height:92%;border-radius:14px}
 p{margin:6px 10px;font-size:13px;text-align:center}
 [hidden]{display:none!important}
 #ov{position:fixed;display:flex;align-items:center;justify-content:center;background:rgba(45,25,78,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border-radius:14px;z-index:5}
-.modal{background:#fff;color:#2d1b4e;border-radius:18px;padding:16px;width:88%;max-width:310px;box-shadow:0 10px 30px rgba(30,10,60,.35);text-align:center;font-family:Trebuchet MS,Verdana,sans-serif}
+.modal{background:#fff;color:#222222;border-radius:18px;padding:16px;width:70%;max-width:310px;box-shadow:0 10px 30px rgba(30,10,60,.35);text-align:center;font-family:Trebuchet MS,Verdana,sans-serif}
 .modal h3{margin:0;font-size:24px;color:#6a45b0}
-.modal .sub2{margin:2px 0 12px;font-size:13px;color:#6b6480}
+.modal .sub2{margin:2px 0 12px;font-size:13px;color:#666666}
 .ti{width:28px;vertical-align:middle;margin-right:6px}
 .dim{filter:grayscale(1);opacity:.6}
 .how{background:#f6f2fd;border-radius:12px;padding:10px 12px;text-align:left;font-size:13px;line-height:1.4;margin-bottom:14px}
@@ -33,18 +33,17 @@ p{margin:6px 10px;font-size:13px;text-align:center}
 <p>Ketuk layar untuk melompat. Mendarat tepat di keranjang.</p>
 <div id="ov" hidden>
  <div class="modal" id="m-start" hidden>
-  <h3><img class="ti" alt="">Tooth Hop!</h3>
-  <p class="sub2">Lompatkan gigi ke dalam keranjang!</p>
+  <h3><img class="ti" alt="" style="display:none;">Tooth Jump!</h3>
+  <p class="sub2">Lompatkan gigi setinggi mungkin!</p>
   <div class="how"><b class="t">Cara Bermain:</b><ul>
-   <li>Ketuk layar, gigi melompat <b>lurus ke atas</b>.</li>
-   <li>Ketuk saat keranjang tujuan tepat di atas gigi. Keranjang bergerak!</li>
+   <li>Ketuk layar, gigi melompat lurus ke atas ke keranjang yang bergerak.</li>
    <li>Mendarat di keranjang = <b>+1 skor</b>. Meleset = satu gigi memudar.</li>
    <li>Tiga gigi memudar = <b>Game Over</b>!</li></ul></div>
   <div class="btns"><button class="btn btn-p" id="b-start">Mulai Game</button></div>
  </div>
  <div class="modal" id="m-over" hidden>
-  <h3><img class="ti dim" alt="">Game Over!</h3>
-  <p class="sub2">Gigi jatuh. Coba lagi untuk skor lebih tinggi.</p>
+  <h3><img class="ti dim" alt="">Game Berakhir!</h3>
+  <p class="sub2">Coba lagi untuk skor lebih tinggi.</p>
   <div class="stats"><div>Skor<b id="o-score">0</b></div><div>Terbaik<b id="o-best">0</b></div></div>
   <p class="rec" id="o-rec" hidden>Rekor baru!</p>
   <div class="btns"><button class="btn btn-p" id="b-retry">Coba lagi</button><button class="btn btn-s" id="b-share">Bagikan</button></div>
@@ -52,6 +51,11 @@ p{margin:6px 10px;font-size:13px;text-align:center}
  <div id="toast" hidden></div>
 </div>
 <script>
+ // 1. Definisikan objek gambar background di bagian atas skrip
+const bgImg = new Image();
+bgImg.src = 'tooth-hop.png'; // Pastikan file gambar berada di folder yang sama
+
+
 const c=document.getElementById('c'),x=c.getContext('2d'),W=360,H=640,D=170,BY=500;
 let best=0;try{best=+localStorage.getItem('toothhop')||0}catch(e){}
 let baskets,cur,nxt,tooth,cam,camT,score,lives,state='start',last=0,now=0;
@@ -107,6 +111,7 @@ function step(dt){
     }
   }
 }
+/* 
 function bg(){
   const g=x.createLinearGradient(0,0,0,H);
   g.addColorStop(0,'#b7a0e2');g.addColorStop(.6,'#d6c6f3');g.addColorStop(1,'#c4aeea');
@@ -120,6 +125,32 @@ function bg(){
   r.addColorStop(0,'rgba(255,255,255,.5)');r.addColorStop(1,'rgba(255,255,255,0)');
   x.fillStyle=r;x.fillRect(0,0,W,H);
 }
+*/
+
+function bg(){
+  // 2. Gambar background image menutupi seluruh canvas
+  if (bgImg.complete) {
+    x.drawImage(bgImg, 0, 0, W, H);
+  } else {
+    // Fallback warna jika gambar belum selesai dimuat
+    const g=x.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#b7a0e2');g.addColorStop(.6,'#d6c6f3');g.addColorStop(1,'#c4aeea');
+    x.fillStyle=g;x.fillRect(0,0,W,H);
+  }
+
+  // Efek daun dan gradien transparan tetap dipertahankan di atas background
+  /*
+  for(const l of leaves){
+    const y=((l.y+cam*.3)%(H+80)+H+80)%(H+80)-40;
+    x.fillStyle=l.l?'rgba(255,255,255,.2)':'rgba(120,85,180,.14)';
+    x.beginPath();x.arc(l.x,y,l.r,0,7);x.fill();
+  }
+  const r=x.createRadialGradient(300,430,10,300,430,260);
+  r.addColorStop(0,'rgba(255,255,255,.5)');r.addColorStop(1,'rgba(255,255,255,0)');
+  x.fillStyle=r;x.fillRect(0,0,W,H);
+  */
+}
+ 
 function basket(b){
   const sx=b.x,sy=b.y-cam;
   const g=x.createLinearGradient(0,sy,0,sy+30);
