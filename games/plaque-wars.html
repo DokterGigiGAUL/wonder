@@ -29,6 +29,10 @@ button.sel{outline:3px solid #fff}
 <p id="msg">Basmi kuman di mulut, untuk menghindari penyakit! Tombol kiri dan kanan menggerakkan kapal pasta gigi. Tembak otomatis. </p>
 <button id="go">Main</button></div></div>
 <script>
+   // 1. Definisikan objek gambar background di bagian atas skrip
+const bgImg = new Image();
+bgImg.src = 'https://doktergigigaul.github.io/wonder/assets/images/games/plaque-wars_.png'; // Pastikan file gambar berada di folder yang sama
+  
 const c=document.getElementById('c'),x=c.getContext('2d'),W=360,H=640,ui=document.getElementById('ui');
 let mode='menu',hi=0;
 try{hi=+localStorage.getItem('ps_hi')||0}catch(e){}
@@ -37,7 +41,44 @@ const $=id=>document.getElementById(id);
 $('go').onclick=start;
 let P,B,E,I,F,S,t,spawn,fire,EB=[],lvl=1,st=0,boss=null,lastF=-99,lifeAt=2000,keys={},tx=null,ty=null,bg=[];
 for(let i=0;i<25;i++)bg.push({x:Math.random()*W,y:Math.random()*H,r:2+Math.random()*6,v:15+Math.random()*30});
+  
 function start(){P={x:W/2,y:H-170,r:12,hp:3,inv:0,pw:1,pwt:0};B=[];E=[];I=[];F=[];EB=[];S=0;t=0;spawn=0;fire=0;lvl=1;st=0;boss=null;lastF=-99;lifeAt=2000;mode='play';ui.style.display='none'}
+
+function bg(){
+  // 2. Gambar background image menutupi seluruh canvas
+  if (bgImg.complete) {
+    x.drawImage(bgImg, 0, 0, W, H);
+   // --- TAMBAHKAN OVERLAY DI SINI ---
+    // Contoh overlay hitam transparan (menggelapkan background sebesar 30%)
+    x.fillStyle = 'rgba(0, 0, 0, 0.6)'; 
+    x.fillRect(0, 0, W, H);
+    
+    /* 
+    // Atau jika ingin    overlay putih transparan (mencerahkan background):
+    x.fillStyle = 'rgba(255, 255, 255, 0.2)'; 
+    x.fillRect(0, 0, W, H);
+    */
+
+  } else {
+    // Fallback warna jika gambar belum selesai dimuat
+    const g=x.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#b7a0e2');g.addColorStop(.6,'#d6c6f3');g.addColorStop(1,'#c4aeea');
+    x.fillStyle=g;x.fillRect(0,0,W,H);
+  }
+
+  // Efek daun dan gradien transparan tetap dipertahankan di atas background
+  /*
+  for(const l of leaves){
+    const y=((l.y+cam*.3)%(H+80)+H+80)%(H+80)-40;
+    x.fillStyle=l.l?'rgba(255,255,255,.15)':'rgba(120,85,180,.15)';
+    x.beginPath();x.arc(l.x,y,l.r,0,9);x.fill();
+  }
+  const r=x.createRadialGradient(300,430,10,300,430,260);
+  r.addColorStop(0,'rgba(0,0,0,.3)');r.addColorStop(1,'rgba(255,255,255,0)');
+  x.fillStyle=r;x.fillRect(0,0,W,H);
+  */
+}
+  
 function over(){mode='over';if(S>hi){hi=S;try{localStorage.setItem('ps_hi',hi)}catch(e){}}
 $('msg').innerHTML='Skor: <b>'+S+'</b> | Rekor: '+hi+'<br><br>💡 '+tips[Math.random()*tips.length|0];
 $('go').textContent='Main Lagi';ui.style.display='flex'}
@@ -47,13 +88,17 @@ const on=e=>{e.preventDefault();btn[k]=1;try{el.setPointerCapture(e.pointerId)}c
 el.addEventListener('pointerdown',on);['pointerup','pointercancel','lostpointercapture'].forEach(n=>el.addEventListener(n,off))});
 addEventListener('contextmenu',e=>e.preventDefault());
 addEventListener('keydown',e=>keys[e.key]=1);addEventListener('keyup',e=>keys[e.key]=0);
+
 function burst(px,py,col,n){for(let i=0;i<n;i++){const a=Math.random()*6.28,s=40+Math.random()*120;F.push({x:px,y:py,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:.5,col})}}
+
 function addEnemy(){const d=1+(lvl-1)*.25,r=Math.random();let e;
 if(r<.15)e={k:'tank',r:24,hp:6,vy:35,col:'#7a3fb0'};
 else if(r<.45)e={k:'zig',r:13,hp:1,vy:70*Math.min(d,2),col:'#e0a020'};
 else e={k:'base',r:14,hp:2,vy:55*Math.min(d,2.2),col:'#5fb83a'};
 e.x=30+Math.random()*(W-60);e.y=-30;e.p=Math.random()*6;e.mhp=e.hp;E.push(e)}
+
 function shoot(){const n=P.pw;for(let i=0;i<n;i++){const o=i-(n-1)/2,a=o*.17;B.push({x:P.x+o*6,y:P.y-18,vx:Math.sin(a)*480,vy:-Math.cos(a)*480})}}
+
 function upd(dt){t+=dt;
 let mx=0,my=0;if(keys.ArrowLeft||keys.a)mx=-1;if(keys.ArrowRight||keys.d)mx=1;
 mx=Math.max(-1,Math.min(1,mx+btn.r-btn.l));
@@ -77,14 +122,18 @@ E=E.filter(e=>!e.dead);B=B.filter(b=>!b.d);
 I.forEach(i=>{i.y+=70*dt;if(Math.hypot(i.x-P.x,i.y-P.y)<24){i.g=1;P.pw=Math.min(3,P.pw+1);P.pwt=12;burst(i.x,i.y,'#27c4ff',10)}});I=I.filter(i=>!i.g&&i.y<H+20);
 F.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.l-=dt});F=F.filter(p=>p.l>0);
 bg.forEach(b=>{b.y+=b.v*dt;if(b.y>H+10){b.y=-10;b.x=Math.random()*W}})}
+
 function bossUpd(dt){boss.t+=dt;boss.fl=Math.max(0,boss.fl-dt);
 if(boss.y<90)boss.y+=50*dt;else boss.x=W/2+Math.sin(boss.t*1.2)*(W/2-60);
 boss.sh-=dt;if(boss.sh<=0&&boss.y>=90){boss.sh=Math.max(.7,1.4-lvl*.1);const n=Math.min(7,lvl);for(let i=0;i<n;i++){const a=1.57+(i-(n-1)/2)*.3;EB.push({x:boss.x,y:boss.y+30,vx:Math.cos(a)*150,vy:Math.sin(a)*150})}}
 for(const b of B){if(!b.d&&Math.hypot(boss.x-b.x,boss.y-b.y)<boss.r+4){b.d=1;boss.hp--;boss.fl=.06}}
 if(boss.hp<=0){addS(200+lvl*50);burst(boss.x,boss.y,'#c9a227',50);boss=null;lvl++;st=0;spawn=1;EB=[]}
 else if(P.inv<=0&&Math.hypot(boss.x-P.x,boss.y-P.y)<boss.r+P.r-4)hurt()}
+
 function addS(n){S+=n;while(S>=lifeAt){lifeAt+=2000;if(P.hp<3)P.hp++}}
+
 function hurt(){P.hp--;P.inv=1.5;P.pw=1;if(P.hp<=0)over()}
+
 function germ(e){x.save();x.translate(e.x,e.y);const r=e.r;
 x.strokeStyle=e.fl?'#fff':e.col;x.lineWidth=3;
 for(let i=0;i<10;i++){const a=i*.628+t;x.beginPath();x.moveTo(Math.cos(a)*r*.8,Math.sin(a)*r*.8);x.lineTo(Math.cos(a)*(r+6),Math.sin(a)*(r+6));x.stroke()}
@@ -94,7 +143,9 @@ x.fillStyle='#200';x.beginPath();x.arc(-r*.35,-r*.05,r*.13,0,6.28);x.arc(r*.35,-
 x.strokeStyle='#200';x.lineWidth=2;x.beginPath();x.moveTo(-r*.7,-r*.55);x.lineTo(-r*.1,-r*.3);x.moveTo(r*.7,-r*.55);x.lineTo(r*.1,-r*.3);x.stroke();
 if(e.k==='tank'&&e.hp<e.mhp){x.fillStyle='#000a';x.fillRect(-r,r+8,r*2,4);x.fillStyle='#f55';x.fillRect(-r,r+8,r*2*e.hp/e.mhp,4)}
 x.restore()}
+  
 function drawBoss(){germ({x:boss.x,y:boss.y,r:boss.r,col:boss.col,fl:boss.fl>0,k:'boss',hp:1,mhp:1});x.fillStyle='#000a';x.fillRect(40,34,W-80,8);x.fillStyle='#f55';x.fillRect(40,34,(W-80)*boss.hp/boss.mhp,8)}
+
 function player(){x.save();x.translate(P.x,P.y);
 if(P.inv>0&&((t*20)|0)%2)x.globalAlpha=.4;
 x.fillStyle='#ffb347';x.beginPath();x.moveTo(-5,22);x.lineTo(0,34+Math.random()*6);x.lineTo(5,22);x.fill();
@@ -105,6 +156,7 @@ x.fillStyle='#27c4ff';x.fillRect(-9,-12,18,8);
 x.fillStyle='#0b6fa0';x.beginPath();x.moveTo(-9,6);x.lineTo(-18,22);x.lineTo(-8,20);x.moveTo(9,6);x.lineTo(18,22);x.lineTo(8,20);x.fill();
 x.fillStyle='#ddd';x.fillRect(-8,20,16,4)}
 x.restore()}
+  
 function draw(){
 const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0a2a4a');g.addColorStop(1,'#134f7a');x.fillStyle=g;x.fillRect(0,0,W,H);
 x.fillStyle='#ffffff22';bg.forEach(b=>{x.beginPath();x.arc(b.x,b.y,b.r,0,6.28);x.fill()});
@@ -118,8 +170,10 @@ x.fillStyle='#fff';x.font='bold 16px sans-serif';x.textAlign='left';x.fillText('
 x.textAlign='right';x.fillText('❤'.repeat(Math.max(0,P.hp)),W-10,24);
 if(P.pwt>0){x.textAlign='center';x.fillStyle='#27c4ff';x.fillText('Fluoride x'+P.pw+' ('+Math.ceil(P.pwt)+'s)',W/2,64)}}
 let last=performance.now();
+  
 function loop(n){const dt=Math.min(.05,(n-last)/1000);last=n;if(mode==='play')upd(dt);else if(mode==='menu')bg.forEach(b=>{b.y+=b.v*dt;if(b.y>H+10)b.y=-10});draw();requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
+
 </script></body></html>
 
 
