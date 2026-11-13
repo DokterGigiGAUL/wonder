@@ -16,7 +16,7 @@
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){--bg:#0d2128;--panel:#121212;--ink:#e6f3f0;
-                                  --muted:#8fb0b8;--mint:#3cc6aa;--gum:#ee7a90;
+                                  --muted:#666666;--mint:#3cc6aa;--gum:#ee7a90;
                                   --danger:#ff6b5e;--line:#27505a;--green:#3cc6aa;--on-green:#0d2128;
                                   --on-primary:#f0f0f0; --black:#fff;}
 }
@@ -46,7 +46,7 @@ h1{font-size:2rem;margin:0 0 2px;letter-spacing:-.01em;color:#121212;font-weight
 .stats b{color:var(--ink)}
 .card{/*background:var(--panel);*/margin-top: 24px;border-radius:18px;padding:16px;margin-top:32px;border:1px solid #cccccc;
       /*background: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)), url() no-repeat center center / cover;*/}
-.teeth{display:flex;justify-content:center;gap:6px;margin:4px 0 12px}
+.teeth{display:flex;justify-content:center;gap:12px;margin:4px 0 12px}
 .tooth{display:block;width:min(36px,11vw);aspect-ratio:132/168;background:var(--toothimg) center/contain no-repeat;filter:drop-shadow(0 2px 2px rgba(16,48,58,.28))}
 .tooth.lost{opacity:.2;filter:none}
 /*
@@ -55,7 +55,7 @@ h1{font-size:2rem;margin:0 0 2px;letter-spacing:-.01em;color:#121212;font-weight
   .word{color:#121212;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:16px 0 8px;min-height:48px}
 .slot{width:clamp(22px,7.2vw,34px);height:44px;border-bottom:3px solid #999999;display:flex;align-items:flex-end;justify-content:center;font-size:1.5rem;font-weight:800;padding-bottom:2px}
 .slot.miss{color:var(--gum);border-color:var(--gum)}
-.msg{color:var(--black);min-height:3.2em;text-align:center;font-size:.95rem;margin:6px 0 10px}
+.msg{color:#121212;min-height:3.2em;text-align:center;font-size:.95rem;margin:6px 0 10px}
 .msg strong{display:block;font-size:1.05rem}
 
 /* Keyboard 6 kolom, gambar tombol 3D (tertanam di --keyimg) */
