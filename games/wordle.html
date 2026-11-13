@@ -49,10 +49,10 @@ h1{font-size:2rem;margin:0 0 2px;letter-spacing:-.01em;color:var(--black);font-w
 /*
   .teeth.danger .tooth:not(.lost){filter:drop-shadow(1.5px 0 0 var(--danger)) drop-shadow(-1.5px 0 0 var(--danger)) drop-shadow(0 1.5px 0 var(--danger)) drop-shadow(0 -1.5px 0 var(--danger))}
 */
-  .word{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:16px 0 8px;min-height:48px}
+  .word{color:var(--black);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:16px 0 8px;min-height:48px}
 .slot{width:clamp(22px,7.2vw,34px);height:44px;border-bottom:3px solid #999999;display:flex;align-items:flex-end;justify-content:center;font-size:1.5rem;font-weight:800;padding-bottom:2px}
 .slot.miss{color:var(--gum);border-color:var(--gum)}
-.msg{min-height:3.2em;text-align:center;font-size:.95rem;margin:6px 0 10px}
+.msg{color:var(--black);min-height:3.2em;text-align:center;font-size:.95rem;margin:6px 0 10px}
 .msg strong{display:block;font-size:1.05rem}
 
 /* Keyboard 6 kolom, gambar tombol 3D (tertanam di --keyimg) */
@@ -87,13 +87,13 @@ h1{font-size:2rem;margin:0 0 2px;letter-spacing:-.01em;color:var(--black);font-w
 .btn.go{background:var(--primary);border-color:var(--primary);color:var(--panel)}
 
 /* Popup */
-.overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgb(10,30,35,0.5);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+.overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--panel);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
 .overlay[hidden]{display:none}
 .modal{width:100%;max-width:380px;max-height:100%;overflow:auto;background:var(--panel);color:var(--ink);border-radius:20px;padding:22px 20px 20px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
 .modal h2{margin:0;text-align:center;font-size:1.75rem;color:var(--black);letter-spacing:-.01em}
 .modal h2 .tooth{display:inline-block;width:22px;vertical-align:-4px;margin-right:6px}
 .msub{margin:4px 0 14px;text-align:center;color:var(--muted);font-size:.95rem}
-.how{background:#d5f3fe;color:#121213;border-radius:14px;padding:14px 16px;font-size:.95rem}
+.how{background:#0076DF10;color:#121212;border-radius:14px;padding:14px 16px;font-size:.95rem}
 .how ul{margin:8px 0 0;padding-left:18px}
 .how li{margin:6px 0}
 .modal>.btn{display:block;width:100%;margin-top:16px}
