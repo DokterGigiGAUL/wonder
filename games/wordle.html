@@ -26,7 +26,7 @@ body{background:var(--bg);color:var(--ink);font-family:"Nunito",ui-rounded,"Sego
   background-image: url('https://doktergigigaul.github.io/wonder/assets/images/games/Gemini_Generated_Image_jcob4vjcob4vjcob.jpg');
 */
     /*background-image: url('https://doktergigigaul.github.io/wonder/assets/images/games/terka-kata.png');*/
-    background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)), url(https://doktergigigaul.github.io/wonder/assets/images/games/terka-kata.png) no-repeat center center / cover;
+    background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0)), url(https://doktergigigaul.github.io/wonder/assets/images/games/terka-kata.png) no-repeat center center / cover;
     background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -37,13 +37,13 @@ body{background:var(--bg);color:var(--ink);font-family:"Nunito",ui-rounded,"Sego
   padding:16px;
 }
   .game{max-width:520px;margin:0 auto}
-h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em;color:var(--black)}
+h1{font-size:2rem;margin:0 0 2px;letter-spacing:-.01em;color:var(--black)}
 .sub{margin:0 0 14px;color:var(--muted);font-size:.9rem}
 .stats{display:flex;gap:16px;font-size:.9rem;color:var(--muted);margin-bottom:10px}
 .stats b{color:var(--ink)}
-.card{/*background:var(--panel);*/background:none;border:1px solid var(--line);border-radius:18px;padding:16px}
+.card{/*background:var(--panel);*/margin-top: 24px;border: 1px solid var(--line);border-radius:18px;padding:16px;background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url() no-repeat center center / cover}
 .teeth{display:flex;justify-content:center;gap:6px;margin:4px 0 12px}
-.tooth{display:block;width:min(44px,11vw);aspect-ratio:132/168;background:var(--toothimg) center/contain no-repeat;filter:drop-shadow(0 2px 2px rgba(16,48,58,.28))}
+.tooth{display:block;width:min(36px,11vw);aspect-ratio:132/168;background:var(--toothimg) center/contain no-repeat;filter:drop-shadow(0 2px 2px rgba(16,48,58,.28))}
 .tooth.lost{opacity:.2;filter:none}
 /*
   .teeth.danger .tooth:not(.lost){filter:drop-shadow(1.5px 0 0 var(--danger)) drop-shadow(-1.5px 0 0 var(--danger)) drop-shadow(0 1.5px 0 var(--danger)) drop-shadow(0 -1.5px 0 var(--danger))}
@@ -83,7 +83,7 @@ h1{font-size:1.35rem;margin:0 0 2px;letter-spacing:-.01em;color:var(--black)}
 .btn{flex:1;font:inherit;font-weight:500;padding:12px 14px;border-radius:12px;border:1px solid var(--ink);background:transparent;color:var(--primary);cursor:pointer}
 .btn.primary{background:var(--primary);color:var(--bg)}
 .btn[hidden]{display:none}
-.btn.go{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.btn.go{background:var(--primary);border-color:var(--primary);color:var(--panel)}
 
 /* Popup */
 .overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgb(10,30,35,0.5);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
